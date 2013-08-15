@@ -1,2 +1,7 @@
-RateApp-Phonegap-plugin
-=======================
+# RateApp Phonegap plugin #
+
+## Adding the Plugin to your project ##
+
+## Using the plugin ##
+
+## RELEASE NOTES ##
