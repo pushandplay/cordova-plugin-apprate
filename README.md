@@ -1,0 +1,2 @@
+RateApp-Phonegap-plugin
+=======================
