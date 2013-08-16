@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
+		id="org.pushandplay.cordova.apprate"
+		version="0.0.1">
+	<name>AppRate</name>
+	<description>Cordova AppRate Plugin</description>
+	<author>pushandplay</author>
+	<license>Apache 2.0 License</license>
+
+	<dependency id="org.apache.cordova.core.dialogs"
+				url="https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git"/>
+
+	<js-module src="www/AppRate.js" name="AppRate">
+		<clobbers target="AppRate"/>
+	</js-module>
+
+	<!-- android -->
+	<platform name="android">
+		<!-- android-specific elements -->
+	</platform>
+
+	<!-- ios -->
+	<platform name="ios">
+		<!-- ios-specific elements -->
+	</platform>
+
+	<!-- bb10 -->
+	<platform name="bb10">
+		<!-- bb10-specific elements -->
+	</platform>
+
+</plugin>
