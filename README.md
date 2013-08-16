@@ -2,9 +2,9 @@
 
 Cross-platform AppRate plugin for Cordova / PhoneGap.
 
-Follows the Cordova Plugin spec, so that it works with Plugman.
+Follows the [Cordova Plugin spec](http://docs.phonegap.com/en/3.0.0rc1/guide_plugins_plugin_spec.md.html#Plugin%20Specification), so that it works with [Plugman](https://github.com/apache/cordova-plugman).
 
-This plugin leverages Cordova/PhoneGap's require/define functionality used for plugins.
+This plugin leverages Cordova/PhoneGap's [require/define functionality used for plugins](http://simonmacdonald.blogspot.ca/2012/08/so-you-wanna-write-phonegap-200-android.html).
 
 
 ## Licence ##
