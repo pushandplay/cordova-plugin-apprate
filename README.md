@@ -1,10 +1,10 @@
 # AppRate Phonegap plugin #
 
-Cross-platform AppRate plugin for Cordova / PhoneGap.
+Cross-platform AppRate plugin for Cordova / PhoneGap.<br>
+Follows the [Cordova Plugin spec](http://docs.phonegap.com/en/3.0.0rc1/guide_plugins_plugin_spec.md.html#Plugin%20Specification), so that it works with [Plugman](https://github.com/apache/cordova-plugman).<br>
+This plugin leverages Cordova/PhoneGap's [require/define functionality used for plugins](http://simonmacdonald.blogspot.ca/2012/08/so-you-wanna-write-phonegap-200-android.html).<br>
 
-Follows the [Cordova Plugin spec](http://docs.phonegap.com/en/3.0.0rc1/guide_plugins_plugin_spec.md.html#Plugin%20Specification), so that it works with [Plugman](https://github.com/apache/cordova-plugman).
-
-This plugin leverages Cordova/PhoneGap's [require/define functionality used for plugins](http://simonmacdonald.blogspot.ca/2012/08/so-you-wanna-write-phonegap-200-android.html).
+<img src="https://dl.dropboxusercontent.com/u/26238/Cordova/Plugins/AppRate/Photo%20Aug%2017%2C%201%2001%2047%20PM.jpg" alt="Preview""/>
 
 ## Supported platforms ##
 
