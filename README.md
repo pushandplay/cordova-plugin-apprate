@@ -24,9 +24,9 @@ Phonegap / Cordova 3.0.0 or later
 
 ## Customization ##
 
-+	Go to plugins/org.pushandplay.cordova.apprate/www folder in root of your project
++	Go to <code>plugins/org.pushandplay.cordova.apprate/www</code> folder in root of your project
 +	Specify app ids in preferences.js or preferences.coffee (need compile to js)
-+	Add your locale to locales.js or locales.coffee (need compile to js)
++	Add your locale to <code>locales.js</code> or <code>locales.coffee</code> (need compile to js)
 
 ## Usage ##
 
