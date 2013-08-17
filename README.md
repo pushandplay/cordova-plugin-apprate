@@ -8,14 +8,30 @@ This plugin leverages Cordova/PhoneGap's [require/define functionality used for 
 
 ## Supported platforms ##
 
-+ iOS
-+ Android
-+ Blackberry 10 (not tested)
++	iOS
++	Android
++	Blackberry 10 (not tested)
+
+## Requirements ##
+
+Phonegap / Cordova 3.0.0 or later
+
+## Installation ##
+
++	Install Cordova / PhoneGap Notification plugin (only https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git, for display confirm dialog)
++	Install Cordova / PhoneGap Globalization plugin (for localization support)
++	Install AppRate plugin from https://github.com/pushandplay/cordova-plugin-apprate.git
+
+## Customization ##
+
++	Go to plugins/org.pushandplay.cordova.apprate/www folder in root of your project
++	Specify app ids in preferences.js or preferences.coffee (need compile to js)
++	Add your locale to locales.js or locales.coffee (need compile to js)
 
 ## Usage ##
 
-
-
++	No need special calls
++	Plugin run with your app staring and automatically check when user rated your app or no
 
 ## Licence ##
 

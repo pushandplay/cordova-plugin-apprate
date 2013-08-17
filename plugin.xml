@@ -2,17 +2,32 @@
 
 <plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
 		id="org.pushandplay.cordova.apprate"
-		version="0.0.3">
+		version="0.0.4">
 	<name>AppRate</name>
 	<description>Cordova AppRate Plugin</description>
 	<author>pushandplay</author>
 	<license>The MIT License</license>
+	<keywords>cordova,phonegap,App Rate,rate</keywords>
 
-	<dependency id="org.apache.cordova.core.dialogs"
+	<engines>
+		<engine name="cordova" version="<=3.0.0" />
+	</engines>
+
+	<!--<dependency id="org.apache.cordova.core.dialogs"
 				url="https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git"/>
+	<dependency id="org.apache.cordova.globalization"
+				url="https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git"/>-->
 
 	<js-module src="www/AppRate.js" name="AppRate">
-		<clobbers target="AppRate"/>
+		<clobbers target="navigator.AppRate"/>
+	</js-module>
+
+	<js-module src="www/preferences.js" name="preferences">
+		<runs target="AppRatePreferences"/>
+	</js-module>
+
+	<js-module src="www/locales.js" name="locales">
+		<runs target="AppRateLocales"/>
 	</js-module>
 
 	<!-- android -->
