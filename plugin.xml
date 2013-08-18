@@ -20,7 +20,7 @@
 	<dependency id="org.apache.cordova.core.inappbrowser"
 				url="https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git"/>-->
 
-	<js-module src="www/apprate.js" name="apprate">
+	<js-module src="www/AppRate.js" name="AppRate">
 		<clobbers target="navigator.apprate"/>
 	</js-module>
 
