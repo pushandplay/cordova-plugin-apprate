@@ -1,54 +1,57 @@
-channel = require "cordova/channel"
 preferences = require "./preferences"
 locales = require "./locales"
+channel = require "cordova/channel"
 
-AppRate = ->
+class AppRate
 	thisObj = @
 
 	@rate_app = parseInt window.localStorage.getItem("rate_app") or 1
-	@rate_app_counter = parseInt window.localStorage.getItem("rate_app_counter") or 0
+	@usesUntilPromptCounter = parseInt window.localStorage.getItem("usesUntilPromptCounter") or 0
 
-	@openRateWindow = ->
+	constructor: ->
+		if preferences.promptAtLaunch is true
+			channel.onCordovaReady.subscribe ->
+				thisObj.promptForRating()
+
+	navigateToAppStore = ->
 		if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
-			window.open "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=#{preferences.app_id.ios}"
+			window.open "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=#{preferences.appStoreID.ios}"
 		else if /(Android)/i.test navigator.userAgent.toLowerCase()
-<<<<<<< HEAD
-			window.open "market://details?id=#{preferences.app_id.android}"
-=======
 			window.open "market://details?id=#{preferences.appStoreID.android}", "_system"
->>>>>>> dev
 		else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()
-			window.open "http://appworld.blackberry.com/webstore/content/#{preferences.app_id.blackberry}"
+			window.open "http://appworld.blackberry.com/webstore/content/#{preferences.appStoreID.blackberry}"
 
-	@rate = (buttonIndex) ->
-		# yes = 1, no = 2, later = 3
+	promptForRatingWindowButtonClickHandler = (buttonIndex) ->
+		# yes = 1, later = 2, no = 3
 		switch buttonIndex
 			when 1
-				thisObj.rate_stop()
-				setTimeout thisObj.openRateWindow, 250
-			when 2 then thisObj.rate_reset()
-			when 3 then thisObj.rate_stop()
+				rate_stop()
+				setTimeout navigateToAppStore, 1000
+			when 2 then rate_reset()
+			when 3 then rate_stop()
 
-	@rate_stop = ->
+	rate_stop = ->
 		window.localStorage.setItem "rate_app", 0
-		window.localStorage.removeItem "rate_app_counter"
+		window.localStorage.removeItem "usesUntilPromptCounter"
 
-	@rate_reset = ->
-		window.localStorage.setItem "rate_app_counter", 0
+	rate_reset = ->
+		window.localStorage.setItem "usesUntilPromptCounter", 0
 
-	@rate_try = (locale) ->
-		localeObj = locales[locale] or locales.en
-		if thisObj.rate_app_counter is preferences.rate_count_max and thisObj.rate_app isnt 0
-			navigator.notification.confirm localeObj.message, thisObj.rate, localeObj.title, localeObj.buttonLabels
-		else if thisObj.rate_app_counter < preferences.rate_count_max
-			thisObj.rate_app_counter++
-			window.localStorage.setItem "rate_app_counter", thisObj.rate_app_counter
+	rate_try = ->
+		localeObj = locales[preferences.useLanguage] or preferences.useLanguage
+		if thisObj.usesUntilPromptCounter is preferences.usesUntilPrompt and thisObj.rate_app isnt 0
+			navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, localeObj.buttonLabels
+		else if thisObj.usesUntilPromptCounter < preferences.usesUntilPrompt
+			thisObj.usesUntilPromptCounter++
+			window.localStorage.setItem "usesUntilPromptCounter", thisObj.usesUntilPromptCounter
 
-	channel.onCordovaReady.subscribe ->
+	promptForRating: ->
 		if navigator.notification and navigator.globalization
 			navigator.globalization.getPreferredLanguage (language) ->
-				thisObj.rate_try language.value.split(/_/)[0]
+				preferences.useLanguage = language.value.split(/_/)[0]
+				rate_try()
 			, ->
-				thisObj.rate_try "en"
+				rate_try()
 
-module.exports = new AppRate()
+
+module.exports = new AppRate @
