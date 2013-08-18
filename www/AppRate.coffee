@@ -12,7 +12,11 @@ AppRate = ->
 		if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
 			window.open "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=#{preferences.app_id.ios}"
 		else if /(Android)/i.test navigator.userAgent.toLowerCase()
+<<<<<<< HEAD
 			window.open "market://details?id=#{preferences.app_id.android}"
+=======
+			window.open "market://details?id=#{preferences.appStoreID.android}", "_system"
+>>>>>>> dev
 		else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()
 			window.open "http://appworld.blackberry.com/webstore/content/#{preferences.app_id.blackberry}"
 

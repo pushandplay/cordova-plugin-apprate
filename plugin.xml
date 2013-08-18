@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
 		id="org.pushandplay.cordova.apprate"
-		version="0.0.5">
+		version="0.0.6">
 	<name>AppRate</name>
 	<description>Cordova AppRate Plugin</description>
 	<author>pushandplay</author>
