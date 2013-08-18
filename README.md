@@ -18,9 +18,9 @@ Phonegap / Cordova 3.0.0 or later
 
 ## Installation ##
 
-+	Install Cordova / PhoneGap Notification plugin (only https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git, for display confirm dialog)
-+	Install Cordova / PhoneGap Globalization plugin (for localization support)
-+	Install AppRate plugin from https://github.com/pushandplay/cordova-plugin-apprate.git
++	Install Cordova / PhoneGap Notification plugin (only dialogs, for display confirm dialog) <code>sudo cordova plugins add https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git</code>
++	Install Cordova / PhoneGap Globalization plugin (for localization support) <code>sudo cordova plugins add https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git</code>
++	Install AppRate plugin <code>sudo cordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git</code>
 
 ## Customization ##
 
