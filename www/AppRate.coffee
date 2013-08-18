@@ -16,7 +16,7 @@ class AppRate
 		if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
 			window.open "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=#{preferences.appStoreID.ios}"
 		else if /(Android)/i.test navigator.userAgent.toLowerCase()
-			window.open "market://details?id=#{preferences.appStoreID.android}"
+			window.open "market://details?id=#{preferences.appStoreID.android}", "_system"
 		else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()
 			window.open "http://appworld.blackberry.com/webstore/content/#{preferences.appStoreID.blackberry}"
 
