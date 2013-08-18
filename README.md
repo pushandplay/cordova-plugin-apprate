@@ -20,18 +20,19 @@ Phonegap / Cordova 3.0.0 or later
 
 +	Install Cordova / PhoneGap Notification plugin (only dialogs, for display confirm dialog) <code>sudo cordova plugins add https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git</code>
 +	Install Cordova / PhoneGap Globalization plugin (for localization support) <code>sudo cordova plugins add https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git</code>
++	If need iOS5 support - install InAppBrowser plugin <code>sudo cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git</code>
 +	Install AppRate plugin <code>sudo cordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git</code>
 
 ## Customization ##
 
 +	Go to <code>plugins/org.pushandplay.cordova.apprate/www</code> folder in root of your project
 +	Specify app ids in preferences.js or preferences.coffee (need compile to js)
-+	Add your locale to <code>locales.js</code> or <code>locales.coffee</code> (need compile to js)
++	Add your useLanguage to <code>locales.js</code> or <code>locales.coffee</code> (need compile to js)
 
 ## Usage ##
 
-+	No need special calls
-+	Plugin run with your app staring and automatically check when user rated your app or no
++	Set in plugin preferences variable "promptAtLaunch" to true and plugin run with your app staring and automatically check when user rated your app or no
++	Call manually with code <code>navigator.apprate.promptForRating();</code>
 
 ## Licence ##
 

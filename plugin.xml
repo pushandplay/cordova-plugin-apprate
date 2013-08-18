@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
 		id="org.pushandplay.cordova.apprate"
-		version="0.0.4">
+		version="0.0.5">
 	<name>AppRate</name>
 	<description>Cordova AppRate Plugin</description>
 	<author>pushandplay</author>
@@ -16,10 +16,12 @@
 	<!--<dependency id="org.apache.cordova.core.dialogs"
 				url="https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git"/>
 	<dependency id="org.apache.cordova.globalization"
-				url="https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git"/>-->
+				url="https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git"/>
+	<dependency id="org.apache.cordova.core.inappbrowser"
+				url="https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git"/>-->
 
 	<js-module src="www/AppRate.js" name="AppRate">
-		<clobbers target="navigator.AppRate"/>
+		<clobbers target="navigator.apprate"/>
 	</js-module>
 
 	<js-module src="www/preferences.js" name="preferences">
