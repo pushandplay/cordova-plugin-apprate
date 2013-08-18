@@ -4,13 +4,14 @@ channel = require "cordova/channel"
 
 class AppRate
 	thisObj = @
+
+	@rate_app = parseInt window.localStorage.getItem("rate_app") or 1
+	@usesUntilPromptCounter = parseInt window.localStorage.getItem("usesUntilPromptCounter") or 0
+
 	constructor: ->
 		if preferences.promptAtLaunch is true
 			channel.onCordovaReady.subscribe ->
 				thisObj.promptForRating()
-
-	@rate_app = parseInt window.localStorage.getItem("rate_app") or 1
-	@usesUntilPromptCounter = parseInt window.localStorage.getItem("usesUntilPromptCounter") or 0
 
 	navigateToAppStore = ->
 		if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()

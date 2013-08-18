@@ -12,6 +12,10 @@ AppRate = (function() {
 
   thisObj = AppRate;
 
+  AppRate.rate_app = parseInt(window.localStorage.getItem("rate_app") || 1);
+
+  AppRate.usesUntilPromptCounter = parseInt(window.localStorage.getItem("usesUntilPromptCounter") || 0);
+
   function AppRate() {
     if (preferences.promptAtLaunch === true) {
       channel.onCordovaReady.subscribe(function() {
@@ -19,10 +23,6 @@ AppRate = (function() {
       });
     }
   }
-
-  AppRate.rate_app = parseInt(window.localStorage.getItem("rate_app") || 1);
-
-  AppRate.usesUntilPromptCounter = parseInt(window.localStorage.getItem("usesUntilPromptCounter") || 0);
 
   navigateToAppStore = function() {
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
