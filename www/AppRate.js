@@ -16,7 +16,7 @@ AppRate = function() {
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
       return window.open("itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=" + preferences.app_id.ios);
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
-      return window.open("market://details?id=" + preferences.app_id.android);
+      return window.open("market://details?id=" + preferences.appStoreID.android, "_system");
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
       return window.open("http://appworld.blackberry.com/webstore/content/" + preferences.app_id.blackberry);
     }
