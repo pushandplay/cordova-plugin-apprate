@@ -2,12 +2,14 @@
 
 <plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
 		id="org.pushandplay.cordova.apprate"
-		version="0.0.7">
+		version="0.0.8">
 	<name>AppRate</name>
 	<description>Cordova AppRate Plugin</description>
 	<author>pushandplay</author>
 	<license>The MIT License</license>
 	<keywords>cordova,phonegap,App Rate,rate</keywords>
+	<license>The MIT License</license>
+	<info>Cross-platform AppRate plugin for Cordova / PhoneGap</info>
 
 	<engines>
 		<engine name="cordova" version="<=3.0.0" />
