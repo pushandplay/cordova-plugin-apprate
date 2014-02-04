@@ -4,15 +4,17 @@
 		id="org.pushandplay.cordova.apprate"
 		version="0.0.8">
 	<name>AppRate</name>
-	<description>Cordova AppRate Plugin</description>
+	<description>This plugin provide the rate this app functionality into your Cordova/Phonegap application</description>
 	<author>pushandplay</author>
 	<license>The MIT License</license>
 	<keywords>cordova,phonegap,App Rate,rate</keywords>
 	<license>The MIT License</license>
 	<info>Cross-platform AppRate plugin for Cordova / PhoneGap</info>
+	<repo>https://github.com/pushandplay/cordova-plugin-apprate.git</repo>
+	<issue>https://github.com/pushandplay/cordova-plugin-apprate/issues</issue>
 
 	<engines>
-		<engine name="cordova" version="<=3.0.0" />
+		<engine name="cordova" version=">=3.0.0" />
 	</engines>
 
 	<!--<dependency id="org.apache.cordova.core.dialogs"
