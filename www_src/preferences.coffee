@@ -1,6 +1,6 @@
 AppRatePreferences =
 	useLanguage: "en"
-	promptAtLaunch: false
+	promptAtLaunch: true
 	promptAgainForEachNewVersion: true	# TODO: not implemented
 	daysUntilPrompt: 1 	# TODO: not implemented
 	usesUntilPrompt: 3

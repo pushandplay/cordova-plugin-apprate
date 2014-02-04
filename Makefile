@@ -39,3 +39,4 @@ app:
 	@cordova create $(DIR_DEMO) org.pushandplay.cordova.AppRateDemoProject AppRateDemoProject
 	@cd $(DIR_DEMO) && cordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git
 	@cd $(DIR_DEMO) && cordova platform add ios
+	@cd $(DIR_DEMO) && cordova prepare

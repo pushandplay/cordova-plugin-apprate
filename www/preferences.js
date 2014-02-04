@@ -3,7 +3,7 @@ var AppRatePreferences;
 
 AppRatePreferences = {
   useLanguage: "en",
-  promptAtLaunch: false,
+  promptAtLaunch: true,
   promptAgainForEachNewVersion: true,
   daysUntilPrompt: 1,
   usesUntilPrompt: 3,
