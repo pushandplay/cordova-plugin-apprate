@@ -1,10 +1,10 @@
 # AppRate Phonegap plugin #
 
-Cross-platform AppRate plugin for Cordova / PhoneGap.<br>
+This plugin provide the rate this app functionality into your Cordova/Phonegap application<br>
 Follows the [Cordova Plugin spec](http://docs.phonegap.com/en/3.0.0rc1/guide_plugins_plugin_spec.md.html#Plugin%20Specification), so that it works with [Plugman](https://github.com/apache/cordova-plugman).<br>
 This plugin leverages Cordova/PhoneGap's [require/define functionality used for plugins](http://simonmacdonald.blogspot.ca/2012/08/so-you-wanna-write-phonegap-200-android.html).<br>
 
-<img src="https://dl.dropboxusercontent.com/u/26238/Cordova/Plugins/AppRate/Photo%20Aug%2017%2C%201%2001%2047%20PM.jpg" alt="Preview""/>
+<img src="https://dl.dropboxusercontent.com/u/26238/Cordova/Plugins/AppRate/preview_iPad.png" alt="Preview iPad"/>
 
 ## Supported platforms ##
 
@@ -18,8 +18,6 @@ Phonegap / Cordova 3.0.0 or later
 
 ## Installation ##
 
-+	Install Cordova / PhoneGap Notification plugin (only dialogs, for display confirm dialog) <code>sudo cordova plugins add https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git</code>
-+	Install Cordova / PhoneGap Globalization plugin (for localization support) <code>sudo cordova plugins add https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git</code>
 +	If need iOS5 support - install InAppBrowser plugin <code>sudo cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git</code>
 +	Install AppRate plugin <code>sudo cordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git</code>
 
@@ -31,7 +29,7 @@ Phonegap / Cordova 3.0.0 or later
 
 ## Usage ##
 
-+	Set in plugin preferences variable "promptAtLaunch" to true and plugin run with your app staring and automatically check when user rated your app or no
++	Set in plugin preferences variable "promptAtLaunch" to true (default) and plugin run with your app staring and automatically check when user rated your app or no
 +	Call manually with code <code>navigator.apprate.promptForRating();</code>
 
 ## Licence ##

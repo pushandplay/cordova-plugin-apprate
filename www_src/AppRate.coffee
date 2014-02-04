@@ -11,7 +11,7 @@ class AppRate
 	constructor: ->
 		if preferences.promptAtLaunch is true
 			channel.onCordovaReady.subscribe ->
-				thisObj.promptForRating()
+				AppRate::promptForRating()
 
 	navigateToAppStore = ->
 		if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
@@ -38,7 +38,7 @@ class AppRate
 		window.localStorage.setItem "usesUntilPromptCounter", 0
 
 	rate_try = ->
-		localeObj = locales[preferences.useLanguage] or preferences.useLanguage
+		localeObj = locales[preferences.useLanguage] or locales["en"]
 		if thisObj.usesUntilPromptCounter is preferences.usesUntilPrompt and thisObj.rate_app isnt 0
 			navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, localeObj.buttonLabels
 		else if thisObj.usesUntilPromptCounter < preferences.usesUntilPrompt
