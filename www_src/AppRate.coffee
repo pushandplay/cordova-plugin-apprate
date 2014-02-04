@@ -11,7 +11,7 @@ class AppRate
 	constructor: ->
 		if preferences.promptAtLaunch is true
 			channel.onCordovaReady.subscribe ->
-				thisObj.promptForRating()
+				AppRate::promptForRating()
 
 	navigateToAppStore = ->
 		if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()

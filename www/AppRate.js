@@ -18,9 +18,7 @@ AppRate = (function() {
 
   function AppRate() {
     if (preferences.promptAtLaunch === true) {
-      channel.onCordovaReady.subscribe(function() {
-        return thisObj.promptForRating();
-      });
+      channel.onCordovaReady.subscribe(thisObj.promptForRating);
     }
   }
 
