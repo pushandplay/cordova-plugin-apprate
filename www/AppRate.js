@@ -57,7 +57,7 @@ AppRate = (function() {
 
   rate_try = function() {
     var localeObj;
-    localeObj = locales[preferences.useLanguage] || preferences.useLanguage;
+    localeObj = locales[preferences.useLanguage] || locales["en"];
     if (thisObj.usesUntilPromptCounter === preferences.usesUntilPrompt && thisObj.rate_app !== 0) {
       return navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, localeObj.buttonLabels);
     } else if (thisObj.usesUntilPromptCounter < preferences.usesUntilPrompt) {
