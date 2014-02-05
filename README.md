@@ -1,10 +1,9 @@
-# AppRate Phonegap plugin #
+# AppRate Cordova/Phonegap plugin #
 
 This plugin provide the rate this app functionality into your Cordova/Phonegap application<br>
 Follows the [Cordova Plugin spec](http://docs.phonegap.com/en/3.0.0rc1/guide_plugins_plugin_spec.md.html#Plugin%20Specification), so that it works with [Plugman](https://github.com/apache/cordova-plugman).<br>
-This plugin leverages Cordova/PhoneGap's [require/define functionality used for plugins](http://simonmacdonald.blogspot.ca/2012/08/so-you-wanna-write-phonegap-200-android.html).<br>
 
-<img src="https://dl.dropboxusercontent.com/u/26238/Cordova/Plugins/AppRate/preview_iPad.png" alt="Preview iPad"/>
+<img src="https://dl.dropboxusercontent.com/u/26238/Cordova/Plugins/AppRate/preview_iPad.png" width="100%" alt="Preview iPad"/>
 
 ## Supported platforms ##
 
@@ -36,7 +35,7 @@ Phonegap / Cordova 3.0.0 or later
 
 The MIT License
 
-Copyright (c) 2013 pushandplay
+Copyright (c) 2013-2014 pushandplay
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

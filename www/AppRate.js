@@ -8,7 +8,7 @@ locales = require("./locales");
 channel = require("cordova/channel");
 
 AppRate = (function() {
-  var navigateToAppStore, promptForRatingWindowButtonClickHandler, rate_reset, rate_stop, rate_try, thisObj;
+  var getLocaleObject, navigateToAppStore, promptForRatingWindowButtonClickHandler, rate_reset, rate_stop, rate_try, thisObj;
 
   thisObj = AppRate;
 
@@ -57,13 +57,26 @@ AppRate = (function() {
 
   rate_try = function() {
     var localeObj;
-    localeObj = locales[preferences.useLanguage] || locales["en"];
+    localeObj = getLocaleObject();
     if (thisObj.usesUntilPromptCounter === preferences.usesUntilPrompt && thisObj.rate_app !== 0) {
       return navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, localeObj.buttonLabels);
     } else if (thisObj.usesUntilPromptCounter < preferences.usesUntilPrompt) {
       thisObj.usesUntilPromptCounter++;
       return window.localStorage.setItem("usesUntilPromptCounter", thisObj.usesUntilPromptCounter);
     }
+  };
+
+  getLocaleObject = function() {
+    var displayAppName, key, localeObj, value;
+    localeObj = locales[preferences.useLanguage] || locales["en"];
+    displayAppName = localeObj.displayAppName || preferences.displayAppName;
+    for (key in localeObj) {
+      value = localeObj[key];
+      if (typeof value === 'string' || value instanceof String) {
+        localeObj[key] = value.replace(/%@/g, displayAppName);
+      }
+    }
+    return localeObj;
   };
 
   AppRate.prototype.promptForRating = function() {
