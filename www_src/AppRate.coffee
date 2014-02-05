@@ -49,7 +49,8 @@ class AppRate
 		localeObj = locales[preferences.useLanguage] or locales["en"]
 		displayAppName = localeObj.displayAppName or preferences.displayAppName
 		for key, value of localeObj
-			localeObj[key] = value.toString().replace(/%@/g, displayAppName)
+			if typeof value == 'string' or value instanceof String
+				localeObj[key] = value.replace(/%@/g, displayAppName)
 		localeObj
 
 
