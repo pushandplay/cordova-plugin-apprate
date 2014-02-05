@@ -72,7 +72,9 @@ AppRate = (function() {
     displayAppName = localeObj.displayAppName || preferences.displayAppName;
     for (key in localeObj) {
       value = localeObj[key];
-      localeObj[key] = value.toString().replace(/%@/g, displayAppName);
+      if (typeof value === 'string' || value instanceof String) {
+        localeObj[key] = value.replace(/%@/g, displayAppName);
+      }
     }
     return localeObj;
   };
