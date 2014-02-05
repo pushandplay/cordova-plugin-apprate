@@ -38,12 +38,20 @@ class AppRate
 		window.localStorage.setItem "usesUntilPromptCounter", 0
 
 	rate_try = ->
-		localeObj = locales[preferences.useLanguage] or locales["en"]
+		localeObj = getLocaleObject()
 		if thisObj.usesUntilPromptCounter is preferences.usesUntilPrompt and thisObj.rate_app isnt 0
 			navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, localeObj.buttonLabels
 		else if thisObj.usesUntilPromptCounter < preferences.usesUntilPrompt
 			thisObj.usesUntilPromptCounter++
 			window.localStorage.setItem "usesUntilPromptCounter", thisObj.usesUntilPromptCounter
+
+	getLocaleObject = ->
+		localeObj = locales[preferences.useLanguage] or locales["en"]
+		displayAppName = localeObj.displayAppName or preferences.displayAppName
+		for key, value of localeObj
+			localeObj[key] = value.toString().replace(/%@/g, displayAppName)
+		localeObj
+
 
 	promptForRating: ->
 		if navigator.notification and navigator.globalization

@@ -1,8 +1,9 @@
 AppRatePreferences =
 	useLanguage: "en"
+	displayAppName: "AppRate plugin"
 	promptAtLaunch: true
-	promptAgainForEachNewVersion: true	# TODO: not implemented
-	daysUntilPrompt: 1 	# TODO: not implemented
+	promptAgainForEachNewVersion: true  # TODO: not implemented
+	daysUntilPrompt: 1  # TODO: not implemented
 	usesUntilPrompt: 3
 	appStoreID:
 		ios: "123456789"

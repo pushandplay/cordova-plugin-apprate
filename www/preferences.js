@@ -3,6 +3,7 @@ var AppRatePreferences;
 
 AppRatePreferences = {
   useLanguage: "en",
+  displayAppName: "AppRate plugin",
   promptAtLaunch: true,
   promptAgainForEachNewVersion: true,
   daysUntilPrompt: 1,
