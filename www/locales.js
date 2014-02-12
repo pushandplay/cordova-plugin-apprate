@@ -25,6 +25,11 @@ AppRateLocales = {
     message: "আপনি %@ ব্যবহার করে ভোগ, আপনি এটি রেট একটি মুহূর্ত গ্রহণ কিছু মনে করবে? এটি একটি মিনিট চেয়ে বেশি গ্রহণ করা হবে না. আপনার সমর্থনের জন্য ধন্যবাদ!",
     buttonLabels: ["না, ধন্যবাদ", "এখন এটি রেটিং করুন", "পরে আমাকে মনে করিয়ে দিন"]
   },
+  ca: {
+    title: "Ressenya %@",
+    message: "Si t'agrada %@, Podries escriure una ressenya? No et prendrà més d'un minut. Gràcies pel teu suport!",
+    buttonLabels: ["No, gràcies", "Escriure una ressenya ara", "Recorda-m'ho més tard"]
+  },
   cs: {
     title: "Ohodnotit %@",
     message: "Pokud se vám líbí %@, našli byste si chvilku na ohodnocení aplikace? Nebude to trvat víc než minutu.\nDěkujeme za vaši podporu!",
