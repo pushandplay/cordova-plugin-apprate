@@ -27,7 +27,7 @@ AppRateLocales = {
   },
   ca: {
     title: "Ressenya %@",
-    message: "Si t'agrada %@, Podries escriure una ressenya? No et prendrà més d'un minut. Gràcies pel teu suport!",
+    message: "Si t'agrada %@, podries escriure una ressenya? No et prendrà més d'un minut. Gràcies pel teu suport!",
     buttonLabels: ["No, gràcies", "Escriure una ressenya ara", "Recorda-m'ho més tard"]
   },
   cs: {
