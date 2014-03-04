@@ -5,6 +5,10 @@ Follows the [Cordova Plugin spec](http://docs.phonegap.com/en/3.0.0rc1/guide_plu
 
 Need help for translations: [https://crowdin.net/project/apprate-cordovaphonegap-plugin](https://crowdin.net/project/apprate-cordovaphonegap-plugin)
 
+Issues list and features requests [here](https://github.com/pushandplay/cordova-plugin-apprate/issues?state=open)
+
+
+
 <img src="https://dl.dropboxusercontent.com/u/26238/Cordova/Plugins/AppRate/preview_iPad.png" width="100%" alt="Preview iPad"/>
 
 ## Supported platforms ##
