@@ -36,12 +36,12 @@ AppRate = (function() {
 
   promptForRatingWindowButtonClickHandler = function(buttonIndex) {
     switch (buttonIndex) {
-      case 1:
+      case 3:
         rate_stop();
         return setTimeout(navigateToAppStore, 1000);
       case 2:
         return rate_reset();
-      case 3:
+      case 1:
         return rate_stop();
     }
   };

@@ -4,11 +4,11 @@ SHELL = /bin/sh
 
 DIR_SRC = ./www_src
 DIR_BUILD = ./www
-DIR_DEMO = ./AppRateDemoProject
+DIR_DEMO = ../AppRateDemoProject
 
-.PHONY: all prepare coffee clean
+.PHONY: all prepare coffee clean app_prepare
 
-all: prepare coffee clean
+all: prepare coffee clean app_prepare
 release: all compress
 	@echo "\n\033[32mComplete\033[0m\n"
 
@@ -33,10 +33,19 @@ compress:
 	@echo "\033[32mCompress files...\033[0m"
 	@find $(DIR_BUILD) -name '*.js' -exec uglifyjs {} -o {} -c -m -d \;
 
+
 app:
 	@echo "\033[32mCreating demo project...\033[0m"
 	@rm -rf $(DIR_DEMO) && mkdir $(DIR_DEMO)
 	@cordova create $(DIR_DEMO) org.pushandplay.cordova.AppRateDemoProject AppRateDemoProject
-	@cd $(DIR_DEMO) && cordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git
+	@#cd $(DIR_DEMO) && cordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git
+	@cd $(DIR_DEMO) && cordova plugins add ../cordova-plugin-apprate
 	@cd $(DIR_DEMO) && cordova platform add ios
+	@cd $(DIR_DEMO) && cordova prepare
+
+
+app_prepare:
+	@echo "\033[32mPreparing demo project...\033[0m"
+	@cd $(DIR_DEMO) && cordova plugins remove org.pushandplay.cordova.apprate
+	@cd $(DIR_DEMO) && cordova plugins add ../cordova-plugin-apprate
 	@cd $(DIR_DEMO) && cordova prepare

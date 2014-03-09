@@ -5,9 +5,9 @@
 		title: "Window title"
 		message: "Info message"
 		buttonLabels: [
-  		""
-  		""
-  		""
+  		"no - 1"
+			"later - 2"
+			"yes - 3"
   	]
 
 ###
@@ -33,9 +33,9 @@ AppRateLocales =
 		title: "Ressenya %@",
 		message: "Si t'agrada %@, podries escriure una ressenya? No et prendrà més d'un minut. Gràcies pel teu suport!",
 		buttonLabels: [
-			"Escriure una ressenya ara"
+			"No, gràcies"
 			"Recorda-m'ho més tard"
-      "No, gràcies"
+      "Escriure una ressenya ara"
 		]
 	cs:
 		title: "Ohodnotit %@"
@@ -57,9 +57,9 @@ AppRateLocales =
 		title: "Bewerte %@"
 		message: "Wenn dir %@ gefällt, würdest Du es bitte bewerten? Dies wird nicht länger als eine Minute dauern. Danke für die Unterstützung!"
 		buttonLabels: [
-			"Jetzt bewerten"
-			"Später erinnern"
 			"Nein, danke"
+			"Später erinnern"
+			"Jetzt bewerten"
 		]
 	el:
 		title: "Αξιολόγησε %@"
@@ -73,17 +73,17 @@ AppRateLocales =
 		title: "Rate %@"
 		message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!"
 		buttonLabels: [
-			"Rate It Now"
-			"Remind Me Later"
 			"No, Thanks"
+			"Remind Me Later"
+			"Rate It Now"
 		]
 	es:
 		title: "Reseña %@"
 		message: "Si te gusta %@, ¿podrías escribirnos una reseña? No te tomará más de un minuto. ¡Gracias por tu apoyo!"
 		buttonLabels: [
-			"Escribir reseña ahora"
+			"No, gracias"
 			"Recordarme más tarde"
-      "No, gracias"
+      "Escribir reseña ahora"
 		]
 	fa:
 		title: "نرخ %@"
@@ -193,9 +193,9 @@ AppRateLocales =
 		title: "Оцените %@"
 		message: "Если вам нравится пользоваться %@, не будете ли вы возражать против того, чтобы уделить минуту и оценить его?\nСпасибо вам за поддержку!"
 		buttonLabels: [
-			"Оценить сейчас"
-			"Напомнить позже"
 			"Нет, спасибо"
+			"Напомнить позже"
+			"Оценить сейчас"
 		]
 	sk:
 		title: "Ohodnotiť %@"
