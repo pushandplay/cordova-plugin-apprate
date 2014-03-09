@@ -28,7 +28,7 @@ AppRateLocales = {
   ca: {
     title: "Ressenya %@",
     message: "Si t'agrada %@, podries escriure una ressenya? No et prendrà més d'un minut. Gràcies pel teu suport!",
-    buttonLabels: ["Escriure una ressenya ara", "Recorda-m'ho més tard", "No, gràcies"]
+    buttonLabels: ["No, gràcies", "Recorda-m'ho més tard", "Escriure una ressenya ara"]
   },
   cs: {
     title: "Ohodnotit %@",
@@ -43,7 +43,7 @@ AppRateLocales = {
   de: {
     title: "Bewerte %@",
     message: "Wenn dir %@ gefällt, würdest Du es bitte bewerten? Dies wird nicht länger als eine Minute dauern. Danke für die Unterstützung!",
-    buttonLabels: ["Jetzt bewerten", "Später erinnern", "Nein, danke"]
+    buttonLabels: ["Nein, danke", "Später erinnern", "Jetzt bewerten"]
   },
   el: {
     title: "Αξιολόγησε %@",
@@ -58,7 +58,7 @@ AppRateLocales = {
   es: {
     title: "Reseña %@",
     message: "Si te gusta %@, ¿podrías escribirnos una reseña? No te tomará más de un minuto. ¡Gracias por tu apoyo!",
-    buttonLabels: ["Escribir reseña ahora", "Recordarme más tarde", "No, gracias"]
+    buttonLabels: ["No, gracias", "Recordarme más tarde", "Escribir reseña ahora"]
   },
   fa: {
     title: "نرخ %@",
