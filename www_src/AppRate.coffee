@@ -22,13 +22,13 @@ class AppRate
 			window.open "http://appworld.blackberry.com/webstore/content/#{preferences.appStoreID.blackberry}"
 
 	promptForRatingWindowButtonClickHandler = (buttonIndex) ->
-		# yes = 1, later = 2, no = 3
+		# no = 1, later = 2, yes = 3
 		switch buttonIndex
-			when 1
+			when 3
 				rate_stop()
 				setTimeout navigateToAppStore, 1000
 			when 2 then rate_reset()
-			when 3 then rate_stop()
+			when 1 then rate_stop()
 
 	rate_stop = ->
 		window.localStorage.setItem "rate_app", 0

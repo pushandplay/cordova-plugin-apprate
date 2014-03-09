@@ -7,9 +7,9 @@
 		title: "Window title"
 		message: "Info message"
 		buttonLabels: [
-  		""
-  		""
-  		""
+  		"no - 1"
+			"later - 2"
+			"yes - 3"
   	]
  */
 var AppRateLocales;
@@ -53,7 +53,7 @@ AppRateLocales = {
   en: {
     title: "Rate %@",
     message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!",
-    buttonLabels: ["Rate It Now", "Remind Me Later", "No, Thanks"]
+    buttonLabels: ["No, Thanks", "Remind Me Later", "Rate It Now"]
   },
   es: {
     title: "Reseña %@",
@@ -128,7 +128,7 @@ AppRateLocales = {
   ru: {
     title: "Оцените %@",
     message: "Если вам нравится пользоваться %@, не будете ли вы возражать против того, чтобы уделить минуту и оценить его?\nСпасибо вам за поддержку!",
-    buttonLabels: ["Оценить сейчас", "Напомнить позже", "Нет, спасибо"]
+    buttonLabels: ["Нет, спасибо", "Напомнить позже", "Оценить сейчас"]
   },
   sk: {
     title: "Ohodnotiť %@",
