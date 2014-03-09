@@ -33,9 +33,9 @@ AppRateLocales =
 		title: "Ressenya %@",
 		message: "Si t'agrada %@, podries escriure una ressenya? No et prendrà més d'un minut. Gràcies pel teu suport!",
 		buttonLabels: [
-			"No, gràcies"
 			"Escriure una ressenya ara"
 			"Recorda-m'ho més tard"
+      "No, gràcies"
 		]
 	cs:
 		title: "Ohodnotit %@"
@@ -81,9 +81,9 @@ AppRateLocales =
 		title: "Reseña %@"
 		message: "Si te gusta %@, ¿podrías escribirnos una reseña? No te tomará más de un minuto. ¡Gracias por tu apoyo!"
 		buttonLabels: [
-			"No, gracias"
 			"Escribir reseña ahora"
 			"Recordarme más tarde"
+      "No, gracias"
 		]
 	fa:
 		title: "نرخ %@"
