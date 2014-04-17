@@ -7,7 +7,7 @@
 	<description>This plugin provide the rate this app functionality into your Cordova/Phonegap application</description>
 	<author>pushandplay</author>
 	<keywords>cordova,phonegap,App Rate,rate</keywords>
-	<license>The MIT License</license>
+	<license>MIT</license>
 	<info>Cross-platform AppRate plugin for Cordova / PhoneGap</info>
 	<repo>https://github.com/pushandplay/cordova-plugin-apprate.git</repo>
 	<issue>https://github.com/pushandplay/cordova-plugin-apprate/issues</issue>
