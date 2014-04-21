@@ -26,7 +26,7 @@ AppRate = (function() {
 
   navigateToAppStore = function() {
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
-      return window.open("itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=" + preferences.appStoreID.ios);
+      return window.open("itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8&id=" + preferences.appStoreID.ios);
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
       return window.open("market://details?id=" + preferences.appStoreID.android, "_system");
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
