@@ -2,9 +2,9 @@
 
 <plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
 		id="org.pushandplay.cordova.apprate"
-		version="0.0.21">
+		version="0.0.22">
 	<name>AppRate</name>
-	<description>This plugin provide the rate this app functionality into your Cordova/Phonegap application</description>
+	<description>This plugin provide the "rate this app" functionality into your Cordova/Phonegap application</description>
 	<author>pushandplay</author>
 	<keywords>cordova,phonegap,App Rate,rate</keywords>
 	<license>The MIT License</license>
@@ -17,6 +17,7 @@
 	</engines>
 
 	<dependency id="org.apache.cordova.dialogs"/>
+	<dependency id="org.apache.cordova.device"/>
 	<dependency id="org.apache.cordova.globalization"/>
 	<!--<dependency id="org.apache.cordova.core.inappbrowser""/>-->
 
