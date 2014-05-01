@@ -25,8 +25,14 @@ AppRate = (function() {
   }
 
   navigateToAppStore = function() {
+    var reviewURL;
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
-      return window.open("itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=" + preferences.appStoreID.ios);
+      if (window.device && parseInt(window.device.version) >= 7) {
+        reviewURL = "itms-apps://itunes.apple.com/" + (preferences.useLanguage || 'en') + "/app/id" + preferences.appStoreID.ios;
+      } else {
+        reviewURL = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=" + preferences.appStoreID.ios + "&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software";
+      }
+      return window.open(reviewURL);
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
       return window.open("market://details?id=" + preferences.appStoreID.android, "_system");
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {

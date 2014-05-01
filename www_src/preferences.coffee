@@ -6,7 +6,7 @@ AppRatePreferences =
 	daysUntilPrompt: 1  # TODO: not implemented
 	usesUntilPrompt: 3
 	appStoreID:
-		ios: "123456789"
+		ios: "736199575"
 		android: "com.company.YourAppID"
 		blackberry: "123456789"
 

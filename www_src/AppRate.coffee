@@ -15,7 +15,11 @@ class AppRate
 
 	navigateToAppStore = ->
 		if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
-			window.open "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=#{preferences.appStoreID.ios}"
+			if window.device and parseInt(window.device.version) >= 7
+				reviewURL = "itms-apps://itunes.apple.com/#{preferences.useLanguage or 'en'}/app/id#{preferences.appStoreID.ios}"
+			else
+				reviewURL = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=#{preferences.appStoreID.ios}&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"
+			window.open reviewURL
 		else if /(Android)/i.test navigator.userAgent.toLowerCase()
 			window.open "market://details?id=#{preferences.appStoreID.android}", "_system"
 		else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()
