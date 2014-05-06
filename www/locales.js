@@ -169,6 +169,11 @@ AppRateLocales = {
     title: "Đánh giá %@",
     message: "Nếu thích sử dụng %@, bạn có muốn giành một chút thời gian để đánh giá nó? Sẽ không lâu hơn một phút. Cảm ơn sự hỗ trợ của bạn!",
     buttonLabels: ["Không, Cảm ơn", "Đánh Giá Ngay", "Nhắc Tôi Sau"]
+  },
+  'zh-TW': {
+    title: "評分 %@",
+    message: "如果你喜歡使用 %@, 是否介意耽誤您一點時間來給我們一個評分呢？ 該動作不會超過一分鐘。 謝謝您的支持！",
+    buttonLabels: ["不，謝謝", "現在評分", "稍後通知我"]
   }
 };
 

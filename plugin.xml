@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
 		id="org.pushandplay.cordova.apprate"
-		version="0.0.22">
+		version="0.0.23">
 	<name>AppRate</name>
 	<description>This plugin provide the "rate this app" functionality into your Cordova/Phonegap application</description>
 	<author>pushandplay</author>
