@@ -75,7 +75,7 @@ AppRate = (function() {
 
   getLocaleObject = function() {
     var displayAppName, key, localeObj, value;
-    localeObj = locales[AppRate.preferences.useLanguage] || locales["en"];
+    localeObj = AppRate.preferences.customLocale || locales[AppRate.preferences.useLanguage] || locales["en"];
     displayAppName = localeObj.displayAppName || AppRate.preferences.displayAppName;
     for (key in localeObj) {
       value = localeObj[key];
@@ -90,6 +90,9 @@ AppRate = (function() {
     if (prefs.useLanguage !== void 0) {
       AppRate.preferences.autoDetectLanguage = false;
       AppRate.preferences.useLanguage = prefs.useLanguage;
+    }
+    if (prefs.customLocale !== void 0) {
+      AppRate.preferences.customLocale = prefs.customLocale;
     }
     if (prefs.usesUntilPrompt !== void 0) {
       AppRate.preferences.usesUntilPrompt = prefs.usesUntilPrompt;

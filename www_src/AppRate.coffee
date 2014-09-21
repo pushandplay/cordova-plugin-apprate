@@ -53,7 +53,7 @@ class AppRate
 			window.localStorage.setItem "usesUntilPromptCounter", thisObj.usesUntilPromptCounter
 
 	getLocaleObject = ->
-		localeObj = locales[AppRate.preferences.useLanguage] or locales["en"]
+		localeObj = AppRate.preferences.customLocale or locales[AppRate.preferences.useLanguage] or locales["en"]
 		displayAppName = localeObj.displayAppName or AppRate.preferences.displayAppName
 		for key, value of localeObj
 			if typeof value == 'string' or value instanceof String
@@ -65,6 +65,7 @@ class AppRate
 		if prefs.useLanguage isnt undefined
 			AppRate.preferences.autoDetectLanguage = false
 			AppRate.preferences.useLanguage = prefs.useLanguage
+		AppRate.preferences.customLocale = prefs.customLocale if prefs.customLocale isnt undefined
 		AppRate.preferences.usesUntilPrompt = prefs.usesUntilPrompt if prefs.usesUntilPrompt isnt undefined
 		AppRate.preferences.displayAppName = prefs.displayAppName if prefs.displayAppName isnt undefined
 		if prefs.appStoreAppURL
