@@ -1,7 +1,6 @@
 # AppRate Cordova/Phonegap plugin #
 
 This plugin provide the rate this app functionality into your Cordova/Phonegap application<br>
-Follows the [Cordova Plugin spec](http://docs.phonegap.com/en/3.0.0rc1/guide_plugins_plugin_spec.md.html#Plugin%20Specification), so that it works with [Plugman](https://github.com/apache/cordova-plugman).<br>
 
 Need help for translations: [https://crowdin.net/project/apprate-cordovaphonegap-plugin](https://crowdin.net/project/apprate-cordovaphonegap-plugin)
 
@@ -23,28 +22,73 @@ Phonegap / Cordova 3.0.0 or later
 
 ## Installation ##
 
-+	If need iOS5 support - install InAppBrowser plugin <code>sudo cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git</code>
-+	Install AppRate plugin <code>sudo cordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git</code>
++	Install AppRate plugin <code>cordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git</code>
 
-## Customization ##
+## Customization and usage ##
 
-+	Go to <code>plugins/org.pushandplay.cordova.apprate/www</code> folder in root of your project
-+	Specify app ids in preferences.js or preferences.coffee (need compile to js)
-+	Add your useLanguage to <code>locales.js</code> or <code>locales.coffee</code> (need compile to js)
++	Simple call
 
-## Usage ##
+		navigator.apprate.setup(myPrefObj);
+		navigator.apprate.promptForRating();
+		
++	Available setup properties:	
 
-+	Set in plugin preferences variable "promptAtLaunch" to true (default) and plugin run with your app staring and automatically check when user rated your app or no
-+	Call manually with code <code>navigator.apprate.promptForRating();</code>
+		{
+			useLanguage: {String}			default locale (default: "en")
+			displayAppName: {String}		Your app name (default: "AppRate plugin")
+			usesUntilPrompt: {Integer}		Show promt message after launches (default: 3)
+			customLocale: {Object}			Custom locale object (default: not set)
+			appStoreAppURL:
+				ios: {String}				App url in AppStore (default: not set)
+				android: {String}			App url in GooglePlay (default: not set)
+				blackberry: {String}		(default: not set)
+		}
+
++	Example 1 - Detect user locale automatically and show message after each 3 launches
+
+		var cfg = {
+			displayAppName: "My Super App",
+			appStoreAppURL: {
+				ios: 'itms-apps://itunes.apple.com/ru/app/id736199575?l=en&mt=8'
+			}
+		};
+		
+		navigator.apprate.setup(cfg);
+		navigator.apprate.promptForRating();
+		
++	Example 2 - Set custom locale strings and show message after each 5 launches
+
+		var cfg = {
+			useLanguage: "ru",
+			usesUntilPrompt: 5,
+			displayAppName: "My Super App",
+			appStoreAppURL: {
+				ios: 'itms-apps://itunes.apple.com/ru/app/id736199575?l=en&mt=8'
+			}
+		};
+		
+		navigator.apprate.setup(cfg);
+		navigator.apprate.promptForRating();
+
++	Example 3 - Set custom locale object and show message after each 10 launches
+
+		var cfg = {
+			usesUntilPrompt: 10,
+			displayAppName: "My Super App",
+			customLocale: {
+				title: "Rate %@",
+				message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!",
+				buttonLabels: ["No, Thanks", "Remind Me Later", "Rate It Now",]
+			},
+			appStoreAppURL: {
+				ios: 'itms-apps://itunes.apple.com/ru/app/id736199575?l=en&mt=8'
+			}
+		};
+		
+		navigator.apprate.setup(cfg);
+		navigator.apprate.promptForRating();
+	
 
 ## Licence ##
 
-The MIT License
-
-Copyright (c) 2013-2014 pushandplay
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The Apache 2.0 License
