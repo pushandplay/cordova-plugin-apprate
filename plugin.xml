@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
 		id="org.pushandplay.cordova.apprate"
-		version="0.0.23">
+		version="1.0">
 	<name>AppRate</name>
 	<description>This plugin provide the "rate this app" functionality into your Cordova/Phonegap application</description>
 	<author>pushandplay</author>
@@ -19,14 +19,10 @@
 	<dependency id="org.apache.cordova.dialogs"/>
 	<dependency id="org.apache.cordova.device"/>
 	<dependency id="org.apache.cordova.globalization"/>
-	<!--<dependency id="org.apache.cordova.core.inappbrowser""/>-->
+    <dependency id="org.apache.cordova.console"/>
 
 	<js-module src="www/AppRate.js" name="AppRate">
 		<clobbers target="navigator.apprate"/>
-	</js-module>
-
-	<js-module src="www/preferences.js" name="preferences">
-		<runs target="AppRatePreferences"/>
 	</js-module>
 
 	<js-module src="www/locales.js" name="locales">
