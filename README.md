@@ -26,12 +26,12 @@ Phonegap / Cordova 3.0.0 or later
 
 ## Customization and usage ##
 
-+	Simple call
+#### Simple call ####
 
 		navigator.apprate.setup(myPrefObj);
 		navigator.apprate.promptForRating();
 		
-+	Available setup properties:	
+#### Available setup properties:	####
 
 		{
 			useLanguage: {String}			default locale (default: "en")
@@ -44,7 +44,9 @@ Phonegap / Cordova 3.0.0 or later
 				blackberry: {String}		(default: not set)
 		}
 
-+	Example 1 - Detect user locale automatically and show message after each 3 launches
+##	Examples ##
+### Example 1 ####
+Detect user locale automatically and show message after each 3 launches
 
 		var cfg = {
 			displayAppName: "My Super App",
@@ -56,7 +58,8 @@ Phonegap / Cordova 3.0.0 or later
 		navigator.apprate.setup(cfg);
 		navigator.apprate.promptForRating();
 		
-+	Example 2 - Set custom locale strings and show message after each 5 launches
+#### Example 2 ####
+Set custom locale strings and show message after each 5 launches
 
 		var cfg = {
 			useLanguage: "ru",
@@ -70,7 +73,8 @@ Phonegap / Cordova 3.0.0 or later
 		navigator.apprate.setup(cfg);
 		navigator.apprate.promptForRating();
 
-+	Example 3 - Set custom locale object and show message after each 10 launches
+#### Example 3 ####
+Set custom locale object and show message after each 10 launches
 
 		var cfg = {
 			usesUntilPrompt: 10,
@@ -87,6 +91,9 @@ Phonegap / Cordova 3.0.0 or later
 		
 		navigator.apprate.setup(cfg);
 		navigator.apprate.promptForRating();
+		
+## Already included translations ##
+ar, bn, ca, cs, da, de, el, en, es, fa, fr, he, hi, id, il, ja, ko, nl, no, pa, pl, pt, ru, sk, sl, sv, th, tr, uk, ur, vi, zh-TW
 	
 
 ## Licence ##
