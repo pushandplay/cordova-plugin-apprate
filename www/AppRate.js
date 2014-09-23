@@ -33,7 +33,7 @@ AppRate = (function() {
   AppRate.preferences = {
     autoDetectLanguage: true,
     useLanguage: "en",
-    displayAppName: "AppRate plugin",
+    displayAppName: void 0,
     promptAgainForEachNewVersion: true,
     daysUntilPrompt: 1,
     usesUntilPrompt: 3,
@@ -59,6 +59,9 @@ AppRate = (function() {
         return AppRate.usesUntilPromptCounter = parseInt(window.localStorage.getItem("usesUntilPromptCounter") || 0);
       };
     })(this));
+    this.getAppTitle(function(success) {
+      return AppRate.preferences.displayAppName = success;
+    });
     this;
   }
 
@@ -168,8 +171,13 @@ AppRate = (function() {
     return this;
   };
 
-  AppRate.prototype.getAppVersion = function(successCalback, errorCallback) {
-    exec(successCalback, errorCallback, 'AppRate', 'getAppVersion', []);
+  AppRate.prototype.getAppVersion = function(successCallback, errorCallback) {
+    exec(successCallback, errorCallback, 'AppRate', 'getAppVersion', []);
+    return this;
+  };
+
+  AppRate.prototype.getAppTitle = function(successCallback, errorCallback) {
+    exec(successCallback, errorCallback, 'AppRate', 'getAppTitle', []);
     return this;
   };
 

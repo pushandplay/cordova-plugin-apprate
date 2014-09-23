@@ -28,7 +28,7 @@ class AppRate
 	@preferences:
 		autoDetectLanguage: true
 		useLanguage: "en"
-		displayAppName: "AppRate plugin"
+		displayAppName: undefined
 		promptAgainForEachNewVersion: true  # TODO: not implemented
 		daysUntilPrompt: 1  # TODO: not implemented
 		usesUntilPrompt: 3
@@ -51,6 +51,9 @@ class AppRate
 
 			AppRate.rate_app = parseInt window.localStorage.getItem("rate_app") or 1
 			AppRate.usesUntilPromptCounter = parseInt window.localStorage.getItem("usesUntilPromptCounter") or 0
+
+		@getAppTitle (success) ->
+			AppRate.preferences.displayAppName = success
 		@
 
 	navigateToAppStore = ->
@@ -124,8 +127,11 @@ class AppRate
 				rate_try()
 		@
 
-	getAppVersion: (successCalback, errorCallback) ->
-		exec successCalback, errorCallback, 'AppRate', 'getAppVersion', []
+	getAppVersion: (successCallback, errorCallback) ->
+		exec successCallback, errorCallback, 'AppRate', 'getAppVersion', []
+		@
+	getAppTitle: (successCallback, errorCallback) ->
+		exec successCallback, errorCallback, 'AppRate', 'getAppTitle', []
 		@
 
 module.exports = new AppRate @
