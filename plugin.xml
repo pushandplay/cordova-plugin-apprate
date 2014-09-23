@@ -37,7 +37,6 @@ under the License.
 
 	<dependency id="org.apache.cordova.dialogs"/>
 	<dependency id="org.apache.cordova.globalization"/>
-    <dependency id="org.apache.cordova.console"/>
 
 	<js-module src="www/AppRate.js" name="AppRate">
 		<clobbers target="navigator.apprate"/>

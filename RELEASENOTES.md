@@ -22,4 +22,5 @@
 
 ### 1.1 (Sep 23, 2014)
 * Issue-9: Check app version and show dialog again (for iOS)
+* Issue-23: Get application title from native app
 * Added Release Notes

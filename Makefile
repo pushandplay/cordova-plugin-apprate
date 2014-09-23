@@ -54,3 +54,7 @@ app_prepare:
 app_install:
 	@cd $(DIR_DEMO) && cordova prepare
 	@cd $(DIR_DEMO) && cordova run --device android
+
+
+publish:
+	@plugman publish ./
