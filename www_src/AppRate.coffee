@@ -19,8 +19,8 @@
  *
 */`
 
-locales = require "./locales"
-channel = require "cordova/channel"
+locales = require './locales'
+exec = require 'cordova/exec'
 
 class AppRate
 	thisObj = @
@@ -28,7 +28,7 @@ class AppRate
 	@preferences:
 		autoDetectLanguage: true
 		useLanguage: "en"
-		displayAppName: "AppRate plugin"
+		displayAppName: undefined
 		promptAgainForEachNewVersion: true  # TODO: not implemented
 		daysUntilPrompt: 1  # TODO: not implemented
 		usesUntilPrompt: 3
@@ -37,8 +37,24 @@ class AppRate
 			android: undefined
 			blackberry: undefined
 
-	@rate_app = parseInt window.localStorage.getItem("rate_app") or 1
-	@usesUntilPromptCounter = parseInt window.localStorage.getItem("usesUntilPromptCounter") or 0
+	constructor: ->
+		@getAppVersion (success) =>
+			AppRate.preferences.curentVersion = success
+			if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase() and (window.localStorage.getItem "appVersion") isnt success
+				AppRate.preferences.curentVersion = success
+
+				rate_stop()
+				rate_reset()
+
+				window.localStorage.setItem 'appVersion', success
+				window.localStorage.removeItem 'rate_app'
+
+			AppRate.rate_app = parseInt window.localStorage.getItem("rate_app") or 1
+			AppRate.usesUntilPromptCounter = parseInt window.localStorage.getItem("usesUntilPromptCounter") or 0
+
+		@getAppTitle (success) ->
+			AppRate.preferences.displayAppName = success
+		@
 
 	navigateToAppStore = ->
 		if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
@@ -47,6 +63,7 @@ class AppRate
 			window.open AppRate.preferences.appStoreAppURL.android, "_system"
 		else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()
 			window.open AppRate.preferences.appStoreAppURL.blackberry
+		@
 
 	promptForRatingWindowButtonClickHandler = (buttonIndex) ->
 		# no = 1, later = 2, yes = 3
@@ -56,13 +73,16 @@ class AppRate
 				setTimeout navigateToAppStore, 1000
 			when 2 then rate_reset()
 			when 1 then rate_stop()
+		@
 
 	rate_stop = ->
 		window.localStorage.setItem "rate_app", 0
 		window.localStorage.removeItem "usesUntilPromptCounter"
+		@
 
 	rate_reset = ->
 		window.localStorage.setItem "usesUntilPromptCounter", 0
+		@
 
 	rate_try = ->
 		localeObj = getLocaleObject()
@@ -71,6 +91,7 @@ class AppRate
 		else if thisObj.usesUntilPromptCounter < AppRate.preferences.usesUntilPrompt
 			thisObj.usesUntilPromptCounter++
 			window.localStorage.setItem "usesUntilPromptCounter", thisObj.usesUntilPromptCounter
+		@
 
 	getLocaleObject = ->
 		localeObj = AppRate.preferences.customLocale or locales[AppRate.preferences.useLanguage] or locales["en"]
@@ -92,6 +113,7 @@ class AppRate
 			AppRate.preferences.appStoreAppURL.ios = prefs.appStoreAppURL.ios if prefs.appStoreAppURL.ios isnt undefined
 			AppRate.preferences.appStoreAppURL.android = prefs.appStoreAppURL.android if prefs.appStoreAppURL.android isnt undefined
 			AppRate.preferences.appStoreAppURL.blackberry = prefs.appStoreAppURL.blackberry if prefs.appStoreAppURL.blackberry isnt undefined
+		@
 
 	promptForRating: ->
 		if navigator.notification and navigator.globalization
@@ -103,6 +125,13 @@ class AppRate
 					rate_try()
 			else
 				rate_try()
+		@
 
+	getAppVersion: (successCallback, errorCallback) ->
+		exec successCallback, errorCallback, 'AppRate', 'getAppVersion', []
+		@
+	getAppTitle: (successCallback, errorCallback) ->
+		exec successCallback, errorCallback, 'AppRate', 'getAppTitle', []
+		@
 
 module.exports = new AppRate @

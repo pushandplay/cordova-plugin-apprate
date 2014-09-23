@@ -21,7 +21,7 @@ under the License.
 
 <plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
 		id="org.pushandplay.cordova.apprate"
-		version="1.0">
+		version="1.1">
 	<name>AppRate</name>
 	<description>This plugin provide the "rate this app" functionality into your Cordova/Phonegap application</description>
 	<author email="hello@pushandplay.ru" href="http://pushandplay.ru">pushandplay</author>
@@ -36,9 +36,7 @@ under the License.
 	</engines>
 
 	<dependency id="org.apache.cordova.dialogs"/>
-	<dependency id="org.apache.cordova.device"/>
 	<dependency id="org.apache.cordova.globalization"/>
-    <dependency id="org.apache.cordova.console"/>
 
 	<js-module src="www/AppRate.js" name="AppRate">
 		<clobbers target="navigator.apprate"/>
@@ -50,12 +48,27 @@ under the License.
 
 	<!-- android -->
 	<platform name="android">
-		<!-- android-specific elements -->
+        <source-file src="src/android/AppRate.java" target-dir="src/org/apache/cordova/apprate" />
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="AppRate">
+                <param name="android-package" value="org.pushandplay.cordova.apprate.AppRate"/>
+            </feature>
+        </config-file>
 	</platform>
 
 	<!-- ios -->
 	<platform name="ios">
-		<!-- ios-specific elements -->
+        <plugins-plist key="AppVersion" string="AppVersion" />
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="AppRate">
+                <param name="ios-package" value="CDVAppRate"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVAppRate.h" />
+        <source-file src="src/ios/CDVAppRate.m" />
 	</platform>
 
 	<!-- bb10 -->

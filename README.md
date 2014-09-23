@@ -22,7 +22,17 @@ Phonegap / Cordova 3.0.0 or later
 
 ## Installation ##
 
-+	Install AppRate plugin <code>cordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git</code>
++	Install from github repository:
+
+		cordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git
+			
++	Install from apache cordova plugins registry:
+
+		cordova plugins add org.pushandplay.cordova.apprate
+		
++	For installation from phonegap build add the following to your config.xml: 
+
+		<gap:plugin name="org.pushandplay.cordova.apprate" />
 
 ## Customization and usage ##
 
@@ -35,7 +45,7 @@ Phonegap / Cordova 3.0.0 or later
 
 		{
 			useLanguage: {String}			default locale (default: "en")
-			displayAppName: {String}		Your app name (default: "AppRate plugin")
+			displayAppName: {String}		Your app name (default: Your native app name)
 			usesUntilPrompt: {Integer}		Show promt message after launches (default: 3)
 			customLocale: {Object}			Custom locale object (default: not set)
 			appStoreAppURL:
@@ -49,7 +59,6 @@ Phonegap / Cordova 3.0.0 or later
 Detect user locale automatically and show message after each 3 launches
 
 		var cfg = {
-			displayAppName: "My Super App",
 			appStoreAppURL: {
 				ios: 'itms-apps://itunes.apple.com/ru/app/id736199575?l=en&mt=8'
 			}
@@ -64,7 +73,6 @@ Set custom locale strings and show message after each 5 launches
 		var cfg = {
 			useLanguage: "ru",
 			usesUntilPrompt: 5,
-			displayAppName: "My Super App",
 			appStoreAppURL: {
 				ios: 'itms-apps://itunes.apple.com/ru/app/id736199575?l=en&mt=8'
 			}
