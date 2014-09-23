@@ -50,7 +50,13 @@ under the License.
 
 	<!-- android -->
 	<platform name="android">
-		<!-- android-specific elements -->
+        <source-file src="src/android/AppRate.java" target-dir="src/org/apache/cordova/apprate" />
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="AppRate">
+                <param name="android-package" value="org.pushandplay.cordova.apprate.AppRate" />
+            </feature>
+        </config-file>
 	</platform>
 
 	<!-- ios -->

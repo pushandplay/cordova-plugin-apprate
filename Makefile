@@ -49,3 +49,8 @@ app_prepare:
 	@cd $(DIR_DEMO) && cordova plugins remove org.pushandplay.cordova.apprate
 	@cd $(DIR_DEMO) && cordova plugins add ../cordova-plugin-apprate
 	@cd $(DIR_DEMO) && cordova prepare
+
+
+app_install:
+	@cd $(DIR_DEMO) && cordova prepare
+	@cd $(DIR_DEMO) && cordova run --device android
