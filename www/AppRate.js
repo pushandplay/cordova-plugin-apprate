@@ -28,8 +28,6 @@ exec = require('cordova/exec');
 AppRate = (function() {
   var getLocaleObject, navigateToAppStore, promptForRatingWindowButtonClickHandler, rate_reset, rate_stop, rate_try, thisObj;
 
-  function AppRate() {}
-
   thisObj = AppRate;
 
   AppRate.preferences = {
@@ -46,9 +44,23 @@ AppRate = (function() {
     }
   };
 
-  AppRate.rate_app = parseInt(window.localStorage.getItem("rate_app") || 1);
-
-  AppRate.usesUntilPromptCounter = parseInt(window.localStorage.getItem("usesUntilPromptCounter") || 0);
+  function AppRate() {
+    this.getAppVersion((function(_this) {
+      return function(success) {
+        AppRate.preferences.curentVersion = success;
+        if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase() && (window.localStorage.getItem("appVersion")) !== success)) {
+          AppRate.preferences.curentVersion = success;
+          rate_stop();
+          rate_reset();
+          window.localStorage.setItem('appVersion', success);
+          window.localStorage.removeItem('rate_app');
+        }
+        AppRate.rate_app = parseInt(window.localStorage.getItem("rate_app") || 1);
+        return AppRate.usesUntilPromptCounter = parseInt(window.localStorage.getItem("usesUntilPromptCounter") || 0);
+      };
+    })(this));
+    this;
+  }
 
   navigateToAppStore = function() {
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {

@@ -54,7 +54,7 @@ under the License.
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="AppRate">
-                <param name="android-package" value="org.pushandplay.cordova.apprate.AppRate" />
+                <param name="android-package" value="org.pushandplay.cordova.apprate.AppRate"/>
             </feature>
         </config-file>
 	</platform>
@@ -65,7 +65,7 @@ under the License.
 
         <config-file target="config.xml" parent="/*">
             <feature name="AppRate">
-                <param name="ios-package" value="CDVAppRate" />
+                <param name="ios-package" value="CDVAppRate"/>
             </feature>
         </config-file>
 

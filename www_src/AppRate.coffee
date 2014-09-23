@@ -37,8 +37,21 @@ class AppRate
 			android: undefined
 			blackberry: undefined
 
-	@rate_app = parseInt window.localStorage.getItem("rate_app") or 1
-	@usesUntilPromptCounter = parseInt window.localStorage.getItem("usesUntilPromptCounter") or 0
+	constructor: ->
+		@getAppVersion (success) =>
+			AppRate.preferences.curentVersion = success
+			if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase() and (window.localStorage.getItem "appVersion") isnt success
+				AppRate.preferences.curentVersion = success
+
+				rate_stop()
+				rate_reset()
+
+				window.localStorage.setItem 'appVersion', success
+				window.localStorage.removeItem 'rate_app'
+
+			AppRate.rate_app = parseInt window.localStorage.getItem("rate_app") or 1
+			AppRate.usesUntilPromptCounter = parseInt window.localStorage.getItem("usesUntilPromptCounter") or 0
+		@
 
 	navigateToAppStore = ->
 		if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()

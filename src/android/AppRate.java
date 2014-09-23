@@ -14,7 +14,7 @@ public class AppRate extends CordovaPlugin {
 	public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException
 	{
 		try {
-			if ("getAppVersion".equals(action)){
+			if (action.equals("getAppVersion")){
 				PackageManager packageManager = this.cordova.getActivity().getPackageManager();
 				callbackContext.success(packageManager.getPackageInfo(this.cordova.getActivity().getPackageName(), 0).versionName);
 				return true;
