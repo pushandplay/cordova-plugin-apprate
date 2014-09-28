@@ -52,6 +52,7 @@ Phonegap / Cordova 3.0.0 or later
 			appStoreAppURL:
 				ios: {String}				App url in AppStore (default: not set)
 				android: {String}			App url in GooglePlay (default: not set)
+				windows8: {String}			App url in Windows Store (default: not set)
 				blackberry: {String}		(default: not set)
 		}
 
@@ -62,7 +63,8 @@ Detect locale automatically and show message on user language after each 3 launc
 		var cfg = {
 			appStoreAppURL: {
 				ios: "itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8",
-				android: "market://details?id=<package_name>"
+				android: "market://details?id=<package_name>",
+                windows8: "ms-windows-store:Review?name=<the Package Family Name of the application>"
 			}
 		};
 		

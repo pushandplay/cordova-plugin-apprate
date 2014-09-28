@@ -71,7 +71,9 @@ AppRate = (function() {
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
       window.open(AppRate.preferences.appStoreAppURL.android, '_system');
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(AppRate.preferences.appStoreAppURL.blackberry);
+      window.open(AppRate.preferences.appStoreAppURL.blackberry, '_system');
+    } else if (/(IEMobile)/i.test(navigator.userAgent.toLowerCase())) {
+      window.open(AppRate.preferences.appStoreAppURL.windows8, '_system');
     }
     return this;
   };
@@ -153,6 +155,9 @@ AppRate = (function() {
       }
       if (prefs.appStoreAppURL.blackberry !== void 0) {
         AppRate.preferences.appStoreAppURL.blackberry = prefs.appStoreAppURL.blackberry;
+      }
+      if (prefs.appStoreAppURL.windows8 !== void 0) {
+        AppRate.preferences.appStoreAppURL.windows8 = prefs.appStoreAppURL.windows8;
       }
     }
     return this;

@@ -62,7 +62,9 @@ class AppRate
 		else if /(Android)/i.test navigator.userAgent.toLowerCase()
 			window.open AppRate.preferences.appStoreAppURL.android, '_system'
 		else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()
-			window.open AppRate.preferences.appStoreAppURL.blackberry
+			window.open AppRate.preferences.appStoreAppURL.blackberry, '_system'
+		else if /(IEMobile)/i.test navigator.userAgent.toLowerCase()
+			window.open AppRate.preferences.appStoreAppURL.windows8, '_system'
 		@
 
 	promptForRatingWindowButtonClickHandler = (buttonIndex) ->
@@ -114,6 +116,7 @@ class AppRate
 			AppRate.preferences.appStoreAppURL.ios = prefs.appStoreAppURL.ios if prefs.appStoreAppURL.ios isnt undefined
 			AppRate.preferences.appStoreAppURL.android = prefs.appStoreAppURL.android if prefs.appStoreAppURL.android isnt undefined
 			AppRate.preferences.appStoreAppURL.blackberry = prefs.appStoreAppURL.blackberry if prefs.appStoreAppURL.blackberry isnt undefined
+			AppRate.preferences.appStoreAppURL.windows8 = prefs.appStoreAppURL.windows8 if prefs.appStoreAppURL.windows8 isnt undefined
 		@
 
 	promptForRating: ->
