@@ -67,9 +67,9 @@ AppRate = (function() {
 
   navigateToAppStore = function() {
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(AppRate.preferences.appStoreAppURL.ios);
+      window.open(AppRate.preferences.appStoreAppURL.ios, '_system');
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(AppRate.preferences.appStoreAppURL.android, "_system");
+      window.open(AppRate.preferences.appStoreAppURL.android, '_system');
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
       window.open(AppRate.preferences.appStoreAppURL.blackberry);
     }
@@ -80,7 +80,7 @@ AppRate = (function() {
     switch (buttonIndex) {
       case 3:
         rate_stop();
-        setTimeout(navigateToAppStore, 1000);
+        setTimeout(navigateToAppStore, 100);
         break;
       case 2:
         rate_reset();
@@ -106,7 +106,7 @@ AppRate = (function() {
     var localeObj;
     localeObj = getLocaleObject();
     if (thisObj.usesUntilPromptCounter === AppRate.preferences.usesUntilPrompt && thisObj.rate_app !== 0) {
-      navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, localeObj.buttonLabels);
+      navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
     } else if (thisObj.usesUntilPromptCounter < AppRate.preferences.usesUntilPrompt) {
       thisObj.usesUntilPromptCounter++;
       window.localStorage.setItem("usesUntilPromptCounter", thisObj.usesUntilPromptCounter);
@@ -128,6 +128,9 @@ AppRate = (function() {
   };
 
   AppRate.prototype.setup = function(prefs) {
+    if (prefs.debug !== void 0) {
+      AppRate.preferences.debug = true;
+    }
     if (prefs.useLanguage !== void 0) {
       AppRate.preferences.autoDetectLanguage = false;
       AppRate.preferences.useLanguage = prefs.useLanguage;

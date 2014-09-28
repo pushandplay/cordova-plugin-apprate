@@ -18,9 +18,15 @@
 # under the License.
 #
 -->
-# Release Notes
+# Release Notes #
 
-### 1.1 (Sep 23, 2014)
-* Issue-9: Check app version and show dialog again (for iOS)
-* Issue-23: Get application title from native app
-* Added Release Notes
+### 1.1.1 (Sep 28, 2014) ###
+*	Updated locale object structure
+*	Fixed bug with order of buttons for some locales
+*	Improved GooglePlay market url support
+*	Code refactoring
+
+### 1.1.0 (Sep 23, 2014) ###
+*	Issue-9: Check app version and show dialog again (for iOS)
+*	Issue-23: Get application title from native app
+*	Added Release Notes

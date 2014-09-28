@@ -15,7 +15,7 @@ release: all compress
 prepare:
 	@echo "\n\033[32mPrepare $(DIR_BUILD) directory...\033[0m"
 	@rm -rf $(DIR_BUILD) && mkdir $(DIR_BUILD)
-	@rsync -av $(DIR_SRC)/ $(DIR_BUILD)
+	@rsync -avz --partial $(DIR_SRC)/ $(DIR_BUILD)
 
 
 coffee:

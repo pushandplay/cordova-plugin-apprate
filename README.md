@@ -56,11 +56,12 @@ Phonegap / Cordova 3.0.0 or later
 
 ##	Examples ##
 ### Example 1 ####
-Detect user locale automatically and show message after each 3 launches
+Detect locale automatically and show message on user language after each 3 launches
 
 		var cfg = {
 			appStoreAppURL: {
-				ios: 'itms-apps://itunes.apple.com/ru/app/id736199575?l=en&mt=8'
+				ios: "itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8",
+				android: "market://details?id=<package_name>"
 			}
 		};
 		
@@ -74,7 +75,8 @@ Set custom locale strings and show message after each 5 launches
 			useLanguage: "ru",
 			usesUntilPrompt: 5,
 			appStoreAppURL: {
-				ios: 'itms-apps://itunes.apple.com/ru/app/id736199575?l=en&mt=8'
+				ios: "itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8",
+				android: "market://details?id=<package_name>"
 			}
 		};
 		
@@ -90,10 +92,13 @@ Set custom locale object and show message after each 10 launches
 			customLocale: {
 				title: "Rate %@",
 				message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!",
-				buttonLabels: ["No, Thanks", "Remind Me Later", "Rate It Now",]
+				cancelButtonLabel: "No, Thanks",
+				laterButtonLabel: "Remind Me Later",
+				rateButtonLabel: "Rate It Now"
 			},
 			appStoreAppURL: {
-				ios: 'itms-apps://itunes.apple.com/ru/app/id736199575?l=en&mt=8'
+				ios: "itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8",
+				android: "market://details?id=<package_name>"
 			}
 		};
 		
