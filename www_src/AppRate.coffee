@@ -58,9 +58,9 @@ class AppRate
 
 	navigateToAppStore = ->
 		if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
-			window.open AppRate.preferences.appStoreAppURL.ios
+			window.open AppRate.preferences.appStoreAppURL.ios, '_system'
 		else if /(Android)/i.test navigator.userAgent.toLowerCase()
-			window.open AppRate.preferences.appStoreAppURL.android, "_system"
+			window.open AppRate.preferences.appStoreAppURL.android, '_system'
 		else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()
 			window.open AppRate.preferences.appStoreAppURL.blackberry
 		@
@@ -70,7 +70,7 @@ class AppRate
 		switch buttonIndex
 			when 3
 				rate_stop()
-				setTimeout navigateToAppStore, 1000
+				setTimeout navigateToAppStore, 100
 			when 2 then rate_reset()
 			when 1 then rate_stop()
 		@
