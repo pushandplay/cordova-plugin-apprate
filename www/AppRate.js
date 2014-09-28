@@ -106,7 +106,7 @@ AppRate = (function() {
     var localeObj;
     localeObj = getLocaleObject();
     if (thisObj.usesUntilPromptCounter === AppRate.preferences.usesUntilPrompt && thisObj.rate_app !== 0) {
-      navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, localeObj.buttonLabels);
+      navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
     } else if (thisObj.usesUntilPromptCounter < AppRate.preferences.usesUntilPrompt) {
       thisObj.usesUntilPromptCounter++;
       window.localStorage.setItem("usesUntilPromptCounter", thisObj.usesUntilPromptCounter);
@@ -128,6 +128,9 @@ AppRate = (function() {
   };
 
   AppRate.prototype.setup = function(prefs) {
+    if (prefs.debug !== void 0) {
+      AppRate.preferences.debug = true;
+    }
     if (prefs.useLanguage !== void 0) {
       AppRate.preferences.autoDetectLanguage = false;
       AppRate.preferences.useLanguage = prefs.useLanguage;

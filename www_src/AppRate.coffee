@@ -87,7 +87,7 @@ class AppRate
 	rate_try = ->
 		localeObj = getLocaleObject()
 		if thisObj.usesUntilPromptCounter is AppRate.preferences.usesUntilPrompt and thisObj.rate_app isnt 0
-			navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, localeObj.buttonLabels
+			navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]
 		else if thisObj.usesUntilPromptCounter < AppRate.preferences.usesUntilPrompt
 			thisObj.usesUntilPromptCounter++
 			window.localStorage.setItem "usesUntilPromptCounter", thisObj.usesUntilPromptCounter
@@ -103,6 +103,7 @@ class AppRate
 
 
 	setup: (prefs) ->
+		AppRate.preferences.debug = true if prefs.debug isnt undefined
 		if prefs.useLanguage isnt undefined
 			AppRate.preferences.autoDetectLanguage = false
 			AppRate.preferences.useLanguage = prefs.useLanguage
