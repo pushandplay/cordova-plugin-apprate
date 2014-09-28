@@ -20,6 +20,9 @@
 -->
 # Release Notes #
 
+### 1.2.0 (Sep XX, 2014) ###
+* Added Windows 8 support
+
 ### 1.1.1 (Sep 28, 2014) ###
 *	Updated locale object structure
 *	Fixed bug with order of buttons for some locales

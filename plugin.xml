@@ -21,7 +21,7 @@ under the License.
 
 <plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
 		id="org.pushandplay.cordova.apprate"
-		version="1.1.1">
+		version="1.2.0">
 	<name>AppRate</name>
 	<description>This plugin provide the "rate this app" functionality into your Cordova/Phonegap application</description>
 	<author email="hello@pushandplay.ru" href="http://pushandplay.ru">pushandplay</author>
@@ -71,7 +71,25 @@ under the License.
         <source-file src="src/ios/CDVAppRate.m" />
 	</platform>
 
-	<!-- bb10 -->
+    <!-- windows8 -->
+    <platform name="windows8">
+        <js-module src="src/windows8/AppRateProxy.js" name="AppRateProxy">
+            <merges target=""/>
+        </js-module>
+    </platform>
+
+    <!-- wp8 -->
+    <platform name="wp8">
+        <config-file target="config.xml" parent="/*">
+            <feature name="AppRate">
+                <param name="wp-package" value="AppRate"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/wp8/AppRate.cs" />
+    </platform>
+
+    <!-- bb10 -->
 	<platform name="bb10">
 		<!-- bb10-specific elements -->
 	</platform>

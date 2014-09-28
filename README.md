@@ -14,6 +14,7 @@ Issues list and features requests [here](https://github.com/pushandplay/cordova-
 
 +	iOS
 +	Android
++	Windows 8
 +	Blackberry 10 (not tested)
 
 ## Requirements ##
