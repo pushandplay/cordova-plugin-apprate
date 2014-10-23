@@ -48,7 +48,7 @@ AppRate = (function() {
     this.getAppVersion((function(_this) {
       return function(success) {
         AppRate.preferences.curentVersion = success;
-        if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase() && (window.localStorage.getItem("appVersion")) !== success)) {
+        if (/(iPhone|iPod|iPad|IEMobile)/i.test(navigator.userAgent.toLowerCase() && (window.localStorage.getItem("appVersion")) !== success)) {
           AppRate.preferences.curentVersion = success;
           rate_stop();
           rate_reset();

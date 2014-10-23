@@ -40,7 +40,7 @@ class AppRate
 	constructor: ->
 		@getAppVersion (success) =>
 			AppRate.preferences.curentVersion = success
-			if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase() and (window.localStorage.getItem "appVersion") isnt success
+			if /(iPhone|iPod|iPad|IEMobile)/i.test navigator.userAgent.toLowerCase() and (window.localStorage.getItem "appVersion") isnt success
 				AppRate.preferences.curentVersion = success
 
 				rate_stop()
