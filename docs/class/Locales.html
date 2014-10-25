@@ -15,176 +15,129 @@
       Index
     </a>
     &raquo;
-    <span class='title'>AppRate</span>
+    <span class='title'>Locales</span>
   </div>
 </div>
     <div id='content'>
       <h1>
         Class:
-        AppRate
+        Locales
       </h1>
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>AppRate.coffee</td>
+          <td>locales.coffee</td>
         </tr>
       </table>
-      <h2>Variables Summary</h2>
-      <dl class='constants'>
-  <dt id='preferences-variable'>
-    preferences
-    =
-  </dt>
-  <dd>
-    <pre><code class='coffeescript'>{
-  useLanguage: null,
-  displayAppName: &#39;&#39;,
-  promptAgainForEachNewVersion: true,
-  usesUntilPrompt: 3,
-  storeAppURL: {
-    ios: void 0,
-    android: void 0,
-    blackberry: void 0
-  },
-  customLocale: null
-}</code></pre>
-    
-  </dd>
-</dl>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <p>Collection of Locale objects</p>
+</div>
+<div class='tags'>
+</div>
       <h2>Class Method Summary</h2>
       <ul class='summary'>
   <li>
     <span class='signature'>
-      <a href='#promptForRating-static'>
+      <a href='#addLocale-static'>
         .
-(AppRate)
-<b>promptForRating</b><span>()</span>
+(Locale)
+<b>addLocale</b><span>(localeObject)</span>
       </a>
     </span>
     <span class='desc'>
-      Check plugin preferences and display or not display rate popup 
+      Add locale to collection 
     </span>
   </li>
   <li>
     <span class='signature'>
-      <a href='#onButtonClicked-static'>
+      <a href='#getLocale-static'>
         .
-(AppRate)
-<b>onButtonClicked</b><span>(buttonIndex)</span>
+(Locale)
+<b>getLocale</b><span>(language, applicationTitle = null)</span>
       </a>
     </span>
     <span class='desc'>
-      User click on popup buttons callback 
-    </span>
-  </li>
-</ul>
-      <h2>Instance Method Summary</h2>
-      <ul class='summary'>
-  <li>
-    <span class='signature'>
-      <a href='#init-dynamic'>
-        #
-(AppRate)
-<b>init</b><span>()</span>
-      </a>
-    </span>
-    <span class='bound note title'>Bound</span>
-    <span class='desc'>
-      Initialize 
+      Get locale from collection by language 
     </span>
   </li>
 </ul>
       <h2>Class Method Details</h2>
       <div class='methods'>
   <div class='method_details'>
-    <p class='signature' id='promptForRating-static'>
+    <p class='signature' id='addLocale-static'>
       .
-(AppRate)
-<b>promptForRating</b><span>()</span>
+(Locale)
+<b>addLocale</b><span>(localeObject)</span>
       <br>
     </p>
     <div class='docstring'>
-  <p>Check plugin preferences and display or not display rate popup</p>
-  <div class='examples'>
-    <h3>Examples:</h3>
-    <h4>
-      
-    </h4>
-    <pre><code class='coffeescript'>AppRate.promptForRating();</code></pre>
-  </div>
-</div>
-<div class='tags'>
-  <h3>Returns:</h3>
-  <ul class='return'>
-    <li>
-      <span class='type'></span>
-      <tt><a href='../class/AppRate.html'>AppRate</a></tt>
-    </li>
-  </ul>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='onButtonClicked-static'>
-      .
-(AppRate)
-<b>onButtonClicked</b><span>(buttonIndex)</span>
-      <br>
-    </p>
-    <div class='docstring'>
-  <p>User click on popup buttons callback</p>
-  <div class='examples'>
-    <h3>Examples:</h3>
-    <h4>
-      Add popup buttons callback listener
-    </h4>
-    <pre><code class='coffeescript'>AppRate.onButtonClicked = function (buttonIndex) {
-  console.log(&quot;button index: &quot; + buttonIndex);
-}</code></pre>
-  </div>
+  <p>Add locale to collection</p>
 </div>
 <div class='tags'>
   <h3>Parameters:</h3>
   <ul class='param'>
     <li>
-      <span class='name'>buttonIndex</span>
+      <span class='name'>localeObject</span>
       <span class='type'>
         (
-          <tt>Integer</tt>
+          <tt><a href='../class/Locale.html'>Locale</a></tt>
         )
       </span>
-      &mdash;
-      <span class='desc'>(1:    cancelButton, 2: laterButton, 3: rateButton) </span>
     </li>
   </ul>
   <h3>Returns:</h3>
   <ul class='return'>
     <li>
       <span class='type'></span>
-      <tt><a href='../class/AppRate.html'>AppRate</a></tt>
+      (
+        <tt><a href='../class/Locale.html'>Locale</a></tt>
+      )
+      &mdash;
+      <span class='desc'>Added locale object </span>
     </li>
   </ul>
 </div>
   </div>
-</div>
-      <h2>Instance Method Details</h2>
-      <div class='methods'>
   <div class='method_details'>
-    <p class='signature' id='init-dynamic'>
-      #
-(AppRate)
-<b>init</b><span>()</span>
-      <span class='bound note'>Bound</span>
+    <p class='signature' id='getLocale-static'>
+      .
+(Locale)
+<b>getLocale</b><span>(language, applicationTitle = null)</span>
       <br>
     </p>
     <div class='docstring'>
-  <p>Initialize</p>
+  <p>Get locale from collection by language</p>
 </div>
 <div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>language</span>
+      <span class='type'>
+        (
+          <tt>String</tt>
+        )
+      </span>
+    </li>
+    <li>
+      <span class='name'>applicationTitle</span>
+      <span class='type'>
+        (
+          <tt>String</tt>
+        )
+      </span>
+    </li>
+  </ul>
   <h3>Returns:</h3>
   <ul class='return'>
     <li>
       <span class='type'></span>
-      <tt><a href='../class/AppRate.html'>AppRate</a></tt>
+      (
+        <tt><a href='../class/Locale.html'>Locale</a></tt>
+      )
+      &mdash;
+      <span class='desc'>Locale object or null </span>
     </li>
   </ul>
 </div>

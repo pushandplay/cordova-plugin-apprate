@@ -19,18 +19,19 @@
  * under the License.
  *
  */;
-var AppRate, exec, locales;
+var AppRate, Locales, exec,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-locales = require('./locales');
+Locales = require('./locales');
 
 exec = require('cordova/exec');
 
 AppRate = (function() {
-  var FLAG_NATIVE_CODE_SUPPORTED, LOCALE_DEFAULT, LOCAL_STORAGE_APP_VERSION, LOCAL_STORAGE_COUNTER, counter, getLocaleObject, localStorageParam, navigateToAppStore, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
+  var FLAG_NATIVE_CODE_SUPPORTED, LOCALE_DEFAULT, LOCAL_STORAGE_COUNTER, counter, getAppTitle, getAppVersion, localStorageParam, navigateToAppStore, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
 
-  function AppRate() {}
-
-  LOCAL_STORAGE_APP_VERSION = 'appVersion';
+  function AppRate() {
+    this.init = __bind(this.init, this);
+  }
 
   LOCAL_STORAGE_COUNTER = 'counter';
 
@@ -39,140 +40,35 @@ AppRate = (function() {
   FLAG_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad|Android)/i.test(navigator.userAgent.toLowerCase());
 
   counter = {
-    appVersion: void 0,
+    applicationVersion: void 0,
     countdown: 0
   };
 
   navigateToAppStore = function() {
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(this.preferences.storeAppURL.ios, '_system');
+      window.open(AppRate.preferences.storeAppURL.ios, '_system');
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(this.preferences.storeAppURL.android, '_system');
+      window.open(AppRate.preferences.storeAppURL.android, '_system');
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(this.preferences.storeAppURL.blackberry);
+      window.open(AppRate.preferences.storeAppURL.blackberry);
     }
-    return this;
-  };
-
-  getLocaleObject = function() {
-    var displayAppName, key, localeObj, value;
-    localeObj = AppRate.preferences.customLocale || locales[AppRate.preferences.useLanguage] || locales[LOCALE_DEFAULT];
-    displayAppName = localeObj.displayAppName || AppRate.preferences.displayAppName;
-    for (key in localeObj) {
-      value = localeObj[key];
-      if (typeof value === 'string' || value instanceof String) {
-        localeObj[key] = value.replace(/%@/g, displayAppName);
-      }
-    }
-    return localeObj;
+    return AppRate;
   };
 
   promptForRatingWindowButtonClickHandler = function(buttonIndex) {
     switch (buttonIndex) {
+      case 1:
+        updateCounter('stop');
+        break;
       case 2:
         updateCounter('reset');
         break;
-      case 1:
       case 3:
         updateCounter('stop');
+        navigateToAppStore();
     }
     return AppRate.onButtonClicked(buttonIndex);
   };
-
-
-  /*
-  @nodoc
-  constructor: ->
-    @getAppVersion (success) =>
-      AppRate.preferences.curentVersion = success
-      if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase() and (window.localStorage.getItem "appVersion") isnt success
-        AppRate.preferences.curentVersion = success
-  
-        rate_stop()
-        rate_reset()
-  
-        window.localStorage.setItem 'appVersion', success
-        window.localStorage.removeItem 'rate_app'
-  
-      AppRate.rate_app = parseInt window.localStorage.getItem("rate_app") or 1
-      AppRate.usesUntilPromptCounter = parseInt window.localStorage.getItem("usesUntilPromptCounter") or 0
-  
-    @getAppTitle (success) ->
-      AppRate.preferences.displayAppName = success
-    @
-  
-  navigateToAppStore = ->
-    if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
-      window.open AppRate.preferences.appStoreAppURL.ios, '_system'
-    else if /(Android)/i.test navigator.userAgent.toLowerCase()
-      window.open AppRate.preferences.appStoreAppURL.android, '_system'
-    else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()
-      window.open AppRate.preferences.appStoreAppURL.blackberry
-    @
-  
-  promptForRatingWindowButtonClickHandler = (buttonIndex) ->
-     * no = 1, later = 2, yes = 3
-    switch buttonIndex
-      when 3
-        rate_stop()
-        setTimeout navigateToAppStore, 100
-      when 2 then rate_reset()
-      when 1 then rate_stop()
-    @
-  
-  rate_stop = ->
-    window.localStorage.setItem "rate_app", 0
-    window.localStorage.removeItem "usesUntilPromptCounter"
-    @
-  
-  rate_reset = ->
-    window.localStorage.setItem "usesUntilPromptCounter", 0
-    @
-  
-  rate_try = ->
-    localeObj = getLocaleObject()
-    if thisObj.usesUntilPromptCounter is AppRate.preferences.usesUntilPrompt and thisObj.rate_app isnt 0
-      navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]
-    else if thisObj.usesUntilPromptCounter < AppRate.preferences.usesUntilPrompt
-      thisObj.usesUntilPromptCounter++
-      window.localStorage.setItem "usesUntilPromptCounter", thisObj.usesUntilPromptCounter
-    @
-  
-  getLocaleObject = ->
-    localeObj = AppRate.preferences.customLocale or locales[AppRate.preferences.useLanguage] or locales["en"]
-    displayAppName = localeObj.displayAppName or AppRate.preferences.displayAppName
-    for key, value of localeObj
-      if typeof value == 'string' or value instanceof String
-        localeObj[key] = value.replace(/%@/g, displayAppName)
-    localeObj
-  
-  
-  setup: (prefs) ->
-    AppRate.preferences.debug = true if prefs.debug isnt undefined
-    if prefs.useLanguage isnt undefined
-      AppRate.preferences.autoDetectLanguage = false
-      AppRate.preferences.useLanguage = prefs.useLanguage
-    AppRate.preferences.customLocale = prefs.customLocale if prefs.customLocale isnt undefined
-    AppRate.preferences.usesUntilPrompt = prefs.usesUntilPrompt if prefs.usesUntilPrompt isnt undefined
-    AppRate.preferences.displayAppName = prefs.displayAppName if prefs.displayAppName isnt undefined
-    if prefs.appStoreAppURL
-      AppRate.preferences.appStoreAppURL.ios = prefs.appStoreAppURL.ios if prefs.appStoreAppURL.ios isnt undefined
-      AppRate.preferences.appStoreAppURL.android = prefs.appStoreAppURL.android if prefs.appStoreAppURL.android isnt undefined
-      AppRate.preferences.appStoreAppURL.blackberry = prefs.appStoreAppURL.blackberry if prefs.appStoreAppURL.blackberry isnt undefined
-    @
-  
-  promptForRating: ->
-    if navigator.notification and navigator.globalization
-      if AppRate.preferences.autoDetectLanguage
-        navigator.globalization.getPreferredLanguage (language) ->
-          AppRate.preferences.useLanguage = language.value.split(/_/)[0]
-          rate_try()
-        , ->
-          rate_try()
-      else
-        rate_try()
-    @
-   */
 
   updateCounter = function(action) {
     if (action == null) {
@@ -196,8 +92,8 @@ AppRate = (function() {
 
   showDialog = function() {
     var localeObj;
-    if (counter.countdown <= AppRate.preferences.usesUntilPrompt) {
-      localeObj = getLocaleObject();
+    if (counter.countdown === AppRate.preferences.usesUntilPrompt) {
+      localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName) || Locales.getLocale(LOCALE_DEFAULT, AppRate.preferences.displayAppName);
       navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
     }
     return AppRate;
@@ -226,7 +122,6 @@ AppRate = (function() {
   AppRate.preferences = {
     useLanguage: null,
     displayAppName: '',
-    currentVersion: null,
     promptAgainForEachNewVersion: true,
     usesUntilPrompt: 3,
     storeAppURL: {
@@ -234,27 +129,23 @@ AppRate = (function() {
       android: void 0,
       blackberry: void 0
     },
-    customLocale: {
-      title: "Rate %@",
-      message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!",
-      cancelButtonLabel: "No, Thanks",
-      laterButtonLabel: "Remind Me Later",
-      rateButtonLabel: "Rate It Now"
-    }
+    customLocale: null
   };
 
-  AppRate.init = function() {
+  AppRate.prototype.init = function() {
     counter = JSON.parse(localStorageParam(LOCAL_STORAGE_COUNTER)) || counter;
-    this.getAppVersion((function(_this) {
-      return function(currentVersion) {
-        if (_this.preferences.currentVersion !== currentVersion) {
-          _this.preferences.currentVersion = currentVersion;
-          localStorageParam(LOCAL_STORAGE_APP_VERSION, currentVersion);
+    getAppVersion((function(_this) {
+      return function(applicationVersion) {
+        if (counter.applicationVersion !== applicationVersion) {
+          counter.applicationVersion = applicationVersion;
+          if (_this.preferences.promptAgainForEachNewVersion) {
+            updateCounter('reset');
+          }
         }
         return _this;
       };
     })(this));
-    this.getAppTitle((function(_this) {
+    getAppTitle((function(_this) {
       return function(displayAppName) {
         _this.preferences.displayAppName = displayAppName;
         return _this;
@@ -263,9 +154,25 @@ AppRate = (function() {
     return this;
   };
 
+  getAppVersion = function(successCallback, errorCallback) {
+    if (FLAG_NATIVE_CODE_SUPPORTED) {
+      exec(successCallback, errorCallback, 'AppRate', 'getAppVersion', []);
+    } else {
+      successCallback(counter.applicationVersion);
+    }
+    return AppRate;
+  };
+
+  getAppTitle = function(successCallback, errorCallback) {
+    if (FLAG_NATIVE_CODE_SUPPORTED) {
+      exec(successCallback, errorCallback, 'AppRate', 'getAppTitle', []);
+    } else {
+      successCallback(AppRate.preferences.displayAppName);
+    }
+    return AppRate;
+  };
+
   AppRate.promptForRating = function() {
-    this.preferences.currentVersion = localStorageParam(LOCAL_STORAGE_APP_VERSION);
-    updateCounter();
     if (this.preferences.useLanguage === null) {
       navigator.globalization.getPreferredLanguage((function(_this) {
         return function(language) {
@@ -276,24 +183,7 @@ AppRate = (function() {
     } else {
       showDialog();
     }
-    return this;
-  };
-
-  AppRate.getAppVersion = function(successCallback, errorCallback) {
-    if (FLAG_NATIVE_CODE_SUPPORTED) {
-      exec(successCallback, errorCallback, 'AppRate', 'getAppVersion', []);
-    } else {
-      successCallback(localStorageParam(LOCAL_STORAGE_APP_VERSION));
-    }
-    return this;
-  };
-
-  AppRate.getAppTitle = function(successCallback, errorCallback) {
-    if (FLAG_NATIVE_CODE_SUPPORTED) {
-      exec(successCallback, errorCallback, 'AppRate', 'getAppTitle', []);
-    } else {
-      successCallback(this.preferences.displayAppName);
-    }
+    updateCounter();
     return this;
   };
 
@@ -306,6 +196,6 @@ AppRate = (function() {
 
 })();
 
-AppRate.init();
+AppRate.prototype.init();
 
 module.exports = AppRate;
