@@ -188,7 +188,7 @@ AppRate = (function() {
 
   AppRate.onButtonClicked = function(buttonIndex) {
     console.log("onButtonClicked->" + buttonIndex);
-    return this;
+    return void 0;
   };
 
   return AppRate;

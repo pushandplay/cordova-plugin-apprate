@@ -236,6 +236,7 @@ class AppRate
       showDialog()
 
     updateCounter()
+    @
 
   # User click on popup buttons callback
   #

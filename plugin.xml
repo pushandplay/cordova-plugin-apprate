@@ -71,9 +71,4 @@ under the License.
         <source-file src="src/ios/CDVAppRate.m" />
 	</platform>
 
-	<!-- bb10 -->
-	<platform name="bb10">
-		<!-- bb10-specific elements -->
-	</platform>
-
 </plugin>
