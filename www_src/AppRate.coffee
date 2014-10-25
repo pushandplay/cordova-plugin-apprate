@@ -22,6 +22,58 @@
 Locales = require './locales'
 exec = require 'cordova/exec'
 
+# AppRate plugin base class
+#
+# @example Simple setup and call
+#   AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+#   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
+#   AppRate.promptForRating();
+#
+# @example Override dialog button callback
+#   AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+#   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
+#   AppRate.onButtonClicked = function(buttonIndex) {
+#     console.log("onButtonClicked -> " + buttonIndex);
+#   };
+#   AppRate.promptForRating();
+#
+# @example Set custom language
+#   AppRate.preferences.useLanguage = 'ru';
+#   AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+#   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
+#   AppRate.promptForRating();
+#
+# @example Set custom Locale object
+#   var customLocale = {};
+#   customLocale.title = "Rate %@";
+#   customLocale.message = "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!";
+#   customLocale.cancelButtonLabel = "No, Thanks";
+#   customLocale.laterButtonLabel = "Remind Me Later";
+#   customLocale.rateButtonLabel = "Rate It Now";
+#
+#   AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+#   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
+#   AppRate.preferences.customLocale = customLocale;
+#   AppRate.promptForRating();
+#
+# @example Full setup
+#   var customLocale = {};
+#   customLocale.title = "Rate %@";
+#   customLocale.message = "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!";
+#   customLocale.cancelButtonLabel = "No, Thanks";
+#   customLocale.laterButtonLabel = "Remind Me Later";
+#   customLocale.rateButtonLabel = "Rate It Now";
+#
+#   AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+#   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
+#   AppRate.preferences.customLocale = customLocale;
+#   AppRate.preferences.displayAppName = 'My custom app title';
+#   AppRate.preferences.usesUntilPrompt = 5;
+#   AppRate.preferences.promptAgainForEachNewVersion = false;
+#   AppRate.promptForRating();
+#
+# @note All %@ patterns in customLocale object will be automatically replaced to your application title
+#
 class AppRate
   LOCAL_STORAGE_COUNTER = 'counter'
   LOCALE_DEFAULT = 'en'
@@ -32,6 +84,9 @@ class AppRate
     applicationVersion: undefined
     countdown: 0
 
+  # Open application page in store
+  #
+  # @return {AppRate} counter
   navigateToAppStore = =>
     if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
       window.open @preferences.storeAppURL.ios, '_system'
@@ -41,6 +96,9 @@ class AppRate
       window.open @preferences.storeAppURL.blackberry
     @
 
+  # Confirm popup button click handler
+  # @param {Integer} buttonIndex
+  # @return {AppRate} counter
   promptForRatingWindowButtonClickHandler = (buttonIndex) =>
     switch buttonIndex
       when 1
@@ -70,25 +128,29 @@ class AppRate
     counter
 
   # Show confirm dialog
+  # @return [AppRate]
   showDialog = =>
     if counter.countdown is @preferences.usesUntilPrompt
-      localeObj = @preferences.customLocale or Locales.getLocale(@preferences.useLanguage, @preferences.displayAppName) or Locales.getLocale(LOCALE_DEFAULT, @preferences.displayAppName)
-      navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]
+      localeObj = @preferences.customLocale or Locales.getLocale(@preferences.useLanguage,
+          @preferences.displayAppName) or Locales.getLocale(LOCALE_DEFAULT, @preferences.displayAppName)
+      navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel,
+                                                                                                                   localeObj.laterButtonLabel,
+                                                                                                                   localeObj.rateButtonLabel]
+    @
 
   #	Get, set or delete localStorage item
   #
-  # @param itemName {String}
-  #	@param temValue {Misc}
-  #	@param action {Boolean}
-  #		true:		set item
-  #		false:	get	item
-  #		null:		delete item
+  # @param {String} itemName
+  #	@param {String, Object, Integer} itemValue
+  #	@param {Boolean} action true | false | null
+  # @return [AppRate, Object, null]
   localStorageParam = (itemName, itemValue = null, action = false) ->
     action = true if itemValue isnt null
     switch action
       when true then localStorage.setItem itemName, itemValue
       when false then return localStorage.getItem itemName
       when null then localStorage.removeItem itemName
+    @
 
   #	Get the application version from native code
   #
@@ -116,7 +178,7 @@ class AppRate
 
   # Initialize
   # @return [AppRate]
-  init: =>
+  @init: ->
     counter = JSON.parse(localStorageParam LOCAL_STORAGE_COUNTER) or counter
     getAppVersion (applicationVersion) =>
       if counter.applicationVersion isnt applicationVersion
@@ -132,7 +194,7 @@ class AppRate
 
   # Preferences object
   #
-  # @property {Object} Plugin preferences
+  # @param {Object} Plugin preferences
   # @param {String} useLanguage
   # @param {String} displayAppName
   # @param {Boolean} promptAgainForEachNewVersion
@@ -156,6 +218,7 @@ class AppRate
       ios: undefined
       android: undefined
       blackberry: undefined
+      win8: undefined
     customLocale: null
 
   #	Check plugin preferences and display or not display rate popup
@@ -173,7 +236,6 @@ class AppRate
       showDialog()
 
     updateCounter()
-    @
 
   # User click on popup buttons callback
   #
@@ -188,6 +250,6 @@ class AppRate
     console.log "onButtonClicked->#{buttonIndex}"
     @
 
-AppRate::init()
+AppRate.init()
 
 module.exports = AppRate

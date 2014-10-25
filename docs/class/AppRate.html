@@ -29,6 +29,72 @@
           <td>AppRate.coffee</td>
         </tr>
       </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <div class='note'>
+    <strong>Note:</strong>
+    All %@ patterns in customLocale object will be automatically replaced to your application title 
+  </div>
+  <p>AppRate plugin base class</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      Simple setup and call
+    </h4>
+    <pre><code class='coffeescript'>AppRate.preferences.storeAppURL.ios = &#39;itms-apps:&#47;&#47;itunes.apple.com&#47;app&#47;id&lt;my_app_id&gt;?mt=8&#39;;
+AppRate.preferences.storeAppURL.android = &#39;market:&#47;&#47;details?id=&lt;package_name&gt;&#39;;
+AppRate.promptForRating();</code></pre>
+    <h4>
+      Override dialog button callback
+    </h4>
+    <pre><code class='coffeescript'>AppRate.preferences.storeAppURL.ios = &#39;itms-apps:&#47;&#47;itunes.apple.com&#47;app&#47;id&lt;my_app_id&gt;?mt=8&#39;;
+AppRate.preferences.storeAppURL.android = &#39;market:&#47;&#47;details?id=&lt;package_name&gt;&#39;;
+AppRate.onButtonClicked = function(buttonIndex) {
+  console.log(&quot;onButtonClicked -&gt; &quot; + buttonIndex);
+};
+AppRate.promptForRating();</code></pre>
+    <h4>
+      Set custom language
+    </h4>
+    <pre><code class='coffeescript'>AppRate.preferences.useLanguage = &#39;ru&#39;;
+AppRate.preferences.storeAppURL.ios = &#39;itms-apps:&#47;&#47;itunes.apple.com&#47;app&#47;id&lt;my_app_id&gt;?mt=8&#39;;
+AppRate.preferences.storeAppURL.android = &#39;market:&#47;&#47;details?id=&lt;package_name&gt;&#39;;
+AppRate.promptForRating();</code></pre>
+    <h4>
+      Set custom Locale object
+    </h4>
+    <pre><code class='coffeescript'>var customLocale = {};
+customLocale.title = &quot;Rate %@&quot;;
+customLocale.message = &quot;If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!&quot;;
+customLocale.cancelButtonLabel = &quot;No, Thanks&quot;;
+customLocale.laterButtonLabel = &quot;Remind Me Later&quot;;
+customLocale.rateButtonLabel = &quot;Rate It Now&quot;;
+
+AppRate.preferences.storeAppURL.ios = &#39;itms-apps:&#47;&#47;itunes.apple.com&#47;app&#47;id&lt;my_app_id&gt;?mt=8&#39;;
+AppRate.preferences.storeAppURL.android = &#39;market:&#47;&#47;details?id=&lt;package_name&gt;&#39;;
+AppRate.preferences.customLocale = customLocale;
+AppRate.promptForRating();</code></pre>
+    <h4>
+      Full setup
+    </h4>
+    <pre><code class='coffeescript'>var customLocale = {};
+customLocale.title = &quot;Rate %@&quot;;
+customLocale.message = &quot;If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!&quot;;
+customLocale.cancelButtonLabel = &quot;No, Thanks&quot;;
+customLocale.laterButtonLabel = &quot;Remind Me Later&quot;;
+customLocale.rateButtonLabel = &quot;Rate It Now&quot;;
+
+AppRate.preferences.storeAppURL.ios = &#39;itms-apps:&#47;&#47;itunes.apple.com&#47;app&#47;id&lt;my_app_id&gt;?mt=8&#39;;
+AppRate.preferences.storeAppURL.android = &#39;market:&#47;&#47;details?id=&lt;package_name&gt;&#39;;
+AppRate.preferences.customLocale = customLocale;
+AppRate.preferences.displayAppName = &#39;My custom app title&#39;;
+AppRate.preferences.usesUntilPrompt = 5;
+AppRate.preferences.promptAgainForEachNewVersion = false;
+AppRate.promptForRating();</code></pre>
+  </div>
+</div>
+<div class='tags'>
+</div>
       <h2>Variables Summary</h2>
       <dl class='constants'>
   <dt id='preferences-variable'>
@@ -44,7 +110,8 @@
   storeAppURL: {
     ios: void 0,
     android: void 0,
-    blackberry: void 0
+    blackberry: void 0,
+    win8: void 0
   },
   customLocale: null
 }</code></pre>
@@ -53,6 +120,18 @@
 </dl>
       <h2>Class Method Summary</h2>
       <ul class='summary'>
+  <li>
+    <span class='signature'>
+      <a href='#init-static'>
+        .
+(AppRate)
+<b>init</b><span>()</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Initialize 
+    </span>
+  </li>
   <li>
     <span class='signature'>
       <a href='#promptForRating-static'>
@@ -78,24 +157,28 @@
     </span>
   </li>
 </ul>
-      <h2>Instance Method Summary</h2>
-      <ul class='summary'>
-  <li>
-    <span class='signature'>
-      <a href='#init-dynamic'>
-        #
-(AppRate)
-<b>init</b><span>()</span>
-      </a>
-    </span>
-    <span class='bound note title'>Bound</span>
-    <span class='desc'>
-      Initialize 
-    </span>
-  </li>
-</ul>
       <h2>Class Method Details</h2>
       <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='init-static'>
+      .
+(AppRate)
+<b>init</b><span>()</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Initialize</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt><a href='../class/AppRate.html'>AppRate</a></tt>
+    </li>
+  </ul>
+</div>
+  </div>
   <div class='method_details'>
     <p class='signature' id='promptForRating-static'>
       .
@@ -166,33 +249,9 @@
 </div>
   </div>
 </div>
-      <h2>Instance Method Details</h2>
-      <div class='methods'>
-  <div class='method_details'>
-    <p class='signature' id='init-dynamic'>
-      #
-(AppRate)
-<b>init</b><span>()</span>
-      <span class='bound note'>Bound</span>
-      <br>
-    </p>
-    <div class='docstring'>
-  <p>Initialize</p>
-</div>
-<div class='tags'>
-  <h3>Returns:</h3>
-  <ul class='return'>
-    <li>
-      <span class='type'></span>
-      <tt><a href='../class/AppRate.html'>AppRate</a></tt>
-    </li>
-  </ul>
-</div>
-  </div>
-</div>
     </div>
     <div id='footer'>
-  October 25, 14 23:28:21 by
+  October 26, 14 01:54:35 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>

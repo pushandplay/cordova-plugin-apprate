@@ -19,8 +19,7 @@
  * under the License.
  *
  */;
-var AppRate, Locales, exec,
-  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+var AppRate, Locales, exec;
 
 Locales = require('./locales');
 
@@ -29,9 +28,7 @@ exec = require('cordova/exec');
 AppRate = (function() {
   var FLAG_NATIVE_CODE_SUPPORTED, LOCALE_DEFAULT, LOCAL_STORAGE_COUNTER, counter, getAppTitle, getAppVersion, localStorageParam, navigateToAppStore, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
 
-  function AppRate() {
-    this.init = __bind(this.init, this);
-  }
+  function AppRate() {}
 
   LOCAL_STORAGE_COUNTER = 'counter';
 
@@ -111,46 +108,13 @@ AppRate = (function() {
     }
     switch (action) {
       case true:
-        return localStorage.setItem(itemName, itemValue);
+        localStorage.setItem(itemName, itemValue);
+        break;
       case false:
         return localStorage.getItem(itemName);
       case null:
-        return localStorage.removeItem(itemName);
+        localStorage.removeItem(itemName);
     }
-  };
-
-  AppRate.preferences = {
-    useLanguage: null,
-    displayAppName: '',
-    promptAgainForEachNewVersion: true,
-    usesUntilPrompt: 3,
-    storeAppURL: {
-      ios: void 0,
-      android: void 0,
-      blackberry: void 0
-    },
-    customLocale: null
-  };
-
-  AppRate.prototype.init = function() {
-    counter = JSON.parse(localStorageParam(LOCAL_STORAGE_COUNTER)) || counter;
-    getAppVersion((function(_this) {
-      return function(applicationVersion) {
-        if (counter.applicationVersion !== applicationVersion) {
-          counter.applicationVersion = applicationVersion;
-          if (_this.preferences.promptAgainForEachNewVersion) {
-            updateCounter('reset');
-          }
-        }
-        return _this;
-      };
-    })(this));
-    getAppTitle((function(_this) {
-      return function(displayAppName) {
-        _this.preferences.displayAppName = displayAppName;
-        return _this;
-      };
-    })(this));
     return this;
   };
 
@@ -172,6 +136,42 @@ AppRate = (function() {
     return AppRate;
   };
 
+  AppRate.init = function() {
+    counter = JSON.parse(localStorageParam(LOCAL_STORAGE_COUNTER)) || counter;
+    getAppVersion((function(_this) {
+      return function(applicationVersion) {
+        if (counter.applicationVersion !== applicationVersion) {
+          counter.applicationVersion = applicationVersion;
+          if (_this.preferences.promptAgainForEachNewVersion) {
+            updateCounter('reset');
+          }
+        }
+        return _this;
+      };
+    })(this));
+    getAppTitle((function(_this) {
+      return function(displayAppName) {
+        _this.preferences.displayAppName = displayAppName;
+        return _this;
+      };
+    })(this));
+    return this;
+  };
+
+  AppRate.preferences = {
+    useLanguage: null,
+    displayAppName: '',
+    promptAgainForEachNewVersion: true,
+    usesUntilPrompt: 3,
+    storeAppURL: {
+      ios: void 0,
+      android: void 0,
+      blackberry: void 0,
+      win8: void 0
+    },
+    customLocale: null
+  };
+
   AppRate.promptForRating = function() {
     if (this.preferences.useLanguage === null) {
       navigator.globalization.getPreferredLanguage((function(_this) {
@@ -183,8 +183,7 @@ AppRate = (function() {
     } else {
       showDialog();
     }
-    updateCounter();
-    return this;
+    return updateCounter();
   };
 
   AppRate.onButtonClicked = function(buttonIndex) {
@@ -196,6 +195,6 @@ AppRate = (function() {
 
 })();
 
-AppRate.prototype.init();
+AppRate.init();
 
 module.exports = AppRate;

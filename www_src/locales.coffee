@@ -19,21 +19,22 @@
  *
  */`
 
-
-#	Locale object
+# Locale object
 class Locale
-  # @param {String} language BCP 47 language tag
-  # @param {String} title Localized message title
-  # @param {String} message Localized message
-  # @param {String} cancelButtonLabel Localized cancelButton label
-  # @param {String} laterButtonLabel Localized laterButton label
-  # @param {String} rateButtonLabel Localized rateButton label
+  # @param {Object} options the locale options
+  # @option options {String} language BCP 47 language tag
+  # @option options {String} title Localized message title
+  # @option options {String} message Localized message
+  # @option options {String} cancelButtonLabel Localized cancelButton label
+  # @option options {String} laterButtonLabel Localized laterButton label
+  # @option options {String} rateButtonLabel Localized rateButton label
   #	@return {Locale}
+  # @see http://tools.ietf.org/html/bcp47
   constructor: ({@language, @title, @message, @cancelButtonLabel, @laterButtonLabel, @rateButtonLabel}) -> @
 
 #	Collection of Locale objects
 class Locales
-  #	@property {Locale} locales
+  #	@property {Object} locales
   locales = {}
 
   #	Add locale to collection
@@ -43,13 +44,16 @@ class Locales
     locales[localeObject.language] = localeObject
 
   #	Get locale from collection by language
-  #	@param {String} language
+  #	@param {String} language BCP 47 language tag
   #	@param {String} applicationTitle
   #	@return {Locale} Locale object or null
+  # @see http://tools.ietf.org/html/bcp47
   @getLocale: (language, applicationTitle = null) ->
     localeObject = locales[language]
     localeObject.title = localeObject.title.replace /%@/g, applicationTitle
     localeObject.message = localeObject.message.replace /%@/g, applicationTitle
+
+    console.log locales
 
     localeObject
 

@@ -61,7 +61,7 @@ docs:
 	@rm -rf docs
 	@#cd $(DIR_SRC) && docco -o ../docs ./*.coffee
 	@cd $(DIR_SRC) && codo -o ../docs ./*.coffee
-	@#cd $(DIR_SRC) && coffeedoc -o ../docs --renderer gfm ./*.coffee
+	@#cd $(DIR_SRC) && coffeedoc -o ../docs ./*.coffee
 
 
 publish:
