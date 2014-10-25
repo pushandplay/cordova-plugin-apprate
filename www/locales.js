@@ -50,7 +50,6 @@ Locales = (function() {
     localeObject = locales[language];
     localeObject.title = localeObject.title.replace(/%@/g, applicationTitle);
     localeObject.message = localeObject.message.replace(/%@/g, applicationTitle);
-    console.log(locales);
     return localeObject;
   };
 

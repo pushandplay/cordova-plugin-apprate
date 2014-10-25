@@ -21,10 +21,9 @@
 # Release Notes #
 
 ### 1.1.2 (Oct 26, 2014) ###
-*	Code refactoring
-* Issue-33 Added docs
-* Drop blackberry support
-
+*	Issue-33: Code refactoring
+* Added docs
+* Added Windows8 basic support
 
 ### 1.1.1 (Sep 28, 2014) ###
 *	Updated locale object structure

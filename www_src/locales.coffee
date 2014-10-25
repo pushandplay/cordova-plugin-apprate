@@ -53,8 +53,6 @@ class Locales
     localeObject.title = localeObject.title.replace /%@/g, applicationTitle
     localeObject.message = localeObject.message.replace /%@/g, applicationTitle
 
-    console.log locales
-
     localeObject
 
 

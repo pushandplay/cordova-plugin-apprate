@@ -20,6 +20,8 @@ Issues list and features requests [here](https://github.com/pushandplay/cordova-
 
 +	iOS
 +	Android
++	Blackberry (experimental)
++	Windows8 (experimental)
 
 ## Requirements ##
 
@@ -52,6 +54,8 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 	usesUntilPrompt {Integer} 3 - count of runs of application before dialog will be displayed
 	storeAppURL.ios {String} null - application URL in AppStore
 	storeAppURL.android {String} null - application URL in GooglePlay
+	storeAppURL.blackberry {String} null - application URL in AppWorld
+	storeAppURL.windows8 {String} null - application URL in WindowsStore
 	customLocale {Object} null - custom locale object
 
 ##	Examples ##
@@ -60,6 +64,8 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 
     AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
     AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
+    AppRate.preferences.storeAppURL.blackberry = 'appworld://content/[App Id]/';
+    AppRate.preferences.storeAppURL.windows8 = 'ms-windows-store:Review?name=<the Package Family Name of the application>';
     AppRate.promptForRating();
 
 #### Override dialog button callback ####

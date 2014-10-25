@@ -93,7 +93,9 @@ class AppRate
     else if /(Android)/i.test navigator.userAgent.toLowerCase()
       window.open @preferences.storeAppURL.android, '_system'
     else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()
-      window.open @preferences.storeAppURL.blackberry
+      window.open @preferences.storeAppURL.blackberry, '_system'
+    else if /(IEMobile)/i.test navigator.userAgent.toLowerCase()
+      window.open @preferences.storeAppURL.windows8, '_system'
     @
 
   # Confirm popup button click handler
@@ -218,7 +220,7 @@ class AppRate
       ios: undefined
       android: undefined
       blackberry: undefined
-      win8: undefined
+      windows8: undefined
     customLocale: null
 
   #	Check plugin preferences and display or not display rate popup

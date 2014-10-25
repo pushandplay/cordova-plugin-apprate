@@ -47,7 +47,9 @@ AppRate = (function() {
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
       window.open(AppRate.preferences.storeAppURL.android, '_system');
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(AppRate.preferences.storeAppURL.blackberry);
+      window.open(AppRate.preferences.storeAppURL.blackberry, '_system');
+    } else if (/(IEMobile)/i.test(navigator.userAgent.toLowerCase())) {
+      window.open(AppRate.preferences.storeAppURL.windows8, '_system');
     }
     return AppRate;
   };
@@ -167,7 +169,7 @@ AppRate = (function() {
       ios: void 0,
       android: void 0,
       blackberry: void 0,
-      win8: void 0
+      windows8: void 0
     },
     customLocale: null
   };
