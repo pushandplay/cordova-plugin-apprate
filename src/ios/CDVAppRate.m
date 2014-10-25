@@ -22,21 +22,19 @@
 
 @implementation CDVAppRate
 
-- (void)getAppVersion:(CDVInvokedUrlCommand*)command
-{
-    [self.commandDelegate runInBackground:^{
-		NSString* versionString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-		CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:versionString];
+- (void)getAppVersion:(CDVInvokedUrlCommand *)command {
+	[self.commandDelegate runInBackground:^{
+		NSString *versionString = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+		CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:versionString];
 
 		[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 	}];
 }
 
-- (void)getAppTitle:(CDVInvokedUrlCommand*)command
-{
+- (void)getAppTitle:(CDVInvokedUrlCommand *)command {
 	[self.commandDelegate runInBackground:^{
-		NSString* appNameString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
-		CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:appNameString];
+		NSString *appNameString = [[NSBundle mainBundle] infoDictionary][@"CFBundleDisplayName"];
+		CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:appNameString];
 
 		[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 	}];

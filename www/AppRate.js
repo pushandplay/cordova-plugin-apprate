@@ -183,12 +183,13 @@ AppRate = (function() {
     } else {
       showDialog();
     }
-    return updateCounter();
+    updateCounter();
+    return this;
   };
 
   AppRate.onButtonClicked = function(buttonIndex) {
     console.log("onButtonClicked->" + buttonIndex);
-    return void 0;
+    return this;
   };
 
   return AppRate;

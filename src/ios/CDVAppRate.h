@@ -21,7 +21,8 @@
 
 @interface CDVAppRate : CDVPlugin
 
-- (void)getAppVersion:(CDVInvokedUrlCommand*)command;
-- (void)getAppTitle:(CDVInvokedUrlCommand*)command;
+- (void)getAppVersion:(CDVInvokedUrlCommand *)command;
+
+- (void)getAppTitle:(CDVInvokedUrlCommand *)command;
 
 @end
