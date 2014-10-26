@@ -43,7 +43,7 @@ AppRate = (function() {
 
   navigateToAppStore = function() {
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(AppRate.preferences.storeAppURL.ios, '_system');
+      exec(null, null, 'AppRate', 'launchAppStore', [AppRate.preferences.storeAppURL.ios]);
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
       window.open(AppRate.preferences.storeAppURL.android, '_system');
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {

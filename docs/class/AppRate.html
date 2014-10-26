@@ -41,13 +41,13 @@
     <h4>
       Simple setup and call
     </h4>
-    <pre><code class='coffeescript'>AppRate.preferences.storeAppURL.ios = &#39;itms-apps:&#47;&#47;itunes.apple.com&#47;app&#47;id&lt;my_app_id&gt;?mt=8&#39;;
+    <pre><code class='coffeescript'>AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
 AppRate.preferences.storeAppURL.android = &#39;market:&#47;&#47;details?id=&lt;package_name&gt;&#39;;
 AppRate.promptForRating();</code></pre>
     <h4>
       Override dialog button callback
     </h4>
-    <pre><code class='coffeescript'>AppRate.preferences.storeAppURL.ios = &#39;itms-apps:&#47;&#47;itunes.apple.com&#47;app&#47;id&lt;my_app_id&gt;?mt=8&#39;;
+    <pre><code class='coffeescript'>AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
 AppRate.preferences.storeAppURL.android = &#39;market:&#47;&#47;details?id=&lt;package_name&gt;&#39;;
 AppRate.onButtonClicked = function(buttonIndex) {
   console.log(&quot;onButtonClicked -&gt; &quot; + buttonIndex);
@@ -57,7 +57,7 @@ AppRate.promptForRating();</code></pre>
       Set custom language
     </h4>
     <pre><code class='coffeescript'>AppRate.preferences.useLanguage = &#39;ru&#39;;
-AppRate.preferences.storeAppURL.ios = &#39;itms-apps:&#47;&#47;itunes.apple.com&#47;app&#47;id&lt;my_app_id&gt;?mt=8&#39;;
+AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
 AppRate.preferences.storeAppURL.android = &#39;market:&#47;&#47;details?id=&lt;package_name&gt;&#39;;
 AppRate.promptForRating();</code></pre>
     <h4>
@@ -70,7 +70,7 @@ customLocale.cancelButtonLabel = &quot;No, Thanks&quot;;
 customLocale.laterButtonLabel = &quot;Remind Me Later&quot;;
 customLocale.rateButtonLabel = &quot;Rate It Now&quot;;
 
-AppRate.preferences.storeAppURL.ios = &#39;itms-apps:&#47;&#47;itunes.apple.com&#47;app&#47;id&lt;my_app_id&gt;?mt=8&#39;;
+AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
 AppRate.preferences.storeAppURL.android = &#39;market:&#47;&#47;details?id=&lt;package_name&gt;&#39;;
 AppRate.preferences.customLocale = customLocale;
 AppRate.promptForRating();</code></pre>
@@ -84,7 +84,7 @@ customLocale.cancelButtonLabel = &quot;No, Thanks&quot;;
 customLocale.laterButtonLabel = &quot;Remind Me Later&quot;;
 customLocale.rateButtonLabel = &quot;Rate It Now&quot;;
 
-AppRate.preferences.storeAppURL.ios = &#39;itms-apps:&#47;&#47;itunes.apple.com&#47;app&#47;id&lt;my_app_id&gt;?mt=8&#39;;
+AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
 AppRate.preferences.storeAppURL.android = &#39;market:&#47;&#47;details?id=&lt;package_name&gt;&#39;;
 AppRate.preferences.customLocale = customLocale;
 AppRate.preferences.displayAppName = &#39;My custom app title&#39;;
@@ -111,7 +111,7 @@ AppRate.promptForRating();</code></pre>
     ios: void 0,
     android: void 0,
     blackberry: void 0,
-    win8: void 0
+    windows8: void 0
   },
   customLocale: null
 }</code></pre>
@@ -251,7 +251,7 @@ AppRate.promptForRating();</code></pre>
 </div>
     </div>
     <div id='footer'>
-  October 26, 14 01:02:26 by
+  October 26, 14 03:32:27 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>

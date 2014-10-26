@@ -40,4 +40,32 @@
 	}];
 }
 
+- (void)launchAppStore:(CDVInvokedUrlCommand *)command {
+	[self.commandDelegate runInBackground:^{
+		NSString *appId = @"";
+		if ([command.arguments count] >= 1) {
+			appId = (NSString *) (command.arguments)[0];
+		}
+
+		// Initialize Product View Controller
+		SKStoreProductViewController *storeProductViewController = [[SKStoreProductViewController alloc] init];
+
+		// Configure View Controller
+		[storeProductViewController setDelegate:self];
+		[storeProductViewController loadProductWithParameters:@{SKStoreProductParameterITunesItemIdentifier : appId} completionBlock:^(BOOL result, NSError *error) {
+			if (error) {
+				NSLog(@"Error %@ with User Info %@.", error, [error userInfo]);
+			} else {
+				[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+				[self.viewController presentViewController:storeProductViewController animated:YES completion:nil];
+			}
+		}];
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	}];
+}
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
+	[viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

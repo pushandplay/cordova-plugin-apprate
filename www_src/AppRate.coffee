@@ -25,12 +25,12 @@ exec = require 'cordova/exec'
 # AppRate plugin base class
 #
 # @example Simple setup and call
-#   AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+#   AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 #   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
 #   AppRate.promptForRating();
 #
 # @example Override dialog button callback
-#   AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+#   AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 #   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
 #   AppRate.onButtonClicked = function(buttonIndex) {
 #     console.log("onButtonClicked -> " + buttonIndex);
@@ -39,7 +39,7 @@ exec = require 'cordova/exec'
 #
 # @example Set custom language
 #   AppRate.preferences.useLanguage = 'ru';
-#   AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+#   AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 #   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
 #   AppRate.promptForRating();
 #
@@ -51,7 +51,7 @@ exec = require 'cordova/exec'
 #   customLocale.laterButtonLabel = "Remind Me Later";
 #   customLocale.rateButtonLabel = "Rate It Now";
 #
-#   AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+#   AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 #   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
 #   AppRate.preferences.customLocale = customLocale;
 #   AppRate.promptForRating();
@@ -64,7 +64,7 @@ exec = require 'cordova/exec'
 #   customLocale.laterButtonLabel = "Remind Me Later";
 #   customLocale.rateButtonLabel = "Rate It Now";
 #
-#   AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+#   AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 #   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
 #   AppRate.preferences.customLocale = customLocale;
 #   AppRate.preferences.displayAppName = 'My custom app title';
@@ -89,7 +89,7 @@ class AppRate
   # @return {AppRate} counter
   navigateToAppStore = =>
     if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
-      window.open @preferences.storeAppURL.ios, '_system'
+      exec null, null, 'AppRate', 'launchAppStore', [@preferences.storeAppURL.ios]
     else if /(Android)/i.test navigator.userAgent.toLowerCase()
       window.open @preferences.storeAppURL.android, '_system'
     else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()

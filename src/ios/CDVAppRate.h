@@ -18,11 +18,14 @@
 */
 
 #import <Cordova/CDV.h>
+#import <StoreKit/StoreKit.h>
 
-@interface CDVAppRate : CDVPlugin
+@interface CDVAppRate : CDVPlugin <SKStoreProductViewControllerDelegate>
 
 - (void)getAppVersion:(CDVInvokedUrlCommand *)command;
 
 - (void)getAppTitle:(CDVInvokedUrlCommand *)command;
+
+- (void)launchAppStore:(CDVInvokedUrlCommand *)command;
 
 @end

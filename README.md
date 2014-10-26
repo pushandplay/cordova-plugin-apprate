@@ -2,17 +2,9 @@
 
 This plugin provide the rate this app functionality into your Cordova/Phonegap application<br>
 
-Need help for translations: [https://crowdin.net/project/apprate-cordovaphonegap-plugin](https://crowdin.net/project/apprate-cordovaphonegap-plugin)
-
 Issues list and features requests [here](https://github.com/pushandplay/cordova-plugin-apprate/issues?state=open)
 
-
-
 [Donate with PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=MS8RQAS2NVVQW&lc=RU&item_name=github%2ecom&item_number=cordova%2dplugin%2dapprate&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
-
-
-
-
 
 <img src="https://dl.dropboxusercontent.com/u/26238/Cordova/Plugins/AppRate/preview_iPad.png" width="100%" alt="Preview iPad"/>
 
@@ -52,7 +44,7 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 	displayAppName {String} '' - custom application title
 	promptAgainForEachNewVersion {Boolean} true - show dialog again when application version will be updated
 	usesUntilPrompt {Integer} 3 - count of runs of application before dialog will be displayed
-	storeAppURL.ios {String} null - application URL in AppStore
+	storeAppURL.ios {String} null - application id in AppStore
 	storeAppURL.android {String} null - application URL in GooglePlay
 	storeAppURL.blackberry {String} null - application URL in AppWorld
 	storeAppURL.windows8 {String} null - application URL in WindowsStore
@@ -62,7 +54,7 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 
 #### Simple setup and call ####
 
-    AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+    AppRate.preferences.storeAppURL.ios = '<my_app_id>';
     AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
     AppRate.preferences.storeAppURL.blackberry = 'appworld://content/[App Id]/';
     AppRate.preferences.storeAppURL.windows8 = 'ms-windows-store:Review?name=<the Package Family Name of the application>';
@@ -70,7 +62,7 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 
 #### Override dialog button callback ####
 
-	AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+	AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 	AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
 	AppRate.onButtonClicked = function(buttonIndex) {
 		console.log("onButtonClicked -> " + buttonIndex);
@@ -80,7 +72,7 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 #### Set custom language ####
 
 	AppRate.preferences.useLanguage = 'ru';
-	AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+	AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 	AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
 	AppRate.promptForRating();
 
@@ -93,7 +85,7 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 	customLocale.laterButtonLabel = "Remind Me Later";
 	customLocale.rateButtonLabel = "Rate It Now";
 
-	AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+	AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 	AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
 	AppRate.preferences.customLocale = customLocale;
 	AppRate.promptForRating();
@@ -107,7 +99,7 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 	customLocale.laterButtonLabel = "Remind Me Later";
 	customLocale.rateButtonLabel = "Rate It Now";
 
-	AppRate.preferences.storeAppURL.ios = 'itms-apps://itunes.apple.com/app/id<my_app_id>?mt=8';
+	AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 	AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
 	AppRate.preferences.customLocale = customLocale;
 	AppRate.preferences.displayAppName = 'My custom app title';
@@ -117,6 +109,8 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 		
 ## Already included translations ##
 ar, bn, ca, cs, da, de, el, en, es, fa, fr, he, hi, id, il, ja, ko, nl, no, pa, pl, pt, ru, sk, sl, sv, th, tr, uk, ur, vi, zh-TW
+
+You can add a new translation here: [https://crowdin.net/project/apprate-cordovaphonegap-plugin](https://crowdin.net/project/apprate-cordovaphonegap-plugin)
 	
 
 ## Licence ##
