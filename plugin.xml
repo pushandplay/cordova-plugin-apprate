@@ -20,60 +20,73 @@ under the License.
 -->
 
 <plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
-		id="org.pushandplay.cordova.apprate"
-		version="1.1.1">
-	<name>AppRate</name>
-	<description>This plugin provide the "rate this app" functionality into your Cordova/Phonegap application</description>
-	<author email="hello@pushandplay.ru" href="http://pushandplay.ru">pushandplay</author>
-	<keywords>cordova,phonegap,App Rate,rate</keywords>
-	<license>Apache 2.0</license>
-	<info>Cross-platform AppRate plugin for Cordova / PhoneGap</info>
-	<repo>https://github.com/pushandplay/cordova-plugin-apprate.git</repo>
-	<issue>https://github.com/pushandplay/cordova-plugin-apprate/issues</issue>
+        id="org.pushandplay.cordova.apprate"
+        version="1.1.2">
+    <name>AppRate</name>
+    <description>This plugin provide the "rate this app" functionality into your Cordova/Phonegap application
+    </description>
+    <author email="hello@pushandplay.ru" href="http://pushandplay.ru">pushandplay</author>
+    <keywords>cordova,phonegap,AppRate,App Rate,rate,iRate,rate in iTunes,write a review,rate us,rate my application</keywords>
+    <license>Apache 2.0</license>
+    <info>Cross-platform AppRate plugin for Cordova / PhoneGap</info>
+    <repo>https://github.com/pushandplay/cordova-plugin-apprate.git</repo>
+    <issue>https://github.com/pushandplay/cordova-plugin-apprate/issues</issue>
 
-	<engines>
-		<engine name="cordova" version=">=3.0.0" />
-	</engines>
+    <engines>
+        <engine name="cordova" version=">=3.0.0"/>
+    </engines>
 
-	<dependency id="org.apache.cordova.dialogs"/>
-	<dependency id="org.apache.cordova.globalization"/>
-    <dependency id="org.apache.cordova.inappbrowser"/>
+    <dependency id="org.apache.cordova.dialogs"/>
+    <dependency id="org.apache.cordova.globalization"/>
 
+    <js-module src="www/AppRate.js" name="AppRate">
+        <clobbers target="AppRate"/>
+    </js-module>
 
-	<js-module src="www/AppRate.js" name="AppRate">
-		<clobbers target="navigator.apprate"/>
-	</js-module>
+    <js-module src="www/locales.js" name="locales">
+        <runs target="AppRateLocales"/>
+    </js-module>
 
-	<js-module src="www/locales.js" name="locales">
-		<runs target="AppRateLocales"/>
-	</js-module>
+    <!-- android -->
+    <platform name="android">
+        <dependency id="org.apache.cordova.inappbrowser"/>
 
-	<!-- android -->
-	<platform name="android">
-        <source-file src="src/android/AppRate.java" target-dir="src/org/apache/cordova/apprate" />
+        <source-file src="src/android/AppRate.java" target-dir="src/org/apache/cordova/apprate"/>
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="AppRate">
                 <param name="android-package" value="org.pushandplay.cordova.apprate.AppRate"/>
             </feature>
         </config-file>
-	</platform>
+    </platform>
 
-	<!-- ios -->
-	<platform name="ios">
+    <!-- ios -->
+    <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="AppRate">
                 <param name="ios-package" value="CDVAppRate"/>
             </feature>
         </config-file>
 
-        <header-file src="src/ios/CDVAppRate.h" />
-        <source-file src="src/ios/CDVAppRate.m" />
-	</platform>
+        <header-file src="src/ios/CDVAppRate.h"/>
+        <source-file src="src/ios/CDVAppRate.m"/>
 
-	<!-- bb10 -->
-	<platform name="bb10">
-		<!-- bb10-specific elements -->
-	</platform>
+        <framework src="StoreKit.framework"/>
+    </platform>
+
+    <!-- blackberry10 -->
+    <platform name="blackberry10">
+
+    </platform>
+
+    <!-- wp8 -->
+    <platform name="wp8">
+
+    </platform>
+
+    <!-- windows8 -->
+    <platform name="windows8">
+
+    </platform>
 
 </plugin>

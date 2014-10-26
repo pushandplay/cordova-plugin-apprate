@@ -18,169 +18,179 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/;
-var AppRate, exec, locales;
+ */;
+var AppRate, Locales, exec;
 
-locales = require('./locales');
+Locales = require('./locales');
 
 exec = require('cordova/exec');
 
 AppRate = (function() {
-  var getLocaleObject, navigateToAppStore, promptForRatingWindowButtonClickHandler, rate_reset, rate_stop, rate_try, thisObj;
+  var FLAG_NATIVE_CODE_SUPPORTED, LOCALE_DEFAULT, LOCAL_STORAGE_COUNTER, counter, getAppTitle, getAppVersion, localStorageParam, navigateToAppStore, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
 
-  thisObj = AppRate;
+  function AppRate() {}
 
-  AppRate.preferences = {
-    autoDetectLanguage: true,
-    useLanguage: "en",
-    displayAppName: void 0,
-    promptAgainForEachNewVersion: true,
-    daysUntilPrompt: 1,
-    usesUntilPrompt: 3,
-    appStoreAppURL: {
-      ios: void 0,
-      android: void 0,
-      blackberry: void 0
-    }
+  LOCAL_STORAGE_COUNTER = 'counter';
+
+  LOCALE_DEFAULT = 'en';
+
+  FLAG_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad|Android)/i.test(navigator.userAgent.toLowerCase());
+
+  counter = {
+    applicationVersion: void 0,
+    countdown: 0
   };
-
-  function AppRate() {
-    this.getAppVersion((function(_this) {
-      return function(success) {
-        AppRate.preferences.curentVersion = success;
-        if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase() && (window.localStorage.getItem("appVersion")) !== success)) {
-          AppRate.preferences.curentVersion = success;
-          rate_stop();
-          rate_reset();
-          window.localStorage.setItem('appVersion', success);
-          window.localStorage.removeItem('rate_app');
-        }
-        AppRate.rate_app = parseInt(window.localStorage.getItem("rate_app") || 1);
-        return AppRate.usesUntilPromptCounter = parseInt(window.localStorage.getItem("usesUntilPromptCounter") || 0);
-      };
-    })(this));
-    this.getAppTitle(function(success) {
-      return AppRate.preferences.displayAppName = success;
-    });
-    this;
-  }
 
   navigateToAppStore = function() {
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(AppRate.preferences.appStoreAppURL.ios, '_system');
+      exec(null, null, 'AppRate', 'launchAppStore', [AppRate.preferences.storeAppURL.ios]);
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(AppRate.preferences.appStoreAppURL.android, '_system');
+      window.open(AppRate.preferences.storeAppURL.android, '_system');
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(AppRate.preferences.appStoreAppURL.blackberry);
+      window.open(AppRate.preferences.storeAppURL.blackberry, '_system');
+    } else if (/(IEMobile)/i.test(navigator.userAgent.toLowerCase())) {
+      window.open(AppRate.preferences.storeAppURL.windows8, '_system');
     }
-    return this;
+    return AppRate;
   };
 
   promptForRatingWindowButtonClickHandler = function(buttonIndex) {
     switch (buttonIndex) {
-      case 3:
-        rate_stop();
-        setTimeout(navigateToAppStore, 100);
+      case 1:
+        updateCounter('stop');
         break;
       case 2:
-        rate_reset();
+        updateCounter('reset');
         break;
-      case 1:
-        rate_stop();
+      case 3:
+        updateCounter('stop');
+        navigateToAppStore();
     }
-    return this;
+    return AppRate.onButtonClicked(buttonIndex);
   };
 
-  rate_stop = function() {
-    window.localStorage.setItem("rate_app", 0);
-    window.localStorage.removeItem("usesUntilPromptCounter");
-    return this;
+  updateCounter = function(action) {
+    if (action == null) {
+      action = 'increment';
+    }
+    switch (action) {
+      case 'increment':
+        if (counter.countdown <= AppRate.preferences.usesUntilPrompt) {
+          counter.countdown++;
+        }
+        break;
+      case 'reset':
+        counter.countdown = 0;
+        break;
+      case 'stop':
+        counter.countdown = AppRate.preferences.usesUntilPrompt + 1;
+    }
+    localStorageParam(LOCAL_STORAGE_COUNTER, JSON.stringify(counter));
+    return counter;
   };
 
-  rate_reset = function() {
-    window.localStorage.setItem("usesUntilPromptCounter", 0);
-    return this;
-  };
-
-  rate_try = function() {
+  showDialog = function() {
     var localeObj;
-    localeObj = getLocaleObject();
-    if (thisObj.usesUntilPromptCounter === AppRate.preferences.usesUntilPrompt && thisObj.rate_app !== 0) {
+    if (counter.countdown === AppRate.preferences.usesUntilPrompt) {
+      localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName) || Locales.getLocale(LOCALE_DEFAULT, AppRate.preferences.displayAppName);
       navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
-    } else if (thisObj.usesUntilPromptCounter < AppRate.preferences.usesUntilPrompt) {
-      thisObj.usesUntilPromptCounter++;
-      window.localStorage.setItem("usesUntilPromptCounter", thisObj.usesUntilPromptCounter);
+    }
+    return AppRate;
+  };
+
+  localStorageParam = function(itemName, itemValue, action) {
+    if (itemValue == null) {
+      itemValue = null;
+    }
+    if (action == null) {
+      action = false;
+    }
+    if (itemValue !== null) {
+      action = true;
+    }
+    switch (action) {
+      case true:
+        localStorage.setItem(itemName, itemValue);
+        break;
+      case false:
+        return localStorage.getItem(itemName);
+      case null:
+        localStorage.removeItem(itemName);
     }
     return this;
   };
 
-  getLocaleObject = function() {
-    var displayAppName, key, localeObj, value;
-    localeObj = AppRate.preferences.customLocale || locales[AppRate.preferences.useLanguage] || locales["en"];
-    displayAppName = localeObj.displayAppName || AppRate.preferences.displayAppName;
-    for (key in localeObj) {
-      value = localeObj[key];
-      if (typeof value === 'string' || value instanceof String) {
-        localeObj[key] = value.replace(/%@/g, displayAppName);
-      }
+  getAppVersion = function(successCallback, errorCallback) {
+    if (FLAG_NATIVE_CODE_SUPPORTED) {
+      exec(successCallback, errorCallback, 'AppRate', 'getAppVersion', []);
+    } else {
+      successCallback(counter.applicationVersion);
     }
-    return localeObj;
+    return AppRate;
   };
 
-  AppRate.prototype.setup = function(prefs) {
-    if (prefs.debug !== void 0) {
-      AppRate.preferences.debug = true;
+  getAppTitle = function(successCallback, errorCallback) {
+    if (FLAG_NATIVE_CODE_SUPPORTED) {
+      exec(successCallback, errorCallback, 'AppRate', 'getAppTitle', []);
+    } else {
+      successCallback(AppRate.preferences.displayAppName);
     }
-    if (prefs.useLanguage !== void 0) {
-      AppRate.preferences.autoDetectLanguage = false;
-      AppRate.preferences.useLanguage = prefs.useLanguage;
-    }
-    if (prefs.customLocale !== void 0) {
-      AppRate.preferences.customLocale = prefs.customLocale;
-    }
-    if (prefs.usesUntilPrompt !== void 0) {
-      AppRate.preferences.usesUntilPrompt = prefs.usesUntilPrompt;
-    }
-    if (prefs.displayAppName !== void 0) {
-      AppRate.preferences.displayAppName = prefs.displayAppName;
-    }
-    if (prefs.appStoreAppURL) {
-      if (prefs.appStoreAppURL.ios !== void 0) {
-        AppRate.preferences.appStoreAppURL.ios = prefs.appStoreAppURL.ios;
-      }
-      if (prefs.appStoreAppURL.android !== void 0) {
-        AppRate.preferences.appStoreAppURL.android = prefs.appStoreAppURL.android;
-      }
-      if (prefs.appStoreAppURL.blackberry !== void 0) {
-        AppRate.preferences.appStoreAppURL.blackberry = prefs.appStoreAppURL.blackberry;
-      }
-    }
+    return AppRate;
+  };
+
+  AppRate.init = function() {
+    counter = JSON.parse(localStorageParam(LOCAL_STORAGE_COUNTER)) || counter;
+    getAppVersion((function(_this) {
+      return function(applicationVersion) {
+        if (counter.applicationVersion !== applicationVersion) {
+          counter.applicationVersion = applicationVersion;
+          if (_this.preferences.promptAgainForEachNewVersion) {
+            updateCounter('reset');
+          }
+        }
+        return _this;
+      };
+    })(this));
+    getAppTitle((function(_this) {
+      return function(displayAppName) {
+        _this.preferences.displayAppName = displayAppName;
+        return _this;
+      };
+    })(this));
     return this;
   };
 
-  AppRate.prototype.promptForRating = function() {
-    if (navigator.notification && navigator.globalization) {
-      if (AppRate.preferences.autoDetectLanguage) {
-        navigator.globalization.getPreferredLanguage(function(language) {
-          AppRate.preferences.useLanguage = language.value.split(/_/)[0];
-          return rate_try();
-        }, function() {
-          return rate_try();
-        });
-      } else {
-        rate_try();
-      }
+  AppRate.preferences = {
+    useLanguage: null,
+    displayAppName: '',
+    promptAgainForEachNewVersion: true,
+    usesUntilPrompt: 3,
+    storeAppURL: {
+      ios: void 0,
+      android: void 0,
+      blackberry: void 0,
+      windows8: void 0
+    },
+    customLocale: null
+  };
+
+  AppRate.promptForRating = function() {
+    if (this.preferences.useLanguage === null) {
+      navigator.globalization.getPreferredLanguage((function(_this) {
+        return function(language) {
+          _this.preferences.useLanguage = language.value.split(/-/)[0];
+          return showDialog();
+        };
+      })(this));
+    } else {
+      showDialog();
     }
+    updateCounter();
     return this;
   };
 
-  AppRate.prototype.getAppVersion = function(successCallback, errorCallback) {
-    exec(successCallback, errorCallback, 'AppRate', 'getAppVersion', []);
-    return this;
-  };
-
-  AppRate.prototype.getAppTitle = function(successCallback, errorCallback) {
-    exec(successCallback, errorCallback, 'AppRate', 'getAppTitle', []);
+  AppRate.onButtonClicked = function(buttonIndex) {
+    console.log("onButtonClicked->" + buttonIndex);
     return this;
   };
 
@@ -188,4 +198,6 @@ AppRate = (function() {
 
 })();
 
-module.exports = new AppRate(this);
+AppRate.init();
+
+module.exports = AppRate;
