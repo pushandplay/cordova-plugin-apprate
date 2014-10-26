@@ -20,6 +20,12 @@
 -->
 # Release Notes #
 
+### 1.1.2 (Oct 26, 2014) ###
+*	Issue-33: Code refactoring
+*	Added docs
+*	Added Windows8 basic support
+*	Implement SKStoreProductViewController (iOS)
+
 ### 1.1.1 (Sep 28, 2014) ###
 *	Updated locale object structure
 *	Fixed bug with order of buttons for some locales
