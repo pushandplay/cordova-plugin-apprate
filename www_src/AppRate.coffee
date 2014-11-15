@@ -29,6 +29,10 @@ exec = require 'cordova/exec'
 #   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
 #   AppRate.promptForRating();
 #
+# @example Call rate dialog immediately
+#   AppRate.preferences.storeAppURL.ios = '<my_app_id>';
+#   AppRate.promptForRating(true);
+#
 # @example Override dialog button callback
 #   AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 #   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
@@ -142,8 +146,8 @@ class AppRate
 
   # Show confirm dialog
   # @return [AppRate]
-  showDialog = =>
-    if counter.countdown is @preferences.usesUntilPrompt
+  showDialog = (immediately) =>
+    if counter.countdown is @preferences.usesUntilPrompt or immediately
       localeObj = @preferences.customLocale or Locales.getLocale(@preferences.useLanguage,
           @preferences.displayAppName) or Locales.getLocale(LOCALE_DEFAULT, @preferences.displayAppName)
       navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel,
@@ -238,17 +242,18 @@ class AppRate
 
   #	Check plugin preferences and display or not display rate popup
   #
+  # @param immediately {Boolean} open rate dialog immediately
   # @return [AppRate]
   #
   # @example
   #   AppRate.promptForRating();
-  @promptForRating: ->
+  @promptForRating: (immediately = false) ->
     if @preferences.useLanguage is null
       navigator.globalization.getPreferredLanguage (language) =>
         @preferences.useLanguage = language.value.split(/-/)[0]
-        showDialog()
+        showDialog(immediately)
     else
-      showDialog()
+      showDialog(immediately)
 
     updateCounter()
     @

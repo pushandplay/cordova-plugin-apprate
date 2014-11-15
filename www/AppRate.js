@@ -104,9 +104,9 @@ AppRate = (function() {
     return counter;
   };
 
-  showDialog = function() {
+  showDialog = function(immediately) {
     var localeObj;
-    if (counter.countdown === AppRate.preferences.usesUntilPrompt) {
+    if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
       localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName) || Locales.getLocale(LOCALE_DEFAULT, AppRate.preferences.displayAppName);
       navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
     }
@@ -190,16 +190,19 @@ AppRate = (function() {
     customLocale: null
   };
 
-  AppRate.promptForRating = function() {
+  AppRate.promptForRating = function(immediately) {
+    if (immediately == null) {
+      immediately = false;
+    }
     if (this.preferences.useLanguage === null) {
       navigator.globalization.getPreferredLanguage((function(_this) {
         return function(language) {
           _this.preferences.useLanguage = language.value.split(/-/)[0];
-          return showDialog();
+          return showDialog(immediately);
         };
       })(this));
     } else {
-      showDialog();
+      showDialog(immediately);
     }
     updateCounter();
     return this;

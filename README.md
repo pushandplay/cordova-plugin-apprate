@@ -61,6 +61,11 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
     AppRate.preferences.storeAppURL.windows8 = 'ms-windows-store:Review?name=<the Package Family Name of the application>';
     AppRate.promptForRating();
 
+#### Call rate dialog immediately ####
+
+	AppRate.preferences.storeAppURL.ios = '<my_app_id>';
+	AppRate.promptForRating(true);
+
 #### Override dialog button callback ####
 
 	AppRate.preferences.storeAppURL.ios = '<my_app_id>';

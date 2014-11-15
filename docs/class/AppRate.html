@@ -45,6 +45,11 @@
 AppRate.preferences.storeAppURL.android = &#39;market:&#47;&#47;details?id=&lt;package_name&gt;&#39;;
 AppRate.promptForRating();</code></pre>
     <h4>
+      Call rate dialog immediately
+    </h4>
+    <pre><code class='coffeescript'>AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
+AppRate.promptForRating(true);</code></pre>
+    <h4>
       Override dialog button callback
     </h4>
     <pre><code class='coffeescript'>AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
@@ -139,7 +144,7 @@ AppRate.promptForRating();</code></pre>
       <a href='#promptForRating-static'>
         .
 (AppRate)
-<b>promptForRating</b><span>()</span>
+<b>promptForRating</b><span>(immediately = false)</span>
       </a>
     </span>
     <span class='desc'>
@@ -185,7 +190,7 @@ AppRate.promptForRating();</code></pre>
     <p class='signature' id='promptForRating-static'>
       .
 (AppRate)
-<b>promptForRating</b><span>()</span>
+<b>promptForRating</b><span>(immediately = false)</span>
       <br>
     </p>
     <div class='docstring'>
@@ -199,6 +204,19 @@ AppRate.promptForRating();</code></pre>
   </div>
 </div>
 <div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>immediately</span>
+      <span class='type'>
+        (
+          <tt>Boolean</tt>
+        )
+      </span>
+      &mdash;
+      <span class='desc'>open rate dialog immediately </span>
+    </li>
+  </ul>
   <h3>Returns:</h3>
   <ul class='return'>
     <li>
@@ -253,7 +271,7 @@ AppRate.promptForRating();</code></pre>
 </div>
     </div>
     <div id='footer'>
-  November 15, 14 03:21:10 by
+  November 15, 14 04:47:15 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>
