@@ -44,6 +44,7 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 	displayAppName {String} '' - custom application title
 	promptAgainForEachNewVersion {Boolean} true - show dialog again when application version will be updated
 	usesUntilPrompt {Integer} 3 - count of runs of application before dialog will be displayed
+	openStoreInApp {Boolean} false - leave app or no when application page opened in app store (now supported only for iOS)
 	storeAppURL.ios {String} null - application id in AppStore
 	storeAppURL.android {String} null - application URL in GooglePlay
 	storeAppURL.blackberry {String} null - application URL in AppWorld
@@ -99,6 +100,7 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 	customLocale.laterButtonLabel = "Remind Me Later";
 	customLocale.rateButtonLabel = "Rate It Now";
 
+	AppRate.preferences.openStoreInApp = true;
 	AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 	AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
 	AppRate.preferences.customLocale = customLocale;

@@ -65,6 +65,7 @@ exec = require 'cordova/exec'
 #   customLocale.rateButtonLabel = "Rate It Now";
 #
 #   AppRate.preferences.storeAppURL.ios = '<my_app_id>';
+#   AppRate.preferences.openStoreInApp = true;
 #   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
 #   AppRate.preferences.customLocale = customLocale;
 #   AppRate.preferences.displayAppName = 'My custom app title';
@@ -78,6 +79,8 @@ class AppRate
   LOCAL_STORAGE_COUNTER = 'counter'
   LOCALE_DEFAULT = 'en'
   FLAG_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad|Android)/i.test navigator.userAgent.toLowerCase()
+  PREF_STORE_URL_FORMAT_IOS = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id="
+  PREF_STORE_URL_FORMAT_IOS7 = "itms-apps://itunes.apple.com/app/id"
 
   # @property {Object}
   counter =
@@ -89,7 +92,15 @@ class AppRate
   # @return {AppRate} counter
   navigateToAppStore = =>
     if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
-      exec null, null, 'AppRate', 'launchAppStore', [@preferences.storeAppURL.ios]
+      if @preferences.openStoreInApp
+        exec null, null, 'AppRate', 'launchAppStore', [@preferences.storeAppURL.ios]
+      else
+        iOSVersion = (navigator.userAgent).match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.')
+        iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) or 0)/10
+        if 7.1 > iOSVersion >= 7.0
+          window.open PREF_STORE_URL_FORMAT_IOS7 + @preferences.storeAppURL.ios, '_system'
+        else
+          window.open PREF_STORE_URL_FORMAT_IOS + @preferences.storeAppURL.ios, '_system'
     else if /(Android)/i.test navigator.userAgent.toLowerCase()
       window.open @preferences.storeAppURL.android, '_system'
     else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()
@@ -201,6 +212,7 @@ class AppRate
   # @param {String} displayAppName
   # @param {Boolean} promptAgainForEachNewVersion
   # @param {Integer} usesUntilPrompt
+  # @param {Boolean} openStoreInApp
   # @param {Object} storeAppURL
   #   @param {String} ios
   #   @param {String} android
@@ -216,6 +228,7 @@ class AppRate
     displayAppName: ''
     promptAgainForEachNewVersion: true
     usesUntilPrompt: 3
+    openStoreInApp: false
     storeAppURL:
       ios: undefined
       android: undefined

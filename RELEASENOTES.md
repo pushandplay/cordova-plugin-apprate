@@ -20,6 +20,9 @@
 -->
 # Release Notes #
 
+### 1.1.3 (Nov 15, 2014) ###
+*	Issue-42: Added pref flag for open app rate page on reviews tab (iOS)
+
 ### 1.1.2 (Oct 26, 2014) ###
 *	Issue-33: Code refactoring
 *	Added docs

@@ -26,7 +26,7 @@ Locales = require('./locales');
 exec = require('cordova/exec');
 
 AppRate = (function() {
-  var FLAG_NATIVE_CODE_SUPPORTED, LOCALE_DEFAULT, LOCAL_STORAGE_COUNTER, counter, getAppTitle, getAppVersion, localStorageParam, navigateToAppStore, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
+  var FLAG_NATIVE_CODE_SUPPORTED, LOCALE_DEFAULT, LOCAL_STORAGE_COUNTER, PREF_STORE_URL_FORMAT_IOS, PREF_STORE_URL_FORMAT_IOS7, counter, getAppTitle, getAppVersion, localStorageParam, navigateToAppStore, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
 
   function AppRate() {}
 
@@ -36,14 +36,29 @@ AppRate = (function() {
 
   FLAG_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad|Android)/i.test(navigator.userAgent.toLowerCase());
 
+  PREF_STORE_URL_FORMAT_IOS = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=";
+
+  PREF_STORE_URL_FORMAT_IOS7 = "itms-apps://itunes.apple.com/app/id";
+
   counter = {
     applicationVersion: void 0,
     countdown: 0
   };
 
   navigateToAppStore = function() {
+    var iOSVersion;
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
-      exec(null, null, 'AppRate', 'launchAppStore', [AppRate.preferences.storeAppURL.ios]);
+      if (AppRate.preferences.openStoreInApp) {
+        exec(null, null, 'AppRate', 'launchAppStore', [AppRate.preferences.storeAppURL.ios]);
+      } else {
+        iOSVersion = navigator.userAgent.match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.');
+        iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) || 0) / 10;
+        if ((7.1 > iOSVersion && iOSVersion >= 7.0)) {
+          window.open(PREF_STORE_URL_FORMAT_IOS7 + AppRate.preferences.storeAppURL.ios, '_system');
+        } else {
+          window.open(PREF_STORE_URL_FORMAT_IOS + AppRate.preferences.storeAppURL.ios, '_system');
+        }
+      }
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
       window.open(AppRate.preferences.storeAppURL.android, '_system');
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
@@ -165,6 +180,7 @@ AppRate = (function() {
     displayAppName: '',
     promptAgainForEachNewVersion: true,
     usesUntilPrompt: 3,
+    openStoreInApp: false,
     storeAppURL: {
       ios: void 0,
       android: void 0,
