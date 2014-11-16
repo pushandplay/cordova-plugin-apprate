@@ -20,6 +20,9 @@
 -->
 # Release Notes #
 
+### 1.1.4 (Nov 17, 2014) ###
+*	ISSUE-41: 
+
 ### 1.1.3 (Nov 16, 2014) ###
 *	ISSUE-42: Added pref flag for open app rate page on reviews tab (iOS)
 *	ISSUE-38: Added immediately call popup flag to promptForRating method

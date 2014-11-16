@@ -114,6 +114,10 @@ AppRate.promptForRating();</code></pre>
   promptAgainForEachNewVersion: true,
   usesUntilPrompt: 3,
   openStoreInApp: false,
+  callbacks: {
+    onButtonClicked: null,
+    onRateDialogShow: null
+  },
   storeAppURL: {
     ios: void 0,
     android: void 0,
@@ -153,25 +157,14 @@ AppRate.promptForRating();</code></pre>
   </li>
   <li>
     <span class='signature'>
-      <a href='#onButtonClicked-static'>
+      <a href='#navigateToAppStore-static'>
         .
 (AppRate)
-<b>onButtonClicked</b><span>(buttonIndex)</span>
+<b>navigateToAppStore</b><span>()</span>
       </a>
     </span>
     <span class='desc'>
-      User click on popup buttons callback 
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#onRateDialogShow-static'>
-        .
-(AppRate)
-<b>onRateDialogShow</b><span>()</span>
-      </a>
-    </span>
-    <span class='desc'>
+      Open application page in store 
     </span>
   </li>
 </ul>
@@ -238,72 +231,25 @@ AppRate.promptForRating();</code></pre>
 </div>
   </div>
   <div class='method_details'>
-    <p class='signature' id='onButtonClicked-static'>
+    <p class='signature' id='navigateToAppStore-static'>
       .
 (AppRate)
-<b>onButtonClicked</b><span>(buttonIndex)</span>
+<b>navigateToAppStore</b><span>()</span>
       <br>
     </p>
     <div class='docstring'>
-  <p>User click on popup buttons callback</p>
-  <div class='examples'>
-    <h3>Examples:</h3>
-    <h4>
-      Add popup buttons callback listener
-    </h4>
-    <pre><code class='coffeescript'>AppRate.onButtonClicked = function (buttonIndex) {
-  console.log(&quot;button index: &quot; + buttonIndex);
-}</code></pre>
-  </div>
+  <p>Open application page in store</p>
 </div>
 <div class='tags'>
-  <h3>Parameters:</h3>
-  <ul class='param'>
+  <h3>Returns:</h3>
+  <ul class='return'>
     <li>
-      <span class='name'>buttonIndex</span>
-      <span class='type'>
-        (
-          <tt>Integer</tt>
-        )
-      </span>
+      <span class='type'></span>
+      (
+        <tt><a href='../class/AppRate.html'>AppRate</a></tt>
+      )
       &mdash;
-      <span class='desc'>(1:    cancelButton, 2: laterButton, 3: rateButton) </span>
-    </li>
-  </ul>
-  <h3>Returns:</h3>
-  <ul class='return'>
-    <li>
-      <span class='type'></span>
-      <tt><a href='../class/AppRate.html'>AppRate</a></tt>
-    </li>
-  </ul>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='onRateDialogShow-static'>
-      .
-(AppRate)
-<b>onRateDialogShow</b><span>()</span>
-      <br>
-    </p>
-    <div class='docstring'>
-  
-  <div class='examples'>
-    <h3>Examples:</h3>
-    <h4>
-      Add callback listener
-    </h4>
-    <pre><code class='coffeescript'>AppRate.onRateDialogShow = function () {
-  console.log(&quot;onRateDialogShow -&gt; my function called&quot;);
-}</code></pre>
-  </div>
-</div>
-<div class='tags'>
-  <h3>Returns:</h3>
-  <ul class='return'>
-    <li>
-      <span class='type'></span>
-      <tt><a href='../class/AppRate.html'>AppRate</a></tt>
+      <span class='desc'>counter </span>
     </li>
   </ul>
 </div>
@@ -311,7 +257,7 @@ AppRate.promptForRating();</code></pre>
 </div>
     </div>
     <div id='footer'>
-  November 16, 14 10:41:50 by
+  November 16, 14 12:27:00 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>

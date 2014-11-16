@@ -90,28 +90,6 @@ class AppRate
     applicationVersion: undefined
     countdown: 0
 
-  # Open application page in store
-  #
-  # @return {AppRate} counter
-  navigateToAppStore = =>
-    if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
-      if @preferences.openStoreInApp
-        exec null, null, 'AppRate', 'launchAppStore', [@preferences.storeAppURL.ios]
-      else
-        iOSVersion = (navigator.userAgent).match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.')
-        iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) or 0)/10
-        if 7.1 > iOSVersion >= 7.0
-          window.open PREF_STORE_URL_FORMAT_IOS7 + @preferences.storeAppURL.ios, '_system'
-        else
-          window.open PREF_STORE_URL_FORMAT_IOS + @preferences.storeAppURL.ios, '_system'
-    else if /(Android)/i.test navigator.userAgent.toLowerCase()
-      window.open @preferences.storeAppURL.android, '_system'
-    else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()
-      window.open @preferences.storeAppURL.blackberry, '_system'
-    else if /(IEMobile)/i.test navigator.userAgent.toLowerCase()
-      window.open @preferences.storeAppURL.windows8, '_system'
-    @
-
   # Confirm popup button click handler
   # @param {Integer} buttonIndex
   # @return {AppRate} counter
@@ -123,9 +101,9 @@ class AppRate
         updateCounter 'reset'
       when 3
         updateCounter 'stop'
-        navigateToAppStore()
+        @navigateToAppStore()
 
-    @onButtonClicked buttonIndex
+    @preferences.callbacks.onButtonClicked? buttonIndex
 
   # Update countdown counter
   #
@@ -151,7 +129,7 @@ class AppRate
       navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel,
                                                                                                                    localeObj.laterButtonLabel,
                                                                                                                    localeObj.rateButtonLabel]
-    @onRateDialogShow(promptForRatingWindowButtonClickHandler)
+    @preferences.callbacks.onRateDialogShow?(promptForRatingWindowButtonClickHandler)
     @
 
   #	Get, set or delete localStorage item
@@ -216,6 +194,7 @@ class AppRate
   # @param {Boolean} promptAgainForEachNewVersion
   # @param {Integer} usesUntilPrompt
   # @param {Boolean} openStoreInApp
+  # @param {Boolean} useCustomRateDialog
   # @param {Object} storeAppURL
   #   @param {String} ios
   #   @param {String} android
@@ -227,14 +206,15 @@ class AppRate
   #   @param {String} laterButtonLabel
   #   @param {String} rateButtonLabel
   @preferences:
-    useLanguage: null
+    useLanguage: undefined
     displayAppName: ''
     promptAgainForEachNewVersion: true
     usesUntilPrompt: 3
     openStoreInApp: false
+    useCustomRateDialog: false
     callbacks:
-      onButtonClicked: null
-      onRateDialogShow: null
+      onButtonClicked: undefined
+      onRateDialogShow: undefined
     storeAppURL:
       ios: undefined
       android: undefined
@@ -260,29 +240,27 @@ class AppRate
     updateCounter()
     @
 
-  # User click on popup buttons callback
-  #
-  # @param buttonIndex {Integer} (1:	cancelButton, 2: laterButton, 3: rateButton)
-  # @return [AppRate]
-  #
-  # @example Add popup buttons callback listener
-  #   AppRate.onButtonClicked = function (buttonIndex) {
-  #     console.log("button index: " + buttonIndex);
-  #   }
-  @onButtonClicked: (buttonIndex) ->
-    console.log "onButtonClicked->#{buttonIndex}"
-    @
 
+  # Open application page in store
   #
-  #
-  # @return [AppRate]
-  #
-  # @example Add callback listener
-  #   AppRate.onRateDialogShow = function () {
-  #     console.log("onRateDialogShow -> my function called");
-  #   }
-  @onRateDialogShow: (callback) ->
-    console.log "onRateDialogShow -> #{callback}"
+  # @return {AppRate} counter
+  @navigateToAppStore = ->
+    if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
+      if @preferences.openStoreInApp
+        exec null, null, 'AppRate', 'launchAppStore', [@preferences.storeAppURL.ios]
+      else
+        iOSVersion = (navigator.userAgent).match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.')
+        iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) or 0)/10
+        if 7.1 > iOSVersion >= 7.0
+          window.open PREF_STORE_URL_FORMAT_IOS7 + @preferences.storeAppURL.ios, '_system'
+        else
+          window.open PREF_STORE_URL_FORMAT_IOS + @preferences.storeAppURL.ios, '_system'
+    else if /(Android)/i.test navigator.userAgent.toLowerCase()
+      window.open @preferences.storeAppURL.android, '_system'
+    else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()
+      window.open @preferences.storeAppURL.blackberry, '_system'
+    else if /(IEMobile)/i.test navigator.userAgent.toLowerCase()
+      window.open @preferences.storeAppURL.windows8, '_system'
     @
 
 AppRate.init()
