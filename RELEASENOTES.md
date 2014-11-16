@@ -20,12 +20,14 @@
 -->
 # Release Notes #
 
-### 1.1.3 (Nov 15, 2014) ###
+### 1.1.3 (Nov 16, 2014) ###
 *	ISSUE-42: Added pref flag for open app rate page on reviews tab (iOS)
 *	ISSUE-38: Added immediately call popup flag to promptForRating method
+* ISSUE-39: Improved locales support
+*	Added locales: de-AT, ur-IN, ur-PK, zh-Hans, zh-Hant
 
 ### 1.1.2 (Oct 26, 2014) ###
-*	Issue-33: Code refactoring
+*	ISSUE-33: Code refactoring
 *	Added docs
 *	Added Windows8 basic support
 *	Implement SKStoreProductViewController (iOS)
@@ -37,6 +39,6 @@
 *	Code refactoring
 
 ### 1.1.0 (Sep 23, 2014) ###
-*	Issue-9: Check app version and show dialog again (for iOS)
-*	Issue-23: Get application title from native app
+*	ISSUE-9: Check app version and show dialog again (for iOS)
+*	ISSUE-23: Get application title from native app
 *	Added Release Notes

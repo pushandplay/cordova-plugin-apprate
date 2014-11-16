@@ -26,13 +26,11 @@ Locales = require('./locales');
 exec = require('cordova/exec');
 
 AppRate = (function() {
-  var FLAG_NATIVE_CODE_SUPPORTED, LOCALE_DEFAULT, LOCAL_STORAGE_COUNTER, PREF_STORE_URL_FORMAT_IOS, PREF_STORE_URL_FORMAT_IOS7, counter, getAppTitle, getAppVersion, localStorageParam, navigateToAppStore, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
+  var FLAG_NATIVE_CODE_SUPPORTED, LOCAL_STORAGE_COUNTER, PREF_STORE_URL_FORMAT_IOS, PREF_STORE_URL_FORMAT_IOS7, counter, getAppTitle, getAppVersion, localStorageParam, navigateToAppStore, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
 
   function AppRate() {}
 
   LOCAL_STORAGE_COUNTER = 'counter';
-
-  LOCALE_DEFAULT = 'en';
 
   FLAG_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad|Android)/i.test(navigator.userAgent.toLowerCase());
 
@@ -107,7 +105,7 @@ AppRate = (function() {
   showDialog = function(immediately) {
     var localeObj;
     if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
-      localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName) || Locales.getLocale(LOCALE_DEFAULT, AppRate.preferences.displayAppName);
+      localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName);
       navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
     }
     return AppRate;
@@ -197,7 +195,7 @@ AppRate = (function() {
     if (this.preferences.useLanguage === null) {
       navigator.globalization.getPreferredLanguage((function(_this) {
         return function(language) {
-          _this.preferences.useLanguage = language.value.split(/-/)[0];
+          _this.preferences.useLanguage = language.value;
           return showDialog(immediately);
         };
       })(this));

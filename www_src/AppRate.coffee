@@ -81,7 +81,6 @@ exec = require 'cordova/exec'
 #
 class AppRate
   LOCAL_STORAGE_COUNTER = 'counter'
-  LOCALE_DEFAULT = 'en'
   FLAG_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad|Android)/i.test navigator.userAgent.toLowerCase()
   PREF_STORE_URL_FORMAT_IOS = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id="
   PREF_STORE_URL_FORMAT_IOS7 = "itms-apps://itunes.apple.com/app/id"
@@ -148,8 +147,7 @@ class AppRate
   # @return [AppRate]
   showDialog = (immediately) =>
     if counter.countdown is @preferences.usesUntilPrompt or immediately
-      localeObj = @preferences.customLocale or Locales.getLocale(@preferences.useLanguage,
-          @preferences.displayAppName) or Locales.getLocale(LOCALE_DEFAULT, @preferences.displayAppName)
+      localeObj = @preferences.customLocale or Locales.getLocale(@preferences.useLanguage, @preferences.displayAppName)
       navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel,
                                                                                                                    localeObj.laterButtonLabel,
                                                                                                                    localeObj.rateButtonLabel]
@@ -250,7 +248,7 @@ class AppRate
   @promptForRating: (immediately = false) ->
     if @preferences.useLanguage is null
       navigator.globalization.getPreferredLanguage (language) =>
-        @preferences.useLanguage = language.value.split(/-/)[0]
+        @preferences.useLanguage = language.value
         showDialog(immediately)
     else
       showDialog(immediately)

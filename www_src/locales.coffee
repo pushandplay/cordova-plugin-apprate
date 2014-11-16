@@ -34,6 +34,8 @@ class Locale
 
 #	Collection of Locale objects
 class Locales
+  #	@property {String} default locale
+  LOCALE_DEFAULT = 'en'
   #	@property {Object} locales
   locales = {}
 
@@ -49,7 +51,7 @@ class Locales
   #	@return {Locale} Locale object or null
   # @see http://tools.ietf.org/html/bcp47
   @getLocale: (language, applicationTitle = null) ->
-    localeObject = locales[language]
+    localeObject = locales[language] or locales[language.split(/-/)[0]] or locales[LOCALE_DEFAULT]
     localeObject.title = localeObject.title.replace /%@/g, applicationTitle
     localeObject.message = localeObject.message.replace /%@/g, applicationTitle
 
@@ -116,6 +118,14 @@ Locales.addLocale new Locale
   language: 'de'
   title: "Bewerte %@"
   message: "Wenn dir %@ gefällt, würdest Du es bitte bewerten? Dies wird nicht länger als eine Minute dauern. Danke für die Unterstützung!"
+  cancelButtonLabel: "Nein, danke"
+  laterButtonLabel: "Später erinnern"
+  rateButtonLabel: "Jetzt bewerten"
+
+Locales.addLocale new Locale
+  language: 'de-AT'
+  title: "Bewerte %@"
+  message: "Wenn dir %@ gefällt, würdest Du es bitte bewerten? Dies wird nicht länger als eine Minute dauern.\nDanke für die Unterstützung!"
   cancelButtonLabel: "Nein, danke"
   laterButtonLabel: "Später erinnern"
   rateButtonLabel: "Jetzt bewerten"
@@ -313,6 +323,22 @@ Locales.addLocale new Locale
   rateButtonLabel: "شرح اب یہ"
 
 Locales.addLocale new Locale
+  language: 'ur-IN'
+  title: "کو ریٹ کیجیے %@"
+  message: "اگر آپ نے %@ کو مفید پایا ہے تو کیا آپ اپنے قیمتی وقت میں سے چند لمحے نکال کر اس کو ریٹ کریں گے؟ اس میں ایک منٹ سے زیادہ نہیں لگے گا، آپ کے تعاون کا شکریہ!"
+  cancelButtonLabel: "نہیں، شکریہ"
+  laterButtonLabel: "مجھے بعد میں یاد دلائیں"
+  rateButtonLabel: "ابھی ریٹ کیجیے"
+
+Locales.addLocale new Locale
+  language: 'ur-PK'
+  title: "کو ریٹ کیجیے %@"
+  message: "اگر آپ نے %@ کو مفید پایا ہے تو کیا آپ اپنے قیمتی وقت میں سے چند لمحے نکال کر اس کو ریٹ کریں گے؟ اس میں ایک منٹ سے زیادہ نہیں لگے گا، آپ کے تعاون کا شکریہ!"
+  cancelButtonLabel: "نہیں، شکریہ"
+  laterButtonLabel: "مجھے بعد میں یاد دلائیں"
+  rateButtonLabel: "ابھی ریٹ کیجیے"
+
+Locales.addLocale new Locale
   language: 'vi'
   title: "Đánh giá %@"
   message: "Nếu thích sử dụng %@, bạn có muốn giành một chút thời gian để đánh giá nó? Sẽ không lâu hơn một phút. Cảm ơn sự hỗ trợ của bạn!"
@@ -326,6 +352,22 @@ Locales.addLocale new Locale
   message: "如果你喜歡使用 %@, 是否介意耽誤您一點時間來給我們一個評分呢？ 該動作不會超過一分鐘。 謝謝您的支持！"
   cancelButtonLabel: "不，謝謝"
   laterButtonLabel: "稍後通知我"
+  rateButtonLabel: "現在評分"
+
+Locales.addLocale new Locale
+  language: 'zh-Hans'
+  title: "为“%@”评分"
+  message: "如果您觉得“%@”很好用，可否为其评一个分数？评分过程只需花费很少的时间。感谢您的支持！"
+  cancelButtonLabel: "不了，谢谢"
+  laterButtonLabel: "稍后再说"
+  rateButtonLabel: "现在去评分"
+
+Locales.addLocale new Locale
+  language: 'zh-Hant'
+  title: "評分 %@"
+  message: "如果您喜歡用 %@，是否願意花一些時間打個分數？其過程將不超過一分鐘。 謝謝您的支持！"
+  cancelButtonLabel: "不，謝謝"
+  laterButtonLabel: "稍後提醒我"
   rateButtonLabel: "現在評分"
 
 
