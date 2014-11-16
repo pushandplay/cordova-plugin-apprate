@@ -108,6 +108,7 @@ AppRate = (function() {
       localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName);
       navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
     }
+    AppRate.onRateDialogShow(promptForRatingWindowButtonClickHandler);
     return AppRate;
   };
 
@@ -208,6 +209,11 @@ AppRate = (function() {
 
   AppRate.onButtonClicked = function(buttonIndex) {
     console.log("onButtonClicked->" + buttonIndex);
+    return this;
+  };
+
+  AppRate.onRateDialogShow = function(callback) {
+    console.log("onRateDialogShow -> " + callback);
     return this;
   };
 

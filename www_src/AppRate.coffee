@@ -151,6 +151,7 @@ class AppRate
       navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel,
                                                                                                                    localeObj.laterButtonLabel,
                                                                                                                    localeObj.rateButtonLabel]
+    @onRateDialogShow(promptForRatingWindowButtonClickHandler)
     @
 
   #	Get, set or delete localStorage item
@@ -231,6 +232,9 @@ class AppRate
     promptAgainForEachNewVersion: true
     usesUntilPrompt: 3
     openStoreInApp: false
+    callbacks:
+      onButtonClicked: null
+      onRateDialogShow: null
     storeAppURL:
       ios: undefined
       android: undefined
@@ -267,6 +271,18 @@ class AppRate
   #   }
   @onButtonClicked: (buttonIndex) ->
     console.log "onButtonClicked->#{buttonIndex}"
+    @
+
+  #
+  #
+  # @return [AppRate]
+  #
+  # @example Add callback listener
+  #   AppRate.onRateDialogShow = function () {
+  #     console.log("onRateDialogShow -> my function called");
+  #   }
+  @onRateDialogShow: (callback) ->
+    console.log "onRateDialogShow -> #{callback}"
     @
 
 AppRate.init()
