@@ -21,7 +21,9 @@
 # Release Notes #
 
 ### 1.1.4 (Nov 17, 2014) ###
-*	ISSUE-41: 
+*	ISSUE-41: Export navigateToAppStore
+*	ISSUE-43: Improve callbacks support
+*	ISSUE-17: Add custom view support for rate-dialog
 
 ### 1.1.3 (Nov 16, 2014) ###
 *	ISSUE-42: Added pref flag for open app rate page on reviews tab (iOS)

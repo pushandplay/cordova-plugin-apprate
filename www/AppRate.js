@@ -82,11 +82,13 @@ AppRate = (function() {
   showDialog = function(immediately) {
     var localeObj, _base;
     if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
-      localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName);
-      navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
-    }
-    if (typeof (_base = AppRate.preferences.callbacks).onRateDialogShow === "function") {
-      _base.onRateDialogShow(promptForRatingWindowButtonClickHandler);
+      if (!AppRate.preferences.useCustomRateDialog) {
+        localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName);
+        navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
+      }
+      if (typeof (_base = AppRate.preferences.callbacks).onRateDialogShow === "function") {
+        _base.onRateDialogShow(promptForRatingWindowButtonClickHandler);
+      }
     }
     return AppRate;
   };
@@ -154,21 +156,21 @@ AppRate = (function() {
   };
 
   AppRate.preferences = {
-    useLanguage: void 0,
+    useLanguage: null,
     displayAppName: '',
     promptAgainForEachNewVersion: true,
     usesUntilPrompt: 3,
     openStoreInApp: false,
     useCustomRateDialog: false,
     callbacks: {
-      onButtonClicked: void 0,
-      onRateDialogShow: void 0
+      onButtonClicked: null,
+      onRateDialogShow: null
     },
     storeAppURL: {
-      ios: void 0,
-      android: void 0,
-      blackberry: void 0,
-      windows8: void 0
+      ios: null,
+      android: null,
+      blackberry: null,
+      windows8: null
     },
     customLocale: null
   };

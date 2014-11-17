@@ -97,6 +97,26 @@ AppRate.preferences.displayAppName = &#39;My custom app title&#39;;
 AppRate.preferences.usesUntilPrompt = 5;
 AppRate.preferences.promptAgainForEachNewVersion = false;
 AppRate.promptForRating();</code></pre>
+    <h4>
+      Callbacks setup and use custom rate-dialog
+    </h4>
+    <pre><code class='coffeescript'>var onRateDialogShow = function(callback) {
+  console.log(&quot;onRateDialogShow&quot;);
+  &#47;&#47; call this callback when user click on button into your custom rate-dialog
+  &#47;&#47; for example: simulate click on &quot;Rate now&quot; button and display store
+  callback(3)
+};
+var onButtonClicked = function(buttonIndex) {
+  console.log(&quot;onButtonClicked -&gt; &quot; + buttonIndex);
+};
+
+AppRate.preferences.storeAppURL.ios = &#39;492224193&#39;;
+AppRate.preferences.useCustomRateDialog = true;
+AppRate.preferences.callbacks.onRateDialogShow = onRateDialogShow;
+AppRate.preferences.callbacks.onButtonClicked = onButtonClicked;
+
+&#47;&#47; True param show rate-dialog immediately and useful for testing or custom logic
+AppRate.promptForRating(true);</code></pre>
   </div>
 </div>
 <div class='tags'>
@@ -114,15 +134,16 @@ AppRate.promptForRating();</code></pre>
   promptAgainForEachNewVersion: true,
   usesUntilPrompt: 3,
   openStoreInApp: false,
+  useCustomRateDialog: false,
   callbacks: {
     onButtonClicked: null,
     onRateDialogShow: null
   },
   storeAppURL: {
-    ios: void 0,
-    android: void 0,
-    blackberry: void 0,
-    windows8: void 0
+    ios: null,
+    android: null,
+    blackberry: null,
+    windows8: null
   },
   customLocale: null
 }</code></pre>
@@ -257,7 +278,7 @@ AppRate.promptForRating();</code></pre>
 </div>
     </div>
     <div id='footer'>
-  November 16, 14 12:27:00 by
+  November 17, 14 22:37:32 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>

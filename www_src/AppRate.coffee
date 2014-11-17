@@ -77,6 +77,25 @@ exec = require 'cordova/exec'
 #   AppRate.preferences.promptAgainForEachNewVersion = false;
 #   AppRate.promptForRating();
 #
+# @example Callbacks setup and use custom rate-dialog
+#   var onRateDialogShow = function(callback) {
+#     console.log("onRateDialogShow");
+#     // call this callback when user click on button into your custom rate-dialog
+#     // for example: simulate click on "Rate now" button and display store
+#     callback(3)
+#   };
+#   var onButtonClicked = function(buttonIndex) {
+#     console.log("onButtonClicked -> " + buttonIndex);
+#   };
+#
+#   AppRate.preferences.storeAppURL.ios = '492224193';
+#   AppRate.preferences.useCustomRateDialog = true;
+#   AppRate.preferences.callbacks.onRateDialogShow = onRateDialogShow;
+#   AppRate.preferences.callbacks.onButtonClicked = onButtonClicked;
+#
+#   // True param show rate-dialog immediately and useful for testing or custom logic
+#   AppRate.promptForRating(true);
+#
 # @note All %@ patterns in customLocale object will be automatically replaced to your application title
 #
 class AppRate
@@ -125,11 +144,12 @@ class AppRate
   # @return [AppRate]
   showDialog = (immediately) =>
     if counter.countdown is @preferences.usesUntilPrompt or immediately
-      localeObj = @preferences.customLocale or Locales.getLocale(@preferences.useLanguage, @preferences.displayAppName)
-      navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel,
-                                                                                                                   localeObj.laterButtonLabel,
-                                                                                                                   localeObj.rateButtonLabel]
-    @preferences.callbacks.onRateDialogShow?(promptForRatingWindowButtonClickHandler)
+      if !@preferences.useCustomRateDialog
+        localeObj = @preferences.customLocale or Locales.getLocale(@preferences.useLanguage, @preferences.displayAppName)
+        navigator.notification.confirm localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel,
+                                                                                                                     localeObj.laterButtonLabel,
+                                                                                                                     localeObj.rateButtonLabel]
+      @preferences.callbacks.onRateDialogShow? promptForRatingWindowButtonClickHandler
     @
 
   #	Get, set or delete localStorage item
@@ -195,6 +215,9 @@ class AppRate
   # @param {Integer} usesUntilPrompt
   # @param {Boolean} openStoreInApp
   # @param {Boolean} useCustomRateDialog
+  # @param {Object} callbacks
+  #   @param onButtonClicked {Function}
+  #   @param onRateDialogShow {Function}
   # @param {Object} storeAppURL
   #   @param {String} ios
   #   @param {String} android
@@ -206,20 +229,20 @@ class AppRate
   #   @param {String} laterButtonLabel
   #   @param {String} rateButtonLabel
   @preferences:
-    useLanguage: undefined
+    useLanguage: null
     displayAppName: ''
     promptAgainForEachNewVersion: true
     usesUntilPrompt: 3
     openStoreInApp: false
     useCustomRateDialog: false
     callbacks:
-      onButtonClicked: undefined
-      onRateDialogShow: undefined
+      onButtonClicked: null
+      onRateDialogShow: null
     storeAppURL:
-      ios: undefined
-      android: undefined
-      blackberry: undefined
-      windows8: undefined
+      ios: null
+      android: null
+      blackberry: null
+      windows8: null
     customLocale: null
 
   #	Check plugin preferences and display or not display rate popup
@@ -239,7 +262,6 @@ class AppRate
 
     updateCounter()
     @
-
 
   # Open application page in store
   #
