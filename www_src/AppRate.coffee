@@ -88,7 +88,7 @@ exec = require 'cordova/exec'
 #     console.log("onButtonClicked -> " + buttonIndex);
 #   };
 #
-#   AppRate.preferences.storeAppURL.ios = '492224193';
+#   AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 #   AppRate.preferences.useCustomRateDialog = true;
 #   AppRate.preferences.callbacks.onRateDialogShow = onRateDialogShow;
 #   AppRate.preferences.callbacks.onButtonClicked = onButtonClicked;
