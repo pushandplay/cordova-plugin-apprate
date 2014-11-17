@@ -26,7 +26,7 @@ Locales = require('./locales');
 exec = require('cordova/exec');
 
 AppRate = (function() {
-  var FLAG_NATIVE_CODE_SUPPORTED, LOCAL_STORAGE_COUNTER, PREF_STORE_URL_FORMAT_IOS, PREF_STORE_URL_FORMAT_IOS7, counter, getAppTitle, getAppVersion, localStorageParam, navigateToAppStore, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
+  var FLAG_NATIVE_CODE_SUPPORTED, LOCAL_STORAGE_COUNTER, PREF_STORE_URL_FORMAT_IOS, PREF_STORE_URL_FORMAT_IOS7, counter, getAppTitle, getAppVersion, localStorageParam, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
 
   function AppRate() {}
 
@@ -43,31 +43,8 @@ AppRate = (function() {
     countdown: 0
   };
 
-  navigateToAppStore = function() {
-    var iOSVersion;
-    if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
-      if (AppRate.preferences.openStoreInApp) {
-        exec(null, null, 'AppRate', 'launchAppStore', [AppRate.preferences.storeAppURL.ios]);
-      } else {
-        iOSVersion = navigator.userAgent.match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.');
-        iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) || 0) / 10;
-        if ((7.1 > iOSVersion && iOSVersion >= 7.0)) {
-          window.open(PREF_STORE_URL_FORMAT_IOS7 + AppRate.preferences.storeAppURL.ios, '_system');
-        } else {
-          window.open(PREF_STORE_URL_FORMAT_IOS + AppRate.preferences.storeAppURL.ios, '_system');
-        }
-      }
-    } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(AppRate.preferences.storeAppURL.android, '_system');
-    } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(AppRate.preferences.storeAppURL.blackberry, '_system');
-    } else if (/(IEMobile)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(AppRate.preferences.storeAppURL.windows8, '_system');
-    }
-    return AppRate;
-  };
-
   promptForRatingWindowButtonClickHandler = function(buttonIndex) {
+    var _base;
     switch (buttonIndex) {
       case 1:
         updateCounter('stop');
@@ -77,9 +54,9 @@ AppRate = (function() {
         break;
       case 3:
         updateCounter('stop');
-        navigateToAppStore();
+        AppRate.navigateToAppStore();
     }
-    return AppRate.onButtonClicked(buttonIndex);
+    return typeof (_base = AppRate.preferences.callbacks).onButtonClicked === "function" ? _base.onButtonClicked(buttonIndex) : void 0;
   };
 
   updateCounter = function(action) {
@@ -103,10 +80,15 @@ AppRate = (function() {
   };
 
   showDialog = function(immediately) {
-    var localeObj;
+    var localeObj, _base;
     if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
-      localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName);
-      navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
+      if (!AppRate.preferences.useCustomRateDialog) {
+        localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName);
+        navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
+      }
+      if (typeof (_base = AppRate.preferences.callbacks).onRateDialogShow === "function") {
+        _base.onRateDialogShow(promptForRatingWindowButtonClickHandler);
+      }
     }
     return AppRate;
   };
@@ -179,11 +161,16 @@ AppRate = (function() {
     promptAgainForEachNewVersion: true,
     usesUntilPrompt: 3,
     openStoreInApp: false,
+    useCustomRateDialog: false,
+    callbacks: {
+      onButtonClicked: null,
+      onRateDialogShow: null
+    },
     storeAppURL: {
-      ios: void 0,
-      android: void 0,
-      blackberry: void 0,
-      windows8: void 0
+      ios: null,
+      android: null,
+      blackberry: null,
+      windows8: null
     },
     customLocale: null
   };
@@ -206,8 +193,27 @@ AppRate = (function() {
     return this;
   };
 
-  AppRate.onButtonClicked = function(buttonIndex) {
-    console.log("onButtonClicked->" + buttonIndex);
+  AppRate.navigateToAppStore = function() {
+    var iOSVersion;
+    if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
+      if (this.preferences.openStoreInApp) {
+        exec(null, null, 'AppRate', 'launchAppStore', [this.preferences.storeAppURL.ios]);
+      } else {
+        iOSVersion = navigator.userAgent.match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.');
+        iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) || 0) / 10;
+        if ((7.1 > iOSVersion && iOSVersion >= 7.0)) {
+          window.open(PREF_STORE_URL_FORMAT_IOS7 + this.preferences.storeAppURL.ios, '_system');
+        } else {
+          window.open(PREF_STORE_URL_FORMAT_IOS + this.preferences.storeAppURL.ios, '_system');
+        }
+      }
+    } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
+      window.open(this.preferences.storeAppURL.android, '_system');
+    } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
+      window.open(this.preferences.storeAppURL.blackberry, '_system');
+    } else if (/(IEMobile)/i.test(navigator.userAgent.toLowerCase())) {
+      window.open(this.preferences.storeAppURL.windows8, '_system');
+    }
     return this;
   };
 
