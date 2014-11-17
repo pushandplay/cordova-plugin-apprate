@@ -45,6 +45,9 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 	promptAgainForEachNewVersion {Boolean} true - show dialog again when application version will be updated
 	usesUntilPrompt {Integer} 3 - count of runs of application before dialog will be displayed
 	openStoreInApp {Boolean} false - leave app or no when application page opened in app store (now supported only for iOS)
+	useCustomRateDialog {Boolean} false - use custom view for rate dialog
+	callbacks.onButtonClicked {Function} null - call back function. called when user clicked on rate-dialog buttons
+	callbacks.onRateDialogShow {Function} null - call back function. called when rate-dialog showing
 	storeAppURL.ios {String} null - application id in AppStore
 	storeAppURL.android {String} null - application URL in GooglePlay
 	storeAppURL.blackberry {String} null - application URL in AppWorld
@@ -113,6 +116,26 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 	AppRate.preferences.usesUntilPrompt = 5;
 	AppRate.preferences.promptAgainForEachNewVersion = false;
 	AppRate.promptForRating();
+
+#### Callbacks setup and use custom rate-dialog ####
+
+	var onRateDialogShow = function(callback) {
+		console.log("onRateDialogShow");
+		//	call this callback when user click on button into your custom rate-dialog
+		//	for example: simulate click on "Rate now" button and display store
+		callback(3)
+	};
+	var onButtonClicked = function(buttonIndex) {
+		console.log("onButtonClicked -> " + buttonIndex);
+	};
+
+	AppRate.preferences.storeAppURL.ios = '492224193';
+	AppRate.preferences.useCustomRateDialog = true;
+	AppRate.preferences.callbacks.onRateDialogShow = onRateDialogShow;
+	AppRate.preferences.callbacks.onButtonClicked = onButtonClicked;
+
+	//	True param show rate-dialog immediately and useful for testing or custom logic
+	AppRate.promptForRating(true);
 		
 ## Already included translations ##
 ar, bn, ca, cs, da, de, de-AT, el, en, es, fa, fr, he, hi, id, il, ja, ko, nl, no, pa, pl, pt, ru, sk, sl, sv, th, tr, uk, ur, ur-IN, ur-PK, vi, zh-TW, zh-Hans, zh-Hant
