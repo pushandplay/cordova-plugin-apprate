@@ -34,11 +34,12 @@ exec = require 'cordova/exec'
 #   AppRate.promptForRating(true);
 #
 # @example Override dialog button callback
-#   AppRate.preferences.storeAppURL.ios = '<my_app_id>';
-#   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
-#   AppRate.onButtonClicked = function(buttonIndex) {
+#   var onButtonClicked = function(buttonIndex) {
 #     console.log("onButtonClicked -> " + buttonIndex);
 #   };
+#   AppRate.preferences.storeAppURL.ios = '<my_app_id>';
+#   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
+#   AppRate.preferences.callbacks.onButtonClicked = onButtonClicked;
 #   AppRate.promptForRating();
 #
 # @example Set custom language
@@ -265,7 +266,7 @@ class AppRate
 
   # Open application page in store
   #
-  # @return {AppRate} counter
+  # @return [AppRate]
   @navigateToAppStore = ->
     if /(iPhone|iPod|iPad)/i.test navigator.userAgent.toLowerCase()
       if @preferences.openStoreInApp

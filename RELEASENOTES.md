@@ -20,6 +20,10 @@
 -->
 # Release Notes #
 
+### 1.1.5 (Nov 23, 2014) ###
+*	ISSUE-47: Actualize documentation
+*	Improved Windows Phone support
+
 ### 1.1.4 (Nov 17, 2014) ###
 *	ISSUE-41: Export navigateToAppStore
 *	ISSUE-43: Improve callbacks support
