@@ -211,7 +211,7 @@ AppRate = (function() {
       window.open(this.preferences.storeAppURL.android, '_system');
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
       window.open(this.preferences.storeAppURL.blackberry, '_system');
-    } else if (/(IEMobile)/i.test(navigator.userAgent.toLowerCase())) {
+    } else if (/(IEMobile|Windows Phone)/i.test(navigator.userAgent.toLowerCase())) {
       window.open(this.preferences.storeAppURL.windows8, '_system');
     }
     return this;
