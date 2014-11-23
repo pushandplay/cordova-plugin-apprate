@@ -52,11 +52,12 @@ AppRate.promptForRating(true);</code></pre>
     <h4>
       Override dialog button callback
     </h4>
-    <pre><code class='coffeescript'>AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
-AppRate.preferences.storeAppURL.android = &#39;market:&#47;&#47;details?id=&lt;package_name&gt;&#39;;
-AppRate.onButtonClicked = function(buttonIndex) {
+    <pre><code class='coffeescript'>var onButtonClicked = function(buttonIndex) {
   console.log(&quot;onButtonClicked -&gt; &quot; + buttonIndex);
 };
+AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
+AppRate.preferences.storeAppURL.android = &#39;market:&#47;&#47;details?id=&lt;package_name&gt;&#39;;
+AppRate.preferences.callbacks.onButtonClicked = onButtonClicked;
 AppRate.promptForRating();</code></pre>
     <h4>
       Set custom language
@@ -266,11 +267,7 @@ AppRate.promptForRating(true);</code></pre>
   <ul class='return'>
     <li>
       <span class='type'></span>
-      (
-        <tt><a href='../class/AppRate.html'>AppRate</a></tt>
-      )
-      &mdash;
-      <span class='desc'>counter </span>
+      <tt><a href='../class/AppRate.html'>AppRate</a></tt>
     </li>
   </ul>
 </div>
@@ -278,7 +275,7 @@ AppRate.promptForRating(true);</code></pre>
 </div>
     </div>
     <div id='footer'>
-  November 17, 14 22:54:27 by
+  November 22, 14 21:54:24 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>

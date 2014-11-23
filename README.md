@@ -71,11 +71,13 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 
 #### Override dialog button callback ####
 
-	AppRate.preferences.storeAppURL.ios = '<my_app_id>';
-	AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
-	AppRate.onButtonClicked = function(buttonIndex) {
+	var onButtonClicked = function(buttonIndex) {
 		console.log("onButtonClicked -> " + buttonIndex);
 	};
+
+	AppRate.preferences.storeAppURL.ios = '<my_app_id>';
+	AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
+	AppRate.preferences.callbacks = onButtonClicked;
 	AppRate.promptForRating();
 		
 #### Set custom language ####
