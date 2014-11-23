@@ -77,7 +77,7 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 
 	AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 	AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
-	AppRate.preferences.callbacks = onButtonClicked;
+	AppRate.preferences.callbacks.onButtonClicked = onButtonClicked;
 	AppRate.promptForRating();
 		
 #### Set custom language ####
