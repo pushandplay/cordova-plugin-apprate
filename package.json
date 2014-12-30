@@ -1,0 +1,9 @@
+{
+  "name": "cordova-plugin-apprate",
+  "version": "0.1.6",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-codo": "^0.2.0",
+    "grunt-contrib-coffee": "^0.12.0"
+  }
+}
