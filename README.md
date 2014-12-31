@@ -144,7 +144,7 @@ ar, bn, ca, cs, da, de, de-AT, el, en, es, fa, fr, he, hi, id, il, ja, ko, nl, n
 
 #### Access to locales ####
 
-	//	Getting list of names of available locales
+	//	Getting list of names for available locales
 	AppRate.locales.getLocalesNames();
 
 	//	Getting locale object by name
