@@ -50,7 +50,7 @@ class Locales
   #	@param {String} applicationTitle
   #	@return {Locale} Locale object or null
   # @see http://tools.ietf.org/html/bcp47
-  @getLocale: (language, applicationTitle = null) ->
+  @getLocale: (language, applicationTitle = '') ->
     localeObject = locales[language] or locales[language.split(/-/)[0]] or locales[LOCALE_DEFAULT]
     localeObject.title = localeObject.title.replace /%@/g, applicationTitle
     localeObject.message = localeObject.message.replace /%@/g, applicationTitle
@@ -60,7 +60,7 @@ class Locales
   # Get list of locales names
   # @return [Array<String>] List of locales names
   @getLocalesNames: ->
-    k for k of locales
+    locale for locale of locales
 
 
 Locales.addLocale new Locale
