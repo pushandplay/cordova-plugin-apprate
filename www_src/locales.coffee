@@ -57,6 +57,11 @@ class Locales
 
     localeObject
 
+  # Get list of locales names
+  # @return [Array<String>] List of locales names
+  @getLocalesNames: ->
+    k for k of locales
+
 
 Locales.addLocale new Locale
   language: 'ar'

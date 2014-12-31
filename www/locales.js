@@ -54,6 +54,15 @@ Locales = (function() {
     return localeObject;
   };
 
+  Locales.getLocalesNames = function() {
+    var k, _results;
+    _results = [];
+    for (k in locales) {
+      _results.push(k);
+    }
+    return _results;
+  };
+
   return Locales;
 
 })();

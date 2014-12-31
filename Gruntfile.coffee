@@ -57,4 +57,4 @@ module.exports = (grunt) ->
   grunt.registerTask 'release', ['default', 'codo:docs']
   grunt.registerTask 'app:create', ['cordovacli:create', 'cordovacli:plugin', 'cordovacli:prepare']
   grunt.registerTask 'app:prepare', ['cordovacli:prepare']
-  grunt.registerTask 'app:run_ios', ['cordovacli:run']
+  grunt.registerTask 'app:run_ios', ['default', 'cordovacli:run_ios']
