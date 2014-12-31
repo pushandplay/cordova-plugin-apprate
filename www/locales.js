@@ -46,12 +46,21 @@ Locales = (function() {
   Locales.getLocale = function(language, applicationTitle) {
     var localeObject;
     if (applicationTitle == null) {
-      applicationTitle = null;
+      applicationTitle = '';
     }
     localeObject = locales[language] || locales[language.split(/-/)[0]] || locales[LOCALE_DEFAULT];
     localeObject.title = localeObject.title.replace(/%@/g, applicationTitle);
     localeObject.message = localeObject.message.replace(/%@/g, applicationTitle);
     return localeObject;
+  };
+
+  Locales.getLocalesNames = function() {
+    var locale, _results;
+    _results = [];
+    for (locale in locales) {
+      _results.push(locale);
+    }
+    return _results;
   };
 
   return Locales;

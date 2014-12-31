@@ -154,6 +154,8 @@ AppRate = (function() {
     return this;
   };
 
+  AppRate.locales = Locales;
+
   AppRate.preferences = {
     useLanguage: null,
     displayAppName: '',
