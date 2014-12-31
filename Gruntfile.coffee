@@ -1,5 +1,11 @@
 module.exports = (grunt) ->
+  config =
+    app:
+      name: 'AppRateDemoProject-test'
+      path: '../'
+
   grunt.initConfig
+    config: config
     pkg: grunt.file.readJSON 'package.json'
     coffee:
       options:
@@ -18,15 +24,19 @@ module.exports = (grunt) ->
         src: ["www_src"]
     cordovacli:
       options:
-        path: 'AppRateDemoProject'
+        path: '<%= config.app.path %><%= config.app.name %>/'
       create:
         options:
-          command: ['create', 'platform', 'plugin']
+          command: ['create', 'platform']
           platforms: ['ios', 'android']
-          plugins: []
-          id: 'org.pushandplay.cordova.AppRateDemoProject'
-          name: 'AppRateDemoProject'
+          id: 'org.pushandplay.cordova.<%= config.app.name %>'
+          name: '<%= config.app.name %>'
           args: ['--link-to', 'www_app']
+      plugin:
+        options:
+          command: 'plugin'
+          action: 'add'
+          plugins: ['../cordova-plugin-apprate']
       prepare:
         options:
           command: ['prepare']
@@ -37,6 +47,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-codo'
   grunt.loadNpmTasks 'grunt-cordovacli'
 
-  grunt.registerTask 'default', ['coffee:compile', 'cordovacli:prepare']
+  grunt.registerTask 'default', ['coffee:compile', 'app:prepare']
   grunt.registerTask 'release', ['default', 'codo:docs']
-  grunt.registerTask 'app', ['cordovacli:prepare']
+  grunt.registerTask 'app:create', ['cordovacli:create', 'cordovacli:plugin', 'cordovacli:prepare']
+  grunt.registerTask 'app:prepare', ['cordovacli:prepare']
