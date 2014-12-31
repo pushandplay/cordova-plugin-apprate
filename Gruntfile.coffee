@@ -1,7 +1,7 @@
 module.exports = (grunt) ->
   config =
     app:
-      name: 'AppRateDemoProject-test'
+      name: 'AppRateDemoProject'
       path: '../'
 
   grunt.initConfig
@@ -19,6 +19,7 @@ module.exports = (grunt) ->
         ext: '.js'
     codo:
       options:
+        name: config.app.path
         output: "./docs"
       docs:
         src: ["www_src"]
@@ -41,6 +42,11 @@ module.exports = (grunt) ->
         options:
           command: ['prepare']
           platforms: ['ios', 'android']
+      run_ios:
+        options:
+          command: 'run'
+          platforms: ['ios']
+          args: ['--debug']
 
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
@@ -51,3 +57,4 @@ module.exports = (grunt) ->
   grunt.registerTask 'release', ['default', 'codo:docs']
   grunt.registerTask 'app:create', ['cordovacli:create', 'cordovacli:plugin', 'cordovacli:prepare']
   grunt.registerTask 'app:prepare', ['cordovacli:prepare']
+  grunt.registerTask 'app:run_ios', ['cordovacli:run']
