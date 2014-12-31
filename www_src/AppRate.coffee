@@ -207,6 +207,10 @@ class AppRate
 
     @
 
+  # Locales object
+  # @property [Object] qwe
+  @locales: Locales
+
   # Preferences object
   #
   # @param {Object} Plugin preferences

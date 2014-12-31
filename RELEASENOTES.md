@@ -20,6 +20,10 @@
 -->
 # Release Notes #
 
+### 1.1.6 (Dec 30, 2014) ###
+*	ISSUE-44: Switch build system from Makefile to Grunt
+*	ISSUE-57: Implement public access to available locales
+
 ### 1.1.5 (Nov 23, 2014) ###
 *	ISSUE-47: Actualize documentation
 *	Improved Windows Phone support

@@ -2,7 +2,7 @@
 <html>
   <head>
   <meta charset='UTF-8'>
-  <title>CoffeeScript API Documentation</title>
+  <title>Documentation</title>
   <script src='../javascript/application.js'></script>
   <script src='../javascript/search.js'></script>
   <link rel='stylesheet' href='../stylesheets/application.css' type='text/css'>
@@ -11,6 +11,10 @@
     <div id='base' data-path='../'></div>
 <div id='header'>
   <div id='menu'>
+    <a href='../extra/README.md.html' title='../'>
+      ..&#47;
+    </a>
+    &raquo;
     <a href='../alphabetical_index.html' title='Index'>
       Index
     </a>
@@ -26,7 +30,7 @@
       <table class='box'>
         <tr>
           <td>Defined in:</td>
-          <td>locales.coffee</td>
+          <td>www_src&#47;locales.coffee</td>
         </tr>
       </table>
       <h2>Overview</h2>
@@ -54,11 +58,23 @@
       <a href='#getLocale-static'>
         .
 (Locale)
-<b>getLocale</b><span>(language, applicationTitle = null)</span>
+<b>getLocale</b><span>(language, applicationTitle = &#39;&#39;)</span>
       </a>
     </span>
     <span class='desc'>
       Get locale from collection by language 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#getLocalesNames-static'>
+        .
+(Array&lt;String&gt;)
+<b>getLocalesNames</b><span>()</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Get list of locales names 
     </span>
   </li>
 </ul>
@@ -103,7 +119,7 @@
     <p class='signature' id='getLocale-static'>
       .
 (Locale)
-<b>getLocale</b><span>(language, applicationTitle = null)</span>
+<b>getLocale</b><span>(language, applicationTitle = &#39;&#39;)</span>
       <br>
     </p>
     <div class='docstring'>
@@ -150,10 +166,34 @@
   </ul>
 </div>
   </div>
+  <div class='method_details'>
+    <p class='signature' id='getLocalesNames-static'>
+      .
+(Array&lt;String&gt;)
+<b>getLocalesNames</b><span>()</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Get list of locales names</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (
+        <tt>Array&lt;String&gt;</tt>
+      )
+      &mdash;
+      <span class='desc'>List of locales names </span>
+    </li>
+  </ul>
+</div>
+  </div>
 </div>
     </div>
     <div id='footer'>
-  November 22, 14 21:54:24 by
+  December 31, 14 17:32:10 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>

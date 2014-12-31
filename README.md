@@ -142,6 +142,14 @@ All %@ patterns in customLocale object will be automatically replaced to your ap
 ## Already included translations ##
 ar, bn, ca, cs, da, de, de-AT, el, en, es, fa, fr, he, hi, id, il, ja, ko, nl, no, pa, pl, pt, ru, sk, sl, sv, th, tr, uk, ur, ur-IN, ur-PK, vi, zh-TW, zh-Hans, zh-Hant
 
+#### Access to locales ####
+
+	//	Getting list of names for available locales
+	AppRate.locales.getLocalesNames();
+
+	//	Getting locale object by name
+	AppRate.locales.getLocale('en');
+
 You can add a new translation here: [https://crowdin.net/project/apprate-cordovaphonegap-plugin](https://crowdin.net/project/apprate-cordovaphonegap-plugin)
 	
 
