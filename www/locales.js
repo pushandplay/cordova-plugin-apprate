@@ -46,7 +46,7 @@ Locales = (function() {
   Locales.getLocale = function(language, applicationTitle) {
     var localeObject;
     if (applicationTitle == null) {
-      applicationTitle = null;
+      applicationTitle = '';
     }
     localeObject = locales[language] || locales[language.split(/-/)[0]] || locales[LOCALE_DEFAULT];
     localeObject.title = localeObject.title.replace(/%@/g, applicationTitle);
@@ -55,10 +55,10 @@ Locales = (function() {
   };
 
   Locales.getLocalesNames = function() {
-    var k, _results;
+    var locale, _results;
     _results = [];
-    for (k in locales) {
-      _results.push(k);
+    for (locale in locales) {
+      _results.push(locale);
     }
     return _results;
   };
