@@ -21,7 +21,7 @@ under the License.
 
 <plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
         id="org.pushandplay.cordova.apprate"
-        version="1.1.6">
+        version="1.1.7">
     <name>AppRate</name>
     <description>This plugin provide the "rate this app" functionality into your Cordova/Phonegap application
     </description>
@@ -51,7 +51,7 @@ under the License.
     <platform name="android">
         <dependency id="org.apache.cordova.inappbrowser"/>
 
-        <source-file src="src/android/AppRate.java" target-dir="src/org/apache/cordova/apprate"/>
+        <source-file src="src/android/AppRate.java" target-dir="src/org/pushandplay/cordova/apprate"/>
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="AppRate">
