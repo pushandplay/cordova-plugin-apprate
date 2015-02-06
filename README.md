@@ -8,6 +8,18 @@ Issues list and features requests [here](https://github.com/pushandplay/cordova-
 
 <img src="https://dl.dropboxusercontent.com/u/26238/Cordova/Plugins/AppRate/preview_iPad.png" width="100%" alt="Preview iPad"/>
 
+### Read before implementation ###
+
++ [Begging For App Ratings](http://www.loopinsight.com/2014/02/04/begging-for-app-ratings/)
++ [Choices And Consequences](http://bitsplitting.org/2013/12/11/choices-and-consequences/)
++ [The importance of App Store reviews](http://www.cowlyowl.com/blog/app-store-reviews)
++ [The Rate Friday Initiative](http://blog.edovia.com/2014/01/03/the-rate-friday-initiative/)
++ [Prompting for App Reviews](http://dancounsell.com/articles/prompting-for-app-reviews)
+
+### Read before writing review ###
+
++ [FAQ](https://github.com/pushandplay/cordova-plugin-apprate/wiki)
+
 ## Supported platforms ##
 
 +	iOS
