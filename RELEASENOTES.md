@@ -20,7 +20,7 @@
 -->
 # Release Notes #
 
-### 1.1.7 (Feb ??, 2015) ###
+### 1.1.7 (Feb 7, 2015) ###
 *	ISSUE-69, ISSUE-70: Fixed mismatch between target dir and package namespace for Android. Thanks @adriano-di-giovanni
 
 ### 1.1.6 (Dec 30, 2014) ###
