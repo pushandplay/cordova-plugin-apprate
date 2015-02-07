@@ -11471,7 +11471,7 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
     };
     window.indentTree = function(el, width) {
       return $(el).find('> ul').each(function() {
-        $(this).find('> li').css('padding-left', "" + width + "px");
+        $(this).find('> li').css('padding-left', width + "px");
         return window.indentTree($(this), width + 20);
       });
     };
