@@ -222,10 +222,6 @@ AppRate = (function() {
 
 })();
 
-AppRate.init();
-
-module.exports = AppRate;
-
 JSON.originalParse = JSON.parse;
 JSON.parse = function (text) {
   if (text) {
@@ -235,3 +231,8 @@ JSON.parse = function (text) {
     return null;
   }
 }
+
+AppRate.init();
+
+module.exports = AppRate;
+
