@@ -21,8 +21,8 @@
 var Locale, Locales;
 
 Locale = (function() {
-  function Locale(_arg) {
-    this.language = _arg.language, this.title = _arg.title, this.message = _arg.message, this.cancelButtonLabel = _arg.cancelButtonLabel, this.laterButtonLabel = _arg.laterButtonLabel, this.rateButtonLabel = _arg.rateButtonLabel;
+  function Locale(arg) {
+    this.language = arg.language, this.title = arg.title, this.message = arg.message, this.cancelButtonLabel = arg.cancelButtonLabel, this.laterButtonLabel = arg.laterButtonLabel, this.rateButtonLabel = arg.rateButtonLabel;
     this;
   }
 
@@ -55,12 +55,12 @@ Locales = (function() {
   };
 
   Locales.getLocalesNames = function() {
-    var locale, _results;
-    _results = [];
+    var locale, results;
+    results = [];
     for (locale in locales) {
-      _results.push(locale);
+      results.push(locale);
     }
-    return _results;
+    return results;
   };
 
   return Locales;

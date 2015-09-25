@@ -1,23 +1,23 @@
 /*
- *
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- *
- */;
+  *
+  * Licensed to the Apache Software Foundation (ASF) under one
+  * or more contributor license agreements. See the NOTICE file
+  * distributed with this work for additional information
+  * regarding copyright ownership. The ASF licenses this file
+  * to you under the Apache License, Version 2.0 (the
+  * "License"); you may not use this file except in compliance
+  * with the License. You may obtain a copy of the License at
+  *
+  * http://www.apache.org/licenses/LICENSE-2.0
+  *
+  * Unless required by applicable law or agreed to in writing,
+  * software distributed under the License is distributed on an
+  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  * KIND, either express or implied. See the License for the
+  * specific language governing permissions and limitations
+  * under the License.
+  *
+  */;
 var AppRate, Locales, exec;
 
 Locales = require('./locales');
@@ -43,19 +43,19 @@ AppRate = (function() {
   };
 
   promptForRatingWindowButtonClickHandler = function(buttonIndex) {
-    var _base;
+    var base;
     switch (buttonIndex) {
       case 1:
         updateCounter('stop');
+        AppRate.navigateToAppStore();
         break;
       case 2:
         updateCounter('reset');
         break;
       case 3:
         updateCounter('stop');
-        AppRate.navigateToAppStore();
     }
-    return typeof (_base = AppRate.preferences.callbacks).onButtonClicked === "function" ? _base.onButtonClicked(buttonIndex) : void 0;
+    return typeof (base = AppRate.preferences.callbacks).onButtonClicked === "function" ? base.onButtonClicked(buttonIndex) : void 0;
   };
 
   updateCounter = function(action) {
@@ -79,14 +79,14 @@ AppRate = (function() {
   };
 
   showDialog = function(immediately) {
-    var localeObj, _base;
+    var base, localeObj;
     if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
       if (!AppRate.preferences.useCustomRateDialog) {
         localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName);
-        navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
+        navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.rateButtonLabel, localeObj.laterButtonLabel, localeObj.cancelButtonLabel]);
       }
-      if (typeof (_base = AppRate.preferences.callbacks).onRateDialogShow === "function") {
-        _base.onRateDialogShow(promptForRatingWindowButtonClickHandler);
+      if (typeof (base = AppRate.preferences.callbacks).onRateDialogShow === "function") {
+        base.onRateDialogShow(promptForRatingWindowButtonClickHandler);
       }
     }
     return AppRate;
