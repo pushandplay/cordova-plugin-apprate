@@ -222,11 +222,11 @@ Locales.addLocale(new Locale({
 
 Locales.addLocale(new Locale({
   language: 'it',
-  title: "Vota %@",
-  message: "Se ti piace utilizzare l'App %@, potresti votarla nello store? Basterà un minuto. Grazie!",
+  title: "Valuta %@",
+  message: "Ti piace %@, Vuoi esprimere una valutazione nello store? Basterà un minuto. Grazie!",
   cancelButtonLabel: "No, grazie",
   laterButtonLabel: "Ricordamelo dopo",
-  rateButtonLabel: "Vota ora"
+  rateButtonLabel: "Valuta ora"
 }));
 
 Locales.addLocale(new Locale({
