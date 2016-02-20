@@ -36,7 +36,7 @@ under the License.
         <engine name="cordova" version=">=3.0.0"/>
     </engines>
 
-    <dependency id="org.apache.cordova.dialogs"/>
+    <dependency id="cordova-plugin-dialogs"/>
     <dependency id="org.apache.cordova.globalization"/>
 
     <js-module src="www/AppRate.js" name="AppRate">
