@@ -49,10 +49,8 @@ under the License.
 
     <!-- android -->
     <platform name="android">
-        <dependency id="org.apache.cordova.inappbrowser"/>
-
+        <dependency id="cordova-plugin-inappbrowser"/>
         <source-file src="src/android/AppRate.java" target-dir="src/org/pushandplay/cordova/apprate"/>
-
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="AppRate">
                 <param name="android-package" value="org.pushandplay.cordova.apprate.AppRate"/>
@@ -76,17 +74,14 @@ under the License.
 
     <!-- blackberry10 -->
     <platform name="blackberry10">
-
     </platform>
 
     <!-- wp8 -->
     <platform name="wp8">
-
     </platform>
 
     <!-- windows8 -->
     <platform name="windows8">
-
     </platform>
 
 </plugin>
