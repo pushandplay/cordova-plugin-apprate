@@ -38,6 +38,7 @@ under the License.
 
     <dependency id="cordova-plugin-dialogs"/>
     <dependency id="cordova-plugin-globalization"/>
+    <dependency id="cordova-plugin-inappbrowser"/>
 
     <js-module src="www/AppRate.js" name="AppRate">
         <clobbers target="AppRate"/>
@@ -49,8 +50,6 @@ under the License.
 
     <!-- android -->
     <platform name="android">
-        <dependency id="org.apache.cordova.inappbrowser"/>
-
         <source-file src="src/android/AppRate.java" target-dir="src/org/pushandplay/cordova/apprate"/>
 
         <config-file target="res/xml/config.xml" parent="/*">
