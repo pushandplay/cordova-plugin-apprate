@@ -102,8 +102,7 @@ exec = require 'cordova/exec'
 class AppRate
   LOCAL_STORAGE_COUNTER = 'counter'
   FLAG_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad|Android)/i.test navigator.userAgent.toLowerCase()
-  PREF_STORE_URL_FORMAT_IOS = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id="
-  PREF_STORE_URL_FORMAT_IOS7 = "itms-apps://itunes.apple.com/app/id"
+  PREF_STORE_URL_FORMAT_IOS = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8&id="
 
   # @property {Object}
   counter =
@@ -278,10 +277,7 @@ class AppRate
       else
         iOSVersion = (navigator.userAgent).match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.')
         iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) or 0)/10
-        if 7.1 > iOSVersion >= 7.0
-          window.open PREF_STORE_URL_FORMAT_IOS7 + @preferences.storeAppURL.ios, '_system'
-        else
-          window.open PREF_STORE_URL_FORMAT_IOS + @preferences.storeAppURL.ios, '_system'
+        window.open PREF_STORE_URL_FORMAT_IOS + @preferences.storeAppURL.ios, '_system'
     else if /(Android)/i.test navigator.userAgent.toLowerCase()
       window.open @preferences.storeAppURL.android, '_system'
     else if /(BlackBerry)/i.test navigator.userAgent.toLowerCase()
