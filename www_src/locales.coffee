@@ -374,6 +374,13 @@ Locales.addLocale new Locale
   cancelButtonLabel: "不，謝謝"
   laterButtonLabel: "稍後提醒我"
   rateButtonLabel: "現在評分"
-
+  
+Locales.addLocale new Locale
+  language: 'fi'
+  title: "Arvostele %@"
+  message: "Jos tykkäät %@ sovelluksesta, haluatko kirjoittaa sille arvostelun? Arvostelun kirjoittamiseen ei mene montaa minuuttia. Kiitos tuestasi!"
+  cancelButtonLabel: "Ei kiitos"
+  laterButtonLabel: "Muistuta minua myöhemmin"
+  rateButtonLabel: "Arvostele nyt"
 
 module.exports = Locales
