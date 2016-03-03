@@ -256,7 +256,7 @@ class AppRate
   #
   # @example
   #   AppRate.promptForRating();
-  @promptForRating: (immediately = false) ->
+  @promptForRating: (immediately = true) ->
     if @preferences.useLanguage is null
       navigator.globalization.getPreferredLanguage (language) =>
         @preferences.useLanguage = language.value
