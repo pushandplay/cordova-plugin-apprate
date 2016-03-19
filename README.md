@@ -126,7 +126,8 @@ AppRate.preferences.customLocale = customLocale;
 AppRate.preferences.displayAppName = 'My custom app title';
 AppRate.preferences.usesUntilPrompt = 5;
 AppRate.preferences.promptAgainForEachNewVersion = false;
-AppRate.promptForRating();
+AppRate.promptForRating(false); 
+//If false is not present it will ignore usesUntilPrompt, promptAgainForEachNewVersion, and button logic, it will prompt every time.
 ```
 
 #### Callbacks setup and use custom rate-dialog ####
