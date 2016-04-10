@@ -25,7 +25,7 @@ Locales = require('./locales');
 exec = require('cordova/exec');
 
 AppRate = (function() {
-  var FLAG_NATIVE_CODE_SUPPORTED, LOCAL_STORAGE_COUNTER, PREF_STORE_URL_FORMAT_IOS, PREF_STORE_URL_FORMAT_IOS7, counter, getAppTitle, getAppVersion, localStorageParam, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
+  var FLAG_NATIVE_CODE_SUPPORTED, LOCAL_STORAGE_COUNTER, PREF_STORE_URL_FORMAT_IOS, counter, getAppTitle, getAppVersion, localStorageParam, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
 
   function AppRate() {}
 
@@ -33,9 +33,7 @@ AppRate = (function() {
 
   FLAG_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad|Android)/i.test(navigator.userAgent.toLowerCase());
 
-  PREF_STORE_URL_FORMAT_IOS = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=";
-
-  PREF_STORE_URL_FORMAT_IOS7 = "itms-apps://itunes.apple.com/app/id";
+  PREF_STORE_URL_FORMAT_IOS = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8&id=";
 
   counter = {
     applicationVersion: void 0,
@@ -43,7 +41,7 @@ AppRate = (function() {
   };
 
   promptForRatingWindowButtonClickHandler = function(buttonIndex) {
-    var _base;
+    var base;
     switch (buttonIndex) {
       case 1:
         updateCounter('stop');
@@ -55,7 +53,7 @@ AppRate = (function() {
         updateCounter('stop');
         AppRate.navigateToAppStore();
     }
-    return typeof (_base = AppRate.preferences.callbacks).onButtonClicked === "function" ? _base.onButtonClicked(buttonIndex) : void 0;
+    return typeof (base = AppRate.preferences.callbacks).onButtonClicked === "function" ? base.onButtonClicked(buttonIndex) : void 0;
   };
 
   updateCounter = function(action) {
@@ -79,14 +77,14 @@ AppRate = (function() {
   };
 
   showDialog = function(immediately) {
-    var localeObj, _base;
+    var base, localeObj;
     if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
       if (!AppRate.preferences.useCustomRateDialog) {
         localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName);
         navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
       }
-      if (typeof (_base = AppRate.preferences.callbacks).onRateDialogShow === "function") {
-        _base.onRateDialogShow(promptForRatingWindowButtonClickHandler);
+      if (typeof (base = AppRate.preferences.callbacks).onRateDialogShow === "function") {
+        base.onRateDialogShow(promptForRatingWindowButtonClickHandler);
       }
     }
     return AppRate;
@@ -178,7 +176,7 @@ AppRate = (function() {
 
   AppRate.promptForRating = function(immediately) {
     if (immediately == null) {
-      immediately = false;
+      immediately = true;
     }
     if (this.preferences.useLanguage === null) {
       navigator.globalization.getPreferredLanguage((function(_this) {
@@ -202,11 +200,7 @@ AppRate = (function() {
       } else {
         iOSVersion = navigator.userAgent.match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.');
         iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) || 0) / 10;
-        if ((7.1 > iOSVersion && iOSVersion >= 7.0)) {
-          window.open(PREF_STORE_URL_FORMAT_IOS7 + this.preferences.storeAppURL.ios, '_system');
-        } else {
-          window.open(PREF_STORE_URL_FORMAT_IOS + this.preferences.storeAppURL.ios, '_system');
-        }
+        window.open(PREF_STORE_URL_FORMAT_IOS + this.preferences.storeAppURL.ios, '_system');
       }
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
       window.open(this.preferences.storeAppURL.android, '_system');
