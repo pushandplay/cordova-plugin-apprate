@@ -223,9 +223,9 @@ Locales.addLocale(new Locale({
 Locales.addLocale(new Locale({
   language: 'it',
   title: "Valuta %@",
-  message: "Ti piace %@? Vuoi dare una valutazione nello store? Ti basterà un minuto. Grazie!",
+  message: "Ti piace %@? Vuoi dare un voto nello store? Ti basterà un minuto! Grazie!",
   cancelButtonLabel: "No, grazie",
-  laterButtonLabel: "Ricordamelo dopo",
+  laterButtonLabel: "Più tardi",
   rateButtonLabel: "Valuta ora"
 }));
 
