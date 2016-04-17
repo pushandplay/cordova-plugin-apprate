@@ -223,7 +223,7 @@ Locales.addLocale(new Locale({
 Locales.addLocale(new Locale({
   language: 'it',
   title: "Valuta %@",
-  message: "Ti piace %@? Vuoi dare un voto nello store? Ti basterà un minuto! Grazie!",
+  message: "Ti piace %@? Puoi dare il tuo voto nello store. Ti basterà un minuto! Grazie!",
   cancelButtonLabel: "No, grazie",
   laterButtonLabel: "Più tardi",
   rateButtonLabel: "Valuta ora"
