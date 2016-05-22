@@ -34,7 +34,7 @@
         </p>
       </nav>
       <div id='filecontents'>
-        <h1 id="apprate-cordova-phonegap-plugin">AppRate Cordova/Phonegap plugin</h1><p>This plugin provide the rate this app functionality into your Cordova/Phonegap application<br></p><p>Issues list and features requests <a href="https://github.com/pushandplay/cordova-plugin-apprate/issues?state=open">here</a></p><p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=MS8RQAS2NVVQW&amp;lc=RU&amp;item_name=github%2ecom&amp;item_number=cordova%2dplugin%2dapprate&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">Donate with PayPal</a></p><p><img src="https://dl.dropboxusercontent.com/u/26238/Cordova/Plugins/AppRate/preview_iPad.png" width="100%" alt="Preview iPad"/></p><h3 id="read-before-implementation">Read before implementation</h3>
+        <h1 id="cordova-plugin-apprate">cordova-plugin-apprate</h1><p>This plugin provide the rate this app functionality into your Cordova/Phonegap application<br></p><p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=MS8RQAS2NVVQW&amp;lc=RU&amp;item_name=github%2ecom&amp;item_number=cordova%2dplugin%2dapprate&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">Donate with PayPal</a></p><p><img src="https://dl.dropboxusercontent.com/u/26238/Cordova/Plugins/AppRate/preview_iPad.png" width="100%" alt="Preview iPad"/></p><h3 id="some-articles-on-the-importance-of-app-reviews-and-ratings">Some Articles on the Importance of App Reviews and Ratings</h3>
 <ul>
 <li><a href="http://www.loopinsight.com/2014/02/04/begging-for-app-ratings/">Begging For App Ratings</a></li>
 <li><a href="http://bitsplitting.org/2013/12/11/choices-and-consequences/">Choices And Consequences</a></li>
@@ -42,27 +42,22 @@
 <li><a href="http://blog.edovia.com/2014/01/03/the-rate-friday-initiative/">The Rate Friday Initiative</a></li>
 <li><a href="http://dancounsell.com/articles/prompting-for-app-reviews">Prompting for App Reviews</a></li>
 </ul>
-<h3 id="read-before-writing-review">Read before writing review</h3>
-<ul>
-<li><a href="https://github.com/pushandplay/cordova-plugin-apprate/wiki">FAQ</a></li>
-</ul>
 <h2 id="supported-platforms">Supported platforms</h2>
 <ul>
 <li>iOS</li>
 <li>Android</li>
 <li>Blackberry (experimental)</li>
+<li>Windows8 (experimental)</li>
 <li>Windows</li>
 </ul>
 <h2 id="requirements">Requirements</h2><p>Phonegap / Cordova 3.0.0 or later</p><h2 id="installation">Installation</h2>
 <ul>
-<li><p>From github repository:</p><p>   cordova plugins add <a href="https://github.com/pushandplay/cordova-plugin-apprate.git">https://github.com/pushandplay/cordova-plugin-apprate.git</a></p></li>
-<li><p>From apache cordova plugins registry:</p><p>   cordova plugins add org.pushandplay.cordova.apprate</p></li>
-<li><p>From phonegap build add the following to your config.xml:</p>   <gap:plugin name="org.pushandplay.cordova.apprate" />
-
-</li>
+<li>From apache cordova plugins registry: <code>cordova plugins add cordova-plugin-apprate</code></li>
+<li>From github repository:    <code>cordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git</code></li>
+<li>From phonegap build add the following to your config.xml: <code>&lt;gap:plugin name=&quot;cordova-plugin-apprate&quot; /&gt;</code></li>
 </ul>
 <h2 id="customization-and-usage">Customization and usage</h2>
-<h4 id="note">Note</h4><p>All %@ patterns in customLocale object will be automatically replaced to your application title</p><h4 id="available-preferences-options">Available preferences options</h4>
+<h4 id="note">Note</h4><p>All <code>%@</code> patterns in customLocale object will be automatically replaced to your application title</p><h4 id="available-preferences-options">Available preferences options</h4>
 <pre><code>useLanguage {String} null - custom BCP 47 language tag
 displayAppName {String} &#39;&#39; - custom application title
 promptAgainForEachNewVersion {Boolean} true - show dialog again when application version will be updated
@@ -79,31 +74,35 @@ storeAppURL.windows {String} null - application URL in Windows Store
 customLocale {Object} null - custom locale object
 </code></pre><h2 id="examples">Examples</h2>
 <h4 id="simple-setup-and-call">Simple setup and call</h4>
-<pre><code>AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
-AppRate.preferences.storeAppURL.android = &#39;market://details?id=&lt;package_name&gt;&#39;;
-AppRate.preferences.storeAppURL.blackberry = &#39;appworld://content/[App Id]/&#39;;
-AppRate.preferences.storeAppURL.windows8 = &#39;ms-windows-store:Review?name=&lt;the Package Family Name of the application&gt;&#39;;
-AppRate.preferences.storeAppURL.windows = &#39;ms-windows-store://pdp/?ProductId=&lt;app Store ID&gt;&#39;;
-AppRate.promptForRating();
-</code></pre><h4 id="call-rate-dialog-immediately">Call rate dialog immediately</h4>
-<pre><code>AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
-AppRate.promptForRating(true);
-</code></pre><h4 id="override-dialog-button-callback">Override dialog button callback</h4>
-<pre><code>var onButtonClicked = function(buttonIndex) {
-    console.log(&quot;onButtonClicked -&gt; &quot; + buttonIndex);
+<pre><code class="lang-javascript">  AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
+  AppRate.preferences.storeAppURL.android = &#39;market://details?id=&lt;package_name&gt;&#39;;
+  AppRate.preferences.storeAppURL.blackberry = &#39;appworld://content/[App Id]/&#39;;
+  AppRate.preferences.storeAppURL.windows8 = &#39;ms-windows-store:Review?name=&lt;the Package Family Name of the application&gt;&#39;;
+  AppRate.preferences.storeAppURL.windows = &#39;ms-windows-store://pdp/?ProductId=&lt;app&#39;s Store ID&gt;&#39;;
+  AppRate.promptForRating();
+</code></pre>
+<h4 id="don-t-call-rate-dialog-immediately">Don&#39;t Call rate dialog immediately</h4>
+<pre><code class="lang-javascript">AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
+AppRate.promptForRating(false);
+</code></pre>
+<h4 id="override-dialog-button-callback">Override dialog button callback</h4>
+<pre><code class="lang-javascript">var onButtonClicked = function(buttonIndex) {
+  console.log(&quot;onButtonClicked -&gt; &quot; + buttonIndex);
 };
 
 AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
 AppRate.preferences.storeAppURL.android = &#39;market://details?id=&lt;package_name&gt;&#39;;
 AppRate.preferences.callbacks.onButtonClicked = onButtonClicked;
 AppRate.promptForRating();
-</code></pre><h4 id="set-custom-language">Set custom language</h4>
-<pre><code>AppRate.preferences.useLanguage = &#39;ru&#39;;
+</code></pre>
+<h4 id="set-custom-language">Set custom language</h4>
+<pre><code class="lang-javascript">AppRate.preferences.useLanguage = &#39;ru&#39;;
 AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
 AppRate.preferences.storeAppURL.android = &#39;market://details?id=&lt;package_name&gt;&#39;;
 AppRate.promptForRating();
-</code></pre><h4 id="set-custom-locale-object">Set custom Locale object</h4>
-<pre><code>var customLocale = {};
+</code></pre>
+<h4 id="set-custom-locale-object">Set custom Locale object</h4>
+<pre><code class="lang-javascript">var customLocale = {};
 customLocale.title = &quot;Rate %@&quot;;
 customLocale.message = &quot;If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!&quot;;
 customLocale.cancelButtonLabel = &quot;No, Thanks&quot;;
@@ -114,8 +113,9 @@ AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
 AppRate.preferences.storeAppURL.android = &#39;market://details?id=&lt;package_name&gt;&#39;;
 AppRate.preferences.customLocale = customLocale;
 AppRate.promptForRating();
-</code></pre><h4 id="full-setup">Full setup</h4>
-<pre><code>var customLocale = {};
+</code></pre>
+<h4 id="full-setup">Full setup</h4>
+<pre><code class="lang-javascript">var customLocale = {};
 customLocale.title = &quot;Rate %@&quot;;
 customLocale.message = &quot;If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!&quot;;
 customLocale.cancelButtonLabel = &quot;No, Thanks&quot;;
@@ -129,16 +129,17 @@ AppRate.preferences.customLocale = customLocale;
 AppRate.preferences.displayAppName = &#39;My custom app title&#39;;
 AppRate.preferences.usesUntilPrompt = 5;
 AppRate.preferences.promptAgainForEachNewVersion = false;
-AppRate.promptForRating();
-</code></pre><h4 id="callbacks-setup-and-use-custom-rate-dialog">Callbacks setup and use custom rate-dialog</h4>
-<pre><code>var onRateDialogShow = function(callback) {
-    console.log(&quot;onRateDialogShow&quot;);
-    //    call this callback when user click on button into your custom rate-dialog
-    //    for example: simulate click on &quot;Rate now&quot; button and display store
-    callback(3)
+AppRate.promptForRating(false); 
+//If false is not present it will ignore usesUntilPrompt, promptAgainForEachNewVersion, and button logic, it will prompt every time.
+</code></pre>
+<h4 id="callbacks-setup-and-use-custom-rate-dialog">Callbacks setup and use custom rate-dialog</h4>
+<pre><code class="lang-javascript">var onRateDialogShow = function(callback) {
+  //call this callback when user click on button into your custom rate-dialog for example: simulate click on &quot;Rate now&quot; button and display store
+  console.log(&quot;onRateDialogShow&quot;);
+  callback(3)
 };
 var onButtonClicked = function(buttonIndex) {
-    console.log(&quot;onButtonClicked -&gt; &quot; + buttonIndex);
+  console.log(&quot;onButtonClicked -&gt; &quot; + buttonIndex);
 };
 
 AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;
@@ -146,23 +147,24 @@ AppRate.preferences.useCustomRateDialog = true;
 AppRate.preferences.callbacks.onRateDialogShow = onRateDialogShow;
 AppRate.preferences.callbacks.onButtonClicked = onButtonClicked;
 
-//    True param show rate-dialog immediately and useful for testing or custom logic
-AppRate.promptForRating(true);
-</code></pre><h2 id="already-included-translations">Already included translations</h2><p>ar, bn, ca, cs, da, de, de-AT, el, en, es, fa, fr, he, hi, id, il, ja, ko, nl, no, pa, pl, pt, ru, sk, sl, sv, th, tr, uk, ur, ur-IN, ur-PK, vi, zh-TW, zh-Hans, zh-Hant</p><h4 id="access-to-locales">Access to locales</h4>
-<pre><code>//    Getting list of names for available locales
+AppRate.promptForRating();
+</code></pre>
+<h2 id="already-included-translations">Already included translations</h2><p><a href="https://github.com/pushandplay/cordova-plugin-apprate/blob/master/www/locales.js">https://github.com/pushandplay/cordova-plugin-apprate/blob/master/www/locales.js</a></p><h4 id="access-to-locales">Access to locales</h4>
+<pre><code class="lang-javascript">// Getting list of names for available locales
 AppRate.locales.getLocalesNames();
 
-//    Getting locale object by name
+// Getting locale object by name
 AppRate.locales.getLocale(&#39;en&#39;);
-</code></pre><p>You can add a new translation here: <a href="https://crowdin.net/project/apprate-cordovaphonegap-plugin">https://crowdin.net/project/apprate-cordovaphonegap-plugin</a></p><h2 id="licence">Licence</h2><p>The Apache 2.0 License</p>
+</code></pre>
+
       </div>
     </div>
     <div id='footer'>
-  February 07, 15 14:33:53 by
+  By
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>
-  2.0.9
+  2.1.0
   &#10034;
   Press H to see the keyboard shortcuts
   &#10034;
