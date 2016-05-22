@@ -169,7 +169,8 @@ AppRate = (function() {
       ios: null,
       android: null,
       blackberry: null,
-      windows8: null
+      windows8: null,
+      windows: null
     },
     customLocale: null
   };
@@ -208,6 +209,8 @@ AppRate = (function() {
       window.open(this.preferences.storeAppURL.blackberry, '_system');
     } else if (/(IEMobile|Windows Phone)/i.test(navigator.userAgent.toLowerCase())) {
       window.open(this.preferences.storeAppURL.windows8, '_system');
+    } else if (/(Windows|Edge)/i.test(navigator.userAgent.toLowerCase())) {
+      window.open(this.preferences.storeAppURL.windows8, '_blank');
     }
     return this;
   };

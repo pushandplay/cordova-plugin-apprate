@@ -44,6 +44,7 @@ declare class StoreAppURLPreferences {
 	android:string;
 	blackberry:string;
 	windows8:string;
+	windows:string;
 }
 
 declare class CallbackPreferences {

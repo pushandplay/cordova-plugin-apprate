@@ -51,7 +51,7 @@
 <li>iOS</li>
 <li>Android</li>
 <li>Blackberry (experimental)</li>
-<li>Windows8 (experimental)</li>
+<li>Windows</li>
 </ul>
 <h2 id="requirements">Requirements</h2><p>Phonegap / Cordova 3.0.0 or later</p><h2 id="installation">Installation</h2>
 <ul>
@@ -75,6 +75,7 @@ storeAppURL.ios {String} null - application id in AppStore
 storeAppURL.android {String} null - application URL in GooglePlay
 storeAppURL.blackberry {String} null - application URL in AppWorld
 storeAppURL.windows8 {String} null - application URL in WindowsStore
+storeAppURL.windows8 {String} null - application URL in Windows Store
 customLocale {Object} null - custom locale object
 </code></pre><h2 id="examples">Examples</h2>
 <h4 id="simple-setup-and-call">Simple setup and call</h4>
@@ -82,6 +83,7 @@ customLocale {Object} null - custom locale object
 AppRate.preferences.storeAppURL.android = &#39;market://details?id=&lt;package_name&gt;&#39;;
 AppRate.preferences.storeAppURL.blackberry = &#39;appworld://content/[App Id]/&#39;;
 AppRate.preferences.storeAppURL.windows8 = &#39;ms-windows-store:Review?name=&lt;the Package Family Name of the application&gt;&#39;;
+AppRate.preferences.storeAppURL.windows = &#39;ms-windows-store://pdp/?ProductId=&lt;app's Store ID&gt;&#39;;
 AppRate.promptForRating();
 </code></pre><h4 id="call-rate-dialog-immediately">Call rate dialog immediately</h4>
 <pre><code>AppRate.preferences.storeAppURL.ios = &#39;&lt;my_app_id&gt;&#39;;

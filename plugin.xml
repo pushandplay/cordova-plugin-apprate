@@ -88,4 +88,9 @@ under the License.
 
     </platform>
 
+    <!-- windows -->
+    <platform name="windows">
+
+    </platform>
+
 </plugin>
