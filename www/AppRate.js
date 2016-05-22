@@ -210,7 +210,7 @@ AppRate = (function() {
     } else if (/(IEMobile|Windows Phone)/i.test(navigator.userAgent.toLowerCase())) {
       window.open(this.preferences.storeAppURL.windows8, '_system');
     } else if (/(Windows|Edge)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(this.preferences.storeAppURL.windows8, '_blank');
+      window.open(this.preferences.storeAppURL.windows, '_blank');
     }
     return this;
   };

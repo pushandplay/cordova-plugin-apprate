@@ -286,7 +286,7 @@ class AppRate
     else if /(IEMobile|Windows Phone)/i.test navigator.userAgent.toLowerCase()
       window.open @preferences.storeAppURL.windows8, '_system'
     else if /(Windows|Edge)/i.test navigator.userAgent.toLowerCase()
-      window.open @preferences.storeAppURL.windows8, '_blank'
+      window.open @preferences.storeAppURL.windows, '_blank'
     @
 
 AppRate.init()
