@@ -63,7 +63,6 @@ All `%@` patterns in customLocale object will be automatically replaced to your 
   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
   AppRate.preferences.storeAppURL.blackberry = 'appworld://content/[App Id]/';
   AppRate.preferences.storeAppURL.windows8 = 'ms-windows-store:Review?name=<the Package Family Name of the application>';
-  AppRate.preferences.storeAppURL.windows = 'ms-windows-store://pdp/?ProductId=<app's Store ID>';
   AppRate.promptForRating();
 ```
 
