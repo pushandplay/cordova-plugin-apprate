@@ -20,6 +20,7 @@ This plugin provide the rate this app functionality into your Cordova/Phonegap a
 - Android
 - Blackberry (experimental)
 - Windows8 (experimental)
+- Windows
 
 ## Requirements ##
 
@@ -50,6 +51,7 @@ All `%@` patterns in customLocale object will be automatically replaced to your 
 	storeAppURL.android {String} null - application URL in GooglePlay
 	storeAppURL.blackberry {String} null - application URL in AppWorld
 	storeAppURL.windows8 {String} null - application URL in WindowsStore
+    storeAppURL.windows {String} null - application URL in Windows Store
 	customLocale {Object} null - custom locale object
 
 ##	Examples ##
@@ -61,6 +63,7 @@ All `%@` patterns in customLocale object will be automatically replaced to your 
   AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
   AppRate.preferences.storeAppURL.blackberry = 'appworld://content/[App Id]/';
   AppRate.preferences.storeAppURL.windows8 = 'ms-windows-store:Review?name=<the Package Family Name of the application>';
+  AppRate.preferences.storeAppURL.windows = 'ms-windows-store://pdp/?ProductId=<the apps Store ID>';
   AppRate.promptForRating();
 ```
 

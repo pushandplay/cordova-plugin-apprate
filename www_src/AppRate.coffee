@@ -247,6 +247,7 @@ class AppRate
       android: null
       blackberry: null
       windows8: null
+      windows: null
     customLocale: null
 
   #	Check plugin preferences and display or not display rate popup
@@ -284,6 +285,8 @@ class AppRate
       window.open @preferences.storeAppURL.blackberry, '_system'
     else if /(IEMobile|Windows Phone)/i.test navigator.userAgent.toLowerCase()
       window.open @preferences.storeAppURL.windows8, '_system'
+    else if /(Windows|Edge)/i.test navigator.userAgent.toLowerCase()
+      window.open @preferences.storeAppURL.windows, '_blank'
     @
 
 AppRate.init()
