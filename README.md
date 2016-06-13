@@ -57,97 +57,89 @@ All `%@` patterns in customLocale object will be automatically replaced to your 
 #### Simple setup and call ####
 
 ```javascript
-  AppRate.preferences.storeAppURL.ios = '<my_app_id>';
-  AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
-  AppRate.preferences.storeAppURL.blackberry = 'appworld://content/[App Id]/';
-  AppRate.preferences.storeAppURL.windows8 = 'ms-windows-store:Review?name=<the Package Family Name of the application>';
-  AppRate.promptForRating();
+AppRate.preferences.storeAppURL = {
+  ios = '<my_app_id>',
+  android = 'market://details?id=<package_name>',
+  blackberry = 'appworld://content/[App Id]/',
+  windows8 = 'ms-windows-store:Review?name=<the Package Family Name of the application>'
+};
+  
+AppRate.promptForRating();
 ```
 
 #### Don't Call rate dialog immediately ####
 
 ```javascript
-AppRate.preferences.storeAppURL.ios = '<my_app_id>';
 AppRate.promptForRating(false);
 ```
+If false is present it will ignore usesUntilPrompt, promptAgainForEachNewVersion, and button logic, it will prompt every time.
 
 #### Override dialog button callback ####
 
 ```javascript
-var onButtonClicked = function(buttonIndex) {
+AppRate.preferences.callbacks.onButtonClicked = function(buttonIndex) {
   console.log("onButtonClicked -> " + buttonIndex);
 };
-
-AppRate.preferences.storeAppURL.ios = '<my_app_id>';
-AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
-AppRate.preferences.callbacks.onButtonClicked = onButtonClicked;
-AppRate.promptForRating();
 ```
 		
 #### Set custom language ####
 
 ```javascript
 AppRate.preferences.useLanguage = 'ru';
-AppRate.preferences.storeAppURL.ios = '<my_app_id>';
-AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
-AppRate.promptForRating();
 ```
 
 #### Set custom Locale object ####
 
 ```javascript
-var customLocale = {};
-customLocale.title = "Rate %@";
-customLocale.message = "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!";
-customLocale.cancelButtonLabel = "No, Thanks";
-customLocale.laterButtonLabel = "Remind Me Later";
-customLocale.rateButtonLabel = "Rate It Now";
-
-AppRate.preferences.storeAppURL.ios = '<my_app_id>';
-AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
-AppRate.preferences.customLocale = customLocale;
-AppRate.promptForRating();
+AppRate.preferences.customLocale = {
+  title = "Rate %@";
+  message = "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!";
+  cancelButtonLabel = "No, Thanks";
+  laterButtonLabel = "Remind Me Later";
+  rateButtonLabel = "Rate It Now";
+};
 ```
 
 #### Full setup ####
 
 ```javascript
-var customLocale = {};
-customLocale.title = "Rate %@";
-customLocale.message = "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!";
-customLocale.cancelButtonLabel = "No, Thanks";
-customLocale.laterButtonLabel = "Remind Me Later";
-customLocale.rateButtonLabel = "Rate It Now";
+AppRate.preferences = {
+	openStoreInApp: true,
+	displayAppName: 'My custom app title',
+	usesUntilPrompt: 5,
+	promptAgainForEachNewVersion: false,
+	storeAppURL: {
+		ios = '<my_app_id>',
+		android = 'market://details?id=<package_name>',
+		blackberry = 'appworld://content/[App Id]/',
+		windows8 = 'ms-windows-store:Review?name=<the Package Family Name of the application>'
+	},
+  customLocale: {
+		title = "Rate %@";
+		message = "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!";
+		cancelButtonLabel = "No, Thanks";
+		laterButtonLabel = "Remind Me Later";
+		rateButtonLabel = "Rate It Now";
+  }
+};
 
-AppRate.preferences.openStoreInApp = true;
-AppRate.preferences.storeAppURL.ios = '<my_app_id>';
-AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
-AppRate.preferences.customLocale = customLocale;
-AppRate.preferences.displayAppName = 'My custom app title';
-AppRate.preferences.usesUntilPrompt = 5;
-AppRate.preferences.promptAgainForEachNewVersion = false;
-AppRate.promptForRating(false); 
-//If false is not present it will ignore usesUntilPrompt, promptAgainForEachNewVersion, and button logic, it will prompt every time.
+AppRate.promptForRating(); 
 ```
 
 #### Callbacks setup and use custom rate-dialog ####
 
 ```javascript
-var onRateDialogShow = function(callback) {
-  //call this callback when user click on button into your custom rate-dialog for example: simulate click on "Rate now" button and display store
-  console.log("onRateDialogShow");
-  callback(3)
+AppRate.preferences = {
+  useCustomRateDialog = true,
+  callbacks: {
+		onRateDialogShow = function(callback){
+		  callback(1) // cause immediate click on 'Rate Now' button
+		},
+		onButtonClicked: function(buttonIndex){
+		  console.log("onButtonClicked -> " + buttonIndex);
+		}
+	}
 };
-var onButtonClicked = function(buttonIndex) {
-  console.log("onButtonClicked -> " + buttonIndex);
-};
-
-AppRate.preferences.storeAppURL.ios = '<my_app_id>';
-AppRate.preferences.useCustomRateDialog = true;
-AppRate.preferences.callbacks.onRateDialogShow = onRateDialogShow;
-AppRate.preferences.callbacks.onButtonClicked = onButtonClicked;
-
-AppRate.promptForRating();
 ```
 		
 ## Already included translations ##
