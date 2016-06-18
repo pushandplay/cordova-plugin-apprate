@@ -72,7 +72,7 @@ AppRate.promptForRating();
 ```javascript
 AppRate.promptForRating(false);
 ```
-If false is present it will ignore usesUntilPrompt, promptAgainForEachNewVersion, and button logic, it will prompt every time.
+If false is not present it will ignore usesUntilPrompt, promptAgainForEachNewVersion, and button logic, it will prompt every time.
 
 #### Override dialog button callback ####
 
