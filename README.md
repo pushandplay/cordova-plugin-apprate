@@ -115,15 +115,16 @@ AppRate.preferences = {
   storeAppURL: {
     ios: '<my_app_id>',
     android: 'market://details?id=<package_name>',
+    windows: 'ms-windows-store://pdp/?ProductId=<the apps Store ID>',
     blackberry: 'appworld://content/[App Id]/',
     windows8: 'ms-windows-store:Review?name=<the Package Family Name of the application>'
   },
   customLocale: {
-    title: "Rate %@";
-    message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!";
-    cancelButtonLabel: "No, Thanks";
-    laterButtonLabel: "Remind Me Later";
-    rateButtonLabel: "Rate It Now";
+    title: "Rate %@",
+    message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!",
+    cancelButtonLabel: "No, Thanks",
+    laterButtonLabel: "Remind Me Later",
+    rateButtonLabel: "Rate It Now"
   }
 };
 
