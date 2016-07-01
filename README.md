@@ -18,6 +18,7 @@ This plugin provide the rate this app functionality into your Cordova/Phonegap a
 
 - iOS
 - Android
+- Windows (experimental)
 - Blackberry (experimental)
 - Windows8 (experimental)
 
@@ -37,7 +38,7 @@ Phonegap / Cordova 3.0.0 or later
 All `%@` patterns in customLocale object will be automatically replaced to your application title
 
 #### Available preferences options ####
-
+```
 useLanguage {String} null - custom BCP 47 language tag
 displayAppName {String} '' - custom application title
 promptAgainForEachNewVersion {Boolean} true - show dialog again when application version will be updated
@@ -48,11 +49,13 @@ callbacks.onButtonClicked {Function} null - call back function. called when user
 callbacks.onRateDialogShow {Function} null - call back function. called when rate-dialog showing
 storeAppURL.ios {String} null - application id in AppStore
 storeAppURL.android {String} null - application URL in GooglePlay
+storeAppURL.windows {String} null - application URL in Windows Store
 storeAppURL.blackberry {String} null - application URL in AppWorld
 storeAppURL.windows8 {String} null - application URL in WindowsStore
 customLocale {Object} null - custom locale object
+```
 
-##	Examples ##
+## Examples ##
 
 #### Simple setup and call ####
 
@@ -60,6 +63,7 @@ customLocale {Object} null - custom locale object
 AppRate.preferences.storeAppURL = {
   ios: '<my_app_id>',
   android: 'market://details?id=<package_name>',
+  windows: 'ms-windows-store://pdp/?ProductId=<the apps Store ID>',
   blackberry: 'appworld://content/[App Id]/',
   windows8: 'ms-windows-store:Review?name=<the Package Family Name of the application>'
 };

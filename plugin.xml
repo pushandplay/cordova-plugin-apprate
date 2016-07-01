@@ -19,12 +19,9 @@ specific language governing permissions and limitations
 under the License.
 -->
 
-<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
-        id="cordova-plugin-apprate"
-        version="1.1.12">
+<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0" id="cordova-plugin-apprate" version="1.1.12">
     <name>AppRate</name>
-    <description>This plugin provide the "rate this app" functionality into your Cordova/Phonegap application
-    </description>
+    <description>This plugin provides "Rate This App" functionality to your Cordova/Phonegap application</description>
     <author email="hello@pushandplay.ru" href="http://pushandplay.ru">pushandplay</author>
     <keywords>cordova,phonegap,AppRate,App Rate,rate,iRate,rate in iTunes,write a review,rate us,rate my application</keywords>
     <license>Apache 2.0</license>
@@ -47,7 +44,6 @@ under the License.
         <runs target="AppRateLocales"/>
     </js-module>
 
-    <!-- android -->
     <platform name="android">
         <source-file src="src/android/AppRate.java" target-dir="src/org/pushandplay/cordova/apprate"/>
 
@@ -58,7 +54,6 @@ under the License.
         </config-file>
     </platform>
 
-    <!-- ios -->
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="AppRate">
@@ -72,19 +67,16 @@ under the License.
         <framework src="StoreKit.framework"/>
     </platform>
 
-    <!-- blackberry10 -->
     <platform name="blackberry10">
-
     </platform>
 
-    <!-- wp8 -->
     <platform name="wp8">
-
     </platform>
 
-    <!-- windows8 -->
     <platform name="windows8">
+    </platform>
 
+    <platform name="windows">
     </platform>
 
 </plugin>

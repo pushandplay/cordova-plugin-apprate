@@ -131,7 +131,9 @@ AppRate = (function() {
   };
 
   AppRate.init = function() {
-    counter = JSON.parse(localStorageParam(LOCAL_STORAGE_COUNTER)) || counter;
+    if(localStorageParam(LOCAL_STORAGE_COUNTER)){
+      counter = JSON.parse(localStorageParam(LOCAL_STORAGE_COUNTER)) || counter;
+    }
     getAppVersion((function(_this) {
       return function(applicationVersion) {
         if (counter.applicationVersion !== applicationVersion) {
@@ -169,7 +171,8 @@ AppRate = (function() {
       ios: null,
       android: null,
       blackberry: null,
-      windows8: null
+      windows8: null,
+      windows: null
     },
     customLocale: null
   };
@@ -204,6 +207,8 @@ AppRate = (function() {
       }
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
       window.open(this.preferences.storeAppURL.android, '_system');
+    } else if (/(Windows|Edge)/i.test(navigator.userAgent.toLowerCase())) {
+      window.open(this.preferences.storeAppURL.windows, '_blank');
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
       window.open(this.preferences.storeAppURL.blackberry, '_system');
     } else if (/(IEMobile|Windows Phone)/i.test(navigator.userAgent.toLowerCase())) {
