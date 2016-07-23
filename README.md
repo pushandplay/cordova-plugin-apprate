@@ -97,11 +97,11 @@ AppRate.preferences.useLanguage = 'ru';
 
 ```javascript
 AppRate.preferences.customLocale = {
-  title: "Rate %@";
-  message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!";
-  cancelButtonLabel: "No, Thanks";
-  laterButtonLabel: "Remind Me Later";
-  rateButtonLabel: "Rate It Now";
+  title: "Rate %@",
+  message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!",
+  cancelButtonLabel: "No, Thanks",
+  laterButtonLabel: "Remind Me Later",
+  rateButtonLabel: "Rate It Now",
 };
 ```
 
