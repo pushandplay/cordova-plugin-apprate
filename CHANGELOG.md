@@ -6,6 +6,8 @@
   - Improve readme
   - Add Windows support from PR #120
   - Fix JSON parse for Android 2.x as per PR #73
+  - Remove InAppBrowser dependency
+  - Add/Improve Locales
 - 1.1.12
   - Bump version to be higher than the previous `cordova-plugin-apprate` on the NPM registry
   - Clean up readme
