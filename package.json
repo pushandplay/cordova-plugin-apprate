@@ -1,9 +1,12 @@
 {
   "name": "cordova-plugin-apprate",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/pushandplay/cordova-plugin-apprate"
+  },
+  "publishConfig": {
+    "registry": "http://man-macmini.nce.amadeus.net:4873/"
   },
   "dependencies": {
     "cordova": "*"
