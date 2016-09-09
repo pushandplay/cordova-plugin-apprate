@@ -53,7 +53,10 @@ AppRate = (function() {
       case 3:
         updateCounter('stop');
     }
-    return typeof (base = AppRate.preferences.callbacks).onButtonClicked === "function" ? base.onButtonClicked(buttonIndex) : void 0;
+    //This is called only in case the user clicked on a button
+    typeof (base = AppRate.preferences.callbacks).onButtonClicked === "function" ? base.onButtonClicked(buttonIndex) : void 0;
+    //This one is called anyway once the process is done
+    return typeof (base = AppRate.preferences.callbacks).done === "function" ? base.done() : void 0;
   };
 
   updateCounter = function(action) {
@@ -86,6 +89,8 @@ AppRate = (function() {
       if (typeof (base = AppRate.preferences.callbacks).onRateDialogShow === "function") {
         base.onRateDialogShow(promptForRatingWindowButtonClickHandler);
       }
+    }else{
+      typeof (base = AppRate.preferences.callbacks).done === "function" ? base.done() : void 0;
     }
     return AppRate;
   };
@@ -165,7 +170,8 @@ AppRate = (function() {
     useCustomRateDialog: false,
     callbacks: {
       onButtonClicked: null,
-      onRateDialogShow: null
+      onRateDialogShow: null,
+      done:null
     },
     storeAppURL: {
       ios: null,
