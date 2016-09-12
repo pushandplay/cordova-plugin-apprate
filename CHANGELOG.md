@@ -1,5 +1,8 @@
 # Changelog
-
+- 1.3.0
+  - Added a general done callbacks called once we have completed the job, not showing or showing the popup
+- 1.2.1
+  - Align the version in the package.json and the plugin.xml
 - 1.2.0
   - Remove coffeescript to remove barrier of entry to contributions
   - Remove docs generation, just use the readme instead
