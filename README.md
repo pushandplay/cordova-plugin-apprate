@@ -49,6 +49,7 @@ All `%@` patterns in customLocale object will be automatically replaced to your 
 | useCustomRateDialog | {Boolean} | false | use custom view for rate dialog |
 | callbacks.onButtonClicked | {Function} | null | call back function. called when user clicked on rate-dialog buttons |
 | callbacks.onRateDialogShow | {Function} | null | call back function. called when rate-dialog showing |
+| callbacks.done | {Function} | null | call back function. called when process is complete, showing or not, rating or not |
 | storeAppURL.ios | {String} | null | application id in AppStore |
 | storeAppURL.android | {String} | null | application URL in GooglePlay |
 | storeAppURL.windows | {String} | null | application URL in Windows Store |
@@ -143,6 +144,9 @@ AppRate.preferences = {
     },
     onButtonClicked: function(buttonIndex){
       console.log("onButtonClicked -> " + buttonIndex);
+    },
+    done: function(){
+      console.log("Finished");
     }
   }
 };
