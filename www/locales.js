@@ -17,7 +17,8 @@
  * specific language governing permissions and limitations
  * under the License.
  *
- */;
+ */
+;
 var Locale, Locales;
 
 Locale = (function() {
@@ -185,6 +186,15 @@ Locales.addLocale(new Locale({
 }));
 
 Locales.addLocale(new Locale({
+  language: 'fi',
+  title: "Arvostele %@",
+  message: "Jos tykkäät %@ sovelluksesta, haluatko kirjoittaa sille arvostelun? Arvostelun kirjoittamiseen ei mene montaa minuuttia. Kiitos tuestasi!",
+  cancelButtonLabel: "Ei kiitos",
+  laterButtonLabel: "Muistuta minua myöhemmin",
+  rateButtonLabel: "Arvostele nyt"
+}));
+
+Locales.addLocale(new Locale({
   language: 'fr',
   title: "Notez %@",
   message: "Si vous aimez utiliser %@, n’oubliez pas de voter sur l’App Store. Cela ne prend qu’une minute. Merci d’avance pour votre soutien !",
@@ -329,6 +339,15 @@ Locales.addLocale(new Locale({
 }));
 
 Locales.addLocale(new Locale({
+  language: 'ta',
+  title: "%@ மதிப்பிடு",
+  message: "%@ பிடித்திருந்தால், நீங்கள் அதை மதிப்பிட ஒரு கணம் எடுக்க முடியுமா? அது ஒரு நிமிடம் தான் எடுக்கும். உங்கள் ஒத்துழைப்புக்கு நன்றி!",
+  cancelButtonLabel: "இல்லை, நன்றி",
+  laterButtonLabel: "பின்னர் நினைவூட்டு",
+  rateButtonLabel: "இப்போது மதிப்பிடு"
+}));
+
+Locales.addLocale(new Locale({
   language: 'th',
   title: "อัตรา %@",
   message: "หากคุณเพลิดเพลินกับการใช้ %@ คุณจะคิดสละเวลาให้คะแนนมันได้หรือไม่ มันจะไม่ใช้เวลานานกว่าหนึ่งนาที ขอบคุณสำหรับการสนับสนุนของคุณ",
@@ -416,15 +435,6 @@ Locales.addLocale(new Locale({
   cancelButtonLabel: "不，謝謝",
   laterButtonLabel: "稍後提醒我",
   rateButtonLabel: "現在評分"
-}));
-
-Locales.addLocale(new Locale({
-  language: 'fi',
-  title: "Arvostele %@",
-  message: "Jos tykkäät %@ sovelluksesta, haluatko kirjoittaa sille arvostelun? Arvostelun kirjoittamiseen ei mene montaa minuuttia. Kiitos tuestasi!",
-  cancelButtonLabel: "Ei kiitos",
-  laterButtonLabel: "Muistuta minua myöhemmin",
-  rateButtonLabel: "Arvostele nyt"
 }));
 
 module.exports = Locales;
