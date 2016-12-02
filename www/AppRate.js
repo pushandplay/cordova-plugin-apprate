@@ -44,6 +44,9 @@ AppRate = (function() {
   promptForRatingWindowButtonClickHandler = function(buttonIndex) {
     var base;
     switch (buttonIndex) {
+      case 0:
+        updateCounter('reset');
+        break;
       case 1:
         updateCounter('stop');
         AppRate.navigateToAppStore();
@@ -215,7 +218,7 @@ AppRate = (function() {
           PREF_STORE_URL_FORMAT_IOS = PREF_STORE_URL_FORMAT_IOS8;
         } else {
           PREF_STORE_URL_FORMAT_IOS = PREF_STORE_URL_FORMAT_IOS9;
-        }        
+        }
         window.open(PREF_STORE_URL_FORMAT_IOS + this.preferences.storeAppURL.ios, '_system');
       }
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
