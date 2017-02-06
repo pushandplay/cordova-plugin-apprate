@@ -44,6 +44,9 @@ AppRate = (function() {
   promptForAppRatingWindowButtonClickHandler = function (buttonIndex) {
     var _base, currentBtn = null;
     switch (buttonIndex) {
+      case 0:
+        updateCounter('reset');
+        break;
       case 1:
         currentBtn = localeObj.noButtonLabel;
         navigator.notification.confirm(localeObj.feedbackPromptMessage, promptForFeedbackWindowButtonClickHandler, localeObj.feedbackPromptTitle, [localeObj.noButtonLabel, localeObj.yesButtonLabel]);
