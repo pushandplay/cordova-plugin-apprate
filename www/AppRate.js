@@ -42,7 +42,7 @@ AppRate = (function() {
   };
 
   promptForAppRatingWindowButtonClickHandler = function (buttonIndex) {
-    var _base, currentBtn = null;
+    var base, currentBtn = null;
     switch (buttonIndex) {
       case 0:
         updateCounter('reset');
@@ -56,11 +56,11 @@ AppRate = (function() {
         navigator.notification.confirm(localeObj.message, promptForStoreRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel])
         break;
     }
-    return typeof (_base = AppRate.preferences.callbacks).onButtonClicked === "function" ? _base.onButtonClicked(buttonIndex, currentBtn, "AppRatingPrompt") : void 0;
+    return typeof (base = AppRate.preferences.callbacks).onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "AppRatingPrompt") : void 0;
   };
 
   promptForStoreRatingWindowButtonClickHandler = function(buttonIndex) {
-    var _base, currentBtn = null;
+    var base, currentBtn = null;
     switch (buttonIndex) {
       case 0:
         updateCounter('reset');
@@ -68,7 +68,6 @@ AppRate = (function() {
       case 1:
         currentBtn = localeObj.cancelButtonLabel;
         updateCounter('stop');
-        AppRate.navigateToAppStore();
         break;
       case 2:
         currentBtn = localeObj.laterButtonLabel;
@@ -77,16 +76,17 @@ AppRate = (function() {
       case 3:
         currentBtn = localeObj.rateButtonLabel;
         updateCounter('stop');
+        AppRate.navigateToAppStore();
         break;
     }
     //This is called only in case the user clicked on a button
-    typeof (_base = AppRate.preferences.callbacks).onButtonClicked === "function" ? _base.onButtonClicked(buttonIndex, currentBtn, "StoreRatingPrompt") : void 0;
+    typeof (base = AppRate.preferences.callbacks).onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "StoreRatingPrompt") : void 0;
     //This one is called anyway once the process is done
     return typeof (base = AppRate.preferences.callbacks).done === "function" ? base.done() : void 0;
   };
 
   promptForFeedbackWindowButtonClickHandler = function(buttonIndex) {
-    var _base, currentBtn = null;
+    var base, currentBtn = null;
     switch (buttonIndex) {
       case 1:
         currentBtn = localeObj.noButtonLabel;
@@ -95,10 +95,10 @@ AppRate = (function() {
       case 2:
         currentBtn = localeObj.yesButtonLabel;
         updateCounter('stop');
-        window.open(AppRate.preferences.appFeedbackURL);
+        window.open(AppRate.preferences.appFeedbackURL, '_system');
         break;
     }
-    return typeof(_base = AppRate.preferences.callbacks).onButtonClicked === "function" ? _base.onButtonClicked(buttonIndex, currentBtn, "FeedbackPrompt") : void 0;
+    return typeof(base = AppRate.preferences.callbacks).onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "FeedbackPrompt") : void 0;
   };
 
   updateCounter = function(action) {
@@ -122,7 +122,7 @@ AppRate = (function() {
   };
 
   showDialog = function(immediately) {
-    var _base;
+    var base;
     if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
       if (!AppRate.preferences.useCustomRateDialog) {
         localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName);
@@ -133,10 +133,10 @@ AppRate = (function() {
         }
       }
       if (typeof (base = AppRate.preferences.callbacks).onRateDialogShow === "function") {
-        _base.onRateDialogShow(promptForStoreRatingWindowButtonClickHandler);
+        base.onRateDialogShow(promptForStoreRatingWindowButtonClickHandler);
       }
     }else{
-      typeof (_base = AppRate.preferences.callbacks).done === "function" ? _base.done() : void 0;
+      typeof (base = AppRate.preferences.callbacks).done === "function" ? base.done() : void 0;
     }
     return AppRate;
   };
