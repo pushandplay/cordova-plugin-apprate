@@ -303,6 +303,15 @@ Locales.addLocale(new Locale({
 }));
 
 Locales.addLocale(new Locale({
+  language: 'pt-PT',
+  title: "Avaliar %@",
+  message: "Se gostou de utilziar o %@, importa-se de o avaliar? Não vai demorar mais do que um minuto. Obrigado pelo seu apoio!",
+  cancelButtonLabel: "Não, obrigado",
+  laterButtonLabel: "Lembrar mais tarde",
+  rateButtonLabel: "Avaliar agora"
+}));
+
+Locales.addLocale(new Locale({
   language: 'ru',
   title: "Оцените %@",
   message: "Если вам нравится пользоваться %@, не будете ли вы возражать против того, чтобы уделить минуту и оценить его?\nСпасибо вам за поддержку!",
