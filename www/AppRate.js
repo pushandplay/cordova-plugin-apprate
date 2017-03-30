@@ -85,7 +85,7 @@ AppRate = (function() {
 
   showDialog = function(immediately) {
     var base, localeObj;
-    if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
+    if (counter.countdown > (AppRate.preferences.usesUntilPrompt-1) || immediately) {
       if (!AppRate.preferences.useCustomRateDialog) {
         localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName);
         navigator.notification.confirm(localeObj.message, promptForRatingWindowButtonClickHandler, localeObj.title, [localeObj.rateButtonLabel, localeObj.laterButtonLabel, localeObj.cancelButtonLabel]);
