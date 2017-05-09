@@ -19,16 +19,14 @@ Cordova 3.0.0 or later
 
 ## Installation
 
-- From apache cordova plugins registry: `cordova plugins add cordova-plugin-apprate`
-- From github repository: `cordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git`
+- From cordova plugins registry: `cordova plugin add cordova-plugin-apprate`
+- From github repository: `cordova plugin add https://github.com/pushandplay/cordova-plugin-apprate.git`
 - From phonegap build add the following to your config.xml: `<gap:plugin name="cordova-plugin-apprate" />`
 
 ## Customization and usage
 
 ## Options / Preferences
 These options are available on the `AppRate.preferences` object. 
-
-Note: All `%@` patterns in customLocale object will be automatically replaced to your application title
 
 | Option | Type | Default | Description |
 | :------ | :---- | :------- | :----------- |
@@ -87,6 +85,7 @@ AppRate.preferences.useLanguage = 'ru';
 ```
 
 ### Set custom Locale object
+Note: `%@` patterns in `title` and `message` will be automatically replaced with `AppRate.preferences.displayAppName`
 
 ```javascript
 AppRate.preferences.customLocale = {
