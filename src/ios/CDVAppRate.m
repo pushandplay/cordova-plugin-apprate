@@ -24,12 +24,12 @@
 @implementation CDVAppRate
 
 - (void)getAppVersion:(CDVInvokedUrlCommand *)command {
-    [self.commandDelegate runInBackground:^{
+    	[self.commandDelegate runInBackground:^{
         NSString *versionString = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:versionString];
 
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-    }];
+		}];
 }
 
 - (void)getAppTitle:(CDVInvokedUrlCommand *)command {
