@@ -211,7 +211,7 @@ AppRate = (function() {
     var iOSStoreUrl;
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
       if (this.preferences.openStoreInApp) {
-        exec(null, null, 'AppRate', 'launchAppStore', [this.preferences.storeAppURL.ios]);
+        exec(null, null, 'AppRate', 'launchiOSReview', [this.preferences.storeAppURL.ios]);
       } else {
         iOSVersion = navigator.userAgent.match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.');
         iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) || 0) / 10;
