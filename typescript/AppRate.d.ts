@@ -19,62 +19,63 @@
  *
  */
 declare class AppRate {
-	static locales:Locales;
-	static preferences:AppRatePreferences;
-	
-	static init():AppRate;
-	static promptForRating(immediately?:boolean):AppRate;
-	static navigateToAppStore():AppRate;
+  static locales:Locales;
+  static preferences:AppRatePreferences;
+
+  static init():AppRate;
+  static promptForRating(immediately?:boolean):AppRate;
+  static navigateToAppStore():AppRate;
 }
 
 declare class AppRatePreferences {
-	useLanguage:string;
-	displayAppName:string;
-	promptAgainForEachNewVersion:boolean;
-	usesUntilPrompt:number;
-	openStoreInApp:boolean;
-	useCustomRateDialog:boolean;
-	callbacks:CallbackPreferences;
-	storeAppURL:StoreAppURLPreferences;
-	customLocale:CustomLocale;
+  useLanguage:string;
+  displayAppName:string;
+  promptAgainForEachNewVersion:boolean;
+  usesUntilPrompt:number;
+  openStoreInApp:boolean;
+  useCustomRateDialog:boolean;
+  callbacks:CallbackPreferences;
+  storeAppURL:StoreAppURLPreferences;
+  customLocale:CustomLocale;
 }
 
 declare class StoreAppURLPreferences {
-	ios:string;
-	android:string;
-	blackberry:string;
-	windows8:string;
-	windows:string;
+  ios:string;
+  android:string;
+  blackberry:string;
+  windows8:string;
+  windows:string;
 }
 
 declare class CallbackPreferences {
-	onButtonClicked:(buttonIndex:number) => void;
-	onRateDialogShow:(rateCallback:(buttonIndex:number) => void) => void;
+  onButtonClicked:(buttonIndex:number) => void;
+  onRateDialogShow:(rateCallback:(buttonIndex:number) => void) => void;
+  done:() => void;
 }
 
 declare class CustomLocale {
-	title:string;
-	message:string;
-	cancelButtonLabel:string;
-	laterButtonLabel:string;
-	rateButtonLabel:string;
+  title:string;
+  message:string;
+  cancelButtonLabel:string;
+  laterButtonLabel:string;
+  rateButtonLabel:string;
 }
 
 declare class Locales {
-	addLocale(localeObject:Locale):Locale;
-	getLocale(language:string, applicationTitle?:string):Locale;
-	getLocalesNames():Array<string>;
+  addLocale(localeObject:Locale):Locale;
+  getLocale(language:string, applicationTitle?:string):Locale;
+  getLocalesNames():Array<string>;
 }
 
 declare class Locale {
-	constructor(localeOptions:LocaleOptions);
+  constructor(localeOptions:LocaleOptions);
 }
 
 declare class LocaleOptions {
-	language:string
-	title:string;
-	message:string;
-	cancelButtonLabel:string;
-	laterButtonLabel:string;
-	rateButtonLabel:string;
+  language:string
+  title:string;
+  message:string;
+  cancelButtonLabel:string;
+  laterButtonLabel:string;
+  rateButtonLabel:string;
 }

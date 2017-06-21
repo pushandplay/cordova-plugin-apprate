@@ -1,64 +1,55 @@
-# cordova-plugin-apprate
+# Cordova-Plugin-Apprate
 
-This plugin provide the rate this app functionality into your Cordova/Phonegap application<br>
+A plugin to provide rate this app functionality into your Cordova / Phonegap application<br>
 
 [Donate with PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=MS8RQAS2NVVQW&lc=RU&item_name=github%2ecom&item_number=cordova%2dplugin%2dapprate&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 
-<img src="https://dl.dropboxusercontent.com/u/26238/Cordova/Plugins/AppRate/preview_iPad.png" width="100%" alt="Preview iPad"/>
+**PR's are greatly appreciated**
 
-### Some Articles on the Importance of App Reviews and Ratings ###
-
-+ [Begging For App Ratings](http://www.loopinsight.com/2014/02/04/begging-for-app-ratings/)
-+ [Choices And Consequences](http://bitsplitting.org/2013/12/11/choices-and-consequences/)
-+ [The importance of App Store reviews](http://www.cowlyowl.com/blog/app-store-reviews)
-+ [The Rate Friday Initiative](http://blog.edovia.com/2014/01/03/the-rate-friday-initiative/)
-+ [Prompting for App Reviews](http://dancounsell.com/articles/prompting-for-app-reviews)
-
-## Supported platforms ##
+## Supported platforms
 
 - iOS
 - Android
-- Windows (experimental)
-- Blackberry (experimental)
-- Windows8 (experimental)
+- Windows
+- Blackberry
 
-## Requirements ##
+## Requirements
 
-Phonegap / Cordova 3.0.0 or later
+Cordova 3.0.0 or later
 
-## Installation ##
+## Installation
 
-- From apache cordova plugins registry: `cordova plugins add cordova-plugin-apprate`
-- From github repository:	`cordova plugins add https://github.com/pushandplay/cordova-plugin-apprate.git`
+- From cordova plugins registry: `cordova plugin add cordova-plugin-apprate`
+- From github repository: `cordova plugin add https://github.com/pushandplay/cordova-plugin-apprate.git`
 - From phonegap build add the following to your config.xml: `<gap:plugin name="cordova-plugin-apprate" />`
 
-## Customization and usage ##
+## Customization and usage
 
-#### Note ####
-All `%@` patterns in customLocale object will be automatically replaced to your application title
-
-#### Available preferences options ####
+## Options / Preferences
+These options are available on the `AppRate.preferences` object. 
 
 | Option | Type | Default | Description |
 | :------ | :---- | :------- | :----------- |
-| useLanguage | {String} | null | custom BCP 47 language tag |
-| displayAppName | {String} | '' | custom application title |
-| promptAgainForEachNewVersion | {Boolean} | true | show dialog again when application version will be updated |
-| usesUntilPrompt | {Integer} | 3 | count of runs of application before dialog will be displayed |
-| openStoreInApp | {Boolean} | false | leave app or no when application page opened in app store (now supported only for iOS) |
-| useCustomRateDialog | {Boolean} | false | use custom view for rate dialog |
-| callbacks.onButtonClicked | {Function} | null | call back function. called when user clicked on rate-dialog buttons |
-| callbacks.onRateDialogShow | {Function} | null | call back function. called when rate-dialog showing |
-| storeAppURL.ios | {String} | null | application id in AppStore |
-| storeAppURL.android | {String} | null | application URL in GooglePlay |
-| storeAppURL.windows | {String} | null | application URL in Windows Store |
-| storeAppURL.blackberry | {String} | null | application URL in AppWorld |
-| storeAppURL.windows8 | {String} | null | application URL in WindowsStore |
-| customLocale | {Object} | null | custom locale object |
+| useLanguage | String | null | custom BCP 47 language tag |
+| displayAppName | String | '' | custom application title |
+| promptAgainForEachNewVersion | Boolean | true | show dialog again when application version will be updated |
+| usesUntilPrompt | Integer | 3 | count of runs of application before dialog will be displayed |
+| openStoreInApp | Boolean | false | leave app or no when application page opened in app store (now supported only for iOS) |
+| useCustomRateDialog | Boolean | false | use custom view for rate dialog |
+| callbacks.onButtonClicked | Function | null | call back function. called when user clicked on rate-dialog buttons |
+| callbacks.onRateDialogShow | Function | null | call back function. called when rate-dialog showing |
+| storeAppURL.ios | String | null | application id in AppStore |
+| storeAppURL.android | String | null | application URL in GooglePlay |
+| storeAppURL.windows | String | null | application URL in Windows Store |
+| storeAppURL.blackberry | String | null | application URL in AppWorld |
+| storeAppURL.windows8 | String | null | application URL in WindowsStore |
+| customLocale | Object | null | custom locale object |
 
-## Examples ##
+## Examples
 
-#### Simple setup and call ####
+Makes sure all your calls to the plugin happen after the cordova `onDeviceReady` event has fired.
+
+### Simple setup and call
 
 ```javascript
 AppRate.preferences.storeAppURL = {
@@ -72,14 +63,14 @@ AppRate.preferences.storeAppURL = {
 AppRate.promptForRating();
 ```
 
-#### Don't Call rate dialog immediately ####
+### Don't Call rate dialog immediately
 
 ```javascript
 AppRate.promptForRating(false);
 ```
 If false is not present it will ignore usesUntilPrompt, promptAgainForEachNewVersion, and button logic, it will prompt every time.
 
-#### Override dialog button callback ####
+### Override dialog button callback
 
 ```javascript
 AppRate.preferences.callbacks.onButtonClicked = function(buttonIndex) {
@@ -87,13 +78,14 @@ AppRate.preferences.callbacks.onButtonClicked = function(buttonIndex) {
 };
 ```
 
-#### Set custom language ####
+### Set custom language
 
 ```javascript
 AppRate.preferences.useLanguage = 'ru';
 ```
 
-#### Set custom Locale object ####
+### Set custom Locale object
+Note: `%@` patterns in `title` and `message` will be automatically replaced with `AppRate.preferences.displayAppName`
 
 ```javascript
 AppRate.preferences.customLocale = {
@@ -105,7 +97,7 @@ AppRate.preferences.customLocale = {
 };
 ```
 
-#### Full setup ####
+### Full setup
 
 ```javascript
 AppRate.preferences = {
@@ -132,7 +124,7 @@ AppRate.preferences = {
 AppRate.promptForRating();
 ```
 
-#### Callbacks setup and use custom rate-dialog ####
+### Callbacks setup and use custom rate-dialog
 
 ```javascript
 AppRate.preferences = {
@@ -148,10 +140,7 @@ AppRate.preferences = {
 };
 ```
 
-## Already included translations ##
-https://github.com/pushandplay/cordova-plugin-apprate/blob/master/www/locales.js
-
-#### Access to locales ####
+### Access to locales
 
 ```javascript
 // Getting list of names for available locales
@@ -160,3 +149,12 @@ AppRate.locales.getLocalesNames();
 // Getting locale object by name
 AppRate.locales.getLocale('en');
 ```
+
+### List of translations
+https://github.com/pushandplay/cordova-plugin-apprate/blob/master/www/locales.js
+
+# Credits
+
+Currently maintained by [@westonganger](https://github.com/westonganger)
+
+Created by [@pushandplay](https://github.com/pushandplay)

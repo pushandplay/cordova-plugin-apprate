@@ -33,7 +33,8 @@ AppRate = (function() {
 
   FLAG_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad|Android)/i.test(navigator.userAgent.toLowerCase());
 
-  PREF_STORE_URL_FORMAT_IOS9 = "itms-apps://itunes.apple.com/app/viewContentsUserReviews/id";
+  PREF_STORE_URL_PREFIX_IOS9 = "itms-apps://itunes.apple.com/app/viewContentsUserReviews/id";
+  PREF_STORE_URL_POSTFIX_IOS9 = "?action=write-review";
   PREF_STORE_URL_FORMAT_IOS8 = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8&id=";
 
   counter = {
@@ -82,7 +83,7 @@ AppRate = (function() {
     //This is called only in case the user clicked on a button
     typeof (base = AppRate.preferences.callbacks).onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "StoreRatingPrompt") : void 0;
     //This one is called anyway once the process is done
-    return typeof (base = AppRate.preferences.callbacks).done === "function" ? base.done() : void 0;
+    return typeof (base = AppRate.preferences.callbacks).done === "function" ? base.done() : function(){ };
   };
 
   promptForFeedbackWindowButtonClickHandler = function(buttonIndex) {
@@ -125,7 +126,7 @@ AppRate = (function() {
     var base;
     if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
       if (!AppRate.preferences.useCustomRateDialog) {
-        localeObj = AppRate.preferences.customLocale || Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName);
+        localeObj = Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName, AppRate.preferences.customLocale);
         if(AppRate.preferences.isAdvancedMode) {
           navigator.notification.confirm(localeObj.appRatePromptMessage, promptForAppRatingWindowButtonClickHandler, localeObj.appRatePromptTitle, [localeObj.noButtonLabel, localeObj.yesButtonLabel]);
         } else {
@@ -136,7 +137,7 @@ AppRate = (function() {
         base.onRateDialogShow(promptForStoreRatingWindowButtonClickHandler);
       }
     }else{
-      typeof (base = AppRate.preferences.callbacks).done === "function" ? base.done() : void 0;
+      typeof (base = AppRate.preferences.callbacks).done === "function" ? base.done() : function(){ };
     }
     return AppRate;
   };
@@ -218,7 +219,7 @@ AppRate = (function() {
     callbacks: {
       onButtonClicked: null,
       onRateDialogShow: null,
-      done:null
+      done: null
     },
     storeAppURL: {
       ios: null,
@@ -251,7 +252,7 @@ AppRate = (function() {
 
   AppRate.navigateToAppStore = function() {
     var iOSVersion;
-    var PREF_STORE_URL_FORMAT_IOS;
+    var iOSStoreUrl;
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
       if (this.preferences.openStoreInApp) {
         exec(null, null, 'AppRate', 'launchAppStore', [this.preferences.storeAppURL.ios]);
@@ -259,20 +260,20 @@ AppRate = (function() {
         iOSVersion = navigator.userAgent.match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.');
         iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) || 0) / 10;
         if (iOSVersion < 9) {
-          PREF_STORE_URL_FORMAT_IOS = PREF_STORE_URL_FORMAT_IOS8;
+          iOSStoreUrl = PREF_STORE_URL_FORMAT_IOS8 + this.preferences.storeAppURL.ios;
         } else {
-          PREF_STORE_URL_FORMAT_IOS = PREF_STORE_URL_FORMAT_IOS9;
+          iOSStoreUrl = PREF_STORE_URL_PREFIX_IOS9 + this.preferences.storeAppURL.ios + PREF_STORE_URL_POSTFIX_IOS9;
         }
-        window.open(PREF_STORE_URL_FORMAT_IOS + this.preferences.storeAppURL.ios, '_system');
+        cordova.InAppBrowser.open(iOSStoreUrl, '_system', 'location=no');
       }
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(this.preferences.storeAppURL.android, '_system');
+      cordova.InAppBrowser.open(this.preferences.storeAppURL.android, '_system', 'location=no');
     } else if (/(Windows|Edge)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(this.preferences.storeAppURL.windows, '_blank');
+      cordova.InAppBrowser.open(this.preferences.storeAppURL.windows, '_blank', 'location=no');
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(this.preferences.storeAppURL.blackberry, '_system');
+      cordova.InAppBrowser.open(this.preferences.storeAppURL.blackberry, '_system', 'location=no');
     } else if (/(IEMobile|Windows Phone)/i.test(navigator.userAgent.toLowerCase())) {
-      window.open(this.preferences.storeAppURL.windows8, '_system');
+      cordova.InAppBrowser.open(this.preferences.storeAppURL.windows8, '_system', 'location=no');
     }
     return this;
   };
