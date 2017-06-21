@@ -51,7 +51,7 @@ declare class StoreAppURLPreferences {
 declare class CallbackPreferences {
   onButtonClicked:(buttonIndex:number) => void;
   onRateDialogShow:(rateCallback:(buttonIndex:number) => void) => void;
-  handleAppFeedback:() => void;
+  handleNegativeFeedback:() => void;
   done:() => void;
 }
 

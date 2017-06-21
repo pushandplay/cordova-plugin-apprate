@@ -35,6 +35,7 @@ These options are available on the `AppRate.preferences` object.
 | promptAgainForEachNewVersion | Boolean | true | show dialog again when application version will be updated |
 | usesUntilPrompt | Integer | 3 | count of runs of application before dialog will be displayed |
 | openStoreInApp | Boolean | false | leave app or no when application page opened in app store (now supported only for iOS) |
+| simpleMode | Boolean | false | enabling simplemode would display the rate dialog directly without the negative feedback filtering flow|
 | useCustomRateDialog | Boolean | false | use custom view for rate dialog |
 | callbacks.onButtonClicked | Function | null | call back function. called when user clicked on rate-dialog buttons |
 | callbacks.onRateDialogShow | Function | null | call back function. called when rate-dialog showing |
@@ -89,11 +90,15 @@ Note: `%@` patterns in `title` and `message` will be automatically replaced with
 
 ```javascript
 AppRate.preferences.customLocale = {
-  title: "Rate %@",
-  message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!",
+  title: "Would you mind rating %@?",
+  message: "It won’t take more than a minute and helps to promote our app. Thanks for your support!",
   cancelButtonLabel: "No, Thanks",
   laterButtonLabel: "Remind Me Later",
-  rateButtonLabel: "Rate It Now"
+  rateButtonLabel: "Rate It Now",
+  yesButtonLabel: "Yes!",
+  noButtonLabel: "Not really",
+  appRatePromptTitle: 'Do you like using %@',
+  feedbackPromptTitle: 'Mind giving us some feedback?',
 };
 ```
 
@@ -113,11 +118,20 @@ AppRate.preferences = {
     windows8: 'ms-windows-store:Review?name=<the Package Family Name of the application>'
   },
   customLocale: {
-    title: "Rate %@",
-    message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!",
+    title: "Would you mind rating %@?",
+    message: "It won’t take more than a minute and helps to promote our app. Thanks for your support!",
     cancelButtonLabel: "No, Thanks",
     laterButtonLabel: "Remind Me Later",
-    rateButtonLabel: "Rate It Now"
+    rateButtonLabel: "Rate It Now",
+    yesButtonLabel: "Yes!",
+    noButtonLabel: "Not really",
+    appRatePromptTitle: 'Do you like using %@',
+    feedbackPromptTitle: 'Mind giving us some feedback?',
+  },
+  callbacks: {
+    handleNegativeFeedback: function(){
+      window.open('mailto:feedback@example.com','_system');
+    }
   }
 };
 

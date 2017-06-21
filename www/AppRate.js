@@ -50,7 +50,7 @@ AppRate = (function() {
         break;
       case 1:
         currentBtn = localeObj.noButtonLabel;
-        if(typeof base.handleAppFeedback === "function") {
+        if(typeof base.handleNegativeFeedback === "function") {
           navigator.notification.confirm(localeObj.feedbackPromptMessage, promptForFeedbackWindowButtonClickHandler, localeObj.feedbackPromptTitle, [localeObj.noButtonLabel, localeObj.yesButtonLabel]);
         }
         break;
@@ -98,7 +98,7 @@ AppRate = (function() {
       case 2:
         currentBtn = localeObj.yesButtonLabel;
         updateCounter('stop');
-        base.handleAppFeedback();
+        base.handleNegativeFeedback();
         break;
     }
     return typeof base.onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "FeedbackPrompt") : function(){ };
@@ -221,7 +221,7 @@ AppRate = (function() {
     callbacks: {
       onButtonClicked: null,
       onRateDialogShow: null,
-      handleAppFeedback: null,
+      handleNegativeFeedback: null,
       done: null
     },
     storeAppURL: {
