@@ -30,7 +30,6 @@ These options are available on the `AppRate.preferences` object.
 | usesUntilPrompt | Integer | 3 | count of runs of application before dialog will be displayed |
 | openStoreInApp | Boolean | false | leave app or no when application page opened in app store (now supported only for iOS) |
 | simpleMode | Boolean | false | enabling simplemode would display the rate dialog directly without the negative feedback filtering flow|
-| useCustomRateDialog | Boolean | false | use custom view for rate dialog |
 | callbacks.onButtonClicked | Function | null | call back function. called when user clicked on rate-dialog buttons |
 | callbacks.onRateDialogShow | Function | null | call back function. called when rate-dialog showing |
 | storeAppURL.ios | String | null | application id in AppStore |
@@ -125,19 +124,7 @@ AppRate.preferences = {
   callbacks: {
     handleNegativeFeedback: function(){
       window.open('mailto:feedback@example.com','_system');
-    }
-  }
-};
-
-AppRate.promptForRating();
-```
-
-### Callbacks setup and use custom rate-dialog
-
-```javascript
-AppRate.preferences = {
-  useCustomRateDialog: true,
-  callbacks: {
+    },
     onRateDialogShow: function(callback){
       callback(1) // cause immediate click on 'Rate Now' button
     },
@@ -146,6 +133,8 @@ AppRate.preferences = {
     }
   }
 };
+
+AppRate.promptForRating();
 ```
 
 ### Access to locales

@@ -34,7 +34,6 @@ declare class AppRatePreferences {
   usesUntilPrompt:number;
   openStoreInApp:boolean;
   simpleMode:boolean;
-  useCustomRateDialog:boolean;
   callbacks:CallbackPreferences;
   storeAppURL:StoreAppURLPreferences;
   customLocale:CustomLocale;
