@@ -1,4 +1,8 @@
 # Changelog
+- 1.4.0 - UNRELEASED
+  - Major improvement  - Instead of directly asking our users to Rate our app, we now handle this flow much better. The first popup will be "Do you like using appName?" If the user says 'Yes' then we ask the user if they would like take a moment and rate our app. If the user says 'NO', We ask the user another question: "Would you mind providing us feedback?" If the user says yes, then we can run a custom callback to handle this such as sending an email.
+  - To revert to previous behaviour you can use simpleMode: true
+  - iOS 9+ now redirects directly to write review
 - 1.3.0
   - Added a general done callbacks called once we have completed the job, not showing or showing the popup
   - Fix %@ with customLocale
