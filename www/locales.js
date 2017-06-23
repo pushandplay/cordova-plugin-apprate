@@ -21,9 +21,13 @@
 ;
 var Locale, Locales;
 
-Locale = (function() {
+Locale = (function () {
   function Locale(arg) {
-    this.language = arg.language, this.title = arg.title, this.message = arg.message, this.cancelButtonLabel = arg.cancelButtonLabel, this.laterButtonLabel = arg.laterButtonLabel, this.rateButtonLabel = arg.rateButtonLabel;
+    for (var index in arg) {
+      if (arg.hasOwnProperty(index)) {
+        this[index] = arg[index] || '';
+      }
+    }
     this;
   }
 
@@ -51,11 +55,15 @@ Locales = (function() {
     }
     localeObject = customLocale || locales[language] || locales[language.split(/-/)[0]] || locales[LOCALE_DEFAULT];
     localeObject.title = localeObject.title.replace(/%@/g, applicationTitle);
+    localeObject.appRatePromptTitle = localeObject.appRatePromptTitle.replace(/%@/g, applicationTitle);
+    localeObject.feedbackPromptTitle = localeObject.feedbackPromptTitle.replace(/%@/g, applicationTitle);
+    localeObject.appRatePromptMessage = localeObject.appRatePromptMessage.replace(/%@/g, applicationTitle);
+    localeObject.feedbackPromptMessage = localeObject.feedbackPromptMessage.replace(/%@/g, applicationTitle);
     localeObject.message = localeObject.message.replace(/%@/g, applicationTitle);
     return localeObject;
   };
 
-  Locales.getLocalesNames = function() {
+  Locales.getLocalesNames = function () {
     var locale, results;
     results = [];
     for (locale in locales) {
@@ -160,11 +168,17 @@ Locales.addLocale(new Locale({
 
 Locales.addLocale(new Locale({
   language: 'en',
-  title: "Rate %@",
-  message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!",
+  title: "Would you mind rating %@?",
+  message: "It won’t take more than a minute and helps to promote our app. Thanks for your support!",
   cancelButtonLabel: "No, Thanks",
   laterButtonLabel: "Remind Me Later",
-  rateButtonLabel: "Rate It Now"
+  rateButtonLabel: "Rate It Now",
+  yesButtonLabel: "Yes!",
+  noButtonLabel: "Not really",
+  appRatePromptTitle: 'Do you like using %@',
+  feedbackPromptTitle: 'Mind giving us some feedback?',
+  appRatePromptMessage:'',
+  feedbackPromptMessage:''
 }));
 
 Locales.addLocale(new Locale({
