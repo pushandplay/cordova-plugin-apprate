@@ -310,19 +310,31 @@ Locales.addLocale(new Locale({
 Locales.addLocale(new Locale({
   language: 'pt',
   title: "Avaliar %@",
-  message: "Se você gosta de usar o %@, você se importaria de avaliá-lo? Não vai demorar mais de um minuto. Obrigado por seu apoio!",
-  cancelButtonLabel: "Não, Obrigado",
+  message: "Se você gostou de usar o %@, você se importaria de avaliá-lo? Não vai demorar mais de um minuto. Obrigado por seu apoio!",
+  cancelButtonLabel: "Não, obrigado",
   laterButtonLabel: "Lembrar mais tarde",
-  rateButtonLabel: "Avaliar Agora"
+  rateButtonLabel: "Avaliar Agora",
+  yesButtonLabel: "Sim!",
+  noButtonLabel: "Não",
+  appRatePromptTitle: "Você gosta de usar %@",
+  feedbackPromptTitle: "Poderia nos dar um feedback?",
+  appRatePromptMessage: "",
+  feedbackPromptMessage: ""
 }));
 
 Locales.addLocale(new Locale({
   language: 'pt-PT',
   title: "Avaliar %@",
-  message: "Se gostou de utilziar o %@, importa-se de o avaliar? Não vai demorar mais do que um minuto. Obrigado pelo seu apoio!",
+  message: "Se gostou de utilizar o %@, importa-se de o avaliar? Não vai demorar mais do que um minuto. Obrigado pelo seu apoio!",
   cancelButtonLabel: "Não, obrigado",
   laterButtonLabel: "Lembrar mais tarde",
-  rateButtonLabel: "Avaliar agora"
+  rateButtonLabel: "Avaliar agora",
+  yesButtonLabel: "Sim!",
+  noButtonLabel: "Não",
+  appRatePromptTitle: "Você gosta de utilizar %@",
+  feedbackPromptTitle: "Poderia nos dar um feedback?",
+  appRatePromptMessage: "",
+  feedbackPromptMessage: ""
 }));
 
 Locales.addLocale(new Locale({
