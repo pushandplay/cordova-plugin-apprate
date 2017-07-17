@@ -32,7 +32,7 @@ declare class AppRatePreferences {
   displayAppName:string;
   promptAgainForEachNewVersion:boolean;
   usesUntilPrompt:number;
-  openStoreInApp:boolean;
+  inAppReview:boolean;
   simpleMode:boolean;
   callbacks:CallbackPreferences;
   storeAppURL:StoreAppURLPreferences;

@@ -28,7 +28,7 @@ These options are available on the `AppRate.preferences` object.
 | displayAppName | String | '' | custom application title |
 | promptAgainForEachNewVersion | Boolean | true | show dialog again when application version will be updated |
 | usesUntilPrompt | Integer | 3 | count of runs of application before dialog will be displayed |
-| openStoreInApp | Boolean | false | leave app or no when application page opened in app store (now supported only for iOS) |
+| inAppReview | Boolean | true | iOS Only. Write review directly in your application (iOS 10.3+), limit of 3 prompts per year. Fallback to opening the store within the app for other iOS versions. Use false to use in app browser. |
 | simpleMode | Boolean | false | enabling simplemode would display the rate dialog directly without the negative feedback filtering flow|
 | callbacks.onButtonClicked | Function | null | call back function. called when user clicked on rate-dialog buttons |
 | callbacks.onRateDialogShow | Function | null | call back function. called when rate-dialog showing |
@@ -99,10 +99,10 @@ AppRate.preferences.customLocale = {
 
 ```javascript
 AppRate.preferences = {
-  openStoreInApp: true,
   displayAppName: 'My custom app title',
   usesUntilPrompt: 5,
   promptAgainForEachNewVersion: false,
+  inAppReview: true,
   storeAppURL: {
     ios: '<my_app_id>',
     android: 'market://details?id=<package_name>',

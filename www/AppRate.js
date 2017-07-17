@@ -242,7 +242,7 @@ AppRate = (function() {
     simpleMode: false,
     promptAgainForEachNewVersion: true,
     usesUntilPrompt: 3,
-    openStoreInApp: false,
+    inAppReview: true,
     callbacks: {
       onButtonClicked: null,
       onRateDialogShow: null,
@@ -281,7 +281,7 @@ AppRate = (function() {
     var iOSVersion;
     var iOSStoreUrl;
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
-      if (this.preferences.openStoreInApp) {
+      if (this.preferences.inAppReview) {
         updateiOSRatingData();
         var showNativePrompt = iOSRating.timesPrompted < 3;
         exec(null, null, 'AppRate', 'launchiOSReview', [this.preferences.storeAppURL.ios, showNativePrompt]);
