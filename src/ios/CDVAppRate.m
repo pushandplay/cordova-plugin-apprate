@@ -42,7 +42,9 @@
 }
 
 - (void)launchiOSReview:(CDVInvokedUrlCommand *)command {
-    if ([SKStoreReviewController class]) {
+    BOOL shouldUseNativePrompt = [command.arguments[1] boolValue];
+
+    if (shouldUseNativePrompt && [SKStoreReviewController class]) {
         [self launchInAppReview];
     } else {
         NSString *appId = @"";
