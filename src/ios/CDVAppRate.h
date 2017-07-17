@@ -26,6 +26,10 @@
 
 - (void)getAppTitle:(CDVInvokedUrlCommand *)command;
 
-- (void)launchAppStore:(CDVInvokedUrlCommand *)command;
+- (void)launchiOSReview:(CDVInvokedUrlCommand *)command;
+
+- (void)launchAppStore:(NSString *)appId;
+
+- (void)launchInAppReview;
 
 @end
