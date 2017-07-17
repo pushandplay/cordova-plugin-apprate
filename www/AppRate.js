@@ -30,6 +30,7 @@ AppRate = (function() {
   function AppRate() {}
 
   LOCAL_STORAGE_COUNTER = 'counter';
+  LOCAL_STORAGE_IOS_RATING = 'iosRating';
 
   FLAG_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad|Android)/i.test(navigator.userAgent.toLowerCase());
 
@@ -40,6 +41,11 @@ AppRate = (function() {
   counter = {
     applicationVersion: void 0,
     countdown: 0
+  };
+
+  var iOSRating = {
+    timesPrompted: 0,
+    lastPromptDate: null
   };
 
   promptForAppRatingWindowButtonClickHandler = function (buttonIndex) {
@@ -124,6 +130,17 @@ AppRate = (function() {
     return counter;
   };
 
+  updateiOSRatingData = function() {
+    if (checkIfDateIsAfter(iOSRating.lastPromptDate, 365)) {
+      iOSRating.timesPrompted = 0;
+    }
+
+    iOSRating.timesPrompted++;
+    iOSRating.lastPromptDate = new Date();
+
+    localStorageParam(LOCAL_STORAGE_IOS_RATING, JSON.stringify(iOSRating));
+  }
+
   showDialog = function(immediately) {
     var base = AppRate.preferences.callbacks;
     if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
@@ -188,6 +205,15 @@ AppRate = (function() {
     if(localStorageParam(LOCAL_STORAGE_COUNTER)){
       counter = JSON.parse(localStorageParam(LOCAL_STORAGE_COUNTER)) || counter;
     }
+
+    if (localStorageParam(LOCAL_STORAGE_IOS_RATING)){
+      iOSRating = JSON.parse(localStorageParam(LOCAL_STORAGE_IOS_RATING)) || iOSRating;
+
+      if (iOSRating.lastPromptDate) {
+        iOSRating.lastPromptDate = new Date(iOSRating.lastPromptDate);
+      }
+    }
+
     getAppVersion((function(_this) {
       return function(applicationVersion) {
         if (counter.applicationVersion !== applicationVersion) {
@@ -256,7 +282,9 @@ AppRate = (function() {
     var iOSStoreUrl;
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
       if (this.preferences.openStoreInApp) {
-        exec(null, null, 'AppRate', 'launchiOSReview', [this.preferences.storeAppURL.ios]);
+        updateiOSRatingData();
+        var showNativePrompt = iOSRating.timesPrompted < 3;
+        exec(null, null, 'AppRate', 'launchiOSReview', [this.preferences.storeAppURL.ios, showNativePrompt]);
       } else {
         iOSVersion = navigator.userAgent.match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.');
         iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) || 0) / 10;
@@ -284,5 +312,17 @@ AppRate = (function() {
 })();
 
 AppRate.init();
+
+function checkIfDateIsAfter(date, minimumDifference) {
+  if (!date) {
+    return false;
+  }
+
+  const dateTimestamp = date.getTime();
+  const todayTimestamp = new Date().getTime();
+  const differenceInDays = Math.abs((todayTimestamp - dateTimestamp) / (3600 * 24 * 1000));
+
+  return differenceInDays > minimumDifference;
+}
 
 module.exports = AppRate;
