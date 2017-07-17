@@ -1,8 +1,6 @@
 # Cordova-Plugin-Apprate
 
-A plugin to provide rate this app functionality into your Cordova / Phonegap application<br>
-
-[Donate with PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=MS8RQAS2NVVQW&lc=RU&item_name=github%2ecom&item_number=cordova%2dplugin%2dapprate&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
+A plugin to provide rate this app functionality into your cordova application<br>
 
 **PR's are greatly appreciated**
 
@@ -13,15 +11,11 @@ A plugin to provide rate this app functionality into your Cordova / Phonegap app
 - Windows
 - Blackberry
 
-## Requirements
-
-Cordova 3.0.0 or later
-
 ## Installation
 
 - From cordova plugins registry: `cordova plugin add cordova-plugin-apprate`
 - From github repository: `cordova plugin add https://github.com/pushandplay/cordova-plugin-apprate.git`
-- From phonegap build add the following to your config.xml: `<gap:plugin name="cordova-plugin-apprate" />`
+- For phonegap build add the following to your config.xml: `<gap:plugin name="cordova-plugin-apprate" />`
 
 ## Customization and usage
 
@@ -35,7 +29,7 @@ These options are available on the `AppRate.preferences` object.
 | promptAgainForEachNewVersion | Boolean | true | show dialog again when application version will be updated |
 | usesUntilPrompt | Integer | 3 | count of runs of application before dialog will be displayed |
 | openStoreInApp | Boolean | false | leave app or no when application page opened in app store (now supported only for iOS) |
-| useCustomRateDialog | Boolean | false | use custom view for rate dialog |
+| simpleMode | Boolean | false | enabling simplemode would display the rate dialog directly without the negative feedback filtering flow|
 | callbacks.onButtonClicked | Function | null | call back function. called when user clicked on rate-dialog buttons |
 | callbacks.onRateDialogShow | Function | null | call back function. called when rate-dialog showing |
 | storeAppURL.ios | String | null | application id in AppStore |
@@ -89,11 +83,15 @@ Note: `%@` patterns in `title` and `message` will be automatically replaced with
 
 ```javascript
 AppRate.preferences.customLocale = {
-  title: "Rate %@",
-  message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!",
+  title: "Would you mind rating %@?",
+  message: "It won’t take more than a minute and helps to promote our app. Thanks for your support!",
   cancelButtonLabel: "No, Thanks",
   laterButtonLabel: "Remind Me Later",
-  rateButtonLabel: "Rate It Now"
+  rateButtonLabel: "Rate It Now",
+  yesButtonLabel: "Yes!",
+  noButtonLabel: "Not really",
+  appRatePromptTitle: 'Do you like using %@',
+  feedbackPromptTitle: 'Mind giving us some feedback?',
 };
 ```
 
@@ -113,23 +111,20 @@ AppRate.preferences = {
     windows8: 'ms-windows-store:Review?name=<the Package Family Name of the application>'
   },
   customLocale: {
-    title: "Rate %@",
-    message: "If you enjoy using %@, would you mind taking a moment to rate it? It won’t take more than a minute. Thanks for your support!",
+    title: "Would you mind rating %@?",
+    message: "It won’t take more than a minute and helps to promote our app. Thanks for your support!",
     cancelButtonLabel: "No, Thanks",
     laterButtonLabel: "Remind Me Later",
-    rateButtonLabel: "Rate It Now"
-  }
-};
-
-AppRate.promptForRating();
-```
-
-### Callbacks setup and use custom rate-dialog
-
-```javascript
-AppRate.preferences = {
-  useCustomRateDialog: true,
+    rateButtonLabel: "Rate It Now",
+    yesButtonLabel: "Yes!",
+    noButtonLabel: "Not really",
+    appRatePromptTitle: 'Do you like using %@',
+    feedbackPromptTitle: 'Mind giving us some feedback?',
+  },
   callbacks: {
+    handleNegativeFeedback: function(){
+      window.open('mailto:feedback@example.com','_system');
+    },
     onRateDialogShow: function(callback){
       callback(1) // cause immediate click on 'Rate Now' button
     },
@@ -138,6 +133,8 @@ AppRate.preferences = {
     }
   }
 };
+
+AppRate.promptForRating();
 ```
 
 ### Access to locales
@@ -157,4 +154,4 @@ https://github.com/pushandplay/cordova-plugin-apprate/blob/master/www/locales.js
 
 Currently maintained by [@westonganger](https://github.com/westonganger)
 
-Created by [@pushandplay](https://github.com/pushandplay)
+Created by [@pushandplay](https://github.com/pushandplay) - [Donate with PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=MS8RQAS2NVVQW&lc=RU&item_name=github%2ecom&item_number=cordova%2dplugin%2dapprate&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)

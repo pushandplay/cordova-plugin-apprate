@@ -33,7 +33,7 @@ declare class AppRatePreferences {
   promptAgainForEachNewVersion:boolean;
   usesUntilPrompt:number;
   openStoreInApp:boolean;
-  useCustomRateDialog:boolean;
+  simpleMode:boolean;
   callbacks:CallbackPreferences;
   storeAppURL:StoreAppURLPreferences;
   customLocale:CustomLocale;
@@ -50,6 +50,7 @@ declare class StoreAppURLPreferences {
 declare class CallbackPreferences {
   onButtonClicked:(buttonIndex:number) => void;
   onRateDialogShow:(rateCallback:(buttonIndex:number) => void) => void;
+  handleNegativeFeedback:() => void;
   done:() => void;
 }
 
@@ -59,6 +60,12 @@ declare class CustomLocale {
   cancelButtonLabel:string;
   laterButtonLabel:string;
   rateButtonLabel:string;
+  yesButtonLabel:string;
+  noButtonLabel:string;
+  appRatePromptTitle:string;
+  feedbackPromptTitle:string;
+  appRatePromptMessage:string;
+  feedbackPromptMessage:string;
 }
 
 declare class Locales {
@@ -78,4 +85,10 @@ declare class LocaleOptions {
   cancelButtonLabel:string;
   laterButtonLabel:string;
   rateButtonLabel:string;
+  yesButtonLabel:string;
+  noButtonLabel:string;
+  appRatePromptTitle:string;
+  feedbackPromptTitle:string;
+  appRatePromptMessage:string;
+  feedbackPromptMessage:string;
 }
