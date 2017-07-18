@@ -280,6 +280,7 @@ AppRate = (function() {
   AppRate.navigateToAppStore = function() {
     var iOSVersion;
     var iOSStoreUrl;
+
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
       if (this.preferences.inAppReview) {
         updateiOSRatingData();

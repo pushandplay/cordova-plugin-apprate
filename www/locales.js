@@ -55,10 +55,10 @@ Locales = (function() {
     }
     localeObject = customLocale || locales[language] || locales[language.split(/-/)[0]] || locales[LOCALE_DEFAULT];
     localeObject.title = localeObject.title.replace(/%@/g, applicationTitle);
-    localeObject.appRatePromptTitle = localeObject.appRatePromptTitle.replace(/%@/g, applicationTitle);
-    localeObject.feedbackPromptTitle = localeObject.feedbackPromptTitle.replace(/%@/g, applicationTitle);
-    localeObject.appRatePromptMessage = localeObject.appRatePromptMessage.replace(/%@/g, applicationTitle);
-    localeObject.feedbackPromptMessage = localeObject.feedbackPromptMessage.replace(/%@/g, applicationTitle);
+    localeObject.appRatePromptTitle = (localeObject.appRatePromptTitle || '').replace(/%@/g, applicationTitle);
+    localeObject.feedbackPromptTitle = (localeObject.feedbackPromptTitle || '').replace(/%@/g, applicationTitle);
+    localeObject.appRatePromptMessage = (localeObject.appRatePromptMessage || '').replace(/%@/g, applicationTitle);
+    localeObject.feedbackPromptMessage = (localeObject.feedbackPromptMessage || '').replace(/%@/g, applicationTitle);
     localeObject.message = localeObject.message.replace(/%@/g, applicationTitle);
     return localeObject;
   };
