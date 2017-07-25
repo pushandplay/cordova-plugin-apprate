@@ -19,7 +19,7 @@ specific language governing permissions and limitations
 under the License.
 -->
 
-<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0" id="cordova-plugin-apprate" version="1.3.0">
+<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0" id="cordova-plugin-apprate" version="1.3.0-zently">
     <name>AppRate</name>
     <description>This plugin provides "Rate This App" functionality to your Cordova/Phonegap application</description>
     <author email="hello@pushandplay.ru" href="http://pushandplay.ru">pushandplay</author>
