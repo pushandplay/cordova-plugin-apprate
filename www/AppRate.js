@@ -70,6 +70,7 @@ AppRate = (function() {
 
   promptForStoreRatingWindowButtonClickHandler = function(buttonIndex) {
     var base = AppRate.preferences.callbacks, currentBtn = null;
+    var $ionicLoading = AppRate.preferences.ionicLoading;
     switch (buttonIndex) {
       case 0:
         updateCounter('reset');
@@ -83,6 +84,7 @@ AppRate = (function() {
         updateCounter('reset');
         break;
       case 3:
+        $ionicLoading.show();
         currentBtn = localeObj.rateButtonLabel;
         updateCounter('stop');
         AppRate.navigateToAppStore();
@@ -280,12 +282,14 @@ AppRate = (function() {
   AppRate.navigateToAppStore = function() {
     var iOSVersion;
     var iOSStoreUrl;
+    var $ionicLoading = AppRate.preferences.ionicLoading;
 
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
       if (this.preferences.inAppReview) {
         updateiOSRatingData();
         var showNativePrompt = iOSRating.timesPrompted < 3;
         exec(null, null, 'AppRate', 'launchiOSReview', [this.preferences.storeAppURL.ios, showNativePrompt]);
+        $ionicLoading.hide();
       } else {
         iOSVersion = navigator.userAgent.match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.');
         iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) || 0) / 10;
@@ -294,15 +298,20 @@ AppRate = (function() {
         } else {
           iOSStoreUrl = PREF_STORE_URL_PREFIX_IOS9 + this.preferences.storeAppURL.ios + PREF_STORE_URL_POSTFIX_IOS9;
         }
+        $ionicLoading.hide();
         cordova.InAppBrowser.open(iOSStoreUrl, '_system', 'location=no');
       }
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
+      $ionicLoading.hide();
       cordova.InAppBrowser.open(this.preferences.storeAppURL.android, '_system', 'location=no');
     } else if (/(Windows|Edge)/i.test(navigator.userAgent.toLowerCase())) {
+      $ionicLoading.hide();
       cordova.InAppBrowser.open(this.preferences.storeAppURL.windows, '_blank', 'location=no');
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
+      $ionicLoading.hide();
       cordova.InAppBrowser.open(this.preferences.storeAppURL.blackberry, '_system', 'location=no');
     } else if (/(IEMobile|Windows Phone)/i.test(navigator.userAgent.toLowerCase())) {
+      $ionicLoading.hide();
       cordova.InAppBrowser.open(this.preferences.storeAppURL.windows8, '_system', 'location=no');
     }
     return this;
