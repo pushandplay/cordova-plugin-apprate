@@ -79,9 +79,9 @@ Locales = (function() {
 Locales.addLocale(new Locale({
   language: 'ar',
   title: "قيِّم %@",
-  message: "ذا أعجبك برنامج %@، هل تمانع من أخذ دقيقة لتقييمه؟ شكرا لدعمك!",
-  cancelButtonLabel: "لا، شكرا",
-  laterButtonLabel: "ذكرني لاحقا",
+  message: "إذا أعجبك برنامج %@، هل تمانع من أخذ دقيقة لتقييمه؟ شكرا لدعمك",
+  cancelButtonLabel: "لا، شكراً",
+  laterButtonLabel: "ذكرني لاحقاً",
   rateButtonLabel: "قيم البرنامج الآن"
 }));
 
@@ -92,15 +92,6 @@ Locales.addLocale(new Locale({
   cancelButtonLabel: "না, ধন্যবাদ",
   laterButtonLabel: "পরে আমাকে মনে করিয়ে দিন",
   rateButtonLabel: "এখন এটি রেটিং করুন"
-}));
-
-Locales.addLocale(new Locale({
-  language: 'ar',
-  title: "قيِّم %@",
-  message: "ذا أعجبك برنامج %@، هل تمانع من أخذ دقيقة لتقييمه؟ شكرا لدعمك!",
-  cancelButtonLabel: "لا، شكرا",
-  laterButtonLabel: "ذكرني لاحقا",
-  rateButtonLabel: "قيم البرنامج الآن"
 }));
 
 Locales.addLocale(new Locale({
