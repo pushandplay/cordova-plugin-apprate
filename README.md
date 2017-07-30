@@ -154,4 +154,4 @@ https://github.com/pushandplay/cordova-plugin-apprate/blob/master/www/locales.js
 
 Currently maintained by [@westonganger](https://github.com/westonganger)
 
-Created by [@pushandplay](https://github.com/pushandplay) - [Donate with PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=MS8RQAS2NVVQW&lc=RU&item_name=github%2ecom&item_number=cordova%2dplugin%2dapprate&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
+Created by [@pushandplay](https://github.com/pushandplay) - [Donate with PayPal](https://www.paypal.me/pushandplay)
