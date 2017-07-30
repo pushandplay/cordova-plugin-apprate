@@ -2,7 +2,7 @@
 
 A plugin to provide rate this app functionality into your cordova application<br>
 
-**PR's are greatly appreciated** [Donate with PayPal](https://www.paypal.me/pushandplay)
+**PR's are greatly appreciated** [Donate with PayPal](https://www.paypal.me/pushandplay/10)
 
 ## Supported platforms
 
@@ -154,4 +154,4 @@ https://github.com/pushandplay/cordova-plugin-apprate/blob/master/www/locales.js
 
 Currently maintained by [@westonganger](https://github.com/westonganger)
 
-Created by [@pushandplay](https://github.com/pushandplay) - [Donate with PayPal](https://www.paypal.me/pushandplay)
+Created by [@pushandplay](https://github.com/pushandplay) - [Donate with PayPal](https://www.paypal.me/pushandplay/10)
