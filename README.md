@@ -2,7 +2,7 @@
 
 A plugin to provide rate this app functionality into your cordova application<br>
 
-**PR's are greatly appreciated**
+**PR's are greatly appreciated** [Donate with PayPal](https://www.paypal.me/pushandplay)
 
 ## Supported platforms
 
