@@ -5,9 +5,7 @@
     "type": "git",
     "url": "https://github.com/pushandplay/cordova-plugin-apprate"
   },
-  "dependencies": {
-    "cordova": "*"
-  },
+  "dependencies": {},
   "devDependencies": {
     "grunt": "*",
     "grunt-cordovacli": "*"
