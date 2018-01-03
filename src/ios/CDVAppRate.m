@@ -43,10 +43,13 @@
 
 - (void)launchiOSReview:(CDVInvokedUrlCommand *)command {
     BOOL shouldUseNativePrompt = [command.arguments[1] boolValue];
+    BOOL allowAppStoreRedirectiOS = [command.arguments[2] boolValue];
 
     if (shouldUseNativePrompt && [SKStoreReviewController class]) {
         [self launchInAppReview];
-    } else {
+    }
+    
+    if(!shouldUseNativePrompt && allowAppStoreRedirectiOS)
         NSString *appId = @"";
 
         if ([command.arguments count] >= 1) {

@@ -243,6 +243,7 @@ AppRate = (function() {
     promptAgainForEachNewVersion: true,
     usesUntilPrompt: 3,
     inAppReview: true,
+    allowAppStoreRedirectiOS: false,
     callbacks: {
       onButtonClicked: null,
       onRateDialogShow: null,
@@ -285,7 +286,7 @@ AppRate = (function() {
       if (this.preferences.inAppReview) {
         updateiOSRatingData();
         var showNativePrompt = iOSRating.timesPrompted < 3;
-        exec(null, null, 'AppRate', 'launchiOSReview', [this.preferences.storeAppURL.ios, showNativePrompt]);
+        exec(null, null, 'AppRate', 'launchiOSReview', [this.preferences.storeAppURL.ios, showNativePrompt, this.preferences.allowAppStoreRedirectiOS]);
       } else {
         iOSVersion = navigator.userAgent.match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.');
         iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) || 0) / 10;
