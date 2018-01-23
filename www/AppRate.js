@@ -155,8 +155,6 @@ AppRate = (function() {
       if (typeof base.onRateDialogShow === "function") {
         base.onRateDialogShow(promptForStoreRatingWindowButtonClickHandler);
       }
-    }else{
-      typeof base.done === "function" ? base.done() : function(){ };
     }
     return AppRate;
   };
