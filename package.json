@@ -9,5 +9,6 @@
   "devDependencies": {
     "grunt": "*",
     "grunt-cordovacli": "*"
-  }
+  },
+  "types": "./typescript/AppRate.d.ts"
 }
