@@ -211,7 +211,7 @@ Locales.addLocale(new Locale({
 Locales.addLocale(new Locale({
   language: 'he',
   title: "דרג את %@",
-  message: "אם אתה נהנה להשתמש ב- %@, אתה מוכן לקחת רגע כדי לדרג את את התוכנה? זה לא ייקח יותר מדקה. תודה על התמיכה!",
+  message: "אם אתה נהנה להשתמש ב- %@, אתה מוכן לקחת רגע כדי לדרג את התוכנה? זה לא ייקח יותר מדקה. תודה על התמיכה!",
   cancelButtonLabel: "לא, תודה",
   laterButtonLabel: "הזכר לי מאוחר יותר",
   rateButtonLabel: "דרג עכשיו"
