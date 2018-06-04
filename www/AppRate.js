@@ -18,14 +18,16 @@
   * under the License.
   *
   */;
-var AppRate, Locales, localeObj, exec;
+var AppRate, Locales, localeObj, exec, Storage;
 
 Locales = require('./locales');
 
 exec = require('cordova/exec');
 
+Storage = require('./storage')
+
 AppRate = (function() {
-  var FLAG_NATIVE_CODE_SUPPORTED, LOCAL_STORAGE_COUNTER, PREF_STORE_URL_FORMAT_IOS, counter, getAppTitle, getAppVersion, localStorageParam, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
+  var FLAG_NATIVE_CODE_SUPPORTED, LOCAL_STORAGE_COUNTER, PREF_STORE_URL_FORMAT_IOS, counter, getAppTitle, getAppVersion, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
 
   function AppRate() {}
 
@@ -126,7 +128,7 @@ AppRate = (function() {
       case 'stop':
         counter.countdown = AppRate.preferences.usesUntilPrompt + 1;
     }
-    localStorageParam(LOCAL_STORAGE_COUNTER, JSON.stringify(counter));
+    Storage.set(LOCAL_STORAGE_COUNTER, counter);
     return counter;
   };
 
@@ -138,7 +140,7 @@ AppRate = (function() {
     iOSRating.timesPrompted++;
     iOSRating.lastPromptDate = new Date();
 
-    localStorageParam(LOCAL_STORAGE_IOS_RATING, JSON.stringify(iOSRating));
+    Storage.set(LOCAL_STORAGE_IOS_RATING, iOSRating);
   }
 
   showDialog = function(immediately) {
@@ -157,28 +159,6 @@ AppRate = (function() {
       }
     }
     return AppRate;
-  };
-
-  localStorageParam = function(itemName, itemValue, action) {
-    if (itemValue == null) {
-      itemValue = null;
-    }
-    if (action == null) {
-      action = false;
-    }
-    if (itemValue !== null) {
-      action = true;
-    }
-    switch (action) {
-      case true:
-        localStorage.setItem(itemName, itemValue);
-        break;
-      case false:
-        return localStorage.getItem(itemName);
-      case null:
-        localStorage.removeItem(itemName);
-    }
-    return this;
   };
 
   getAppVersion = function(successCallback, errorCallback) {
@@ -200,17 +180,18 @@ AppRate = (function() {
   };
 
   AppRate.init = function() {
-    if(localStorageParam(LOCAL_STORAGE_COUNTER)){
-      counter = JSON.parse(localStorageParam(LOCAL_STORAGE_COUNTER)) || counter;
-    }
+    AppRate.ready = Promise.all([
+      Storage.get(LOCAL_STORAGE_COUNTER).then(function (storedCounter) {
+        counter = storedCounter || counter
+      }),
+      Storage.get(LOCAL_STORAGE_IOS_RATING).then(function (storedRating) {
+        iOSRating = storedRating || iOSRating
 
-    if (localStorageParam(LOCAL_STORAGE_IOS_RATING)){
-      iOSRating = JSON.parse(localStorageParam(LOCAL_STORAGE_IOS_RATING)) || iOSRating;
-
-      if (iOSRating.lastPromptDate) {
-        iOSRating.lastPromptDate = new Date(iOSRating.lastPromptDate);
-      }
-    }
+        if (iOSRating.lastPromptDate) {
+          iOSRating.lastPromptDate = new Date(iOSRating.lastPromptDate);
+        }
+      })
+    ])
 
     getAppVersion((function(_this) {
       return function(applicationVersion) {
@@ -258,20 +239,22 @@ AppRate = (function() {
   };
 
   AppRate.promptForRating = function(immediately) {
-    if (immediately == null) {
-      immediately = true;
-    }
-    if (this.preferences.useLanguage === null) {
-      navigator.globalization.getPreferredLanguage((function(_this) {
-        return function(language) {
-          _this.preferences.useLanguage = language.value;
-          return showDialog(immediately);
-        };
-      })(this));
-    } else {
-      showDialog(immediately);
-    }
-    updateCounter();
+    AppRate.ready.then(function() {
+      if (immediately == null) {
+        immediately = true;
+      }
+      if (AppRate.preferences.useLanguage === null) {
+        navigator.globalization.getPreferredLanguage((function(_this) {
+          return function(language) {
+            _this.preferences.useLanguage = language.value;
+            return showDialog(immediately);
+          };
+        })(AppRate));
+      } else {
+        showDialog(immediately);
+      }
+      updateCounter();
+    });
     return this;
   };
 
