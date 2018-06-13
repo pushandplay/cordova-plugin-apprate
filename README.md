@@ -1,8 +1,8 @@
 # Cordova-Plugin-Apprate
 
-A plugin to provide rate this app functionality into your cordova application<br>
+A plugin to provide rate this app functionality into your cordova application
 
-**PR's are greatly appreciated** [Donate with PayPal](https://www.paypal.me/pushandplay/10)
+**PR's are greatly appreciated** 
 
 ## Supported platforms
 
