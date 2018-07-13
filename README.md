@@ -1,4 +1,6 @@
 # Cordova-Plugin-Apprate
+<a href="https://badge.fury.io/js/cordova-plugin-apprate" target="_blank"><img height="21" style='border:0px;height:21px;' border='0' src="https://badge.fury.io/js/cordova-plugin-apprate.svg" alt="NPM Version"></a>
+<a href='https://www.npmjs.org/package/cordova-plugin-apprate' target='_blank'><img height='21' style='border:0px;height:21px;' src='https://img.shields.io/npm/dt/cordova-plugin-apprate.svg?label=NPM+Downloads' border='0' alt='NPM Downloads' /></a>
 
 A plugin to provide rate this app functionality into your cordova application
 
