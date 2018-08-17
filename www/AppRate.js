@@ -141,10 +141,10 @@ AppRate = (function() {
     iOSRating.lastPromptDate = new Date();
 
     Storage.set(LOCAL_STORAGE_IOS_RATING, iOSRating);
-  }
+  };
 
   showDialog = function(immediately) {
-    var base = AppRate.preferences.callbacks;
+    updateCounter();
     if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
       localeObj = Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName, AppRate.preferences.customLocale);
 
@@ -154,6 +154,7 @@ AppRate = (function() {
         navigator.notification.confirm(localeObj.appRatePromptMessage, promptForAppRatingWindowButtonClickHandler, localeObj.appRatePromptTitle, [localeObj.noButtonLabel, localeObj.yesButtonLabel]);
       }
 
+      var base = AppRate.preferences.callbacks;
       if (typeof base.onRateDialogShow === "function") {
         base.onRateDialogShow(promptForStoreRatingWindowButtonClickHandler);
       }
@@ -243,17 +244,13 @@ AppRate = (function() {
       if (immediately == null) {
         immediately = true;
       }
-      if (AppRate.preferences.useLanguage === null) {
-        navigator.globalization.getPreferredLanguage((function(_this) {
-          return function(language) {
-            _this.preferences.useLanguage = language.value;
-            return showDialog(immediately);
-          };
-        })(AppRate));
-      } else {
-        showDialog(immediately);
+
+      // see also: https://cordova.apache.org/news/2017/11/20/migrate-from-cordova-globalization-plugin.html
+      if (AppRate.preferences.useLanguage === null && window.Intl && typeof window.Intl === 'object') {
+        AppRate.preferences.useLanguage = window.navigator.language;
       }
-      updateCounter();
+
+      showDialog(immediately);
     });
     return this;
   };
