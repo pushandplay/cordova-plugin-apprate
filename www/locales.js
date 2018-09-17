@@ -88,19 +88,14 @@ Locales.addLocale(new Locale({
 Locales.addLocale(new Locale({
   language: 'bn',
   title: "রেট %@",
-  message: "আপনি %@ ব্যবহার করে ভোগ, আপনি এটি রেট একটি মুহূর্ত গ্রহণ কিছু মনে করবে? এটি একটি মিনিট চেয়ে বেশি গ্রহণ করা হবে না. আপনার সমর্থনের জন্য ধন্যবাদ!",
+  message: "মাত্র এক মিনিট ব্যয় করুন এবং আমাদের এ্যপের প্রচারে সহায়তা করুন। আপনার সহযোগীতার জন্য ধন্যবাদ",
   cancelButtonLabel: "না, ধন্যবাদ",
-  laterButtonLabel: "পরে আমাকে মনে করিয়ে দিন",
-  rateButtonLabel: "এখন এটি রেটিং করুন"
-}));
-
-Locales.addLocale(new Locale({
-  language: 'bn',
-  title: "রেট %@",
-  message: "আপনি %@ ব্যবহার করে ভোগ, আপনি এটি রেট একটি মুহূর্ত গ্রহণ কিছু মনে করবে? এটি একটি মিনিট চেয়ে বেশি গ্রহণ করা হবে না. আপনার সমর্থনের জন্য ধন্যবাদ!",
-  cancelButtonLabel: "না, ধন্যবাদ",
-  laterButtonLabel: "পরে আমাকে মনে করিয়ে দিন",
-  rateButtonLabel: "এখন এটি রেটিং করুন"
+  laterButtonLabel: "আমাকে পরে মনে করিয়ে দিন",
+  rateButtonLabel: "এখন এটি রেটিং দিন",
+  yesButtonLabel: "হ্যাঁ!",
+  noButtonLabel: "সত্যিই না",
+  appRatePromptTitle: '%@ ব্যবহার করে ভালো লেগেছে কি?',
+  feedbackPromptTitle: 'কিছু মতামত দিবেন কি?',
 }));
 
 Locales.addLocale(new Locale({
