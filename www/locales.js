@@ -132,7 +132,13 @@ Locales.addLocale(new Locale({
   message: "Wenn dir %@ gefällt, würdest Du es bitte bewerten? Dies wird nicht länger als eine Minute dauern. Danke für die Unterstützung!",
   cancelButtonLabel: "Nein, danke",
   laterButtonLabel: "Später erinnern",
-  rateButtonLabel: "Jetzt bewerten"
+  rateButtonLabel: "Jetzt bewerten",
+  yesButtonLabel: "Ja!",
+  noButtonLabel: "Nicht wirklich",
+  appRatePromptTitle: 'Gefällt dir %@',
+  feedbackPromptTitle: 'Würdest du uns eine kurze Rückmeldung geben?',
+  appRatePromptMessage:'',
+  feedbackPromptMessage:''
 }));
 
 Locales.addLocale(new Locale({
@@ -141,7 +147,13 @@ Locales.addLocale(new Locale({
   message: "Wenn dir %@ gefällt, würdest Du es bitte bewerten? Dies wird nicht länger als eine Minute dauern.\nDanke für die Unterstützung!",
   cancelButtonLabel: "Nein, danke",
   laterButtonLabel: "Später erinnern",
-  rateButtonLabel: "Jetzt bewerten"
+  rateButtonLabel: "Jetzt bewerten",
+  yesButtonLabel: "Ja!",
+  noButtonLabel: "Nicht wirklich",
+  appRatePromptTitle: 'Gefällt dir %@',
+  feedbackPromptTitle: 'Würdest du uns eine kurze Rückmeldung geben?',
+  appRatePromptMessage:'',
+  feedbackPromptMessage:''
 }));
 
 Locales.addLocale(new Locale({
