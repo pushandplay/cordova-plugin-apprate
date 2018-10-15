@@ -54,7 +54,8 @@ Locales = (function() {
       applicationTitle = '';
     }
     localeObject = customLocale || locales[language] || locales[language.split(/-/)[0]] || locales[LOCALE_DEFAULT];
-    localeObject.title = localeObject.title.replace(/%@/g, applicationTitle);
+  	localeObject = Object.assign({}, locales[LOCALE_DEFAULT], localeObject);	//use entries of default locale as fallback for unset entries
+	localeObject.title = localeObject.title.replace(/%@/g, applicationTitle);
     localeObject.appRatePromptTitle = (localeObject.appRatePromptTitle || '').replace(/%@/g, applicationTitle);
     localeObject.feedbackPromptTitle = (localeObject.feedbackPromptTitle || '').replace(/%@/g, applicationTitle);
     localeObject.appRatePromptMessage = (localeObject.appRatePromptMessage || '').replace(/%@/g, applicationTitle);
