@@ -277,7 +277,7 @@ AppRate = (function() {
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
       cordova.InAppBrowser.open(this.preferences.storeAppURL.android, '_system', 'location=no');
     } else if (/(Windows|Edge)/i.test(navigator.userAgent.toLowerCase())) {
-      cordova.InAppBrowser.open(this.preferences.storeAppURL.windows, '_blank', 'location=no');
+	  Windows.Services.Store.StoreRequestHelper.sendRequestAsync(Windows.Services.Store.StoreContext.getDefault(), 16, "");
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
       cordova.InAppBrowser.open(this.preferences.storeAppURL.blackberry, '_system', 'location=no');
     } else if (/(IEMobile|Windows Phone)/i.test(navigator.userAgent.toLowerCase())) {
