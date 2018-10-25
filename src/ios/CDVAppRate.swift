@@ -13,6 +13,9 @@ class SwiftAppRate: NSObject {
 //    }
     @objc
     func isTestFlight() -> Bool {
-        return (Bundle.main.path(forResource: "embedded", ofType: "mobileprovision") != nil);
+        guard let path = Bundle.main.appStoreReceiptURL?.path else {
+            return false
+        }
+        return path.contains("CoreSimulator") || path.contains("sandboxReceipt")
     }
 }

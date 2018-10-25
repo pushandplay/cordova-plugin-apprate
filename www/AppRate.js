@@ -220,6 +220,7 @@ AppRate = (function () {
     })(this));
     getIsSimulator((function (_this) {
       return function (isSimulator) {
+        isSimulator = isSimulator == "true" ? true : false;
         _this.preferences.inAppReview = _this.preferences.inAppReview && !!isSimulator;
         return _this;
       };
