@@ -20,6 +20,7 @@
 #import "CDVAppRate.h"
 #import <Cordova/CDV.h>
 #import <StoreKit/StoreKit.h>
+#import "Pulse_Community-Swift.h"
 
 @implementation CDVAppRate
 
@@ -55,6 +56,20 @@
 
         [self launchAppStore:appId];
     }
+}
+
+
+- (void)isSimulatorOrTestFlight:(CDVInvokedUrlCommand *)command {
+    SwiftAppRate *instance = [SwiftAppRate new];
+    [self.commandDelegate runInBackground:^{
+        CDVPluginResult *pluginResult = NULL;
+        if ([instance isTestFlight]) {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"true"];
+        } else {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"false"];
+        }
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
 }
 
 - (void)launchAppStore:(NSString *) appId{
