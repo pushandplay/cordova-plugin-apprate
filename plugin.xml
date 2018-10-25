@@ -19,15 +19,15 @@ specific language governing permissions and limitations
 under the License.
 -->
 
-<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0" id="cordova-plugin-apprate" version="1.4.0">
+<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0" id="cordova-plugin-apprate" version="1.4.1">
     <name>AppRate</name>
-    <description>This plugin provides "Rate This App" functionality to your Cordova/Phonegap application</description>
+    <description>This plugin provides "Rate This App" functionality to your Cordova/Phonegap application + TestFlight Version</description>
     <author email="hello@pushandplay.ru" href="http://pushandplay.ru">pushandplay</author>
     <keywords>cordova,phonegap,AppRate,App Rate,rate,iRate,rate in iTunes,write a review,rate us,rate my application</keywords>
     <license>Apache 2.0</license>
     <info>Cross-platform AppRate plugin for Cordova / PhoneGap</info>
-    <repo>https://github.com/pushandplay/cordova-plugin-apprate.git</repo>
-    <issue>https://github.com/pushandplay/cordova-plugin-apprate/issues</issue>
+    <repo>https://github.com/brainycouchmike/cordova-plugin-apprate.git</repo>
+    <issue>https://github.com/brainycouchmike/cordova-plugin-apprate/issues</issue>
 
     <engines>
         <engine name="cordova" version=">=3.0.0"/>
@@ -36,6 +36,7 @@ under the License.
     <dependency id="cordova-plugin-dialogs"/>
     <dependency id="cordova-plugin-inappbrowser"/>
     <dependency id="cordova-plugin-nativestorage"/>
+    <dependency id="cordova-plugin-add-swift-support" version="1.7.2"/>
 
     <js-module src="www/AppRate.js" name="AppRate">
         <clobbers target="AppRate"/>
@@ -68,6 +69,7 @@ under the License.
 
         <header-file src="src/ios/CDVAppRate.h"/>
         <source-file src="src/ios/CDVAppRate.m"/>
+        <source-file src="src/ios/CDVAppRate.swift"/>
 
         <framework src="StoreKit.framework"/>
     </platform>
