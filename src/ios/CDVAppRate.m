@@ -68,11 +68,15 @@
             if (error) {
                 NSLog(@"Error %@ with User Info %@.", error, [error userInfo]);
             } else {
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                [self.viewController presentViewController:storeProductViewController animated:YES completion:nil];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                });
             }
         }];
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        [self.viewController presentViewController:storeProductViewController animated:YES completion:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        });
     }];
 }
 
