@@ -342,7 +342,11 @@ Locales.addLocale(new Locale({
   message: "Если вам нравится пользоваться %@, не будете ли вы возражать против того, чтобы уделить минуту и оценить его?\nСпасибо вам за поддержку!",
   cancelButtonLabel: "Нет, спасибо",
   laterButtonLabel: "Напомнить позже",
-  rateButtonLabel: "Оценить сейчас"
+  rateButtonLabel: "Оценить сейчас",
+  yesButtonLabel: "Да!",
+  noButtonLabel: "Нет",
+  appRatePromptTitle: "Вам нравится приложение?",
+  feedbackPromptTitle: "Не могли бы вы дать нам обратную связь?"
 }));
 
 Locales.addLocale(new Locale({
@@ -405,7 +409,11 @@ Locales.addLocale(new Locale({
   message: "Якщо вам подобається користуватися %@, чи не будете ви заперечувати проти того, щоб приділити хвилинку та оцінити її? Спасибі вам за підтримку!",
   cancelButtonLabel: "Ні, дякую",
   laterButtonLabel: "Нагадати пізніше",
-  rateButtonLabel: "Оцінити зараз"
+  rateButtonLabel: "Оцінити зараз",
+  yesButtonLabel: "Так!",
+  noButtonLabel: "Ні",
+  appRatePromptTitle: "Вам подобається додаток?",
+  feedbackPromptTitle: "Чи не могли б ви дати нам зворотний зв'язок?"
 }));
 
 Locales.addLocale(new Locale({
