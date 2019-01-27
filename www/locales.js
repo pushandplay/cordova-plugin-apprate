@@ -192,13 +192,13 @@ Locales.addLocale(new Locale({
 Locales.addLocale(new Locale({
   language: 'eu',
   title: "%@ iruzkindu nahi?",
-  message: "%@ gustoko baduzu asko eskertuko genuke zure iruzkina, minutu bat baino gutxiago izango da. Eskerrik asko zure parte hartzeagatik!",
+  message: "%@ gustuko baduzu asko eskertuko genuke zure iruzkina, minutu bat baino gutxiago izango da. Eskerrik asko zure laguntzagatik!",
   cancelButtonLabel: "Ez, Eskerrik asko",
   laterButtonLabel: "Beranduago gogoratu",
   rateButtonLabel: "Iruzkindu orain",
   yesButtonLabel: "Bai!",
   noButtonLabel: "Ez",
-  appRatePromptTitle: 'Gustoko duzu %@ ?',
+  appRatePromptTitle: 'Gustuko duzu %@ ?',
   feedbackPromptTitle: 'Iruzkin bat lagatzerik nahi?',
   appRatePromptMessage:'',
   feedbackPromptMessage:''
