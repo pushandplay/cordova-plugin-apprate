@@ -190,6 +190,21 @@ Locales.addLocale(new Locale({
 }));
 
 Locales.addLocale(new Locale({
+  language: 'eu',
+  title: "%@ iruzkindu nahi?",
+  message: "%@ gustuko baduzu asko eskertuko genuke zure iruzkina, minutu bat baino gutxiago izango da. Eskerrik asko zure laguntzagatik!",
+  cancelButtonLabel: "Ez, Eskerrik asko",
+  laterButtonLabel: "Beranduago gogoratu",
+  rateButtonLabel: "Iruzkindu orain",
+  yesButtonLabel: "Bai!",
+  noButtonLabel: "Ez",
+  appRatePromptTitle: 'Gustuko duzu %@ ?',
+  feedbackPromptTitle: 'Iruzkin bat lagatzerik nahi?',
+  appRatePromptMessage:'',
+  feedbackPromptMessage:''
+}));
+
+Locales.addLocale(new Locale({
   language: 'fa',
   title: "نرخ %@",
   message: "اگر شما با استفاده از %@ لذت بردن از، اشکالی ندارد یک لحظه به امتیاز دهی هستند؟ آن را نمی خواهد بیشتر از یک دقیقه طول بکشد. با تشکر از حمایت شما!",
