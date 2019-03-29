@@ -297,9 +297,9 @@ function checkIfDateIsAfter(date, minimumDifference) {
     return false;
   }
 
-  const dateTimestamp = date.getTime();
-  const todayTimestamp = new Date().getTime();
-  const differenceInDays = Math.abs((todayTimestamp - dateTimestamp) / (3600 * 24 * 1000));
+  var dateTimestamp = date.getTime();
+  var todayTimestamp = new Date().getTime();
+  var differenceInDays = Math.abs((todayTimestamp - dateTimestamp) / (3600 * 24 * 1000));
 
   return differenceInDays > minimumDifference;
 }
