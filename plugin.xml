@@ -34,7 +34,6 @@ under the License.
     </engines>
 
     <dependency id="cordova-plugin-dialogs"/>
-    <dependency id="cordova-plugin-inappbrowser"/>
     <dependency id="cordova-plugin-nativestorage"/>
 
     <js-module src="www/AppRate.js" name="AppRate">

@@ -236,7 +236,10 @@ AppRate = (function() {
       windows8: null,
       windows: null
     },
-    customLocale: null
+    customLocale: null,
+    openUrl: function (url) {
+        cordova.InAppBrowser.open(url, '_system', 'location=no');
+    }
   };
 
   AppRate.promptForRating = function(immediately) {
@@ -272,16 +275,16 @@ AppRate = (function() {
         } else {
           iOSStoreUrl = PREF_STORE_URL_PREFIX_IOS9 + this.preferences.storeAppURL.ios + PREF_STORE_URL_POSTFIX_IOS9;
         }
-        cordova.InAppBrowser.open(iOSStoreUrl, '_system', 'location=no');
+	AppRate.preferences.openUrl(iOSStoreUrl);
       }
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
-      cordova.InAppBrowser.open(this.preferences.storeAppURL.android, '_system', 'location=no');
+      AppRate.preferences.openUrl(this.preferences.storeAppURL.android);
     } else if (/(Windows|Edge)/i.test(navigator.userAgent.toLowerCase())) {
 	  Windows.Services.Store.StoreRequestHelper.sendRequestAsync(Windows.Services.Store.StoreContext.getDefault(), 16, "");
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
-      cordova.InAppBrowser.open(this.preferences.storeAppURL.blackberry, '_system', 'location=no');
+      AppRate.preferences.openUrl(this.preferences.storeAppURL.blackberry);
     } else if (/(IEMobile|Windows Phone)/i.test(navigator.userAgent.toLowerCase())) {
-      cordova.InAppBrowser.open(this.preferences.storeAppURL.windows8, '_system', 'location=no');
+      AppRate.preferences.openUrl(this.preferences.storeAppURL.windows8);
     }
     return this;
   };
