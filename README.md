@@ -62,6 +62,8 @@ AppRate.preferences.openUrl = function (url) {
 
 ## Customization and usage
 
+- Note: During development the submit button will be disabled and cannot be pressed. This is expected behavior per Apple when the app has not been downloaded from the app store. Details here: https://github.com/pushandplay/cordova-plugin-apprate/issues/182
+
 ## Options / Preferences
 These options are available on the `AppRate.preferences` object. 
 
