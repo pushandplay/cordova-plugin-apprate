@@ -411,11 +411,17 @@ Locales.addLocale(new Locale({
 
 Locales.addLocale(new Locale({
   language: 'tr',
-  title: "Oy %@",
-  message: "Eğer %@ uygulamamız hoşunuza gittiyse, oy vermek ister misiniz? Bir dakikadan fazla sürmeyecektir. Desteğiniz için teşekkürler!",
+  title: "%@ Uygulamamızı değerlendirmek ister misiniz?",
+  message: "Bir dakikadan fazla sürmeyecektir ve uygulamamızı tanıtmamıza yardımcı olacaktır. Desteğiniz için teşekkürler!",
   cancelButtonLabel: "Teşekkürler, Hayır",
   laterButtonLabel: "Sonra Hatırlat",
-  rateButtonLabel: "Şimdi Oyla"
+  rateButtonLabel: "Şimdi Değerlendir",
+  yesButtonLabel: "Evet!",
+  noButtonLabel: "Pek Değil",
+  appRatePromptTitle: '%@ kullanmayı seviyor musunuz ?',
+  feedbackPromptTitle: 'Geribildirim vermek ister misiniz?',
+  appRatePromptMessage:'',
+  feedbackPromptMessage:''
 }));
 
 Locales.addLocale(new Locale({
