@@ -186,7 +186,13 @@ Locales.addLocale(new Locale({
   message: "Si te gusta %@, ¿podrías escribirnos una reseña? No te tomará más de un minuto. ¡Gracias por tu apoyo!",
   cancelButtonLabel: "No, gracias",
   laterButtonLabel: "Recordarme más tarde",
-  rateButtonLabel: "Escribir reseña ahora"
+  rateButtonLabel: "Escribir reseña ahora",
+  yesButtonLabel: "Si",
+  noButtonLabel: "No",
+  appRatePromptTitle: "¿Te gusta %@?",
+  feedbackPromptTitle: "¿Darías tu opinión?",
+  appRatePromptMessage:"",
+  feedbackPromptMessage:""
 }));
 
 Locales.addLocale(new Locale({
@@ -228,7 +234,13 @@ Locales.addLocale(new Locale({
   message: "Si vous aimez utiliser %@, n’oubliez pas de voter sur l’App Store. Cela ne prend qu’une minute. Merci d’avance pour votre soutien !",
   cancelButtonLabel: "Non, merci",
   laterButtonLabel: "Me le rappeler ultérieurement",
-  rateButtonLabel: "Votez maintenant"
+  rateButtonLabel: "Votez maintenant",
+  yesButtonLabel: "Oui",
+  noButtonLabel: "Non, merci",
+  appRatePromptTitle: "Vous aimez %@",
+  feedbackPromptTitle: "Voulez-vous voter sur l'App Store?",
+  appRatePromptMessage:"",
+  feedbackPromptMessage:""
 }));
 
 Locales.addLocale(new Locale({
@@ -264,7 +276,13 @@ Locales.addLocale(new Locale({
   message: "Ti piace %@? Puoi dare il tuo voto nello store. Ti basterà un minuto! Grazie!",
   cancelButtonLabel: "No, grazie",
   laterButtonLabel: "Più tardi",
-  rateButtonLabel: "Valuta ora"
+  rateButtonLabel: "Valuta ora",
+  yesButtonLabel: "Si",
+  noButtonLabel: "No",
+  appRatePromptTitle: "Ti piace %@",
+  feedbackPromptTitle: "Daresti il tuo giudizio?",
+  appRatePromptMessage:"",
+  feedbackPromptMessage:""
 }));
 
 Locales.addLocale(new Locale({
