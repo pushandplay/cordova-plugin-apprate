@@ -293,7 +293,9 @@ AppRate = (function() {
 
 })();
 
-AppRate.init();
+document.addEventListener("deviceready", function() {
+  AppRate.init();
+}, false)
 
 function checkIfDateIsAfter(date, minimumDifference) {
   if (!date) {
