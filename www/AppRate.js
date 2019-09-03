@@ -27,12 +27,11 @@ exec = require('cordova/exec');
 Storage = require('./storage')
 
 AppRate = (function() {
-  var FLAG_NATIVE_CODE_SUPPORTED, LOCAL_STORAGE_COUNTER, PREF_STORE_URL_FORMAT_IOS, counter, getAppTitle, getAppVersion, promptForRatingWindowButtonClickHandler, showDialog, updateCounter;
+  var FLAG_NATIVE_CODE_SUPPORTED, LOCAL_STORAGE_COUNTER, counter, getAppTitle, getAppVersion, showDialog, updateCounter;
 
   function AppRate() {}
 
   LOCAL_STORAGE_COUNTER = 'counter';
-  LOCAL_STORAGE_IOS_RATING = 'iosRating';
 
   FLAG_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad|Android)/i.test(navigator.userAgent.toLowerCase());
 
@@ -43,11 +42,6 @@ AppRate = (function() {
   counter = {
     applicationVersion: void 0,
     countdown: 0
-  };
-
-  var iOSRating = {
-    timesPrompted: 0,
-    lastPromptDate: null
   };
 
   promptForAppRatingWindowButtonClickHandler = function (buttonIndex) {
@@ -132,17 +126,6 @@ AppRate = (function() {
     return counter;
   };
 
-  updateiOSRatingData = function() {
-    if (checkIfDateIsAfter(iOSRating.lastPromptDate, 365)) {
-      iOSRating.timesPrompted = 0;
-    }
-
-    iOSRating.timesPrompted++;
-    iOSRating.lastPromptDate = new Date();
-
-    Storage.set(LOCAL_STORAGE_IOS_RATING, iOSRating);
-  };
-
   showDialog = function(immediately) {
     updateCounter();
     if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
@@ -184,13 +167,6 @@ AppRate = (function() {
     AppRate.ready = Promise.all([
       Storage.get(LOCAL_STORAGE_COUNTER).then(function (storedCounter) {
         counter = storedCounter || counter
-      }),
-      Storage.get(LOCAL_STORAGE_IOS_RATING).then(function (storedRating) {
-        iOSRating = storedRating || iOSRating
-
-        if (iOSRating.lastPromptDate) {
-          iOSRating.lastPromptDate = new Date(iOSRating.lastPromptDate);
-        }
       })
     ])
 
@@ -264,8 +240,7 @@ AppRate = (function() {
 
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
       if (this.preferences.inAppReview) {
-        updateiOSRatingData();
-        var showNativePrompt = iOSRating.timesPrompted < 3;
+        var showNativePrompt = true;
         exec(null, null, 'AppRate', 'launchiOSReview', [this.preferences.storeAppURL.ios, showNativePrompt]);
       } else {
         iOSVersion = navigator.userAgent.match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.');
@@ -296,17 +271,5 @@ AppRate = (function() {
 document.addEventListener("deviceready", function() {
   AppRate.init();
 }, false)
-
-function checkIfDateIsAfter(date, minimumDifference) {
-  if (!date) {
-    return false;
-  }
-
-  var dateTimestamp = date.getTime();
-  var todayTimestamp = new Date().getTime();
-  var differenceInDays = Math.abs((todayTimestamp - dateTimestamp) / (3600 * 24 * 1000));
-
-  return differenceInDays > minimumDifference;
-}
 
 module.exports = AppRate;
