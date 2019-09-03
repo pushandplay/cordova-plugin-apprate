@@ -1,6 +1,7 @@
 # Changelog
 
 - UNRELEASED
+  - [PR #253](https://github.com/pushandplay/cordova-plugin-apprate/pull/253) - Remove iOS rating counter in favor of native approach
   - [PR #252](https://github.com/pushandplay/cordova-plugin-apprate/pull/252) - Postpone initial AppRate.init() until `deviceready`
 
 - 1.4.0
