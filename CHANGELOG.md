@@ -3,6 +3,13 @@
 - UNRELEASED
   - [PR #253](https://github.com/pushandplay/cordova-plugin-apprate/pull/253) - Remove iOS rating counter in favor of native approach
   - [PR #252](https://github.com/pushandplay/cordova-plugin-apprate/pull/252) - Postpone initial AppRate.init() until `deviceready`
+  - [PR #239](https://github.com/pushandplay/cordova-plugin-apprate/pull/239) - Remove inappbrowser dependency adding support to choose between inappbrowser and safariviewcontroller 
+  - [PR #244](https://github.com/pushandplay/cordova-plugin-apprate/pull/244) - Use ES5 var instead of ES6 const for better browser compatibility
+  - [PR #231](https://github.com/pushandplay/cordova-plugin-apprate/pull/231) - Displaying store view page before it loads for improved UX
+  - [PR #228](https://github.com/pushandplay/cordova-plugin-apprate/pull/228) - Add native support for windows platform rating
+  - [PR #220](https://github.com/pushandplay/cordova-plugin-apprate/pull/220) - Remove dependency on deprecated cordova-plugin-globalization in favor of browser `Intl` api
+  - Various language fixes and improvements
+  - [View All Merged PR's](https://github.com/pushandplay/cordova-plugin-apprate/compare/v1.4.0...master)
 
 - 1.4.0
   - [Merged PR's](https://github.com/pushandplay/cordova-plugin-apprate/pulls?utf8=%E2%9C%93&q=is%3Apr+is%3Aclosed+merged%3A2017-06-24..2018-06-13)
