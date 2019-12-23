@@ -37,6 +37,7 @@ declare class AppRatePreferences {
   callbacks:CallbackPreferences;
   storeAppURL:StoreAppURLPreferences;
   customLocale:CustomLocale;
+  openUrl:(url:string) => void;
 }
 
 declare class StoreAppURLPreferences {
