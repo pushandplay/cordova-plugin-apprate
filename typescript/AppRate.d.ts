@@ -18,8 +18,8 @@
  * under the License.
  *
  */
-declare module "cordova-plugin-apprate" {
 
+declare module "cordova-plugin-apprate" {
 
   export class AppRate {
     static locales: Locales;
@@ -96,4 +96,5 @@ declare module "cordova-plugin-apprate" {
     appRatePromptMessage: string;
     feedbackPromptMessage: string;
   }
+  
 }
