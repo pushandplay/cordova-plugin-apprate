@@ -18,6 +18,7 @@
  * under the License.
  *
  */
+declare module "cordova-plugin-apprate"
 declare class AppRate {
   static locales:Locales;
   static preferences:AppRatePreferences;
