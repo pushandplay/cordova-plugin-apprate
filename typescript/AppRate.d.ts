@@ -18,79 +18,82 @@
  * under the License.
  *
  */
-declare module "cordova-plugin-apprate"
-declare class AppRate {
-  static locales:Locales;
-  static preferences:AppRatePreferences;
+declare module "cordova-plugin-apprate" {
 
-  static init():AppRate;
-  static promptForRating(immediately?:boolean):AppRate;
-  static navigateToAppStore():AppRate;
-}
 
-declare class AppRatePreferences {
-  useLanguage:string;
-  displayAppName:string;
-  promptAgainForEachNewVersion:boolean;
-  usesUntilPrompt:number;
-  inAppReview:boolean;
-  simpleMode:boolean;
-  callbacks:CallbackPreferences;
-  storeAppURL:StoreAppURLPreferences;
-  customLocale:CustomLocale;
-  openUrl:(url:string) => void;
-}
+  export class AppRate {
+    static locales: Locales;
+    static preferences: AppRatePreferences;
 
-declare class StoreAppURLPreferences {
-  ios:string;
-  android:string;
-  blackberry:string;
-  windows8:string;
-  windows:string;
-}
+    static init(): AppRate;
+    static promptForRating(immediately?: boolean): AppRate;
+    static navigateToAppStore(): AppRate;
+  }
 
-declare class CallbackPreferences {
-  onButtonClicked:(buttonIndex:number) => void;
-  onRateDialogShow:(rateCallback:(buttonIndex:number) => void) => void;
-  handleNegativeFeedback:() => void;
-  done:() => void;
-}
+  export class AppRatePreferences {
+    useLanguage: string;
+    displayAppName: string;
+    promptAgainForEachNewVersion: boolean;
+    usesUntilPrompt: number;
+    inAppReview: boolean;
+    simpleMode: boolean;
+    callbacks: CallbackPreferences;
+    storeAppURL: StoreAppURLPreferences;
+    customLocale: CustomLocale;
+    openUrl: (url: string) => void;
+  }
 
-declare class CustomLocale {
-  title:string;
-  message:string;
-  cancelButtonLabel:string;
-  laterButtonLabel:string;
-  rateButtonLabel:string;
-  yesButtonLabel:string;
-  noButtonLabel:string;
-  appRatePromptTitle:string;
-  feedbackPromptTitle:string;
-  appRatePromptMessage:string;
-  feedbackPromptMessage:string;
-}
+  export class StoreAppURLPreferences {
+    ios: string;
+    android: string;
+    blackberry: string;
+    windows8: string;
+    windows: string;
+  }
 
-declare class Locales {
-  addLocale(localeObject:Locale):Locale;
-  getLocale(language:string, applicationTitle?:string):Locale;
-  getLocalesNames():Array<string>;
-}
+  export class CallbackPreferences {
+    onButtonClicked: (buttonIndex: number) => void;
+    onRateDialogShow: (rateCallback: (buttonIndex: number) => void) => void;
+    handleNegativeFeedback: () => void;
+    done: () => void;
+  }
 
-declare class Locale {
-  constructor(localeOptions:LocaleOptions);
-}
+  export class CustomLocale {
+    title: string;
+    message: string;
+    cancelButtonLabel: string;
+    laterButtonLabel: string;
+    rateButtonLabel: string;
+    yesButtonLabel: string;
+    noButtonLabel: string;
+    appRatePromptTitle: string;
+    feedbackPromptTitle: string;
+    appRatePromptMessage: string;
+    feedbackPromptMessage: string;
+  }
 
-declare class LocaleOptions {
-  language:string
-  title:string;
-  message:string;
-  cancelButtonLabel:string;
-  laterButtonLabel:string;
-  rateButtonLabel:string;
-  yesButtonLabel:string;
-  noButtonLabel:string;
-  appRatePromptTitle:string;
-  feedbackPromptTitle:string;
-  appRatePromptMessage:string;
-  feedbackPromptMessage:string;
+  export class Locales {
+    addLocale(localeObject: Locale): Locale;
+    getLocale(language: string, applicationTitle?: string): Locale;
+    getLocalesNames(): Array<string>;
+  }
+
+  export class Locale {
+    constructor(localeOptions: LocaleOptions);
+  }
+
+  export class LocaleOptions {
+    language: string
+    title: string;
+    message: string;
+    cancelButtonLabel: string;
+    laterButtonLabel: string;
+    rateButtonLabel: string;
+    yesButtonLabel: string;
+    noButtonLabel: string;
+    appRatePromptTitle: string;
+    feedbackPromptTitle: string;
+    appRatePromptMessage: string;
+    feedbackPromptMessage: string;
+  }
 }
