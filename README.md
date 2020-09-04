@@ -73,7 +73,7 @@ These options are available on the `AppRate.preferences` object.
 | displayAppName | String | '' | custom application title |
 | promptAgainForEachNewVersion | Boolean | true | show dialog again when application version will be updated |
 | usesUntilPrompt | Integer | 3 | count of runs of application before dialog will be displayed |
-| inAppReview | Boolean | true | iOS Only. Write review directly in your application (iOS 10.3+), limit of 3 prompts per year. Fallback to opening the store within the app for other iOS versions. Use false to use in app browser. |
+| reviewType.ios | [Enum](#reviewtypeios-enum) | AppStoreReview | the type of review display to show the user |
 | simpleMode | Boolean | false | enabling simplemode would display the rate dialog directly without the negative feedback filtering flow|
 | callbacks.onButtonClicked | Function | null | call back function. called when user clicked on rate-dialog buttons |
 | callbacks.onRateDialogShow | Function | null | call back function. called when rate-dialog showing |
@@ -83,6 +83,11 @@ These options are available on the `AppRate.preferences` object.
 | storeAppURL.blackberry | String | null | application URL in AppWorld |
 | storeAppURL.windows8 | String | null | application URL in WindowsStore |
 | customLocale | Object | null | custom locale object |
+
+### reviewType.ios Enum
+- 'AppStoreReview' - Open the store within the app. Use this option as an alternative to inAppReview to avoid the rate action from [doing nothing](https://developer.apple.com/documentation/storekit/skstorereviewcontroller/2851536-requestreview)
+- 'InAppReview' - Write review directly in your application (iOS 10.3+), limit of 3 prompts per year. Fallback to 'AppStoreReview' for other iOS versions
+- 'InAppBrowser' - Open the store using the `openUrl` preference (defaults to InAppBrowser). Be advised that WKWebView might not open the app store links
 
 ## Examples
 
@@ -148,7 +153,9 @@ AppRate.preferences = {
   displayAppName: 'My custom app title',
   usesUntilPrompt: 5,
   promptAgainForEachNewVersion: false,
-  inAppReview: true,
+  reviewType: {
+    ios: 'InAppReview'
+  },
   storeAppURL: {
     ios: '<my_app_id>',
     android: 'market://details?id=<package_name>',
@@ -223,7 +230,9 @@ AppRate.preferences = {
   displayAppName: 'My custom app title',
   usesUntilPrompt: 5,
   promptAgainForEachNewVersion: false,
-  inAppReview: true,
+  reviewType: {
+    ios: 'InAppReview'
+  },
   storeAppURL: {
     ios: '<my_app_id>',
     android: 'market://details?id=<package_name>',
