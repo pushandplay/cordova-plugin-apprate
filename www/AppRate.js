@@ -18,38 +18,40 @@
   * under the License.
   *
   */;
-var AppRate, Locales, localeObj, exec, Storage;
+var exec = require('cordova/exec');
+var Locales = require('./locales');
+var Storage = require('./storage')
 
-Locales = require('./locales');
+var AppRate = (function() {
 
-exec = require('cordova/exec');
+  function noop(){}
 
-Storage = require('./storage')
-
-AppRate = (function() {
-  var FLAG_NATIVE_CODE_SUPPORTED, LOCAL_STORAGE_COUNTER, counter, getAppTitle, getAppVersion, showDialog, updateCounter;
+  var localeObj;
 
   function AppRate() {}
+
   AppRate.initialized = false;
   AppRate.ready = new Promise(function (resolve, reject) {
     AppRate.readyResolve = resolve;
     AppRate.readyReject = reject;
   });
 
-  LOCAL_STORAGE_COUNTER = 'counter';
+  var LOCAL_STORAGE_COUNTER = 'counter';
 
-  FLAG_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad|Android)/i.test(navigator.userAgent.toLowerCase());
+  var FLAG_IOS_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase());
+  var FLAG_ANDROID_NATIVE_CODE_SUPPORTED = /Android/i.test(navigator.userAgent.toLowerCase());
+  var FLAG_NATIVE_CODE_SUPPORTED = FLAG_IOS_NATIVE_CODE_SUPPORTED || FLAG_ANDROID_NATIVE_CODE_SUPPORTED;
 
-  PREF_STORE_URL_PREFIX_IOS9 = "itms-apps://itunes.apple.com/app/viewContentsUserReviews/id";
-  PREF_STORE_URL_POSTFIX_IOS9 = "?action=write-review";
-  PREF_STORE_URL_FORMAT_IOS8 = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8&id=";
+  var PREF_STORE_URL_PREFIX_IOS9 = "itms-apps://itunes.apple.com/app/viewContentsUserReviews/id";
+  var PREF_STORE_URL_POSTFIX_IOS9 = "?action=write-review";
+  var PREF_STORE_URL_FORMAT_IOS8 = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8&id=";
 
-  counter = {
+  var counter = {
     applicationVersion: void 0,
     countdown: 0
   };
 
-  promptForAppRatingWindowButtonClickHandler = function (buttonIndex) {
+  function promptForAppRatingWindowButtonClickHandler(buttonIndex) {
     var base = AppRate.preferences.callbacks, currentBtn = null;
     switch (buttonIndex) {
       case 0:
@@ -67,9 +69,9 @@ AppRate = (function() {
         break;
     }
     return typeof base.onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "AppRatingPrompt") : function(){ };
-  };
+  }
 
-  promptForStoreRatingWindowButtonClickHandler = function(buttonIndex) {
+  function promptForStoreRatingWindowButtonClickHandler(buttonIndex) {
     var base = AppRate.preferences.callbacks, currentBtn = null;
     switch (buttonIndex) {
       case 0:
@@ -93,9 +95,9 @@ AppRate = (function() {
     typeof base.onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "StoreRatingPrompt") : function(){ };
     //This one is called anyway once the process is done
     return typeof base.done === "function" ? base.done() : function(){ };
-  };
+  }
 
-  promptForFeedbackWindowButtonClickHandler = function(buttonIndex) {
+  function promptForFeedbackWindowButtonClickHandler(buttonIndex) {
     var base = AppRate.preferences.callbacks, currentBtn = null;
     switch (buttonIndex) {
       case 1:
@@ -109,9 +111,9 @@ AppRate = (function() {
         break;
     }
     return typeof base.onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "FeedbackPrompt") : function(){ };
-  };
+  }
 
-  updateCounter = function(action) {
+  function updateCounter(action) {
     if (action == null) {
       action = 'increment';
     }
@@ -129,14 +131,19 @@ AppRate = (function() {
     }
     Storage.set(LOCAL_STORAGE_COUNTER, counter);
     return counter;
-  };
+  }
 
-  showDialog = function(immediately) {
+  function showDialog(immediately) {
     updateCounter();
     if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
       localeObj = Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName, AppRate.preferences.customLocale);
 
-      if(AppRate.preferences.simpleMode) {
+      if (AppRate.preferences.isNativePromptAvailable && AppRate.preferences.reviewType) {
+        if ((FLAG_IOS_NATIVE_CODE_SUPPORTED && AppRate.preferences.reviewType.ios === 'InAppReview')
+        || (FLAG_ANDROID_NATIVE_CODE_SUPPORTED && AppRate.preferences.reviewType.android === 'InAppReview')) {
+          AppRate.navigateToAppStore();
+        }
+      } else if(AppRate.preferences.simpleMode) {
         navigator.notification.confirm(localeObj.message, promptForStoreRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
       } else {
         navigator.notification.confirm(localeObj.appRatePromptMessage, promptForAppRatingWindowButtonClickHandler, localeObj.appRatePromptTitle, [localeObj.noButtonLabel, localeObj.yesButtonLabel]);
@@ -148,31 +155,72 @@ AppRate = (function() {
       }
     }
     return AppRate;
-  };
+  }
 
-  getAppVersion = function(successCallback, errorCallback) {
-    if (FLAG_NATIVE_CODE_SUPPORTED) {
-      exec(successCallback, errorCallback, 'AppRate', 'getAppVersion', []);
-    } else {
-      successCallback(counter.applicationVersion);
-    }
-    return AppRate;
-  };
+  function getAppVersion() {
+    return new Promise(function (resolve, reject){
+      if (FLAG_NATIVE_CODE_SUPPORTED) {
+        exec(resolve, reject, 'AppRate', 'getAppVersion', []);
+      } else {
+        resolve(counter.applicationVersion);
+      }
+    });
+  }
 
-  getAppTitle = function(successCallback, errorCallback) {
-    if (FLAG_NATIVE_CODE_SUPPORTED) {
-      exec(successCallback, errorCallback, 'AppRate', 'getAppTitle', []);
-    } else {
-      successCallback(AppRate.preferences.displayAppName);
-    }
-    return AppRate;
-  };
+  function getAppTitle() {
+    return new Promise(function (resolve, reject){
+      if (FLAG_NATIVE_CODE_SUPPORTED) {
+        exec(resolve, reject, 'AppRate', 'getAppTitle', []);
+      } else {
+        resolve(AppRate.preferences.displayAppName);
+      }
+    });
+  }
+
+  function isNativePromptAvailable() {
+    return new Promise(function (resolve, reject){
+      if (FLAG_NATIVE_CODE_SUPPORTED) {
+        exec(resolve, reject, 'AppRate', 'isNativePromptAvailable', []);
+      } else {
+        resolve(false);
+      }
+    });
+  }
 
   AppRate.init = function() {
-    var initPromise = Promise.all([
-      Storage.get(LOCAL_STORAGE_COUNTER).then(function (storedCounter) {
-        counter = storedCounter || counter
+    var appVersionPromise = getAppVersion()
+      .then(function(applicationVersion) {
+        if (counter.applicationVersion !== applicationVersion) {
+          counter.applicationVersion = applicationVersion;
+          if (AppRate.preferences.promptAgainForEachNewVersion) {
+            updateCounter('reset');
+          }
+        }
       })
+      .catch(noop);
+
+    var appTitlePromise = getAppTitle()
+      .then(function(displayAppName) {
+        AppRate.preferences.displayAppName = displayAppName;
+      })
+      .catch(noop);
+
+    var isNativePromptAvailablePromise = isNativePromptAvailable()
+      .then(function(isNativePromptAvailable) {
+        AppRate.preferences.isNativePromptAvailable = isNativePromptAvailable;
+      })
+      .catch(function () {
+        AppRate.preferences.isNativePromptAvailable = false;
+      });
+
+    var storagePromise = Storage.get(LOCAL_STORAGE_COUNTER).then(function (storedCounter) {
+      counter = storedCounter || counter
+    });
+    var initPromise = Promise.all([
+      isNativePromptAvailablePromise,
+      appVersionPromise,
+      appTitlePromise,
+      storagePromise
     ]);
     if (AppRate.initialized) {
       AppRate.ready = initPromise;
@@ -182,24 +230,6 @@ AppRate = (function() {
         .then(AppRate.readyResolve)
         .catch(AppRate.readyReject);
     }
-
-    getAppVersion((function(_this) {
-      return function(applicationVersion) {
-        if (counter.applicationVersion !== applicationVersion) {
-          counter.applicationVersion = applicationVersion;
-          if (_this.preferences.promptAgainForEachNewVersion) {
-            updateCounter('reset');
-          }
-        }
-        return _this;
-      };
-    })(this));
-    getAppTitle((function(_this) {
-      return function(displayAppName) {
-        _this.preferences.displayAppName = displayAppName;
-        return _this;
-      };
-    })(this));
     return this;
   };
 
@@ -211,8 +241,10 @@ AppRate = (function() {
     simpleMode: false,
     promptAgainForEachNewVersion: true,
     usesUntilPrompt: 3,
+    isNativePromptAvailable: false,
     reviewType: {
-      ios: 'AppStoreReview'
+      ios: 'AppStoreReview',
+      android: 'InAppBrowser'
     },
     callbacks: {
       onButtonClicked: null,
@@ -253,7 +285,7 @@ AppRate = (function() {
     var iOSVersion;
     var iOSStoreUrl;
 
-    if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
+    if (FLAG_IOS_NATIVE_CODE_SUPPORTED) {
       if (!this.preferences.reviewType || !this.preferences.reviewType.ios || this.preferences.reviewType.ios === 'AppStoreReview') {
         exec(null, null, 'AppRate', 'launchiOSReview', [this.preferences.storeAppURL.ios, false]);
       } else if (this.preferences.reviewType.ios === 'InAppReview') {
@@ -268,8 +300,12 @@ AppRate = (function() {
         }
         AppRate.preferences.openUrl(iOSStoreUrl);
       }
-    } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
-      AppRate.preferences.openUrl(this.preferences.storeAppURL.android);
+    } else if (FLAG_ANDROID_NATIVE_CODE_SUPPORTED) {
+      if (this.preferences.reviewType && this.preferences.reviewType.android === 'InAppReview') {
+        exec(null, null, 'AppRate', 'launchReview', []);
+      } else {
+        AppRate.preferences.openUrl(this.preferences.storeAppURL.android);
+      }
     } else if (/(Windows|Edge)/i.test(navigator.userAgent.toLowerCase())) {
       Windows.Services.Store.StoreRequestHelper.sendRequestAsync(Windows.Services.Store.StoreContext.getDefault(), 16, "");
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {

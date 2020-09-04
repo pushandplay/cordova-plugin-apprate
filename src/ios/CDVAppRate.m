@@ -41,6 +41,12 @@
     }];
 }
 
+- (void)isNativePromptAvailable:(CDVInvokedUrlCommand *)command {
+    BOOL isNativePromptAvailable = [SKStoreReviewController class];
+    CDVPluginResult * pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:isNativePromptAvailable];
+    [self.commandDelegate sendPluginResult : pluginResult callbackId : command.callbackId];
+}
+
 - (void)launchiOSReview:(CDVInvokedUrlCommand *)command {
     BOOL shouldUseNativePrompt = [command.arguments[1] boolValue];
 

@@ -60,9 +60,14 @@ AppRate.preferences.openUrl = function (url) {
 - From github repository: `cordova plugin add https://github.com/pushandplay/cordova-plugin-apprate.git`
 - For phonegap build add the following to your config.xml: `<gap:plugin name="cordova-plugin-apprate" />`
 
+## Integrating Google Play Services
+
+To set up Google Play Core version, you can use PLAY_CORE_VERSION parameter (with 1.8.0 value by default). It is useful in order to avoid conflicts with another plugins which use any other different version of Google Play Core.
+
 ## Customization and usage
 
 - Note: During development the submit button will be disabled and cannot be pressed. This is expected behavior per Apple when the app has not been downloaded from the app store. Details here: https://github.com/pushandplay/cordova-plugin-apprate/issues/182
+- Note: Using the in app review for Android/IOS will not prompt the user, and the native review prompt will be _requested_ and not guaranteed to be shown
 
 ## Options / Preferences
 These options are available on the `AppRate.preferences` object. 
@@ -73,8 +78,9 @@ These options are available on the `AppRate.preferences` object.
 | displayAppName | String | '' | custom application title |
 | promptAgainForEachNewVersion | Boolean | true | show dialog again when application version will be updated |
 | usesUntilPrompt | Integer | 3 | count of runs of application before dialog will be displayed |
-| reviewType.ios | [Enum](#reviewtypeios-enum) | AppStoreReview | the type of review display to show the user |
-| simpleMode | Boolean | false | enabling simplemode would display the rate dialog directly without the negative feedback filtering flow|
+| reviewType.ios | [Enum](#reviewtypeios-enum) | AppStoreReview | the type of review display to show the user on ios |
+| reviewType.android | [Enum](#reviewtypeandroid-enum) | InAppBrowser | the type of review display to show the user on android |
+| simpleMode | Boolean | false | enabling simplemode would display the rate dialog directly without the negative feedback filtering flow |
 | callbacks.onButtonClicked | Function | null | call back function. called when user clicked on rate-dialog buttons |
 | callbacks.onRateDialogShow | Function | null | call back function. called when rate-dialog showing |
 | storeAppURL.ios | String | null | application id in AppStore |
@@ -85,9 +91,13 @@ These options are available on the `AppRate.preferences` object.
 | customLocale | Object | null | custom locale object |
 
 ### reviewType.ios Enum
+- 'InAppReview' - Write review directly in your application (iOS 10.3+), limited to 3 prompts per year. Fallback to 'AppStoreReview' for other iOS versions. No custom prompt will be shown to the user per apple requirments
 - 'AppStoreReview' - Open the store within the app. Use this option as an alternative to inAppReview to avoid the rate action from [doing nothing](https://developer.apple.com/documentation/storekit/skstorereviewcontroller/2851536-requestreview)
-- 'InAppReview' - Write review directly in your application (iOS 10.3+), limit of 3 prompts per year. Fallback to 'AppStoreReview' for other iOS versions
 - 'InAppBrowser' - Open the store using the `openUrl` preference (defaults to InAppBrowser). Be advised that WKWebView might not open the app store links
+
+### reviewType.android Enum
+- 'InAppReview' - Write review directly in your application. No custom prompt will be shown to the user per android requirments. Notice this will only work on released versions. To test it our please refer to [this article](https://developer.android.com/guide/playcore/in-app-review/test)
+- 'InAppBrowser' - Open the store using the `openUrl` preference (defaults to InAppBrowser)
 
 ## Examples
 
@@ -154,7 +164,8 @@ AppRate.preferences = {
   usesUntilPrompt: 5,
   promptAgainForEachNewVersion: false,
   reviewType: {
-    ios: 'InAppReview'
+    ios: 'InAppReview',
+    android: 'InAppReview'
   },
   storeAppURL: {
     ios: '<my_app_id>',
@@ -231,7 +242,8 @@ AppRate.preferences = {
   usesUntilPrompt: 5,
   promptAgainForEachNewVersion: false,
   reviewType: {
-    ios: 'InAppReview'
+    ios: 'InAppReview',
+    android: 'InAppReview'
   },
   storeAppURL: {
     ios: '<my_app_id>',
