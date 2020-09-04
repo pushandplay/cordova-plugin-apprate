@@ -35,7 +35,9 @@ declare module "cordova-plugin-apprate" {
     displayAppName: string;
     promptAgainForEachNewVersion: boolean;
     usesUntilPrompt: number;
-    inAppReview: boolean;
+    reviewType: {
+      ios: 'AppStoreReview' | 'InAppReview' | 'InAppBrowser';
+    };
     simpleMode: boolean;
     callbacks: CallbackPreferences;
     storeAppURL: StoreAppURLPreferences;
@@ -96,5 +98,5 @@ declare module "cordova-plugin-apprate" {
     appRatePromptMessage: string;
     feedbackPromptMessage: string;
   }
-  
+
 }

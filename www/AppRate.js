@@ -30,6 +30,11 @@ AppRate = (function() {
   var FLAG_NATIVE_CODE_SUPPORTED, LOCAL_STORAGE_COUNTER, counter, getAppTitle, getAppVersion, showDialog, updateCounter;
 
   function AppRate() {}
+  AppRate.initialized = false;
+  AppRate.ready = new Promise(function (resolve, reject) {
+    AppRate.readyResolve = resolve;
+    AppRate.readyReject = reject;
+  });
 
   LOCAL_STORAGE_COUNTER = 'counter';
 
@@ -164,11 +169,19 @@ AppRate = (function() {
   };
 
   AppRate.init = function() {
-    AppRate.ready = Promise.all([
+    var initPromise = Promise.all([
       Storage.get(LOCAL_STORAGE_COUNTER).then(function (storedCounter) {
         counter = storedCounter || counter
       })
-    ])
+    ]);
+    if (AppRate.initialized) {
+      AppRate.ready = initPromise;
+    } else {
+      AppRate.initialized = true;
+      initPromise
+        .then(AppRate.readyResolve)
+        .catch(AppRate.readyReject);
+    }
 
     getAppVersion((function(_this) {
       return function(applicationVersion) {
@@ -198,7 +211,9 @@ AppRate = (function() {
     simpleMode: false,
     promptAgainForEachNewVersion: true,
     usesUntilPrompt: 3,
-    inAppReview: true,
+    reviewType: {
+      ios: 'AppStoreReview'
+    },
     callbacks: {
       onButtonClicked: null,
       onRateDialogShow: null,
@@ -239,9 +254,10 @@ AppRate = (function() {
     var iOSStoreUrl;
 
     if (/(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase())) {
-      if (this.preferences.inAppReview) {
-        var showNativePrompt = true;
-        exec(null, null, 'AppRate', 'launchiOSReview', [this.preferences.storeAppURL.ios, showNativePrompt]);
+      if (!this.preferences.reviewType || !this.preferences.reviewType.ios || this.preferences.reviewType.ios === 'AppStoreReview') {
+        exec(null, null, 'AppRate', 'launchiOSReview', [this.preferences.storeAppURL.ios, false]);
+      } else if (this.preferences.reviewType.ios === 'InAppReview') {
+        exec(null, null, 'AppRate', 'launchiOSReview', [this.preferences.storeAppURL.ios, true]);
       } else {
         iOSVersion = navigator.userAgent.match(/OS\s+([\d\_]+)/i)[0].replace(/_/g, '.').replace('OS ', '').split('.');
         iOSVersion = parseInt(iOSVersion[0]) + (parseInt(iOSVersion[1]) || 0) / 10;
@@ -250,12 +266,12 @@ AppRate = (function() {
         } else {
           iOSStoreUrl = PREF_STORE_URL_PREFIX_IOS9 + this.preferences.storeAppURL.ios + PREF_STORE_URL_POSTFIX_IOS9;
         }
-	AppRate.preferences.openUrl(iOSStoreUrl);
+        AppRate.preferences.openUrl(iOSStoreUrl);
       }
     } else if (/(Android)/i.test(navigator.userAgent.toLowerCase())) {
       AppRate.preferences.openUrl(this.preferences.storeAppURL.android);
     } else if (/(Windows|Edge)/i.test(navigator.userAgent.toLowerCase())) {
-	  Windows.Services.Store.StoreRequestHelper.sendRequestAsync(Windows.Services.Store.StoreContext.getDefault(), 16, "");
+      Windows.Services.Store.StoreRequestHelper.sendRequestAsync(Windows.Services.Store.StoreContext.getDefault(), 16, "");
     } else if (/(BlackBerry)/i.test(navigator.userAgent.toLowerCase())) {
       AppRate.preferences.openUrl(this.preferences.storeAppURL.blackberry);
     } else if (/(IEMobile|Windows Phone)/i.test(navigator.userAgent.toLowerCase())) {
