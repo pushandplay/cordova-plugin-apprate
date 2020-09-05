@@ -38,9 +38,9 @@ var AppRate = (function() {
 
   var LOCAL_STORAGE_COUNTER = 'counter';
 
-  var FLAG_IOS_NATIVE_CODE_SUPPORTED = /(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase());
-  var FLAG_ANDROID_NATIVE_CODE_SUPPORTED = /Android/i.test(navigator.userAgent.toLowerCase());
-  var FLAG_NATIVE_CODE_SUPPORTED = FLAG_IOS_NATIVE_CODE_SUPPORTED || FLAG_ANDROID_NATIVE_CODE_SUPPORTED;
+  var IS_IOS = /(iPhone|iPod|iPad)/i.test(navigator.userAgent.toLowerCase());
+  var IS_ANDROID = /Android/i.test(navigator.userAgent.toLowerCase());
+  var FLAG_NATIVE_CODE_SUPPORTED = IS_IOS || IS_ANDROID;
 
   var PREF_STORE_URL_PREFIX_IOS9 = "itms-apps://itunes.apple.com/app/viewContentsUserReviews/id";
   var PREF_STORE_URL_POSTFIX_IOS9 = "?action=write-review";
@@ -139,8 +139,8 @@ var AppRate = (function() {
       localeObj = Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName, AppRate.preferences.customLocale);
 
       if (AppRate.preferences.isNativePromptAvailable && AppRate.preferences.reviewType) {
-        if ((FLAG_IOS_NATIVE_CODE_SUPPORTED && AppRate.preferences.reviewType.ios === 'InAppReview')
-        || (FLAG_ANDROID_NATIVE_CODE_SUPPORTED && AppRate.preferences.reviewType.android === 'InAppReview')) {
+        if ((IS_IOS && AppRate.preferences.reviewType.ios === 'InAppReview')
+        || (IS_ANDROID && AppRate.preferences.reviewType.android === 'InAppReview')) {
           AppRate.navigateToAppStore();
         }
       } else if(AppRate.preferences.simpleMode) {
@@ -285,7 +285,7 @@ var AppRate = (function() {
     var iOSVersion;
     var iOSStoreUrl;
 
-    if (FLAG_IOS_NATIVE_CODE_SUPPORTED) {
+    if (IS_IOS) {
       if (!this.preferences.reviewType || !this.preferences.reviewType.ios || this.preferences.reviewType.ios === 'AppStoreReview') {
         exec(null, null, 'AppRate', 'launchiOSReview', [this.preferences.storeAppURL.ios, false]);
       } else if (this.preferences.reviewType.ios === 'InAppReview') {
@@ -300,7 +300,7 @@ var AppRate = (function() {
         }
         AppRate.preferences.openUrl(iOSStoreUrl);
       }
-    } else if (FLAG_ANDROID_NATIVE_CODE_SUPPORTED) {
+    } else if (IS_ANDROID) {
       if (this.preferences.reviewType && this.preferences.reviewType.android === 'InAppReview') {
         exec(null, null, 'AppRate', 'launchReview', []);
       } else {

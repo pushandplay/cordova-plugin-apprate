@@ -164,8 +164,8 @@ AppRate.preferences = {
   usesUntilPrompt: 5,
   promptAgainForEachNewVersion: false,
   reviewType: {
-    ios: 'InAppReview',
-    android: 'InAppReview'
+    ios: 'AppStoreReview',
+    android: 'InAppBrowser'
   },
   storeAppURL: {
     ios: '<my_app_id>',
@@ -242,8 +242,8 @@ AppRate.preferences = {
   usesUntilPrompt: 5,
   promptAgainForEachNewVersion: false,
   reviewType: {
-    ios: 'InAppReview',
-    android: 'InAppReview'
+    ios: 'AppStoreReview',
+    android: 'InAppBrowser'
   },
   storeAppURL: {
     ios: '<my_app_id>',
