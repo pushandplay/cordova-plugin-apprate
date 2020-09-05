@@ -301,7 +301,7 @@ var AppRate = (function() {
         AppRate.preferences.openUrl(iOSStoreUrl);
       }
     } else if (IS_ANDROID) {
-      if (this.preferences.reviewType && this.preferences.reviewType.android === 'InAppReview') {
+      if (AppRate.preferences.isNativePromptAvailable && this.preferences.reviewType && this.preferences.reviewType.android === 'InAppReview') {
         exec(null, null, 'AppRate', 'launchReview', []);
       } else {
         AppRate.preferences.openUrl(this.preferences.storeAppURL.android);
