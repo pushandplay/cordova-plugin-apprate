@@ -62,7 +62,7 @@ AppRate.preferences.openUrl = function (url) {
 
 ## Integrating Google Play Core
 
-To set up Google Play Core version, you can use PLAY_CORE_VERSION parameter (with 1.8.0 value by default). It is useful in order to avoid conflicts with another plugins which use any other different version of Google Play Core.
+To set up Google Play Core version, you can use PLAY_CORE_VERSION parameter (with `1.+` value by default). It is useful in order to avoid conflicts with another plugins which use any other different version of Google Play Core.
 
 ## Customization and usage
 
