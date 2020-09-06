@@ -141,6 +141,7 @@ var AppRate = (function() {
       if (AppRate.preferences.isNativePromptAvailable && AppRate.preferences.reviewType) {
         if ((IS_IOS && AppRate.preferences.reviewType.ios === 'InAppReview')
         || (IS_ANDROID && AppRate.preferences.reviewType.android === 'InAppReview')) {
+          updateCounter('stop');
           AppRate.navigateToAppStore();
         }
       } else if(AppRate.preferences.simpleMode) {
