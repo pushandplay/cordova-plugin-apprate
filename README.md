@@ -30,7 +30,7 @@ AppRate.preferences.openUrl = function (url) {
           SafariViewController.show({
                 url: url,
                 barColor: "#0000ff", // on iOS 10+ you can change the background color as well
-                controlTintColor: "#00ffff" // on iOS 10+ you can override the default tintColor
+                controlTintColor: "#00ffff", // on iOS 10+ you can override the default tintColor
                 tintColor: "#00ffff", // should be set to same value as controlTintColor and will be a fallback on older ios
               },
               // this success handler will be invoked for the lifecycle events 'opened', 'loaded' and 'closed'
