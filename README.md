@@ -90,14 +90,28 @@ These options are available on the `AppRate.preferences` object.
 | storeAppURL.windows8 | String | null | application URL in WindowsStore |
 | customLocale | Object | null | custom locale object |
 
-### reviewType.ios Enum
-- 'InAppReview' - Write review directly in your application (iOS 10.3+), limited to 3 prompts per year. Fallback to 'AppStoreReview' for other iOS versions. No custom prompt will be shown to the user per Apple's requirments
-- 'AppStoreReview' - Open the store within the app. Use this option as an alternative to inAppReview to avoid the rate action from [doing nothing](https://developer.apple.com/documentation/storekit/skstorereviewcontroller/2851536-requestreview)
-- 'InAppBrowser' - Open the store using the `openUrl` preference (defaults to InAppBrowser). Be advised that WKWebView might not open the app store links
+### reviewType
 
-### reviewType.android Enum
-- 'InAppReview' - Write review directly in your application. No custom prompt will be shown to the user per Android's requirments. Notice this will only work on released versions. To test it our please refer to [this article](https://developer.android.com/guide/playcore/in-app-review/test)
-- 'InAppBrowser' - Open the store using the `openUrl` preference (defaults to InAppBrowser)
+The `InAppReview` review type will attempt to launch a native in-app review dialog (as opposed to opening the app store).
+   
+The native dialog is designed to maintain the privacy of the users and to prevent applications from harassing them with too many review requests. 
+As such, the dialog might or might not appear, and we will not be able to know whether it appeared, or whether the user reviewed the app or not.  
+
+Since we can't know if the dialog will be shown, and in order to comply to the requirements of Apple/Android, 
+no custom prompt will be shown to the user before attempting to open the in-app review dialog.
+
+Native in-app review can only be possible under certain conditions. If those conditions are not met, a fallback method will be used (see information per platform below).
+
+#### reviewType.ios [Enum]
+- `InAppReview` - Write review directly in your application (iOS 10.3+), limited to 3 prompts per year. Will fallback to 'AppStoreReview' for other iOS versions
+- `AppStoreReview` - Open the store within the app. Use this option as an alternative to inAppReview to avoid the rate action from [doing nothing](https://developer.apple.com/documentation/storekit/skstorereviewcontroller/2851536-requestreview)
+- `InAppBrowser` - Open the store using the `openUrl` preference (defaults to InAppBrowser). Be advised that WKWebView might not open the app store links
+
+#### reviewType.android [Enum]
+- `InAppReview` - Write review directly in your application. Will fallback to `InAppBrowser` if not available
+- `InAppBrowser` - Open the store using the `openUrl` preference (defaults to InAppBrowser)
+
+Notice that the `InAppReview` will only work on released versions. To test it our please refer to [this article](https://developer.android.com/guide/playcore/in-app-review/test)
 
 ## Examples
 

@@ -27,6 +27,7 @@ var AppRate = (function() {
   function noop(){}
 
   var localeObj;
+  var isNativePromptAvailable = false;
 
   function AppRate() {}
 
@@ -138,7 +139,7 @@ var AppRate = (function() {
     if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
       localeObj = Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName, AppRate.preferences.customLocale);
 
-      if (AppRate.preferences.isNativePromptAvailable && AppRate.preferences.reviewType) {
+      if (isNativePromptAvailable && AppRate.preferences.reviewType) {
         if ((IS_IOS && AppRate.preferences.reviewType.ios === 'InAppReview')
         || (IS_ANDROID && AppRate.preferences.reviewType.android === 'InAppReview')) {
           updateCounter('stop');
@@ -178,7 +179,7 @@ var AppRate = (function() {
     });
   }
 
-  function isNativePromptAvailable() {
+  function checkIsNativePromptAvailable() {
     return new Promise(function (resolve, reject){
       if (FLAG_NATIVE_CODE_SUPPORTED) {
         exec(resolve, reject, 'AppRate', 'isNativePromptAvailable', []);
@@ -206,19 +207,19 @@ var AppRate = (function() {
       })
       .catch(noop);
 
-    var isNativePromptAvailablePromise = isNativePromptAvailable()
-      .then(function(isNativePromptAvailable) {
-        AppRate.preferences.isNativePromptAvailable = isNativePromptAvailable;
+    var checkIsNativePromptAvailablePromise = checkIsNativePromptAvailable()
+      .then(function(isNativePromptAvailableResult) {
+        isNativePromptAvailable = isNativePromptAvailableResult;
       })
       .catch(function () {
-        AppRate.preferences.isNativePromptAvailable = false;
+        isNativePromptAvailable = false;
       });
 
     var storagePromise = Storage.get(LOCAL_STORAGE_COUNTER).then(function (storedCounter) {
       counter = storedCounter || counter
     });
     var initPromise = Promise.all([
-      isNativePromptAvailablePromise,
+      checkIsNativePromptAvailablePromise,
       appVersionPromise,
       appTitlePromise,
       storagePromise
@@ -242,7 +243,6 @@ var AppRate = (function() {
     simpleMode: false,
     promptAgainForEachNewVersion: true,
     usesUntilPrompt: 3,
-    isNativePromptAvailable: false,
     reviewType: {
       ios: 'AppStoreReview',
       android: 'InAppBrowser'
@@ -302,7 +302,7 @@ var AppRate = (function() {
         AppRate.preferences.openUrl(iOSStoreUrl);
       }
     } else if (IS_ANDROID) {
-      if (AppRate.preferences.isNativePromptAvailable && this.preferences.reviewType && this.preferences.reviewType.android === 'InAppReview') {
+      if (isNativePromptAvailable && this.preferences.reviewType && this.preferences.reviewType.android === 'InAppReview') {
         exec(null, null, 'AppRate', 'launchReview', []);
       } else {
         AppRate.preferences.openUrl(this.preferences.storeAppURL.android);
