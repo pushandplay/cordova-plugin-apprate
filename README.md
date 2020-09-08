@@ -30,7 +30,7 @@ AppRate.preferences.openUrl = function (url) {
           SafariViewController.show({
                 url: url,
                 barColor: "#0000ff", // on iOS 10+ you can change the background color as well
-                controlTintColor: "#00ffff" // on iOS 10+ you can override the default tintColor
+                controlTintColor: "#00ffff", // on iOS 10+ you can override the default tintColor
                 tintColor: "#00ffff", // should be set to same value as controlTintColor and will be a fallback on older ios
               },
               // this success handler will be invoked for the lifecycle events 'opened', 'loaded' and 'closed'
@@ -60,9 +60,14 @@ AppRate.preferences.openUrl = function (url) {
 - From github repository: `cordova plugin add https://github.com/pushandplay/cordova-plugin-apprate.git`
 - For phonegap build add the following to your config.xml: `<gap:plugin name="cordova-plugin-apprate" />`
 
+## Integrating Google Play Core
+
+To set up Google Play Core version, you can use PLAY_CORE_VERSION parameter (with `1.+` value by default). It is useful in order to avoid conflicts with another plugins which use any other different version of Google Play Core.
+
 ## Customization and usage
 
 - Note: During development the submit button will be disabled and cannot be pressed. This is expected behavior per Apple when the app has not been downloaded from the app store. Details here: https://github.com/pushandplay/cordova-plugin-apprate/issues/182
+- Note: Using the in-app review for Android/iOS will not prompt the user, and the native review prompt will be _requested_ and not guaranteed to be shown
 
 ## Options / Preferences
 These options are available on the `AppRate.preferences` object. 
@@ -73,8 +78,9 @@ These options are available on the `AppRate.preferences` object.
 | displayAppName | String | '' | custom application title |
 | promptAgainForEachNewVersion | Boolean | true | show dialog again when application version will be updated |
 | usesUntilPrompt | Integer | 3 | count of runs of application before dialog will be displayed |
-| reviewType.ios | [Enum](#reviewtypeios-enum) | AppStoreReview | the type of review display to show the user |
-| simpleMode | Boolean | false | enabling simplemode would display the rate dialog directly without the negative feedback filtering flow|
+| reviewType.ios | [Enum](#reviewtypeios-enum) | AppStoreReview | the type of review display to show the user on iOS |
+| reviewType.android | [Enum](#reviewtypeandroid-enum) | InAppBrowser | the type of review display to show the user on Android |
+| simpleMode | Boolean | false | enabling simplemode would display the rate dialog directly without the negative feedback filtering flow |
 | callbacks.onButtonClicked | Function | null | call back function. called when user clicked on rate-dialog buttons |
 | callbacks.onRateDialogShow | Function | null | call back function. called when rate-dialog showing |
 | storeAppURL.ios | String | null | application id in AppStore |
@@ -84,10 +90,28 @@ These options are available on the `AppRate.preferences` object.
 | storeAppURL.windows8 | String | null | application URL in WindowsStore |
 | customLocale | Object | null | custom locale object |
 
-### reviewType.ios Enum
-- 'AppStoreReview' - Open the store within the app. Use this option as an alternative to inAppReview to avoid the rate action from [doing nothing](https://developer.apple.com/documentation/storekit/skstorereviewcontroller/2851536-requestreview)
-- 'InAppReview' - Write review directly in your application (iOS 10.3+), limit of 3 prompts per year. Fallback to 'AppStoreReview' for other iOS versions
-- 'InAppBrowser' - Open the store using the `openUrl` preference (defaults to InAppBrowser). Be advised that WKWebView might not open the app store links
+### reviewType
+
+The `InAppReview` review type will attempt to launch a native in-app review dialog (as opposed to opening the app store).
+   
+The native dialog is designed to maintain the privacy of the users and to prevent applications from harassing them with too many review requests. 
+As such, the dialog might or might not appear, and we will not be able to know whether it appeared, or whether the user reviewed the app or not.  
+
+Since we can't know if the dialog will be shown, and in order to comply to the requirements of Apple/Android, 
+no custom prompt will be shown to the user before attempting to open the in-app review dialog.
+
+Native in-app review can only be possible under certain conditions. If those conditions are not met, a fallback method will be used (see information per platform below).
+
+#### reviewType.ios [Enum]
+- `InAppReview` - Write review directly in your application (iOS 10.3+), limited to 3 prompts per year. Will fallback to 'AppStoreReview' for other iOS versions
+- `AppStoreReview` - Open the store within the app. Use this option as an alternative to inAppReview to avoid the rate action from [doing nothing](https://developer.apple.com/documentation/storekit/skstorereviewcontroller/2851536-requestreview)
+- `InAppBrowser` - Open the store using the `openUrl` preference (defaults to InAppBrowser). Be advised that WKWebView might not open the app store links
+
+#### reviewType.android [Enum]
+- `InAppReview` - Write review directly in your application. Will fallback to `InAppBrowser` if not available
+- `InAppBrowser` - Open the store using the `openUrl` preference (defaults to InAppBrowser)
+
+Notice that the `InAppReview` will only work on released versions. To test it our please refer to [this article](https://developer.android.com/guide/playcore/in-app-review/test)
 
 ## Examples
 
@@ -154,7 +178,8 @@ AppRate.preferences = {
   usesUntilPrompt: 5,
   promptAgainForEachNewVersion: false,
   reviewType: {
-    ios: 'InAppReview'
+    ios: 'AppStoreReview',
+    android: 'InAppBrowser'
   },
   storeAppURL: {
     ios: '<my_app_id>',
@@ -231,7 +256,8 @@ AppRate.preferences = {
   usesUntilPrompt: 5,
   promptAgainForEachNewVersion: false,
   reviewType: {
-    ios: 'InAppReview'
+    ios: 'AppStoreReview',
+    android: 'InAppBrowser'
   },
   storeAppURL: {
     ios: '<my_app_id>',

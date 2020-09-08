@@ -26,6 +26,8 @@
 
 - (void)getAppTitle:(CDVInvokedUrlCommand *)command;
 
+- (void)isNativePromptAvailable:(CDVInvokedUrlCommand *)command;
+
 - (void)launchiOSReview:(CDVInvokedUrlCommand *)command;
 
 - (void)launchAppStore:(NSString *)appId;

@@ -37,6 +37,7 @@ declare module "cordova-plugin-apprate" {
     usesUntilPrompt: number;
     reviewType: {
       ios: 'AppStoreReview' | 'InAppReview' | 'InAppBrowser';
+      android: 'InAppReview' | 'InAppBrowser';
     };
     simpleMode: boolean;
     callbacks: CallbackPreferences;

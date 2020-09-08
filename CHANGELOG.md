@@ -3,6 +3,7 @@
 - UNRELEASED
   - [PR #280](https://github.com/pushandplay/cordova-plugin-apprate/pull/280) - Removed iOS option `inAppReview` in favor of new option `reviewType`. Please update your app according to the updated documentation
   - [PR #280](https://github.com/pushandplay/cordova-plugin-apprate/pull/280) - Fixed race condition on `deviceready` events causing the module to not be fully initialized
+  - [PR #281](https://github.com/pushandplay/cordova-plugin-apprate/pull/281) - feature: Android in-app review
  
 - 1.5.0
   - [PR #253](https://github.com/pushandplay/cordova-plugin-apprate/pull/253) - Remove iOS rating counter in favor of native approach
