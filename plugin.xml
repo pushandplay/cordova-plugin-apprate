@@ -38,6 +38,7 @@ under the License.
 
     <js-module src="www/AppRate.js" name="AppRate">
         <clobbers target="AppRate"/>
+        <clobbers target="window.AppRate"/>
     </js-module>
 
     <js-module src="www/locales.js" name="locales">

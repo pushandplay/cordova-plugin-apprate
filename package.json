@@ -10,5 +10,6 @@
     "grunt": "*",
     "grunt-cordovacli": "*"
   },
-  "types": "./typescript/AppRate.d.ts"
+  "main": "./typings/index.js",
+  "types": "./typings/index.d.ts"
 }

@@ -1,7 +1,9 @@
 # Changelog
 
 - Unreleased
-  - Nothing yet
+  - Typescript Definitions optimized/fixed
+  - Preferences should now be edited via `setPreferences` Method (no override of defaults)
+  - `simpleMode` replaced with `mode` (See [Usage](https://github.com/EinfachHans/cordova-plugin-apprate#mode))
 
 - 1.6.0
   - [PR #280](https://github.com/pushandplay/cordova-plugin-apprate/pull/280) - Removed iOS option `inAppReview` in favor of new option `reviewType`. Please update your app according to the updated documentation
