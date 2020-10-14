@@ -84,7 +84,8 @@ These options are available to set via the `setPreferences` method.
 | usesUntilPrompt | Integer | 3 | count of runs of application before dialog will be displayed |
 | reviewType.ios | [Enum](#reviewtypeios-enum) | AppStoreReview | the type of review display to show the user on iOS |
 | reviewType.android | [Enum](#reviewtypeandroid-enum) | InAppBrowser | the type of review display to show the user on Android |
-| mode | String | 'normal' | See [here](#mode) for possible Values and explanation |
+| simpleMode | Boolean | false | enabling simplemode would display the rate dialog directly without the negative feedback filtering flow |
+| directIfInAppReview | boolean | false | enabling would skip displaying a rate dialog if in app review is set and available  |
 | callbacks.onButtonClicked | Function | null | call back function. called when user clicked on rate-dialog buttons |
 | callbacks.onRateDialogShow | Function | null | call back function. called when rate-dialog showing |
 | storeAppURL.ios | String | null | application id in AppStore |

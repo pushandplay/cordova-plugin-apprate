@@ -13,7 +13,8 @@ declare module 'cordova-plugin-apprate' {
       ios?: ReviewTypeAppStore | ReviewTypeInApp | ReviewTypeBrowser;
       android?: ReviewTypeInApp | ReviewTypeBrowser;
     };
-    mode?: 'simple' | 'normal' | 'direct';
+    simpleMode?: boolean;
+    directIfInAppReview?: boolean;
     callbacks?: CallbackPreferences;
     storeAppURL?: StoreAppURLPreferences;
     customLocale?: CustomLocale;

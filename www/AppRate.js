@@ -58,7 +58,8 @@ var AppRate = (function () {
   var preferences = {
     useLanguage: null,
     displayAppName: '',
-    mode: 'normal',
+    simpleMode: false,
+    directIfInAppReview: false,
     promptAgainForEachNewVersion: true,
     usesUntilPrompt: 3,
     reviewType: {
@@ -175,11 +176,11 @@ var AppRate = (function () {
     if (counter.countdown === preferences.usesUntilPrompt || immediately) {
       localeObj = Locales.getLocale(preferences.useLanguage, preferences.displayAppName, preferences.customLocale);
 
-      if (preferences.mode === 'directOnlyIfInApp' && isNativePromptAvailable && preferences.reviewType &&
+      if (preferences.directIfInAppReview && isNativePromptAvailable && preferences.reviewType &&
           ((IS_IOS && preferences.reviewType.ios === 'InAppReview') || (IS_ANDROID && preferences.reviewType.android === 'InAppReview'))) {
         updateCounter('stop');
         AppRate.navigateToAppStore();
-      } else if (preferences.mode === 'simple') {
+      } else if (preferences.simpleMode) {
         navigator.notification.confirm(localeObj.message, promptForStoreRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
       } else {
         navigator.notification.confirm(localeObj.appRatePromptMessage, promptForAppRatingWindowButtonClickHandler, localeObj.appRatePromptTitle, [localeObj.noButtonLabel, localeObj.yesButtonLabel]);
