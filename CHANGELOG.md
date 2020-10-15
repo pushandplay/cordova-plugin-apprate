@@ -1,5 +1,8 @@
 # Changelog
 
+- Unreleased
+  - Nothing yet
+
 - 1.6.1
   - [#287](https://github.com/pushandplay/cordova-plugin-apprate/issues/287) - Fix bug with `reviewType` setting
 
