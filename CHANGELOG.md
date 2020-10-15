@@ -1,7 +1,7 @@
 # Changelog
 
-- Unreleased
-  - Nothing yet
+- 1.6.1
+  - [#287](https://github.com/pushandplay/cordova-plugin-apprate/issues/287) - Fix bug with `reviewType` setting
 
 - 1.6.0
   - [PR #280](https://github.com/pushandplay/cordova-plugin-apprate/pull/280) - Removed iOS option `inAppReview` in favor of new option `reviewType`. Please update your app according to the updated documentation
