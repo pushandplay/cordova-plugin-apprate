@@ -139,12 +139,17 @@ var AppRate = (function() {
     if (counter.countdown === AppRate.preferences.usesUntilPrompt || immediately) {
       localeObj = Locales.getLocale(AppRate.preferences.useLanguage, AppRate.preferences.displayAppName, AppRate.preferences.customLocale);
 
+      var isNativePrompt = false;
+
       if (isNativePromptAvailable && AppRate.preferences.reviewType) {
-        if ((IS_IOS && AppRate.preferences.reviewType.ios === 'InAppReview')
-        || (IS_ANDROID && AppRate.preferences.reviewType.android === 'InAppReview')) {
-          updateCounter('stop');
-          AppRate.navigateToAppStore();
+        if((IS_IOS && AppRate.preferences.reviewType.ios === 'InAppReview') || (IS_ANDROID && AppRate.preferences.reviewType.android === 'InAppReview')) {
+          isNativePrompt = true;
         }
+      }
+
+      if (isNativePrompt) {
+        updateCounter('stop');
+        AppRate.navigateToAppStore();
       } else if(AppRate.preferences.simpleMode) {
         navigator.notification.confirm(localeObj.message, promptForStoreRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel]);
       } else {
