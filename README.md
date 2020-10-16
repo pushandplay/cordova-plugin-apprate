@@ -116,13 +116,6 @@ Native in-app review can only be possible under certain conditions. If those con
 
 Notice that the `InAppReview` will only work on released versions. To test it our please refer to [this article](https://developer.android.com/guide/playcore/in-app-review/test)
 
-### Mode
-
-Possible Values:
-- `normal`: Normal behaviour, with the negative feedback filtering flow
-- `simple`: Will display the rate dialog directly without the negative feedback filtering flow
-- `direct`: Directly perform the rate method if the **reviewType** of current platform is **InAppReview** and it's available  
-
 ## Examples
 
 Makes sure all your calls to the plugin happen after the cordova `onDeviceReady` event has fired.
