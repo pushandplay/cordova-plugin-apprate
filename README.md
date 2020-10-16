@@ -18,9 +18,7 @@ Choose your preferred browser plugin which will be used to open the store and in
 - https://github.com/EddyVerbruggen/cordova-plugin-safariviewcontroller
 - https://github.com/apache/cordova-plugin-inappbrowser
 
-Alternatively you can use the [Market Plugin](https://github.com/xmartlabs/cordova-plugin-market)
-
-NOTE: If you chose cordova-plugin-safariviewcontroller then you must configure it with this plugin by setting:
+NOTE: If you want to choose the InAppBrowser, you can use the default `openUrl` - Preference, but if you chose cordova-plugin-safariviewcontroller then you must configure it with this plugin by setting:
 ```javascript
 AppRate.setPreferences({
   openUrl : (url) => {
@@ -85,7 +83,7 @@ These options are available to set via the `setPreferences` method.
 | reviewType.ios | [Enum](#reviewtypeios-enum) | AppStoreReview | the type of review display to show the user on iOS |
 | reviewType.android | [Enum](#reviewtypeandroid-enum) | InAppBrowser | the type of review display to show the user on Android |
 | simpleMode | Boolean | false | enabling simplemode would display the rate dialog directly without the negative feedback filtering flow |
-| directIfInAppReview | boolean | false | enabling would skip displaying a rate dialog if in app review is set and available  |
+| showPromptForInAppReview | boolean | true | disabling would skip displaying a rate dialog if in app review is set and available  |
 | callbacks.onButtonClicked | Function | null | call back function. called when user clicked on rate-dialog buttons |
 | callbacks.onRateDialogShow | Function | null | call back function. called when rate-dialog showing |
 | storeAppURL.ios | String | null | application id in AppStore |

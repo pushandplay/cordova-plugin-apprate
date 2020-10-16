@@ -57,7 +57,7 @@ var AppRate = (function() {
     useLanguage: null,
     displayAppName: '',
     simpleMode: false,
-    directIfInAppReview: false,
+    showPromptForInAppReview: true,
     promptAgainForEachNewVersion: true,
     usesUntilPrompt: 3,
     reviewType: {
@@ -170,7 +170,7 @@ var AppRate = (function() {
     if (counter.countdown === preferences.usesUntilPrompt || immediately) {
       localeObj = Locales.getLocale(preferences.useLanguage, preferences.displayAppName, preferences.customLocale);
 
-      if (preferences.directIfInAppReview && isNativePromptAvailable && preferences.reviewType &&
+      if (!preferences.showPromptForInAppReview && isNativePromptAvailable && preferences.reviewType &&
           ((IS_IOS && preferences.reviewType.ios === 'InAppReview') || (IS_ANDROID && preferences.reviewType.android === 'InAppReview'))) {
         updateCounter('stop');
         AppRate.navigateToAppStore();

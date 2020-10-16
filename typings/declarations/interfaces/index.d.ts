@@ -14,7 +14,7 @@ declare module 'cordova-plugin-apprate' {
       android?: ReviewTypeInApp | ReviewTypeBrowser;
     };
     simpleMode?: boolean;
-    directIfInAppReview?: boolean;
+    showPromptForInAppReview?: boolean;
     callbacks?: CallbackPreferences;
     storeAppURL?: StoreAppURLPreferences;
     customLocale?: CustomLocale;
