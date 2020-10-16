@@ -23,16 +23,14 @@ var exec = require('cordova/exec');
 var Locales = require('./locales');
 var Storage = require('./storage')
 
-var AppRate = (function () {
+var AppRate = (function() {
 
-  function noop() {
-  }
+  function noop(){}
 
   var localeObj;
   var isNativePromptAvailable = false;
 
-  function AppRate() {
-  }
+  function AppRate() {}
 
   AppRate.initialized = false;
   AppRate.ready = new Promise(function (resolve, reject) {
@@ -93,7 +91,7 @@ var AppRate = (function () {
         break;
       case 1:
         currentBtn = localeObj.noButtonLabel;
-        if (typeof base.handleNegativeFeedback === "function") {
+        if(typeof base.handleNegativeFeedback === "function") {
           navigator.notification.confirm(localeObj.feedbackPromptMessage, promptForFeedbackWindowButtonClickHandler, localeObj.feedbackPromptTitle, [localeObj.noButtonLabel, localeObj.yesButtonLabel]);
         }
         break;
@@ -102,8 +100,7 @@ var AppRate = (function () {
         navigator.notification.confirm(localeObj.message, promptForStoreRatingWindowButtonClickHandler, localeObj.title, [localeObj.cancelButtonLabel, localeObj.laterButtonLabel, localeObj.rateButtonLabel])
         break;
     }
-    return typeof base.onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "AppRatingPrompt") : function () {
-    };
+    return typeof base.onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "AppRatingPrompt") : function(){ };
   }
 
   function promptForStoreRatingWindowButtonClickHandler(buttonIndex) {
@@ -127,11 +124,9 @@ var AppRate = (function () {
         break;
     }
     //This is called only in case the user clicked on a button
-    typeof base.onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "StoreRatingPrompt") : function () {
-    };
+    typeof base.onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "StoreRatingPrompt") : function(){ };
     //This one is called anyway once the process is done
-    return typeof base.done === "function" ? base.done() : function () {
-    };
+    return typeof base.done === "function" ? base.done() : function(){ };
   }
 
   function promptForFeedbackWindowButtonClickHandler(buttonIndex) {
@@ -147,8 +142,7 @@ var AppRate = (function () {
         base.handleNegativeFeedback();
         break;
     }
-    return typeof base.onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "FeedbackPrompt") : function () {
-    };
+    return typeof base.onButtonClicked === "function" ? base.onButtonClicked(buttonIndex, currentBtn, "FeedbackPrompt") : function(){ };
   }
 
   function updateCounter(action) {
