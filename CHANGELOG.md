@@ -1,7 +1,9 @@
 # Changelog
 
 - Unreleased
-  - Nothing yet
+  - Typescript Definitions optimized/fixed
+  - Preferences should now be edited via `setPreferences` Method (no override of defaults)
+  - `directIfInAppReview` added
 
 - 1.6.1
   - [#287](https://github.com/pushandplay/cordova-plugin-apprate/issues/287) - Fix bug with `reviewType` setting

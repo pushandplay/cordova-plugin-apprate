@@ -18,40 +18,42 @@ Choose your preferred browser plugin which will be used to open the store and in
 - https://github.com/EddyVerbruggen/cordova-plugin-safariviewcontroller
 - https://github.com/apache/cordova-plugin-inappbrowser
 
-NOTE: If you chose inappbrowser then make sure to add `openUrl: AppRate.preferences.openUrl` option to preferences if you will override the preference object. And if you chose cordova-plugin-safariviewcontroller then you must configure it with this plugin by setting:
+NOTE: If you want to choose the InAppBrowser, you can use the default `openUrl` - Preference, but if you chose cordova-plugin-safariviewcontroller then you must configure it with this plugin by setting:
 ```javascript
-AppRate.preferences.openUrl = function (url) {
-  if (!window.SafariViewController) {
-    window.open(url, '_blank', 'location=yes');
+AppRate.setPreferences({
+  openUrl : (url) => {
+    if (!window.SafariViewController) {
+      window.open(url, '_blank', 'location=yes');
+    }
+    else {
+      SafariViewController.isAvailable(function (available) {
+          if (available) {
+            SafariViewController.show({
+                  url: url,
+                  barColor: "#0000ff", // on iOS 10+ you can change the background color as well
+                  controlTintColor: "#00ffff", // on iOS 10+ you can override the default tintColor
+                  tintColor: "#00ffff", // should be set to same value as controlTintColor and will be a fallback on older ios
+                },
+                // this success handler will be invoked for the lifecycle events 'opened', 'loaded' and 'closed'
+                function(result) {
+                  if (result.event === 'opened') {
+                    console.log('opened');
+                  } else if (result.event === 'loaded') {
+                    console.log('loaded');
+                  } else if (result.event === 'closed') {
+                    console.log('closed');
+                  }
+                },
+                function(msg) {
+                  console.log("error: " + msg);
+                })
+          } else {
+            window.open(url, '_blank', 'location=yes');
+          }
+        });
+    }
   }
-  else {
-    SafariViewController.isAvailable(function (available) {
-        if (available) {
-          SafariViewController.show({
-                url: url,
-                barColor: "#0000ff", // on iOS 10+ you can change the background color as well
-                controlTintColor: "#00ffff", // on iOS 10+ you can override the default tintColor
-                tintColor: "#00ffff", // should be set to same value as controlTintColor and will be a fallback on older ios
-              },
-              // this success handler will be invoked for the lifecycle events 'opened', 'loaded' and 'closed'
-              function(result) {
-                if (result.event === 'opened') {
-                  console.log('opened');
-                } else if (result.event === 'loaded') {
-                  console.log('loaded');
-                } else if (result.event === 'closed') {
-                  console.log('closed');
-                }
-              },
-              function(msg) {
-                console.log("error: " + msg);
-              })
-        } else {
-          window.open(url, '_blank', 'location=yes');
-        }
-      });
-  }
-};
+});
 ```
 
 ## Installation
@@ -70,7 +72,7 @@ To set up Google Play Core version, you can use PLAY_CORE_VERSION parameter (wit
 - Note: Using the in-app review for Android/iOS will not prompt the user, and the native review prompt will be _requested_ and not guaranteed to be shown
 
 ## Options / Preferences
-These options are available on the `AppRate.preferences` object. 
+These options are available to set via the `setPreferences` method. 
 
 | Option | Type | Default | Description |
 | :------ | :---- | :------- | :----------- |
@@ -81,6 +83,7 @@ These options are available on the `AppRate.preferences` object.
 | reviewType.ios | [Enum](#reviewtypeios-enum) | AppStoreReview | the type of review display to show the user on iOS |
 | reviewType.android | [Enum](#reviewtypeandroid-enum) | InAppBrowser | the type of review display to show the user on Android |
 | simpleMode | Boolean | false | enabling simplemode would display the rate dialog directly without the negative feedback filtering flow |
+| showPromptForInAppReview | boolean | true | disabling would skip displaying a rate dialog if in app review is set and available  |
 | callbacks.onButtonClicked | Function | null | call back function. called when user clicked on rate-dialog buttons |
 | callbacks.onRateDialogShow | Function | null | call back function. called when rate-dialog showing |
 | storeAppURL.ios | String | null | application id in AppStore |
@@ -122,12 +125,14 @@ Makes sure all your calls to the plugin happen after the cordova `onDeviceReady`
 Note: windows does not need an URL as this is done by the native code.
 
 ```javascript
-AppRate.preferences.storeAppURL = {
-  ios: '<my_app_id>',
-  android: 'market://details?id=<package_name>',
-  blackberry: 'appworld://content/[App Id]/',
-  windows8: 'ms-windows-store:Review?name=<the Package Family Name of the application>'
-};
+AppRate.setPreferences({
+  storeAppURL: {
+      ios: '<my_app_id>',
+      android: 'market://details?id=<package_name>',
+      blackberry: 'appworld://content/[App Id]/',
+      windows8: 'ms-windows-store:Review?name=<the Package Family Name of the application>'
+  }
+});
 
 AppRate.promptForRating();
 ```
@@ -142,38 +147,46 @@ If false is not present it will ignore usesUntilPrompt, promptAgainForEachNewVer
 ### Override dialog button callback
 
 ```javascript
-AppRate.preferences.callbacks.onButtonClicked = function(buttonIndex) {
-  console.log("onButtonClicked -> " + buttonIndex);
-};
+AppRate.setPreferences({
+  callbacks: {
+    onButtonClicked: (buttonIndex) => {
+      console.log("onButtonClicked -> " + buttonIndex);
+    }
+  }
+});
 ```
 
 ### Set custom language
 
 ```javascript
-AppRate.preferences.useLanguage = 'ru';
+AppRate.setPreferences({
+  useLanguage: 'ru'
+});
 ```
 
 ### Set custom Locale object
-Note: `%@` patterns in `title` and `message` will be automatically replaced with `AppRate.preferences.displayAppName`
+Note: `%@` patterns in `title` and `message` will be automatically replaced with `preferences.displayAppName`
 
 ```javascript
-AppRate.preferences.customLocale = {
-  title: "Would you mind rating %@?",
-  message: "It won’t take more than a minute and helps to promote our app. Thanks for your support!",
-  cancelButtonLabel: "No, Thanks",
-  laterButtonLabel: "Remind Me Later",
-  rateButtonLabel: "Rate It Now",
-  yesButtonLabel: "Yes!",
-  noButtonLabel: "Not really",
-  appRatePromptTitle: 'Do you like using %@',
-  feedbackPromptTitle: 'Mind giving us some feedback?',
-};
+AppRate.setPreferences({
+    customLocale: {
+      title: "Would you mind rating %@?",
+      message: "It won’t take more than a minute and helps to promote our app. Thanks for your support!",
+      cancelButtonLabel: "No, Thanks",
+      laterButtonLabel: "Remind Me Later",
+      rateButtonLabel: "Rate It Now",
+      yesButtonLabel: "Yes!",
+      noButtonLabel: "Not really",
+      appRatePromptTitle: 'Do you like using %@',
+      feedbackPromptTitle: 'Mind giving us some feedback?',
+    }
+});
 ```
 
 ### Full setup using SafariViewController
 
 ```javascript
-AppRate.preferences = {
+AppRate.setPreferences({
   displayAppName: 'My custom app title',
   usesUntilPrompt: 5,
   promptAgainForEachNewVersion: false,
@@ -209,41 +222,40 @@ AppRate.preferences = {
     onButtonClicked: function(buttonIndex){
       console.log("onButtonClicked -> " + buttonIndex);
     }
-  }
-};
-
-AppRate.preferences.openUrl = function (url) {
-  if (!window.SafariViewController) {
-    window.open(url, '_blank', 'location=yes');
-  }
-  else {
-    SafariViewController.isAvailable(function (available) {
-        if (available) {
-          SafariViewController.show({
-                url: url,
-                barColor: "#0000ff", // on iOS 10+ you can change the background color as well
-                controlTintColor: "#00ffff" // on iOS 10+ you can override the default tintColor
-                tintColor: "#00ffff", // should be set to same value as controlTintColor and will be a fallback on older ios
-              },
-              // this success handler will be invoked for the lifecycle events 'opened', 'loaded' and 'closed'
-              function(result) {
-                if (result.event === 'opened') {
-                  console.log('opened');
-                } else if (result.event === 'loaded') {
-                  console.log('loaded');
-                } else if (result.event === 'closed') {
-                  console.log('closed');
-                }
-              },
-              function(msg) {
-                console.log("error: " + msg);
-              })
-        } else {
-          window.open(url, '_blank', 'location=yes');
-        }
-      });
-  }
-};
+  },
+  openUrl: function (url) {
+     if (!window.SafariViewController) {
+       window.open(url, '_blank', 'location=yes');
+     }
+     else {
+       SafariViewController.isAvailable(function (available) {
+           if (available) {
+             SafariViewController.show({
+                   url: url,
+                   barColor: "#0000ff", // on iOS 10+ you can change the background color as well
+                   controlTintColor: "#00ffff", // on iOS 10+ you can override the default tintColor
+                   tintColor: "#00ffff", // should be set to same value as controlTintColor and will be a fallback on older ios
+                 },
+                 // this success handler will be invoked for the lifecycle events 'opened', 'loaded' and 'closed'
+                 function(result) {
+                   if (result.event === 'opened') {
+                     console.log('opened');
+                   } else if (result.event === 'loaded') {
+                     console.log('loaded');
+                   } else if (result.event === 'closed') {
+                     console.log('closed');
+                   }
+                 },
+                 function(msg) {
+                   console.log("error: " + msg);
+                 })
+           } else {
+             window.open(url, '_blank', 'location=yes');
+           }
+       });
+     }
+   }
+});
 
 AppRate.promptForRating();
 ```
@@ -251,7 +263,7 @@ AppRate.promptForRating();
 ### Full setup using inappbrowser
 
 ```javascript
-AppRate.preferences = {
+AppRate.setPreferences({
   displayAppName: 'My custom app title',
   usesUntilPrompt: 5,
   promptAgainForEachNewVersion: false,
@@ -287,9 +299,8 @@ AppRate.preferences = {
     onButtonClicked: function(buttonIndex){
       console.log("onButtonClicked -> " + buttonIndex);
     }
-  },
-  openUrl: AppRate.preferences.openUrl
-};
+  }
+});
 
 AppRate.promptForRating();
 ```
