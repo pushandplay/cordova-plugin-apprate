@@ -33,7 +33,7 @@ var AppRate = (function() {
   function AppRate() {}
 
   AppRate.initialized = false;
-  AppRate.ready = new Promise(function (resolve, reject) {
+  AppRate.ready = new Promise(function(resolve, reject) {
     AppRate.readyResolve = resolve;
     AppRate.readyReject = reject;
   });
@@ -78,7 +78,7 @@ var AppRate = (function() {
       windows: null
     },
     customLocale: null,
-    openUrl: function (url) {
+    openUrl: function(url) {
       cordova.InAppBrowser.open(url, '_system', 'location=no');
     }
   };
@@ -189,7 +189,7 @@ var AppRate = (function() {
   }
 
   function getAppVersion() {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       if (FLAG_NATIVE_CODE_SUPPORTED) {
         exec(resolve, reject, 'AppRate', 'getAppVersion', []);
       } else {
@@ -199,7 +199,7 @@ var AppRate = (function() {
   }
 
   function getAppTitle() {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       if (FLAG_NATIVE_CODE_SUPPORTED) {
         exec(resolve, reject, 'AppRate', 'getAppTitle', []);
       } else {
@@ -209,7 +209,7 @@ var AppRate = (function() {
   }
 
   function checkIsNativePromptAvailable() {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       if (FLAG_NATIVE_CODE_SUPPORTED) {
         exec(resolve, reject, 'AppRate', 'isNativePromptAvailable', []);
       } else {
@@ -235,9 +235,9 @@ var AppRate = (function() {
     }
   }
 
-  AppRate.init = function () {
+  AppRate.init = function() {
     var appVersionPromise = getAppVersion()
-      .then(function (applicationVersion) {
+      .then(function(applicationVersion) {
         if (counter.applicationVersion !== applicationVersion) {
           counter.applicationVersion = applicationVersion;
           if (preferences.promptAgainForEachNewVersion) {
@@ -248,20 +248,20 @@ var AppRate = (function() {
       .catch(noop);
 
     var appTitlePromise = getAppTitle()
-      .then(function (displayAppName) {
+      .then(function(displayAppName) {
         preferences.displayAppName = displayAppName;
       })
       .catch(noop);
 
     var checkIsNativePromptAvailablePromise = checkIsNativePromptAvailable()
-      .then(function (isNativePromptAvailableResult) {
+      .then(function(isNativePromptAvailableResult) {
         isNativePromptAvailable = isNativePromptAvailableResult;
       })
-      .catch(function () {
+      .catch(function() {
         isNativePromptAvailable = false;
       });
 
-    var storagePromise = Storage.get(LOCAL_STORAGE_COUNTER).then(function (storedCounter) {
+    var storagePromise = Storage.get(LOCAL_STORAGE_COUNTER).then(function(storedCounter) {
       counter = storedCounter || counter
     });
     var initPromise = Promise.all([
@@ -282,16 +282,16 @@ var AppRate = (function() {
 
   AppRate.locales = Locales;
 
-  AppRate.setPreferences = function (pref) {
+  AppRate.setPreferences = function(pref) {
     setPreferences(pref);
   };
 
-  AppRate.getPreferences = function () {
+  AppRate.getPreferences = function() {
     return preferences;
   };
 
-  AppRate.promptForRating = function (immediately) {
-    AppRate.ready.then(function () {
+  AppRate.promptForRating = function(immediately) {
+    AppRate.ready.then(function() {
       if (immediately == null) {
         immediately = true;
       }
@@ -305,7 +305,7 @@ var AppRate = (function() {
     });
   };
 
-  AppRate.navigateToAppStore = function () {
+  AppRate.navigateToAppStore = function() {
     var iOSVersion;
     var iOSStoreUrl;
 
@@ -343,7 +343,7 @@ var AppRate = (function() {
 
 })();
 
-document.addEventListener("deviceready", function () {
+document.addEventListener("deviceready", function() {
   AppRate.init();
 }, false)
 

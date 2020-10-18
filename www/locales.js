@@ -50,7 +50,7 @@ Locales = (function() {
     return localeObject;
   };
 
-  Locales.getLocalesNames = function () {
+  Locales.getLocalesNames = function() {
     var locale, results;
     results = [];
     for (locale in locales) {
