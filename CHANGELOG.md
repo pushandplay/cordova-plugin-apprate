@@ -1,6 +1,9 @@
 # Changelog
 
 - Unreleased
+  - Nothing yet
+
+- 1.7.0
   - [PR #286](https://github.com/pushandplay/cordova-plugin-apprate/pull/286) - Added new method `setPreferences` which does not override any default/existing settings. This is now the preferred way to set the plugins preferences.
   - [PR #286](https://github.com/pushandplay/cordova-plugin-apprate/pull/286) - Added option `showPromptForInAppReview`
   - [PR #286](https://github.com/pushandplay/cordova-plugin-apprate/pull/286) - Typescript definitions updated to latest syntax
