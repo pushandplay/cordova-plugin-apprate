@@ -236,17 +236,6 @@ var AppRate = (function() {
   }
 
   AppRate.init = function() {
-    var appVersionPromise = getAppVersion()
-      .then(function(applicationVersion) {
-        if (counter.applicationVersion !== applicationVersion) {
-          counter.applicationVersion = applicationVersion;
-          if (preferences.promptAgainForEachNewVersion) {
-            updateCounter('reset');
-          }
-        }
-      })
-      .catch(noop);
-
     var appTitlePromise = getAppTitle()
       .then(function(displayAppName) {
         preferences.displayAppName = displayAppName;
@@ -261,12 +250,22 @@ var AppRate = (function() {
         isNativePromptAvailable = false;
       });
 
-    var storagePromise = Storage.get(LOCAL_STORAGE_COUNTER).then(function(storedCounter) {
-      counter = storedCounter || counter
-    });
+    var storagePromise = Storage.get(LOCAL_STORAGE_COUNTER)
+      .then(function(storedCounter) {
+        counter = storedCounter || counter;
+        return getAppVersion();
+      })
+      .then(function(applicationVersion) {
+        if (counter.applicationVersion !== applicationVersion) {
+          counter.applicationVersion = applicationVersion;
+          if (preferences.promptAgainForEachNewVersion) {
+            updateCounter('reset');
+          }
+        }
+      })
+      .catch(noop);
     var initPromise = Promise.all([
       checkIsNativePromptAvailablePromise,
-      appVersionPromise,
       appTitlePromise,
       storagePromise
     ]);
