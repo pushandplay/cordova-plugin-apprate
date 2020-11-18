@@ -1,6 +1,7 @@
 # Changelog
 
 - Unreleased
+  - [PR #293](https://github.com/pushandplay/cordova-plugin-apprate/pull/293) - Fix handling of `customLocale` object in `setPreferences`
   - [PR #289](https://github.com/pushandplay/cordova-plugin-apprate/pull/289) - Bugfix to ensure `getAppVersion()` runs after localstorage has been initialized
 
 - 1.7.0
