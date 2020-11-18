@@ -77,19 +77,7 @@ var AppRate = (function() {
       windows8: null,
       windows: null
     },
-    customLocale: {
-      title: null,
-      message: null,
-      cancelButtonLabel: null,
-      laterButtonLabel: null,
-      rateButtonLabel: null,
-      yesButtonLabel: null,
-      noButtonLabel: null,
-      appRatePromptTitle: null,
-      feedbackPromptTitle: null,
-      appRatePromptMessage: null,
-      feedbackPromptMessage: null,
-    },
+    customLocale: null,
     openUrl: function(url) {
       cordova.InAppBrowser.open(url, '_system', 'location=no');
     }
@@ -237,7 +225,7 @@ var AppRate = (function() {
     if (pref && typeof pref === 'object') {
       for (let key in pref) {
         if (pref.hasOwnProperty(key) && prefObj.hasOwnProperty(key)) {
-          if (typeof pref[key] === 'object') {
+          if (typeof pref[key] === 'object' && key !== 'customLocale') {
             setPreferences(pref[key], prefObj[key]);
           } else {
             prefObj[key] = pref[key];
