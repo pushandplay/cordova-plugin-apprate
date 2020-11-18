@@ -77,7 +77,19 @@ var AppRate = (function() {
       windows8: null,
       windows: null
     },
-    customLocale: null,
+    customLocale: {
+     appRatePromptMessage: null,
+     appRatePromptTitle: null,
+     cancelButtonLabel: null,
+     feedbackPromptMessage: null,
+     feedbackPromptTitle: null,
+     laterButtonLabel: null,
+     message: null,
+     noButtonLabel: null,
+     rateButtonLabel: null,
+     title: null,
+     yesButtonLabel: null
+    },
     openUrl: function(url) {
       cordova.InAppBrowser.open(url, '_system', 'location=no');
     }
