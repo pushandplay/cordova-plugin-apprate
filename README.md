@@ -316,7 +316,7 @@ AppRate.locales.getLocale('en');
 ```
 
 ### List of Translations
-[www/locales.js](./www/locales.js)
+- [./www/locales.js](./www/locales.js)
 
 # Credits
 
