@@ -316,7 +316,7 @@ AppRate.locales.getLocale('en');
 ```
 
 ### List of Translations
-https://github.com/pushandplay/cordova-plugin-apprate/blob/master/www/locales.js
+[www/locales.js](./www/locales.js)
 
 # Credits
 
