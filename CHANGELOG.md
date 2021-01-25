@@ -1,7 +1,7 @@
 # Changelog
 
 - Unreleased
-  - Nothing yet
+  - [PR #300](https://github.com/pushandplay/cordova-plugin-apprate/pull/300) - Fix iPad device recognition on iOS 13+
  
 - 1.7.1
   - [PR #293](https://github.com/pushandplay/cordova-plugin-apprate/pull/293) - Fix handling of `customLocale` object in `setPreferences`
