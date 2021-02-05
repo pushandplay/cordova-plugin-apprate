@@ -1,8 +1,8 @@
 declare module 'cordova-plugin-apprate' {
-
   type ReviewTypeAppStore = 'AppStoreReview';
   type ReviewTypeInApp = 'InAppReview';
   type ReviewTypeBrowser = 'InAppBrowser';
+  type PromptType = 'AppRatingPrompt' | 'StoreRatingPrompt' | 'FeedbackPrompt';
 
   interface AppRatePreferences {
     useLanguage?: string;
@@ -30,7 +30,7 @@ declare module 'cordova-plugin-apprate' {
   }
 
   interface CallbackPreferences {
-    onButtonClicked?: (buttonIndex: number) => void;
+    onButtonClicked?: (buttonIndex: number, buttonLabel: string, promptType: PromptType) => void;
     onRateDialogShow?: (rateCallback: (buttonIndex: number) => void) => void;
     handleNegativeFeedback?: () => void;
     done?: () => void;
@@ -59,7 +59,6 @@ declare module 'cordova-plugin-apprate' {
   }
 
   interface LocaleOptions extends CustomLocale {
-    language: string
+    language: string;
   }
-
 }
