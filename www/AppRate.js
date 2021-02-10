@@ -223,7 +223,7 @@ var AppRate = (function() {
       prefObj = preferences;
     }
     if (pref && typeof pref === 'object') {
-      for (let key in pref) {
+      for (var key in pref) {
         if (pref.hasOwnProperty(key) && prefObj.hasOwnProperty(key)) {
           if (typeof pref[key] === 'object' && key !== 'customLocale') {
             setPreferences(pref[key], prefObj[key]);
