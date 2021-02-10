@@ -1,6 +1,9 @@
 # Changelog
 
 - Unreleased
+  - Nothing yet
+  
+- 1.7.2
   - [PR #302](https://github.com/pushandplay/cordova-plugin-apprate/pull/301) - Fix bug in setPreferences
   - [PR #301](https://github.com/pushandplay/cordova-plugin-apprate/pull/301) - Typescript fixes
   - [PR #300](https://github.com/pushandplay/cordova-plugin-apprate/pull/300) - Fix iPad device recognition on iOS 13+
