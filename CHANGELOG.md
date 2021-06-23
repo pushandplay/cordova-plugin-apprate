@@ -1,7 +1,7 @@
 # Changelog
 
 - Unreleased
-  - Nothing yet
+  - [PR #310](https://github.com/pushandplay/cordova-plugin-apprate/pull/310) - Add translation for `pt-BR`
   
 - 1.7.2
   - [PR #302](https://github.com/pushandplay/cordova-plugin-apprate/pull/301) - Fix bug in setPreferences
