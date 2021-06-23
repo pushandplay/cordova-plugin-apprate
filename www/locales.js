@@ -341,6 +341,21 @@ Locales.addLocale({
 });
 
 Locales.addLocale({
+  language: 'pt-BR',
+  title: "Gostaria de avaliar %@?",
+  message: "Se gostou de utilizar o %@, importa-se de avaliá-lo? Não vai demorar mais do que um minuto. Obrigado pelo seu apoio!",
+  cancelButtonLabel: "Não, obrigado",
+  laterButtonLabel: "Lembrar mais tarde",
+  rateButtonLabel: "Avaliar agora",
+  yesButtonLabel: "Sim!",
+  noButtonLabel: "Não",
+  appRatePromptTitle: "Você gosta de utilizar %@?",
+  feedbackPromptTitle: "Poderia nos dar um feedback?",
+  appRatePromptMessage: "",
+  feedbackPromptMessage: ""
+});
+
+Locales.addLocale({
   language: 'pt-PT',
   title: "Avaliar %@",
   message: "Se gostou de utilizar o %@, importa-se de o avaliar? Não vai demorar mais do que um minuto. Obrigado pelo seu apoio!",
