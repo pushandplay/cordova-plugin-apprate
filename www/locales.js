@@ -217,14 +217,14 @@ Locales.addLocale({
 Locales.addLocale({
   language: 'fr',
   title: "Notez %@",
-  message: "Si vous aimez utiliser %@, n’oubliez pas de voter sur l’App Store. Cela ne prend qu’une minute. Merci d’avance pour votre soutien !",
+  message: "Si vous aimez utiliser %@, n’oubliez pas de la noter sur le store. Cela ne prend qu’une minute. Merci d’avance pour votre soutien !",
   cancelButtonLabel: "Non, merci",
   laterButtonLabel: "Me le rappeler ultérieurement",
-  rateButtonLabel: "Votez maintenant",
+  rateButtonLabel: "Notez maintenant",
   yesButtonLabel: "Oui",
   noButtonLabel: "Non, merci",
   appRatePromptTitle: "Vous aimez %@",
-  feedbackPromptTitle: "Voulez-vous voter sur l'App Store?",
+  feedbackPromptTitle: "Voulez-vous noter sur le store?",
   appRatePromptMessage:"",
   feedbackPromptMessage:""
 });
