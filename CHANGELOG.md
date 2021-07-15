@@ -1,6 +1,7 @@
 # Changelog
 
 - Unreleased
+  - [PR #313](https://github.com/pushandplay/cordova-plugin-apprate/pull/313) - Improve French translations
   - [PR #310](https://github.com/pushandplay/cordova-plugin-apprate/pull/310) - Add translation for `pt-BR`
   
 - 1.7.2
