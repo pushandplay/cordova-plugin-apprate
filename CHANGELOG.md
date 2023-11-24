@@ -1,14 +1,15 @@
 # Changelog
 
 - Unreleased
+  - [PR #315](https://github.com/pushandplay/cordova-plugin-apprate/pull/315) - Fix error in IOS 17 "Call must be made on main thread" in launchAppStore method
   - [PR #313](https://github.com/pushandplay/cordova-plugin-apprate/pull/313) - Improve French translations
   - [PR #310](https://github.com/pushandplay/cordova-plugin-apprate/pull/310) - Add translation for `pt-BR`
-  
+
 - 1.7.2
   - [PR #302](https://github.com/pushandplay/cordova-plugin-apprate/pull/301) - Fix bug in setPreferences
   - [PR #301](https://github.com/pushandplay/cordova-plugin-apprate/pull/301) - Typescript fixes
   - [PR #300](https://github.com/pushandplay/cordova-plugin-apprate/pull/300) - Fix iPad device recognition on iOS 13+
- 
+
 - 1.7.1
   - [PR #293](https://github.com/pushandplay/cordova-plugin-apprate/pull/293) - Fix handling of `customLocale` object in `setPreferences`
   - [PR #289](https://github.com/pushandplay/cordova-plugin-apprate/pull/289) - Bugfix to ensure `getAppVersion()` runs after localstorage has been initialized
@@ -25,11 +26,11 @@
   - [PR #280](https://github.com/pushandplay/cordova-plugin-apprate/pull/280) - Removed iOS option `inAppReview` in favor of new option `reviewType`. Please update your app according to the updated documentation
   - [PR #280](https://github.com/pushandplay/cordova-plugin-apprate/pull/280) - Fixed race condition on `deviceready` events causing the module to not be fully initialized
   - [PR #281](https://github.com/pushandplay/cordova-plugin-apprate/pull/281) - feature: Android in-app review
- 
+
 - 1.5.0
   - [PR #253](https://github.com/pushandplay/cordova-plugin-apprate/pull/253) - Remove iOS rating counter in favor of native approach
   - [PR #252](https://github.com/pushandplay/cordova-plugin-apprate/pull/252) - Postpone initial AppRate.init() until `deviceready`
-  - [PR #239](https://github.com/pushandplay/cordova-plugin-apprate/pull/239) - Remove inappbrowser dependency adding support to choose between inappbrowser and safariviewcontroller 
+  - [PR #239](https://github.com/pushandplay/cordova-plugin-apprate/pull/239) - Remove inappbrowser dependency adding support to choose between inappbrowser and safariviewcontroller
   - [PR #244](https://github.com/pushandplay/cordova-plugin-apprate/pull/244) - Use ES5 var instead of ES6 const for better browser compatibility
   - [PR #231](https://github.com/pushandplay/cordova-plugin-apprate/pull/231) - Displaying store view page before it loads for improved UX
   - [PR #228](https://github.com/pushandplay/cordova-plugin-apprate/pull/228) - Add native support for windows platform rating
