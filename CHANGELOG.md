@@ -1,6 +1,9 @@
 # Changelog
 
 - Unreleased
+  - Nothing yet
+
+- v1.7.3
   - [PR #315](https://github.com/pushandplay/cordova-plugin-apprate/pull/315) - Fix error in IOS 17 "Call must be made on main thread" in launchAppStore method
   - [PR #313](https://github.com/pushandplay/cordova-plugin-apprate/pull/313) - Improve French translations
   - [PR #310](https://github.com/pushandplay/cordova-plugin-apprate/pull/310) - Add translation for `pt-BR`

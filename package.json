@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-apprate",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/pushandplay/cordova-plugin-apprate"
