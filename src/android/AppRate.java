@@ -1,34 +1,24 @@
 package org.pushandplay.cordova.apprate;
 
-import org.apache.cordova.CordovaPlugin;
-import org.apache.cordova.CallbackContext;
-import org.apache.cordova.LOG;
-import org.apache.cordova.PluginResult;
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import android.app.Activity;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.PackageManager;
 import android.content.pm.ApplicationInfo;
-
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.android.play.core.tasks.Task;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CallbackContext;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class AppRate extends CordovaPlugin {
   @Override
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     try {
-      if (action.equals("isNativePromptAvailable")) {
-        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, true);
-        callbackContext.sendPluginResult(pluginResult);
-        return true;
-      }
       if (action.equals("getAppVersion")) {
-        PackageManager packageManager = this.cordova.getActivity().getPackageManager();
-        callbackContext.success(packageManager.getPackageInfo(this.cordova.getActivity().getPackageName(), 0).versionName);
+        callbackContext.success(this.cordova.getActivity().getPackageManager().getPackageInfo(this.cordova.getActivity().getPackageName(), 0).versionName);
         return true;
       }
       if (action.equals("getAppTitle")) {
@@ -44,22 +34,18 @@ public class AppRate extends CordovaPlugin {
         Task<ReviewInfo> request = manager.requestReviewFlow();
         request.addOnCompleteListener(task -> {
           if (task.isSuccessful()) {
-            LOG.d("AppRate", "request review success");
             ReviewInfo reviewInfo = task.getResult();
             Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
             flow.addOnCompleteListener(launchTask -> {
-              if (task.isSuccessful()) {
-                LOG.d("AppRate", "launch review success");
+              if (launchTask.isSuccessful()) {
                 callbackContext.success();
               } else {
-                Exception error = task.getException();
-                LOG.d("AppRate", "Failed to launch review", error);
+                Exception error = launchTask.getException();
                 callbackContext.error("Failed to launch review - " + error.getMessage());
               }
             });
           } else {
             Exception error = task.getException();
-            LOG.d("AppRate", "Failed to launch review", error);
             callbackContext.error("Failed to launch review flow - " + error.getMessage());
           }
         });
