@@ -63,9 +63,9 @@ AppRate.setPreferences({
 - From github repository: `cordova plugin add https://github.com/pushandplay/cordova-plugin-apprate.git`
 - For phonegap build add the following to your config.xml: `<gap:plugin name="cordova-plugin-apprate" />`
 
-## Integrating Google Play Core
+## Integrating Play In-App Reviews Library
 
-To set up Google Play Core version, you can use PLAY_CORE_VERSION parameter (with `1.+` value by default). It is useful in order to avoid conflicts with another plugins which use any other different version of Google Play Core.
+To set up Play In-App Reviews Library version, you can use PLAY_REVIEW_VERSION parameter (with `2.+` value by default). It is useful in order to avoid conflicts with another plugins which use any other different version of Play In-App Reviews Library. For Play In-App Reviews Library release notes please see https://developer.android.com/reference/com/google/android/play/core/release-notes-in_app_reviews
 
 ## Customization and usage
 
