@@ -3,6 +3,9 @@
 - Unreleased
   - Nothing yet
 
+- v1.7.4
+  - [PR #334](https://github.com/pushandplay/cordova-plugin-apprate/pull/334) - Migration from the Play Core Java
+
 - v1.7.3
   - [PR #315](https://github.com/pushandplay/cordova-plugin-apprate/pull/315) - Fix error in IOS 17 "Call must be made on main thread" in launchAppStore method
   - [PR #313](https://github.com/pushandplay/cordova-plugin-apprate/pull/313) - Improve French translations
